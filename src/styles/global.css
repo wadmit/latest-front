@@ -1,0 +1,365 @@
+:root {
+  --primary-main: #ff6b26;
+}
+
+html {
+  scroll-behavior: smooth !important;
+  scroll-padding-top: 18.75rem !important;
+  width: 100%;
+  height: 100%;
+}
+@keyframes wiseSvgs {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@font-face {
+  font-family: HankenGroteskBold;
+  src: url("/fonts/HankenGrotesk/HankenGrotesk-Bold.woff2") format("woff2");
+  src: url("/fonts/HankenGrotesk/HankenGrotesk-Bold.ttf");
+  format: ("ttf");
+  font-display: swap;
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: HankenGroteskRegular;
+  src: url("/fonts/HankenGrotesk/HankenGrotesk-Regular.woff2") format("woff2");
+  src: url("/fonts/HankenGrotesk/HankenGrotesk-Regular.ttf");
+  format: ("ttf");
+  font-weight: 400;
+
+  font-display: swap;
+}
+
+@font-face {
+  font-family: HankenGroteskBlack;
+  src: url("/fonts/HankenGrotesk/HankenGrotesk-Black.woff2") format("woff2");
+  src: url("/fonts/HankenGrotesk/HankenGrotesk-Black.ttf");
+  format: "ttf";
+  font-display: swap;
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: HankenGroteskExtraBold;
+  src: url("/fonts/HankenGrotesk/HankenGrotesk-ExtraBold.woff2") format("woff2");
+  src: url("/fonts/HankenGrotesk/HankenGrotesk-ExtraBold.ttf");
+
+  format: "ttf";
+  font-display: swap;
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: HankenGroteskExtraThin;
+  src: url("/fonts/HankenGrotesk/HankenGrotesk-ExtraLight.woff2")
+    format("woff2");
+  src: url("/fonts/HankenGrotesk/HankenGrotesk-Extrathin.ttf");
+  format: "ttf";
+
+  font-display: swap;
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: HankenGroteskLight;
+  src: url("/fonts/HankenGrotesk/HankenGrotesk-Light.woff2") format("woff2");
+  src: url("/fonts/HankenGrotesk/HankenGrotesk-Light.ttf");
+  format: "ttf";
+  font-display: swap;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: HankenGroteskSemibold;
+  src: url("/fonts/HankenGrotesk/HankenGroteskSemiBold.woff2") format("woff2");
+  src: url("/fonts/HankenGrotesk/HankenGrotesk-SemiBold.ttf");
+  format: "ttf";
+  font-display: swap;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: HankenGroteskThin;
+  src: url("/fonts/HankenGrotesk/HankenGrotesk-Thin.woff2") format("woff2");
+  src: url("/fonts/HankenGrotesk/HankenGrotesk-Thin.ttf");
+  format: ("ttf");
+  font-display: swap;
+  font-weight: 100;
+}
+
+body {
+  overflow-x: hidden;
+  box-sizing: "border-box";
+  padding: 0;
+  margin: 0;
+  /* width: 100vw; */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar-items {
+  background-image: linear-gradient(
+    to right,
+    var(--primary-main),
+    var(--primary-main)
+  );
+  background-repeat: no-repeat;
+  background-size: 0% 0.125rem;
+  background-position: left bottom;
+  transition: background-size 0.3s ease;
+}
+
+.navbar-items:hover {
+  background-size: 100% 0.125rem;
+  color: var(--primary-main);
+}
+
+.nav-active {
+  background-size: 100% 0.125rem;
+  color: var(--primary-main);
+}
+
+.zoom {
+  background-position: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.zoom:hover {
+  transform: scale(1.05);
+}
+
+table {
+  /* word-break: break-all; */
+  layout: fixed;
+  width: 100% !important;
+}
+
+.phone-input {
+  width: 100% !important;
+  height: 3rem !important;
+  /*Initially */
+  /* border-radius: 0.1875rem !important; */
+  /*Remove this if you want to remove borderRadius */
+  border-radius: 37px;
+}
+
+.phone-input:hover {
+  border: 0.0625rem solid var(--primary-main) !important;
+}
+
+.phone-input:focus {
+  outline: none !important;
+  border: 0.125rem solid var(--primary-main) !important;
+}
+
+.phone-input-nuaa {
+  width: 100% !important;
+  height: 3rem !important;
+  border-radius: 0.1875rem !important;
+}
+
+.phone-input-nuaa:hover {
+  border: 0.0625rem solid #00509f !important;
+}
+
+.phone-input-nuaa:focus {
+  outline: none !important;
+  border: 0.125rem solid #00509f !important;
+}
+
+.phone-input-container,
+.phone-input-container:hover {
+  border: none !important;
+  outline: none !important;
+  border-radius: 3rem;
+}
+
+.phone-search input {
+  width: 90% !important;
+  height: 2.5rem !important;
+  margin: 0.625rem 0rem !important;
+  padding: 0.625rem 0.3125rem !important;
+}
+
+.phone-dropdown {
+  min-height: 25rem !important;
+  box-shadow: 0rem 0rem 0.625rem 0rem rgba(0, 0, 0, 0.2);
+  max-width: 16.875rem !important;
+}
+
+.heartbeat {
+  animation: beat 0.8s infinite alternate;
+  transform-origin: center;
+}
+
+@keyframes beat {
+  to {
+    transform: scale(1.2);
+  }
+}
+
+.zoom-box {
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
+  /* Animation */
+}
+
+.zoom-box:hover {
+  -webkit-transform: scale(1.01);
+  transform: scale(1.01);
+  cursor: pointer;
+}
+
+#blog-content-article img {
+  max-height: 25rem;
+  width: 100%;
+  object-fit: contain;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: var(--primary-main) !important;
+}
+.t {
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 1rem !important;
+  font-weight: bold !important;
+  border: 0.0625rem solid var(--primary-main) !important;
+  height: 2.375rem;
+  min-width: 2.375rem;
+  display: flex;
+  background-color: white !important;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50% !important;
+}
+
+.bg-container {
+  width: 100vw;
+  overflow: hidden;
+  height: 9rem;
+}
+
+.first_line {
+  background-color: #ffc4a8;
+  transform: skewX(-39deg);
+  width: 50%;
+  height: 30rem;
+  float: right;
+}
+
+.second_line {
+  width: 30%;
+  height: 30rem;
+  transform: skewX(-39deg);
+  float: right;
+  background-color: #ff7a3c;
+}
+
+.sitemap_header {
+  height: inherit;
+  display: grid;
+  place-items: center;
+  font-size: 3em;
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.sitemap_link:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+.scoreBtn {
+  border: 2px solid #6c6c6c;
+  border-radius: 24px;
+}
+.scoreBtn:hover {
+  background: linear-gradient(135deg, #ffffff 0%, #f2f2f2 100%);
+  box-shadow: -1px 1px 2px rgba(100, 100, 100, 0.2),
+    1px -1px 2px rgba(100, 100, 100, 0.2),
+    -1px -1px 2px rgba(255, 255, 255, 0.9), 1px 1px 3px rgba(100, 100, 100, 0.9),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.3),
+    inset -1px -1px 2px rgba(100, 100, 100, 0.5);
+}
+
+.scoreBtn-active {
+  background: #f6f6f6;
+  border: 2px solid #6c6c6c;
+  box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3),
+    -1px -1px 2px rgba(172, 172, 172, 0.5),
+    inset -5px 5px 10px rgba(172, 172, 172, 0.2),
+    inset 5px -5px 10px rgba(172, 172, 172, 0.2),
+    inset -5px -5px 10px rgba(255, 255, 255, 0.9),
+    inset 5px 5px 13px rgba(172, 172, 172, 0.9);
+  border-radius: 24px;
+}
+
+/* feedback emoji */
+.feedback-emoji:hover > span {
+  display: flex !important;
+}
+/* .MuiPaper-root {
+  height: 937px;
+  width: 437px;
+  box-shadow: none !important;
+  background: transparent !important;
+  overflow: hidden !important;
+  top: 0 !important;
+  right: 100px !important;
+} */
+
+.blur-bg {
+  filter: blur(290px) opacity(0.8) !important;
+  -webkit-filter: blur(290px) opacity(0.8) !important;
+  -moz-filter: blur(290px) opacity(0.5) !important;
+  -o-filter: blur(290px);
+
+  -ms-filter: blur(290px) opacity(0.8) !important;
+  /* opacity: 0.8; */
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fade-in-robot {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-last {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

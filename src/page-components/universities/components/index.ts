@@ -1,0 +1,12 @@
+export { default as UniversitySearchComponent } from "@/page-components/universities/components/UniversitySearchComponent";
+export { default as UniversityCard } from "@/page-components/universities/components/UniversityCard";
+export { default as UniversityFilter } from "@/page-components/universities/components/UniversityFilter";
+export { default as UniversityDetails } from "@/page-components/universities/components/UniversityDetails";
+export { default as UniversityHeader } from "@/page-components/universities/components/UniversityHeader";
+export { default as UniversityBody } from "@/page-components/universities/components/UniversityBody";
+export { default as UniversityContact } from "@/page-components/universities/components/UniversityContact";
+export { default as UniversityAdmissionCard } from "@/page-components/universities/components/UniversityAdmissionCard";
+export { default as UniversityCost } from "@/page-components/universities/components/UniversityCost";
+export { default as UniversityScholarships } from "@/page-components/universities/components/UniversityScholarships";
+export { default as UniversityProgramCard } from "@/page-components/universities/components/UniversityProgramCard";
+export { default as UniversityCourses } from "@/page-components/universities/components/UniversityCourses";

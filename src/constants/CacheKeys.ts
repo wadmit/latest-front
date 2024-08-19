@@ -1,0 +1,16 @@
+export default {
+  FILTER_QUERY_KEY: "FilterQuery",
+  BLOG_QUERY_KEY: "BlogQuery",
+  NEWS_QUERY_KEY: "NewsQuery",
+  FUTURE_STREAMS_QUERY_KEY: "FutureStreamsQuery",
+  SUBDISCIPLINES_QUERY_KEY: "SubDisciplinesQuery",
+  DISCIPLINES_QUERY_KEY: "DisciplinesQuery",
+  OVERALL_GRADE_QUERY_KEY: "OverallGradeQuery",
+  EDUCATION_LEVELS_QUERY_KEY: "EducationLevelsQuery",
+  GRADE_SCALES_QUERY_KEY: "GradeScalesQuery",
+  APPLICATION_GET_QUERY_KEY: "ApplicationGetQuery",
+  USER_PROFILE_QUERY_KEY: "UserProfileQuery",
+  USER_UNIVERSITIES_QUERY_KEY: "UserUniversitiesQuery",
+  USER_PROFILE_DOCUMENT_QUERY_KEY: "UserDocumentsQuery",
+  NUAA_FUTURE_STREAMS_QUERY_KEY: "NuaaFutureStreamsQuery",
+};

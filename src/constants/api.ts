@@ -1,0 +1,25 @@
+import { StoragePath } from "@/types/storage-path";
+
+export default {
+  students: "/web/students",
+  programs: "/web/programs",
+  costScale: "/web/costcalculator",
+  universities: "/web/universities",
+  contactUs: "/web/contacts",
+  country: "/common/countries",
+  partner: "/web/partners",
+  authentication: "/web/auth/validate",
+  partnerdocument: `common/file-upload/upload_partner_file?path=${StoragePath.PartnerDocument}`,
+  filters: "/web/filters",
+  blog: "/web/blogs",
+  news: "/web/news",
+  documents: "/web/documents",
+  subDisciplines: "/web/sub_disciplines",
+  disciplines: "/web/disciplines",
+  common: "/common",
+  education_levels: "/web/education_levels",
+  grade_scales: "/web/grade_scales",
+  eligibility: "/web/eligibility",
+  applications: "/web/applications",
+  feedbacks: "/web/feedbacks",
+};

@@ -1,0 +1,85 @@
+img {
+  border-radius: "8px";
+  width: "100% !important";
+  height: "100% !important";
+  max-height: "423px !important";
+  -o-object-fit: "cover !important";
+  object-fit: "cover !important";
+}
+
+p {
+  text-align: "justify";
+  margin-bottom: "24px";
+}
+
+a {
+  color: "orange !important";
+  -webkit-text-decoration: "none !important";
+  text-decoration: "none !important";
+}
+a:hover {
+  -webkit-text-decoration: "underline !important";
+  text-decoration: "underline !important";
+}
+
+h4 {
+  font-size: "1rem";
+  font-weight: "bold";
+  margin-bottom: "24px";
+  margin-top: "24px";
+  color: "#5B5B5B !important";
+}
+
+h3 {
+  font-size: "1.3rem";
+  font-weight: "bold";
+  margin-bottom: "24px";
+  margin-top: "24px";
+  color: "#5B5B5B !important";
+}
+
+ul {
+  list-style: "none";
+}
+ul li::before {
+  content: '"."';
+  font-size: "2em";
+  color: "main";
+  font-weight: "bold";
+  display: "inline-block";
+  width: "1em";
+  margin-left: "-1em";
+}
+ul li {
+  margin-bottom: "10px";
+}
+
+table {
+  width: 100%;
+  /* border: 1px solid rgba(0, 0, 0, 0.1); */
+  border-radius: 8px;
+}
+
+th {
+  padding: 12px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgb(225, 232, 237);
+  text-align: left;
+}
+
+table tbody tr:nth-child(odd) {
+  background-color: rgb(248, 248, 248);
+}
+
+table tbody tr td:nth-child(odd) {
+  padding: 12px;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: rgb(225, 232, 237);
+  padding: 12px;
+}
+
+table tbody tr td:nth-child(even) {
+  padding: 12px;
+} /*# sourceMappingURL=style.css.map */

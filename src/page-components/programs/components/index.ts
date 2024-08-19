@@ -1,0 +1,14 @@
+export { default as AvailableScholarship } from "@/page-components/programs/components/AvailableScholarship";
+export { default as ProgramFilter } from "@/page-components/programs/components/ProgramFilter";
+export { default as PreRequties } from "@/page-components/programs/components/PreRequties";
+export { default as ProgramAdmissionCard } from "@/page-components/programs/components/ProgramAdmissionCard";
+export { default as ProgramBody } from "@/page-components/programs/components/ProgramBody";
+export { default as ProgramCard } from "@/page-components/programs/components/ProgramCard";
+export { default as ProgramCost } from "@/page-components/programs/components/ProgramCost";
+export { default as ProgramCostTooltip } from "@/page-components/programs/components/ProgramCostTooltip";
+export { default as ProgramDetails } from "@/page-components/programs/components/ProgramDetails";
+export { default as ProgramHeader } from "@/page-components/programs/components/ProgramHeader";
+export { default as ProgramRanking } from "@/page-components/programs/components/ProgramRanking";
+export { default as ProgramSearchComponent } from "@/page-components/programs/components/ProgramSearchComponent";
+export { default as SortListIcons } from "@/page-components/programs/components/SortListIcons";
+export { default as UniversitiesAndProgramsCard } from "@/page-components/programs/components/UniversitiesAndProgramsCard";

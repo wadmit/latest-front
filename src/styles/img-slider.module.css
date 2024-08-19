@@ -1,0 +1,26 @@
+.swiper {
+  width: 250px;
+  height: 250px;
+  /* padding: 50px 0; */
+  /* overflow: hidden; */
+}
+
+.swiper_slide {
+  position: relative;
+  /* box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2); */
+  user-select: none;
+  background-size: cover;
+  background-position: center;
+}
+
+.swiper_slide img {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 95% !important;
+  object-position: 50% 0%;
+  aspect-ratio: 16/9;
+  /* layout: fill; */
+  /* object-fit: cover;
+  object-position: center; */
+}

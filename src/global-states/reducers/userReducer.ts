@@ -1,0 +1,143 @@
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+
+import type { RootState } from "@/global-states/store";
+import type { IProgram } from "@/types/program";
+import type { IUniversity } from "@/types/university";
+import type { IUserDashboardData } from "@/types/user";
+
+interface IUserState {
+	didUserSignedUp: boolean;
+	shortList: string[];
+	shortlistedPrograms: IProgram[];
+	shortlistDetails: { program: IProgram; foundation: IProgram }[];
+	shortListLoading: boolean;
+	activeStepGlobal: number | undefined;
+	maxActiveStepGlobal: number;
+	universities: IUniversity[] | null;
+	dashboardDataGlobal: IUserDashboardData | null;
+}
+
+const initialState: IUserState = {
+	dashboardDataGlobal: null,
+	didUserSignedUp: false,
+	shortListLoading: true,
+	shortList: [],
+	shortlistDetails: [],
+	shortlistedPrograms: [],
+	activeStepGlobal: undefined,
+	maxActiveStepGlobal: 0,
+	universities: null,
+};
+
+export const userSlice = createSlice({
+	name: "user",
+	initialState,
+	reducers: {
+		setActiveStepGlobal: (state, action: PayloadAction<number>) => {
+			state.activeStepGlobal = action.payload;
+		},
+		setMaxActiveStepGlobal: (state, action: PayloadAction<number>) => {
+			state.maxActiveStepGlobal = action.payload;
+		},
+		setUniversities: (state, action: PayloadAction<IUniversity[]>) => {
+			state.universities = action.payload;
+		},
+		setDidUserSignedUp: (state, action: PayloadAction<boolean>) => {
+			state.didUserSignedUp = action.payload;
+		},
+		setDashboardDataGlobal: (
+			state,
+			action: PayloadAction<IUserDashboardData>,
+		) => {
+			state.dashboardDataGlobal = action.payload;
+		},
+		setShortListedPrograms: (state, action: PayloadAction<IProgram[]>) => {
+			state.shortlistedPrograms = action.payload;
+		},
+		setShortListedDetails: (
+			state,
+			action: PayloadAction<{ program: IProgram; foundation: IProgram }[]>,
+		) => {
+			state.shortlistDetails = action.payload;
+		},
+		addShortlistedPrograms: (state, action: PayloadAction<IProgram>) => {
+			state.shortlistedPrograms = [
+				...state.shortlistedPrograms,
+				action.payload,
+			];
+		},
+		removeShortlistedProgram: (state, action: PayloadAction<string>) => {
+			state.shortlistedPrograms = state.shortlistedPrograms.filter(
+				(p) => p.id !== action.payload,
+			);
+		},
+		setWiseScore: (state, action: PayloadAction<number>) => ({
+			...state,
+			dashboardDataGlobal: {
+				...state.dashboardDataGlobal!,
+				score: action.payload,
+			},
+		}),
+		setProgramShortListCompleteArray: (
+			state,
+			action: PayloadAction<string[]>,
+		) => {
+			state.shortList = action.payload;
+		},
+		setShortListLoading: (
+			state,
+			// action: PayloadAction<string[]>
+		) => {
+			state.shortListLoading = false;
+		},
+		setProgramShortList: (state, action: PayloadAction<string>) => {
+			state.shortList = [...state.shortList, action.payload];
+		},
+		removeProgramShortList: (state, action: PayloadAction<string>) => ({
+			...state,
+			shortList: state.shortList.filter(
+				(program: string) => program !== action.payload,
+			),
+		}),
+	},
+});
+
+export const {
+	setDidUserSignedUp,
+	setProgramShortList,
+	removeProgramShortList,
+	setDashboardDataGlobal,
+	setProgramShortListCompleteArray,
+	setShortListLoading,
+	setShortListedPrograms,
+	setShortListedDetails,
+	addShortlistedPrograms,
+	removeShortlistedProgram,
+	setActiveStepGlobal,
+	setMaxActiveStepGlobal,
+	setUniversities,
+	setWiseScore,
+} = userSlice.actions;
+
+export const selectShortListPrograms = (state: RootState) =>
+	state.user.shortList;
+export const SelectShortlistedPrograms = (state: RootState) =>
+	state.user.shortlistedPrograms;
+export const SelectShortlistedDetails = (state: RootState) =>
+	state.user.shortlistDetails;
+export const isShortListHandleLoading = (state: RootState) =>
+	state.user.shortListLoading;
+export const selectDashboardDataGlobal = (state: RootState) =>
+	state.user.dashboardDataGlobal;
+
+export const selectDidUserSignedUp = (state: RootState) =>
+	state.user.didUserSignedUp;
+
+export const selectActiveStepGlobal = (state: RootState) =>
+	state.user.activeStepGlobal;
+export const selectMaxActiveStepGlobal = (state: RootState) =>
+	state.user.maxActiveStepGlobal;
+export const selectUniversities = (state: RootState) => state.user.universities;
+
+export default userSlice.reducer;
