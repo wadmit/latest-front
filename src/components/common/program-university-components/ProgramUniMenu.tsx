@@ -3,7 +3,7 @@
 import React, { MutableRefObject, useEffect, useState } from "react";
 import { Box, Tab, Typography } from "@mui/material";
 import Link from "next/link";
-import { INavbarMenu } from "../navbar/provider";
+import type { INavbarMenu } from "@/components/common/navbar/provider";
 import {
   StyledNavbar,
   StyledTabs,

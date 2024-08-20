@@ -93,12 +93,6 @@ function UniversityContact() {
           sx={{
             cursor: "pointer",
           }}
-          onClick={
-            () => {
-              console.log("hi");
-            }
-            // pushTourl(university?.detail?.socials?.['Facebook Link'])
-          }
           display="flex"
           flexDirection="column"
           alignItems="center"
@@ -108,7 +102,7 @@ function UniversityContact() {
           <Image
             width={30}
             height={30}
-            src="/images/Universities/facebook.svg"
+            src="/images/universities/facebook.svg"
             alt="facebook"
           />
           <Typography
@@ -136,7 +130,7 @@ function UniversityContact() {
           <Image
             width={30}
             height={30}
-            src="/images/Universities/instagram.svg"
+            src="/images/universities/instagram.svg"
             alt="facebook"
           />
           <Typography
@@ -164,7 +158,7 @@ function UniversityContact() {
           <Image
             width={30}
             height={30}
-            src="/images/Universities/youtube.svg"
+            src="/images/universities/youtube.svg"
             alt="facebook"
           />
           <Typography
@@ -193,7 +187,7 @@ function UniversityContact() {
           <Image
             width={30}
             height={30}
-            src="/images/Universities/twitter.svg"
+            src="/images/universities/twitter.svg"
             alt="facebook"
           />
           <Typography

@@ -12,9 +12,9 @@ import Loader from "@/components/common/circular-loader/Loader";
 import { useEffect, useState } from "react";
 import { analytics } from "@/services/analytics.service";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
-import { SortSvg } from "$/svg";
 import ProgramUniversityHeader from "@/components/common/program-university-components/ProgramUniversityHeader";
 import { useUniversitys } from "@/hooks/useUniversitys";
+import Image from "next/image";
 
 const UniversityHome = ({
   universities,
@@ -120,7 +120,7 @@ const UniversityHome = ({
                       >
                         Sort
                       </Typography>
-                      <SortSvg />
+                      <Image height={20} width={20} src="/images/universities/sort.webp" alt="sort" />
                     </Box>
                   </Button>
                 </Box>

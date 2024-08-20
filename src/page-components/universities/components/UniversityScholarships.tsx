@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { Grid, Typography, Box } from "@mui/material";
-import { GetTickIcon } from "@/page-components/universities/svg";
+import Image from "next/image";
 
 const UniversityScholarships = forwardRef(
   ({ scholarships }: { scholarships: string[] }, ref) => (
@@ -31,7 +31,15 @@ const UniversityScholarships = forwardRef(
               sm={12}
             >
               <Box display="flex" gap="12px" alignItems="center">
-                <GetTickIcon />
+                <Image
+                  src="/images/common/tick-circle.webp"
+                  width={1000}
+                  height={24}
+                  style={{
+                    width: 24,
+                  }}
+                  alt="tick icon"
+                />
                 <Typography>{scholarship}</Typography>
               </Box>
             </Grid>

@@ -1,20 +1,13 @@
 import React, { useContext } from "react";
 import { Divider, Typography, Box, Stack } from "@mui/material";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { WiseAdmitDefault } from "$/svg";
 import UniversityDetailContext from "@/context/university-detail-context";
 import applicationConfig from "@/config";
 import type { IUniversity } from "@/types/university";
 import type { IProgram, IProgramRanking } from "@/types/program";
-import {
-  ProgramOffered,
-  RankingIcon,
-  UniversityIcon,
-} from "@/page-components/universities/svg";
 
 function UniversityHeader() {
-  const router = useRouter();
   const university = useContext(UniversityDetailContext) as IUniversity & {
     programs: IProgram[];
   };
@@ -143,7 +136,15 @@ function UniversityHeader() {
           bgcolor="var(--States-Info-light, #E5F2FF)"
         >
           <Box display="flex" alignItems="center" gap="12px">
-            <RankingIcon />
+            <Image
+              src="/images/universities/ranking.webp"
+              width={500}
+              height={24}
+              style={{ width: 24 }}
+              alt="university ranking"
+            />
+
+            {/* <RankingIcon /> */}
             <Box display="flex" flexDirection="column">
               <Typography variant="h3" fontSize="clamp(16px , 28px , 28px)">
                 {extractRankings(university, "US NEWS Rankings")}
@@ -156,7 +157,13 @@ function UniversityHeader() {
           </Box>
           <Divider orientation="vertical" />
           <Box display="flex" alignItems="center" gap="12px">
-            <ProgramOffered />
+            <Image
+              src="/images/universities/program-offered.webp"
+              width={500}
+              height={24}
+              style={{ width: 24 }}
+              alt="program offered"
+            />{" "}
             <Box display="flex" flexDirection="column">
               <Typography variant="h3" fontSize="clamp(16px , 28px , 28px)">
                 {university.programs.length}
@@ -168,7 +175,13 @@ function UniversityHeader() {
           </Box>
           <Divider orientation="vertical" />
           <Box display="flex" alignItems="center" gap="12px">
-            <UniversityIcon />
+            <Image
+              src="/images/universities/university-icon.webp"
+              width={500}
+              height={24}
+              style={{ width: 24 }}
+              alt="program offered"
+            />{" "}
             <Box display="flex" flexDirection="column">
               <Typography variant="h3" fontSize="clamp(16px , 28px , 28px)">
                 {university.detail.total_international_stds}

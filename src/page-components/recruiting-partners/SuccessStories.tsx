@@ -9,7 +9,7 @@ import SwiperCore from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
 import { RootContainer } from "@/components/common";
 import { SuccessStoriesData } from "@/page-components/recruiting-partners/utils/provider";
-import { LeftCrowNotation, RightCrowNotation } from "$/svg";
+import { ClickableArrow } from "$/svg";
 
 // Initialize Swiper core and add Navigation and Pagination modules
 SwiperCore.use([Navigation, Pagination]);
@@ -171,8 +171,8 @@ function SuccessStories() {
             padding: 0,
           }}
         >
-          <LeftCrowNotation />
-        </Button>
+          <ClickableArrow direction="left" />
+          </Button>
         <Button
           onClick={slideNext}
           style={{
@@ -184,8 +184,8 @@ function SuccessStories() {
             padding: 0,
           }}
         >
-          <RightCrowNotation />
-        </Button>
+          <ClickableArrow direction="right" />
+          </Button>
       </Box>
     </RootContainer>
   );

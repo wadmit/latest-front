@@ -11,12 +11,12 @@ import {
   ProgramSearchComponent,
   ProgramFilter,
 } from "@/page-components/programs/components";
-import { SortSvg } from "$/svg";
 import { ProgramContext } from "@/context/program-context";
 import { usePrograms } from "@/hooks";
-import { IProgram } from "@/types/program";
+import type { IProgram } from "@/types/program";
 import ProgramUniversityHeader from "@/components/common/program-university-components/ProgramUniversityHeader";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 const ProgramHome = ({
   programs,
@@ -127,7 +127,7 @@ const ProgramHome = ({
                       >
                         Sort
                       </Typography>
-                      <SortSvg />
+                      <Image height={20} width={20} src="/images/universities/sort.webp" alt="sort" />
                     </Box>
                   </Button>
                 </Box>

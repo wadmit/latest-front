@@ -1,20 +1,12 @@
 "use client";
 import { useState } from "react";
-import {
-  Box,
-  Divider,
-  Hidden,
-  Stack,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import { analytics } from "@/services/analytics.service";
 import dynamic from "next/dynamic";
 import { theme } from "@/common/muicustomtheme/theme";
 import { RootContainer } from "@/components/common";
-import { Heart } from "@/page-components/students/svg";
 import Image from "next/image";
 
 const RedoAnimText = dynamic(
@@ -214,20 +206,7 @@ function Herosection() {
               alt="Hero section"
               src={"/images/student/students.webp"}
             />
-            {/* 
-            <img
-              width="100%"
-              height={
-                isMobile ? '260px' : isMdScreen && !isMobile ? '358px' : '100%'
-              }
-              style={{
-                objectFit: isMobile || isMdScreen ? 'initial' : 'cover',
-                // aspectRatio: '16/9',
-              }}
-              loading="lazy"
-              src="/images/student/students.webp"
-              alt="Hero section"
-            /> */}
+
             <Box
               display="flex"
               flexDirection="column"
@@ -247,7 +226,16 @@ function Herosection() {
               >
                 Ready, set, apply
               </Typography>
-              <img src="/images/student/arrowReady.png" alt="Arrow Ready" />
+              <Image
+                width={1000}
+                height={76}
+                style={{
+                  width: 100,
+                  height: 70,
+                }}
+                src="/images/student/arrow-ready.webp"
+                alt="Arrow Ready"
+              />
             </Box>
             <Box
               display="flex"
@@ -265,7 +253,17 @@ function Herosection() {
               gap="6px"
               left={{ lg: "-10%", md: "-10%", sm: "-2%", xs: "-2%" }}
             >
-              <img src="/images/student/arrowAsap.png" alt="Arrow Ready" />
+              <Image
+                width={1000}
+                height={76}
+                style={{
+                  width: 45,
+                  height: 76,
+                }}
+                src="/images/student/arrow-asap.webp"
+                alt="Arrow Ready"
+              />
+
               <Typography
                 component={"span"}
                 color="rgba(106, 101, 101, 1)"
@@ -287,7 +285,17 @@ function Herosection() {
               gap="6px"
               right={{ lg: "2%", md: "30%", sm: "5%", xs: "5%" }}
             >
-              <img src="/images/student/arrowApply.png" alt="Arrow Ready" />
+              <Image
+                width={1000}
+                height={76}
+                style={{
+                  width: 45,
+                  height: 76,
+                }}
+                src="/images/student/arrow-apply.webp"
+                alt="Arrow Ready"
+              />
+
               <Typography
                 color="rgba(106, 101, 101, 1)"
                 fontSize="16px"
@@ -298,7 +306,17 @@ function Herosection() {
                 component={"span"}
                 fontFamily="HankenGroteskRegular"
               >
-                Apply in a heartbeat! <Heart />
+                Apply in a heartbeat!{" "}
+                <Image
+                  width={1000}
+                  height={18}
+                  style={{
+                    width: 18,
+                    height: 18,
+                  }}
+                  src="/images/student/heart.webp"
+                  alt="Arrow Ready"
+                />
               </Typography>
             </Box>
             <Box
@@ -312,7 +330,16 @@ function Herosection() {
               gap="6px"
               left={{ lg: "-1%", md: "0%" }}
             >
-              <img src="/images/student/StarBigs.svg" alt="Arrow Ready" />
+              <Image
+                width={1000}
+                height={20}
+                style={{
+                  width: 20,
+                  height: 20,
+                }}
+                src="/images/student/star-big.webp"
+                alt="star big"
+              />
             </Box>
             <Box
               display={{ lg: "flex", md: "flex", sm: "none", xs: "none" }}
@@ -325,7 +352,16 @@ function Herosection() {
               gap="6px"
               left={{ lg: "3%", md: "0%" }}
             >
-              <img src="/images/student/StarSmalls.svg" alt="Arrow Ready" />
+              <Image
+                width={1000}
+                height={7}
+                style={{
+                  width: 7,
+                  height: 7,
+                }}
+                src="/images/student/star-small.webp"
+                alt="star small"
+              />
             </Box>
           </Box>
         </Box>
