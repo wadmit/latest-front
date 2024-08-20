@@ -37,21 +37,7 @@ const nextConfig = {
     fileLoaderRule.exclude = /\.svg$/i;
 
     return config;
-  },
-  plugins: [
-    {
-      name: "preset-default",
-      params: {
-        overrides: {
-          removeViewBox: false,
-          removeXMLNS: true,
-          removeTitle: true,
-          removeDesc: true,
-          removeEmptyAttrs: true,
-        },
-      },
-    },
-  ],
+  }
 };
 
 export default nextConfig;

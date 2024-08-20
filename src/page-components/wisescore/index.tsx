@@ -6,9 +6,8 @@ import WiseScoreWelcome from "./WisescoreWelcome";
 import { WiseAdmitColorFulSvg } from "$/svg";
 import WiseScoreModal from "./WisescoreModal";
 
-type Props = {};
 
-const WiseScoreHome = (props: Props) => {
+const WiseScoreHome = () => {
   const [showModal, setShowModal] = useState(false);
 
   const handleShowOrHideModel = () => {
@@ -30,9 +29,6 @@ const WiseScoreHome = (props: Props) => {
   return (
     <>
       <WiseScoreWelcome
-        // sx={{
-        //   backgroundImage: "url('/wisescore/swatch.svg')",
-        // }}
         version="WiseScore"
         onClick={handleShowOrHideModel}
         primaryColor="#FF6B26"
@@ -47,7 +43,6 @@ const WiseScoreHome = (props: Props) => {
       {showModal && (
         <WiseScoreModal
           version="WiseScore"
-          //  endPoint=""
           variant=""
           secondaryColor="#EFE5DA"
           primaryColor="rgba(255, 107, 38, 1)"

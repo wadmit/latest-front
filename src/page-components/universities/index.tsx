@@ -120,7 +120,7 @@ const UniversityHome = ({
                       >
                         Sort
                       </Typography>
-                      <Image height={20} width={20} src="/images/universities/sort.webp" alt="sort" />
+                      <Image height={20} width={20} src="/images/common/sort.webp" alt="sort" />
                     </Box>
                   </Button>
                 </Box>

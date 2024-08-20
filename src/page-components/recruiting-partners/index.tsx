@@ -7,18 +7,18 @@ import RecruitingPartnerUniversity from "@/page-components/recruiting-partners/R
 import SuccessStories from "@/page-components/recruiting-partners/SuccessStories";
 
 const RecruitingPartnersHome = () => {
-	return (
-		<>
-			<RecruitingHero />
-			<WhyChooseWiseAdmit />
-			<BecomeOurPartner />
-			<CalculateYourRevenue />
-			<Suspense fallback={<div>Loading...</div>}>
-				<RecruitingPartnerUniversity />
-			</Suspense>
-			<SuccessStories />
-		</>
-	);
+  return (
+    <>
+      <RecruitingHero />
+      <WhyChooseWiseAdmit />
+      <BecomeOurPartner />
+      <CalculateYourRevenue />
+      <Suspense fallback={<div>Loading...</div>}>
+        <RecruitingPartnerUniversity />
+      </Suspense>
+      <SuccessStories />
+    </>
+  );
 };
 
 export default RecruitingPartnersHome;

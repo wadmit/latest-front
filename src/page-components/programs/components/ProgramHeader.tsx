@@ -11,12 +11,6 @@ import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import Cookies from "js-cookie";
 import applicationConfig from "@/config";
 import { WiseAdmitDefault } from "$/svg";
-import {
-  BookIcon,
-  CourseCreditIcon,
-  GetDuration,
-  RightArrow,
-} from "@/page-components/programs/svg";
 
 function ProgramHeader({ isFoundation }: { isFoundation?: boolean }) {
   const program = useContext(ProgramsDetailContext);
@@ -126,7 +120,14 @@ function ProgramHeader({ isFoundation }: { isFoundation?: boolean }) {
               }
             }}
           >
-            Start Application <RightArrow />
+            Start Application{" "}
+            <Image
+              src="/images/programs/start-application-icon.webp"
+              width={1000}
+              height={16}
+              style={{ width: 16 }}
+              alt="start application"
+            />
           </Box>
         )}
       </Box>
@@ -181,7 +182,13 @@ function ProgramHeader({ isFoundation }: { isFoundation?: boolean }) {
             bgcolor="var(--States-Info-light, #E5F2FF)"
           >
             <Box display="flex" alignItems="center" gap="12px">
-              <GetDuration />
+              <Image
+                src="/images/programs/duration.webp"
+                width={1000}
+                height={24}
+                style={{ width: 24 }}
+                alt="program duration"
+              />{" "}
               <Box display="flex" flexDirection="column">
                 <Typography variant="h3" fontSize="clamp(16px , 24px , 28px)">
                   {program?.detail?.program_duration
@@ -195,10 +202,15 @@ function ProgramHeader({ isFoundation }: { isFoundation?: boolean }) {
             </Box>
             <Divider orientation="vertical" />
             <Box display="flex" alignItems="center" gap="12px">
-              <BookIcon />
+              <Image
+                src="/images/programs/discipline-icon.webp"
+                width={1000}
+                height={24}
+                style={{ width: 24 }}
+                alt="program type"
+              />
               <Box display="flex" flexDirection="column">
                 <Typography variant="h3" fontSize="clamp(16px , 24px , 28px)">
-                  {/* {program?.discipline?.name ?? "N/A"} */}
                   Discipline name
                 </Typography>
                 <Typography color="rgba(32, 28, 26, 0.55)" variant="body2">
@@ -208,7 +220,13 @@ function ProgramHeader({ isFoundation }: { isFoundation?: boolean }) {
             </Box>
             <Divider orientation="vertical" />
             <Box display="flex" alignItems="center" gap="12px">
-              <CourseCreditIcon />
+              <Image
+                src="/images/programs/language.webp"
+                width={1000}
+                height={24}
+                style={{ width: 24 }}
+                alt="program language"
+              />{" "}
               <Box display="flex" flexDirection="column">
                 <Typography variant="h3" fontSize="clamp(16px , 24px , 28px)">
                   English

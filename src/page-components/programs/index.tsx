@@ -15,7 +15,6 @@ import { ProgramContext } from "@/context/program-context";
 import { usePrograms } from "@/hooks";
 import type { IProgram } from "@/types/program";
 import ProgramUniversityHeader from "@/components/common/program-university-components/ProgramUniversityHeader";
-import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 
 const ProgramHome = ({
@@ -38,8 +37,6 @@ const ProgramHome = ({
     handleFilter,
     handleResetFilters,
   } = usePrograms(paginate, programs);
-  const searchParams = useSearchParams();
-
   const [sortedPrograms, setSortedrograms] = useState<IProgram[]>(programsData);
 
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
@@ -127,7 +124,7 @@ const ProgramHome = ({
                       >
                         Sort
                       </Typography>
-                      <Image height={20} width={20} src="/images/universities/sort.webp" alt="sort" />
+                      <Image height={20} width={20} src="/images/common/sort.webp" alt="sort" />
                     </Box>
                   </Button>
                 </Box>

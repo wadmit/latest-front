@@ -3,22 +3,24 @@ import React from "react";
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { RootContainer } from "@/components/common";
+import Image from "next/image";
 
 function InstitutionHero() {
   const router = useRouter();
   const isMobile = useMediaQuery("(max-width:600px)");
   return (
     <Box position="relative">
-      <img
+      <Image
         loading="lazy"
         alt="Institution Hero Image"
         style={{
+          width: "100%",
           aspectRatio: "4/3",
           objectFit: "cover",
         }}
-        src="/images/institution/hero.png"
-        width="100%"
-        height={isMobile ? "200px" : "560px"}
+        src="/images/institution/hero.webp"
+        width={1000}
+        height={isMobile ? 200 : 560}
       />
       <Box
         position="absolute"

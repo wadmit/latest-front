@@ -2,7 +2,6 @@
 import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import Image from "next/image";
-import groupImage from "$/images/partners/groupUpdatedImage.png";
 import {
 	PartnerData,
 	styles,
@@ -52,7 +51,7 @@ function BecomeOurPartner() {
 								three easy steps
 							</Typography>
 						</Typography>
-						<Image layout="responsive" alt="Wiseadmit Team" src={groupImage} />
+						<Image width={1000} style={{width: 385}} height={285} alt="Wiseadmit Team" src={"/images/partners/group-image.webp"} />
 					</Box>
 				</Grid>
 

@@ -43,7 +43,7 @@ function ProgramRanking() {
               style={{
                 borderRadius: "50%",
               }}
-              src="/images/Universities/us_news_ranking.svg"
+              src="/images/programs/us-ranking.webp"
               width="64"
               height="64"
               quality={100}
@@ -73,7 +73,7 @@ function ProgramRanking() {
         >
           <Box gap="19px" display="flex" alignItems="center">
             <Image
-              src="/images/Universities/shanghai_ranking.svg"
+              src="/images/programs/shanghai-ranking.webp"
               width="64"
               height="64"
               style={{
