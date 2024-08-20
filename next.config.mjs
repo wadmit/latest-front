@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -13,6 +14,21 @@ const nextConfig = {
         pathname: "**",
       },
     ],
+  },
+  webpack(config, options) {
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: [
+        {
+          loader: "@svgr/webpack",
+          // options: {
+          // },
+        },
+      ],
+    });
+
+    return config;
   },
 };
 

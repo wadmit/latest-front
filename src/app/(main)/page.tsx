@@ -8,6 +8,7 @@ export const metadata: Metadata = generateMetadata({
     "WiseAdmit is an all-in-one platform for international students to instantly find scholarships, best-fit programs, and universities worldwide.",
   endPoint: "/",
 });
+
 export const viewport = {
   width: "device-width",
   initialScale: 1,

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "@/styles/global.css";
 import MainLayoutScript from "@/page-components/scripts/MainLayoutScript";
 import TanstackProvider from "@/providers/TanstackProvider";
@@ -8,8 +7,6 @@ import CurrencyProvider from "@/providers/CurrencyProvider";
 import ReduxProvider from "@/providers/ReduxProvider";
 import NextAuthProvider from "@/providers/NextAuthProvider";
 import { generateMetadata } from "@/components/common/head-component/HeadComponent";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = generateMetadata({
   title: "WiseAdmit | Apply To Universities Worldwide",

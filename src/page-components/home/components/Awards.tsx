@@ -35,7 +35,7 @@ const Awards = () => {
       <Grid container columnSpacing={"42px"} mt="48px">
         {awardImages.map((eachImage, index) => {
           return (
-            <Grid item lg={3} md={6} sm={6} xs={12}>
+            <Grid key={index} item lg={3} md={6} sm={6} xs={12}>
               <Image
                 key={index}
                 style={{

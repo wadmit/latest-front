@@ -10,7 +10,7 @@ import "swiper/css/scrollbar";
 import "swiper/css/effect-cards";
 import "react-phone-input-2/lib/material.css";
 
-const Template = ({ children }: any) => {
+const Template = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <ThemeProvider theme={theme}>
