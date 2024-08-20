@@ -1414,7 +1414,11 @@ export function StartEarningSvg() {
     </svg>
   );
 }
-export function LeftCrowNotation() {
+export function ClickableArrow({
+  direction,
+}: {
+  direction: "left" | "right";
+}) {
   return (
     <svg
       width="18"
@@ -1422,6 +1426,9 @@ export function LeftCrowNotation() {
       viewBox="0 0 29 29"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      style={{
+        transform: direction === "left" ? "scaleX(1)" : "scaleX(-1)",
+      }}
     >
       <path
         fillRule="evenodd"
@@ -1433,24 +1440,6 @@ export function LeftCrowNotation() {
   );
 }
 
-export function RightCrowNotation() {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 29 29"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M11.4733 23.6524L9.78125 21.9484L17.3292 14.4004L9.78125 6.85244L11.4733 5.14844L19.8732 13.5484C20.0968 13.7733 20.2222 14.0774 20.2222 14.3944C20.2222 14.7115 20.0968 15.0156 19.8732 15.2404L11.4733 23.6524Z"
-        fill="white"
-      />
-    </svg>
-  );
-}
 export function GreenUpArrow() {
   return (
     <svg

@@ -11,7 +11,6 @@ const Awards = () => {
   return (
     <RootContainer
       mt="80px"
-      // sx={{ display: { lg: "flex", md: "flex", sm: "flex", xs: "flex" } }}
     >
       <Box display="flex" justifyContent="center">
         <Typography
@@ -32,7 +31,7 @@ const Awards = () => {
           Awards and recognitions
         </Typography>
       </Box>
-      <Grid container columnSpacing={"42px"} mt="48px">
+      <Grid container columnSpacing={"42px"} mt="48px" rowSpacing={"22px"}>
         {awardImages.map((eachImage, index) => {
           return (
             <Grid key={index} item lg={3} md={6} sm={6} xs={12}>

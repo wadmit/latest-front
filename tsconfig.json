@@ -38,6 +38,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/types/app/(dashboard)/template.tsx"
-  ],
+, "src/page-components/home/svg/Arrow.js"  ],
   "exclude": ["node_modules"]
 }

@@ -137,6 +137,9 @@ importers:
       socket.io-client:
         specifier: ^4.7.5
         version: 4.7.5
+      svgo:
+        specifier: ^3.3.2
+        version: 3.3.2
       swiper:
         specifier: ^11.1.8
         version: 11.1.8

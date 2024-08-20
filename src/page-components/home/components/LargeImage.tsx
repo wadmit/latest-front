@@ -17,8 +17,6 @@ const LargeImage = () => {
               loading="lazy"
               width="380"
               height="285"
-              //   width="380px"
-              //   height="285px"
               alt={readBlogImagesAlts[index]}
             />
           </Grid>

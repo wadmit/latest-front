@@ -3,18 +3,11 @@ import { analytics } from "@/services/analytics.service";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import Image from "next/image";
-import {
-  ArrowDown,
-  ArrowRightPrimary,
-  ArrowSecondary,
-  Dot,
-  Star,
-} from "@/page-components/home/svg";
-import { useRouter } from "next/navigation";
+import { ArrowDown, ArrowSvg } from "@/page-components/home/svg";
+import React from "react";
 
 const LandingHeroSection = () => {
   const isMobile = useMediaQuery("(max-width:1024px)");
-  const router = useRouter();
 
   return (
     <Box position="relative">
@@ -143,6 +136,7 @@ const LandingHeroSection = () => {
               sx={{
                 cursor: "pointer",
                 transition: "all 0.3s ease",
+
                 "&:hover": {
                   transform: "scale(1.02)",
                   border: "1px solid #FF6B26",
@@ -150,7 +144,7 @@ const LandingHeroSection = () => {
                 },
               }}
             >
-              Student <ArrowRightPrimary />
+              Student <ArrowSvg width={20} height={20} fill="#FF6B26" />
             </Box>
             <Box
               flexDirection={{
@@ -181,7 +175,7 @@ const LandingHeroSection = () => {
                     redirectPath: "",
                   });
                 }}
-                padding="12px 32px 12px 32px"
+                padding="12px 30px 12px 32px"
                 border="1px solid rgba(131, 134, 139, 1)"
                 borderRadius="8px"
                 width={{ lg: "50%", md: "100%", sm: "100%", xs: "100%" }}
@@ -197,7 +191,7 @@ const LandingHeroSection = () => {
                 fontFamily="HankenGroteskSemiBold"
                 lineHeight="19.2px"
               >
-                Recruitment partner <ArrowSecondary />
+                Recruitment partner <ArrowSvg width={20} height={20} />
               </Box>
               <Box
                 component={"a"}
@@ -233,7 +227,7 @@ const LandingHeroSection = () => {
                 fontFamily="HankenGroteskSemiBold"
                 lineHeight="19.2px"
               >
-                Institution partner <ArrowSecondary />
+                Institution partner <ArrowSvg width={20} height={20} />
               </Box>
             </Box>
           </Box>
@@ -272,7 +266,18 @@ const LandingHeroSection = () => {
                   right="-15%"
                   display={{ lg: "flex", md: "none", sm: "none", xs: "none" }}
                 >
-                  <Dot />
+                  <Image
+                    width={1000}
+                    height={22}
+                    alt="home-dot"
+                    style={{
+                      height: 22,
+                      width: 22,
+                    }}
+                    src={"/images/home/dot.webp"}
+                  />
+
+                  {/* <Dot /> hello */}
                 </Box>
                 <Box
                   top="8%"
@@ -280,7 +285,16 @@ const LandingHeroSection = () => {
                   right="-8%"
                   display={{ lg: "flex", md: "none", sm: "none", xs: "none" }}
                 >
-                  <Star />
+                  <Image
+                    width={1000}
+                    height={22}
+                    alt="home-dot"
+                    style={{
+                      height: 27,
+                      width: 27,
+                    }}
+                    src={"/images/home/star.webp"}
+                  />
                 </Box>
               </Box>
             </Box>

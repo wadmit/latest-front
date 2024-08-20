@@ -96,8 +96,6 @@ function TrustedBy() {
                 <Image
                   width={68}
                   height={68}
-                  // width={isMobile ? '58px' : '68px'}
-                  // height={isMobile ? '58px' : '68px'}
                   style={{ width: "68px", height: "68px", objectFit: "cover" }}
                   loading="lazy"
                   alt={altTags[index]}

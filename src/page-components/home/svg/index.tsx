@@ -35,71 +35,23 @@ export function ArrowDown() {
     </svg>
   );
 }
-
-export function ArrowRightPrimary() {
+export const ArrowSvg = (props: any) => {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-    >
-      <path
-        d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.03 12.53L13.03 15.53C12.88 15.68 12.69 15.75 12.5 15.75C12.31 15.75 12.12 15.68 11.97 15.53C11.68 15.24 11.68 14.76 11.97 14.47L13.69 12.75H8.5C8.09 12.75 7.75 12.41 7.75 12C7.75 11.59 8.09 11.25 8.5 11.25H13.69L11.97 9.53C11.68 9.24 11.68 8.76 11.97 8.47C12.26 8.18 12.74 8.18 13.03 8.47L16.03 11.47C16.32 11.76 16.32 12.24 16.03 12.53Z"
-        fill="#FF6B26"
-      />
-    </svg>
-  );
-}
-
-export function ArrowSecondary() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
       width="20"
       height="20"
       viewBox="0 0 20 20"
       fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
       <path
         d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM14.03 10.53L11.03 13.53C10.88 13.68 10.69 13.75 10.5 13.75C10.31 13.75 10.12 13.68 9.97 13.53C9.68 13.24 9.68 12.76 9.97 12.47L11.69 10.75H6.5C6.09 10.75 5.75 10.41 5.75 10C5.75 9.59 6.09 9.25 6.5 9.25H11.69L9.97 7.53C9.68 7.24 9.68 6.76 9.97 6.47C10.26 6.18 10.74 6.18 11.03 6.47L14.03 9.47C14.32 9.76 14.32 10.24 14.03 10.53Z"
-        fill="#383838"
+        fill={`${props.fill ? props.fill : "#383838"}`}
       />
     </svg>
   );
-}
-
-export function Dot() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="22"
-      height="22"
-      viewBox="0 0 22 22"
-      fill="none"
-    >
-      <circle cx="11" cy="11" r="11" fill="#FECA9A" />
-    </svg>
-  );
-}
-
-export function Star() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="29"
-      height="27"
-      viewBox="0 0 29 27"
-      fill="none"
-    >
-      <path
-        d="M1.49223 12.5301C0.611984 12.677 0.582801 14.0698 1.45647 14.2524C8.88065 15.8042 12.1101 17.9684 13.8997 25.9041C14.1022 26.8021 15.694 26.7882 15.8584 25.8824C17.2875 18.0074 19.6213 15.647 27.413 14.204C28.3094 14.038 28.3096 12.5224 27.4132 12.3562C19.6206 10.912 17.2849 8.55355 15.857 0.679525C15.6927 -0.226382 14.193 -0.226566 14.0286 0.679318C12.5411 8.87577 10.0736 11.0982 1.49223 12.5301Z"
-        fill="#60B590"
-      />
-    </svg>
-  );
-}
+};
 
 export function LinearGradient() {
   return (
@@ -189,14 +141,17 @@ export function LinearGradient() {
   );
 }
 
-export function LeftFaced() {
+export function BookIconSvg({direction, isMobile}: {direction: "left" | "right", isMobile?: boolean}) {
   return (
     <svg
-      width="36"
-      height="36"
+      width={isMobile ? 26 : 36}
+      height={isMobile ? 26 : 36}
       viewBox="0 0 36 36"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      style={{
+        transform: direction === "left" ? "scaleX(-1)" : "scaleX(1)"
+      }}
     >
       <path
         d="M29.3242 28.5871C29.3242 27.615 28.9381 26.6828 28.2507 25.9954C27.5633 25.308 26.6311 24.9219 25.659 24.9219H5.86659"
@@ -204,6 +159,7 @@ export function LeftFaced() {
         strokeWidth="2.9322"
         strokeLinecap="round"
         strokeLinejoin="round"
+        
       />
       <path
         d="M25.659 2.92969H5.86659V32.2517H25.659C26.6311 32.2517 27.5633 31.8656 28.2507 31.1782C28.9381 30.4908 29.3242 29.5586 29.3242 28.5865V6.59494C29.3242 5.62286 28.9381 4.69058 28.2507 4.00322C27.5633 3.31585 26.6311 2.92969 25.659 2.92969Z"
@@ -211,43 +167,17 @@ export function LeftFaced() {
         strokeWidth="2.9322"
         strokeLinecap="round"
         strokeLinejoin="round"
+        
       />
     </svg>
   );
 }
 
-export function RightFaced() {
+export function Star({isMobile}: {isMobile: boolean}) {
   return (
     <svg
-      width="36"
-      height="36"
-      viewBox="0 0 36 36"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.67578 28.5871C6.67578 27.615 7.06194 26.6828 7.74931 25.9954C8.43668 25.308 9.36895 24.9219 10.341 24.9219H30.1334"
-        stroke="#FF6B26"
-        strokeWidth="2.9322"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M10.341 2.92969H30.1334V32.2517H10.341C9.36895 32.2517 8.43668 31.8656 7.74931 31.1782C7.06194 30.4908 6.67578 29.5586 6.67578 28.5865V6.59494C6.67578 5.62286 7.06194 4.69058 7.74931 4.00322C8.43668 3.31585 9.36895 2.92969 10.341 2.92969Z"
-        stroke="#FF6B26"
-        strokeWidth="2.9322"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-export function SmallStar() {
-  return (
-    <svg
-      width="20"
-      height="19"
+      width={isMobile ? 20 : 35}
+      height={isMobile ? 20 : 35}
       viewBox="0 0 20 19"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -256,60 +186,6 @@ export function SmallStar() {
         d="M9.59201 1L6.93721 6.37833L1.00042 7.24608L5.29621 11.4302L4.28241 17.3412L9.59201 14.5489L14.9016 17.3412L13.8878 11.4302L18.1836 7.24608L12.2468 6.37833L9.59201 1Z"
         stroke="#FF6B26"
         strokeWidth="1.71832"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-export function SmallLeftFaced() {
-  return (
-    <svg
-      width="21"
-      height="21"
-      viewBox="0 0 21 21"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M3.4375 16.7534C3.4375 16.1837 3.66379 15.6374 4.0666 15.2346C4.46941 14.8318 5.01573 14.6055 5.58539 14.6055H17.184"
-        stroke="#FF6B26"
-        strokeWidth="1.71831"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M5.58539 1.71875H17.184V18.9018H5.58539C5.01573 18.9018 4.46941 18.6756 4.0666 18.2727C3.66379 17.8699 3.4375 17.3236 3.4375 16.754V3.86664C3.4375 3.29698 3.66379 2.75066 4.0666 2.34785C4.46941 1.94504 5.01573 1.71875 5.58539 1.71875Z"
-        stroke="#FF6B26"
-        strokeWidth="1.71831"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-export function SmallRightFaced() {
-  return (
-    <svg
-      width="21"
-      height="21"
-      viewBox="0 0 21 21"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M3.4375 16.7534C3.4375 16.1837 3.66379 15.6374 4.0666 15.2346C4.46941 14.8318 5.01573 14.6055 5.58539 14.6055H17.184"
-        stroke="#FF6B26"
-        strokeWidth="1.71831"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M5.58539 1.71875H17.184V18.9018H5.58539C5.01573 18.9018 4.46941 18.6756 4.0666 18.2727C3.66379 17.8699 3.4375 17.3236 3.4375 16.754V3.86664C3.4375 3.29698 3.66379 2.75066 4.0666 2.34785C4.46941 1.94504 5.01573 1.71875 5.58539 1.71875Z"
-        stroke="#FF6B26"
-        strokeWidth="1.71831"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

@@ -9,13 +9,11 @@ import {
   supportAltTags,
   supportImages,
 } from "@/page-components/home/utils/provider";
-import { Height } from "@mui/icons-material";
 
 const Support = () => {
   SwiperCore.use([Autoplay]);
 
   const ref = useRef(null);
-  const isMobile = useMediaQuery("(max-width:600px)");
 
   const propTags = [
     {

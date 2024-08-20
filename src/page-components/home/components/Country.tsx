@@ -129,36 +129,7 @@ function Country() {
             </Grid>
           </Grid>
 
-          {/* Responsive images */}
-          <Grid
-            item
-            xl={9}
-            lg={8}
-            md={12}
-            sm={12}
-            xs={12}
-            display={{ lg: "block", md: "block", sm: "none", xs: "none" }}
-          >
-            <Image
-              width="10000" //higher the width better the quality, we can still manage with from style
-              height="0"
-              loading="lazy"
-              style={{
-                width: "100%",
-                height: "100%",
-              }}
-              src="/images/home/MainBig.webp"
-              alt="wiseadmit-study-in-china"
-            />
-          </Grid>
-          <Grid
-            item
-            lg={12}
-            md={12}
-            sm={12}
-            xs={12}
-            display={{ lg: "none", md: "none", sm: "block", xs: "block" }}
-          >
+          <Grid item xl={9} lg={8} xs={12} display={{ xs: "block" }}>
             <Image
               width="10000"
               height="0"
@@ -168,7 +139,7 @@ function Country() {
                 width: "100%",
                 height: "auto",
               }}
-              src="/images/home/MainBig.webp"
+              src="/images/home/mainbig.webp"
               alt="wiseadmit-study-in-china"
             />
           </Grid>

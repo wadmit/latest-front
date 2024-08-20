@@ -7,7 +7,7 @@ import styles from "@/styles/testimonial.module.css";
 import { Navigation, Pagination } from "swiper/modules";
 import ThumbnailWrapper from "@/page-components/home/components/atoms/ThumbnailWrapper";
 import { RootContainer } from "@/components/common";
-import { LeftCrowNotation, RightCrowNotation } from "$/svg";
+import {  ClickableArrow } from "$/svg";
 import { testimonialsData } from "@/page-components/home/utils/provider";
 import type { IThumbnailWrapperRef } from "@/page-components/home/utils/types";
 
@@ -152,7 +152,7 @@ function Testimonials() {
             padding: 0,
           }}
         >
-          <LeftCrowNotation />
+          <ClickableArrow direction="left" />
         </Button>
         <Button
           id="Right crow"
@@ -167,7 +167,7 @@ function Testimonials() {
             padding: 0,
           }}
         >
-          <RightCrowNotation />
+          <ClickableArrow direction="right" />
         </Button>
       </Box>
     </RootContainer>

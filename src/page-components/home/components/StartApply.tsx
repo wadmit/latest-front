@@ -4,13 +4,10 @@ import { useRouter } from "next/navigation";
 import { analytics } from "@/services/analytics.service";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import {
-  LeftFaced,
-  RightFaced,
-  SmallLeftFaced,
-  SmallRightFaced,
-  SmallStar,
+  BookIconSvg,
   Star,
 } from "@/page-components/home/svg";
+import Image from "next/image";
 
 function StartApply() {
   const theme = useTheme();
@@ -83,28 +80,31 @@ function StartApply() {
           top={{ lg: "140px", md: "60px", sm: "60px", xs: "30px" }}
           left={{ lg: "195px", md: "105px", sm: "50px", xs: "25px" }}
         >
-          {isMobile ? <SmallLeftFaced /> : <LeftFaced />}
+          <BookIconSvg direction="right" isMobile={isMobile} />
         </Box>
         <Box
           position="absolute"
           top={{ lg: "320px", md: "320px", sm: "250px", xs: "240px" }}
           left={{ lg: "315px", md: "250px", sm: "100px", xs: "50px" }}
         >
-          {isMobile ? <SmallStar /> : <Star />}
-        </Box>
+         
+         <Star isMobile={isMobile} />
+         </Box>
         <Box
           position="absolute"
           top={{ lg: "140px", md: "60px", sm: "60px", xs: "30px" }}
           right={{ lg: "195px", md: "105px", sm: "50px", xs: "25px" }}
         >
-          {isMobile ? <SmallRightFaced /> : <RightFaced />}
+          <BookIconSvg direction="left" isMobile={isMobile} />
+
+          {/* {isMobile ? <SmallRightFaced /> : <RightFaced />} */}
         </Box>
         <Box
           position="absolute"
           top={{ lg: "320px", md: "320px", sm: "250px", xs: "240px" }}
           right={{ lg: "315px", md: "250px", sm: "100px", xs: "50px" }}
         >
-          {isMobile ? <SmallStar /> : <Star />}
+          <Star isMobile={isMobile} />
         </Box>
       </Box>
     </Box>
