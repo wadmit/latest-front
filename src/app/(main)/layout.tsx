@@ -1,4 +1,5 @@
 "use client";
+
 import { Navbar } from "@/components/common";
 import CategoryButton from "@/components/common/buttons/CategoryButton";
 import { Footer } from "@/components/common/footer/Footer";
@@ -7,13 +8,24 @@ import { usePathname } from "next/navigation";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isContactUsPage = pathname === "/contactus";
+
+  const renderFooter = () => {
+    switch (pathname) {
+      case "/contactus":
+        return <FooterContact />;
+      case "/applynow":
+        return null;
+      default:
+        return <Footer />;
+    }
+  };
+
   return (
     <>
-      <Navbar />
+      {pathname !== "/applynow" && <Navbar />}
       <CategoryButton />
       {children}
-      {isContactUsPage ? <FooterContact /> : <Footer />}
+      {renderFooter()}
     </>
   );
 }
