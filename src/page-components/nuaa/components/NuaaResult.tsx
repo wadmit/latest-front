@@ -78,6 +78,7 @@ const NuaaResult = ({ title, url, resultImage, color }: Props) => {
         position: "relative",
         // mt: -20,
         zIndex: 100,
+        overflow: 'hidden'
       }}
     >
       <Box sx={{ backgroundImage: `url(${resultImage})` }}>
@@ -357,19 +358,18 @@ const NuaaResult = ({ title, url, resultImage, color }: Props) => {
               </ButtonWrapperNuaa>
             </Box>
           </Stack>
-          <Box display={{ lg: "flex", xs: "none" }}>
+          <Box display={{ lg: "flex", xs: "none",  }}>
             <img
               style={{
-                // width: '100%',
-                // objectFit: 'contain',
+                width: 285,
+                height: 328,
                 borderRadius: "12px",
                 position: "absolute",
-                top: 50,
+                top: 25,
                 right: 30,
-                // maxHeight: '300px',
               }}
               alt="Nuaa University"
-              src="/images/universities/nuaa-workflow.png"
+              src="/images/universities/nuaa-result-celebration.webp"
             />
           </Box>
         </Grid>

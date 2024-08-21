@@ -46,17 +46,17 @@ function WhyChooseWiseAdmit() {
           <WhyChooseCard
             data={attractmorestudents}
             title="Convert More Students"
-            src="/images/partners/cube.png"
+            src="/images/partners/cube.webp"
           />
           <WhyChooseCard
             data={servewithbetterefficiency}
             title="Be More Efficient"
-            src="/images/partners/setting.png"
+            src="/images/partners/setting.webp"
           />
           <WhyChooseCard
             data={maximizeyourreach}
             title="Generate More Revenue"
-            src="/images/partners/dollar.png"
+            src="/images/partners/dollar.webp"
           />
         </Box>
       </Box>

@@ -1,16 +1,11 @@
-import { IUniversityTemplateImages } from "@/types/utils";
 import { Box } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import SwiperCore from "swiper";
 import { Autoplay, Pagination } from "swiper/modules";
-import { images } from "../utils/provider";
 
-type Props = {
-  images: IUniversityTemplateImages[];
-};
 
-const NuaaSectionOne = (props: Props) => {
+const NuaaSectionOne = () => {
   SwiperCore.use([Autoplay, Pagination]);
   return (
     <Box bgcolor="grey.50">
@@ -22,8 +17,8 @@ const NuaaSectionOne = (props: Props) => {
       >
         <Box position="relative" width="100%" height="31.25rem">
           <Image
-            src={images[2].src}
-            alt={images[2].alt}
+            src='/images/universities/nuaa-banner.webp'
+            alt='banner'
             layout="fill"
             objectFit="cover"
           />

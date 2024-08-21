@@ -49,8 +49,6 @@ const NuaaFooter = ({ config }: Props) => {
           >
             <ImageComponent
               src={"/images/universities/nuaa-logo.png"}
-              layout="fill"
-              objectFit="contain"
               style={{
                 filter: "brightness(0) invert(1)",
               }}

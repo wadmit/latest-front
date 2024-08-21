@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
-import wiseAdmitLogoLarge from '$/images/partners/wiseadmit_logo_large.png';
+import wiseAdmitLogoLarge from '$/images/partners/wiseadmit-logo-large.png';
 
 export function DataNotfound({
   title,

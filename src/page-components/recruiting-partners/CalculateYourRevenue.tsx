@@ -3,8 +3,8 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import ellipseeight from "$/images/partners/Ellipse 8.png";
-import ellipsenine from "$/images/partners/Ellipse 9.png";
+import bigEllipse from "$/images/partners/big-ellipse.webp";
+import smallEllipse from "$/images/partners/small-ellipse.webp";
 import { ButtonWrapper, RootContainer } from "@/components/common";
 
 function CalculateYourRevenue() {
@@ -23,8 +23,7 @@ function CalculateYourRevenue() {
 						top={{ lg: "225px", md: "218px", sm: "155px", xs: "145px" }}
 						left={{ lg: "85px", md: "55px", sm: "5px", xs: "2px" }}
 					>
-						<Image alt="ellipse-nine" src={ellipsenine} />
-						{/* <Image src={ellipseeight} /> */}
+						<Image alt="ellipse-nine" src={smallEllipse} width={1000} height={107} style={{width: 637}} />
 					</Box>
 					<Box
 						position="relative"
@@ -32,7 +31,7 @@ function CalculateYourRevenue() {
 						left="-4px"
 						display={{ lg: "flex", md: "flex", sm: "none", xs: "none" }}
 					>
-						<Image alt="ellipse-eight" src={ellipseeight} />
+						<Image alt="ellipse-eight" src={bigEllipse} width={1000} height={134} style={{width: 786}}/>
 					</Box>
 				</Box>
 				<Box

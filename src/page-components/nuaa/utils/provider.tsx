@@ -18,23 +18,9 @@ export const config: IUniversityTemplateConfig = {
   originalSiteUrl: "http://cie.nuaa.edu.cn/",
   homePageUrl: "/nuaa/nuaa-score",
   scorePageUrl: "/nuaa/nuaa-score/result",
-  resultImage: "/images/universities/banner.svg",
+  resultImage: "/images/universities/nuaa-banner.webp",
 };
 
-export const images = [
-  {
-    src: "/images/universities/nuaa_1.jpg",
-    alt: "NUAA1",
-  },
-  {
-    src: "/images/universities/nuaa_2.jpg",
-    alt: "NUAA2",
-  },
-  {
-    src: "/images/universities/banner-3.svg",
-    alt: "NUAA3",
-  },
-];
 
 export const badgeArray: TBadgeProps[] = [
   {

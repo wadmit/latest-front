@@ -26,10 +26,11 @@ export function WhyChooseCard({
           alt="img-Homepage"
           style={{
             objectFit: "contain",
+            width: 45
           }}
           src={src}
           height={45}
-          width={45}
+          width={1000}
         />
       </Box>
       <Box mt="17px">

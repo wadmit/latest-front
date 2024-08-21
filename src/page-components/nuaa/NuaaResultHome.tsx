@@ -1,6 +1,6 @@
 import React from "react";
 import { NuaaResult } from "@/page-components/nuaa/components";
-import { config, images } from "./utils/provider";
+import { config } from "./utils/provider";
 import Layout from "@/app/(nuaa)/nuaa/layout";
 
 type Props = {};
