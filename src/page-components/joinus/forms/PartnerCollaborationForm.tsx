@@ -28,7 +28,7 @@ const PartnerCollaborationForm = () => {
         top={-50}
         position="absolute"
         zIndex={10}
-        sx={{ backgroundImage: "url(partner-vector.png)" }}
+        sx={{ backgroundImage: "url(/images/partners/partner-vector.webp)" }}
       />
       <StyledContainerWrapper sx={{ zIndex: 11, position: "relative" }}>
         <Box display="flex" justifyContent="center" alignItems="center">

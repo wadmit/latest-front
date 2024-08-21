@@ -16,12 +16,12 @@ export const alertTexts = {
 export const OnBoardingImage = [
     {
         label: 'Dashboard',
-        imgPath: "/images/onboarding/first.svg",
+        imgPath: "/images/onboarding/first.webp",
         desc: "Get started by checking your WiseScore. Know your eligibility for admission and scholarship for university or program of your choice in just 3 minutes."
     },
     {
         label: 'Dashboard',
-        imgPath: "/images/onboarding/second.svg",
+        imgPath: "/images/onboarding/second.webp",
         desc: "Now that you have checked your WiseScore, shortlist your favorite program and start application. It's all about making things happen on your terms."
     },
     //Remove this comment if you want to add consent on onboarding component
@@ -31,22 +31,22 @@ export const OnBoardingImage = [
     // },
     {
         label: 'View or edit your profile',
-        imgPath: '/images/onboarding/third.svg',
+        imgPath: '/images/onboarding/third.webp',
         desc: "You can edit personal information, address, guardian details. You can also change your profile photo and complete your profile from here."
     },
     {
         label: 'Shortlisted universities & programs',
-        imgPath: '/images/onboarding/sixth.svg',
+        imgPath: '/images/onboarding/sixth.webp',
         desc: "You can edit personal information, address, guardian details. You can also change your profile photo and complete your profile from here."
     },
     {
         label: 'Check your applications',
-        imgPath: '/images/onboarding/fifth.svg',
+        imgPath: '/images/onboarding/fifth.webp',
         desc: "Find all your shortlisted application and progress in one spot. Make sure you have uploaded all required documents. Stay tuned for further updates from university"
     },
     {
         label: 'Submit your documents.',
-        imgPath: '/images/onboarding/fourth.svg',
+        imgPath: '/images/onboarding/fourth.webp',
         desc: "You can upload multiple documents at once if you have extra files or  more pages for the next steps. After you submit them to the university,  you can see them all in one place. Simple!"
     },
 

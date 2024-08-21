@@ -68,7 +68,6 @@ export const ResponsiveBox = styled(Box)`
 	width: 100vw;
 	display: flex;
 	align-items: center;
-	// background-image: url("patternsignup.png");
 	background-position: center;
 	background-size: cover;
 	padding: 0px 80px 0px 126px;

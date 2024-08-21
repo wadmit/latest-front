@@ -133,7 +133,7 @@ function StartApplying() {
             }}
             width={100000}
             height={1}
-            src="/images/home/applying_three.webp"
+            src="/images/home/applying-three.webp"
             alt="apply-to-chinese-universities"
           />
         </Box>

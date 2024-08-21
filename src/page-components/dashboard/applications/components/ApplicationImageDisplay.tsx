@@ -30,7 +30,7 @@ const ApplicationImageDisplay = ({
         <DisplayImageView
           handleRemove={handleRemove}
           name={name}
-          imageUrl="/Dashboard/pdf.png"
+          imageUrl="/images/dashboard/pdf.webp"
           previewUrl={previewUrl}
           status={status}
           activeStep={activeStep}

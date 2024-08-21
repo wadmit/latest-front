@@ -145,7 +145,7 @@ const ContactUsForm = () => {
                   >
                     We love to hear from you, Get in touch{" "}
                     <Image
-                      src="/images/contactus/WaveHand.png"
+                      src="/images/contactus/wave-hand.webp"
                       height={30}
                       width={30}
                       alt="wavehand"

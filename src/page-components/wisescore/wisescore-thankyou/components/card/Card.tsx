@@ -98,18 +98,20 @@ export function Card({
 					height={{ md: "17.75rem", xs: "11.0625rem", lg: "245px" }}
 					maxWidth={{ md: "17.875rem", lg: "324px", xs: "100%" }}
 					width="100%"
+					
 				>
 					<Image
 						alt="university-cover"
 						src={
 							university?.cover
 								? `${process.env.NEXT_PUBLIC_IMAGE_DISTRIBUTION_KEY}/${university.cover_key}`
-								: "/images/universities/uni_1.png"
+								: "/images/universities/default-university.webp"
 						}
 						objectFit="cover"
 						style={{
 							borderRadius: "8px",
 						}}
+					
 						layout="fill"
 					/>
 					<Box sx={{ position: "absolute", top: ".75rem", left: "1rem" }}>

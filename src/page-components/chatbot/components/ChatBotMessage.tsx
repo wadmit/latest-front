@@ -78,7 +78,7 @@ const ChatBotMessage = ({
             borderRadius: "50%",
             backgroundColor: "white",
           }}
-          src="/images/home/avatar.jpg"
+          src="/images/home/avatar.webp"
         />
       )}
       <Box

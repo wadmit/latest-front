@@ -25,7 +25,7 @@ const ChatBotHeader = () => {
               borderRadius: "50%",
               backgroundColor: "white",
             }}
-            src="/images/home/avatar.jpg"
+            src="/images/home/avatar.webp"
           />
           <Box display={"flex"} gap={"1px"} flexDirection={"column"}>
             <Typography
@@ -75,7 +75,7 @@ const ChatBotHeader = () => {
         <img
           width={"28px"}
           height={"28px"}
-          src="/images/home/whatsappfinal.svg"
+          src="/images/home/whatsapp.webp"
         />
       </Box>
     </Box>

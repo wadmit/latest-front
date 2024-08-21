@@ -6,7 +6,7 @@ import { Box, Button, Grid, MenuItem, Stack, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InputBox from "@/page-components/costcalculator/components/InputBox";
-import costArrow from "$/images/costcalculator/cost_arrow.jpg";
+import costArrow from "$/images/costcalculator/cost-arrow.webp";
 import Image from "next/image";
 import DownloadFile from "@/page-components/costcalculator/components/DownloadFile";
 import useCurrencyInfo from "@/hooks/useCurrencyInfo";

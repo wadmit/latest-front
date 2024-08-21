@@ -67,7 +67,7 @@ function OnBoardingComponent({
                         <Close />
                     </Box>
                     <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" gap="8px">
-                        <img src='/images/onboarding/onb.svg' />
+                        <img src='/images/onboarding/onb.webp' />
                         <Typography fontFamily="HankenGroteskExtraBold" fontWeight={800} fontSize={{ lg: "18px", md: "18px", sm: "16px", xs: "16px" }} lineHeight="23.4px" letterSpacing="-2%" color="rgba(255, 255, 255, 1)" mt="24px" textAlign="center" padding={{ lg: "0px", md: "0px", sm: "0px", xs: "0px 40px" }}>
                             Welcome to WiseAdmit Student Portal, {userName} !
                         </Typography>

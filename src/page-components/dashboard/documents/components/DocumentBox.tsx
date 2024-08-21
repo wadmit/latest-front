@@ -21,7 +21,7 @@ export function ShowPdf({ idx }: { idx: number }) {
         width={153}
         height={143}
         objectFit="contain"
-        src="/Dashboard/pdf.png"
+        src="/images/dashboard/pdf.webp"
         alt="PDF file"
       />
     </Box>
