@@ -357,7 +357,7 @@ function ApplicationTable({ status }: IProps) {
   // handle the payment when user clicks on handle click
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    // Create a Checkout Session.
+    // Create a Checkout Session
     if (currentCountry === "Nepal") {
       setShowPaymentOptions(true);
       return;
