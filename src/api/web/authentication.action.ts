@@ -34,3 +34,18 @@ export const signUp = async (data: any) => {
     throw error;
   }
 }
+
+export const forgotPassword = async (formValues: {email: string}) => {
+  try {
+    const response = await ApiService.post({
+      url: `${ApiConfig.students}/forgotpassword`,
+      options: formValues,
+      tokenNeeded: false,
+    });
+
+    return response;
+    
+  } catch (error) {
+    throw error
+  }
+}

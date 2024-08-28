@@ -1,4 +1,5 @@
 import { generateMetadata } from "@/components/common/head-component/HeadComponent";
+import ForgotPasswordHome from "@/page-components/apply-now/forgot-password";
 import { Metadata } from "next";
 import React from "react";
 
@@ -9,7 +10,7 @@ export const metadata: Metadata = generateMetadata({
 });
 
 const page = () => {
-  return <div>page</div>;
+  return <ForgotPasswordHome />
 };
 
 export default page;
