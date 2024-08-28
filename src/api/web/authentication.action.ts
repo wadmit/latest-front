@@ -1,5 +1,5 @@
 import { ApiConfig } from "@/constants";
-import ApiService from "@/services/api.service";
+import ApiService, { request } from "@/services/api.service";
 
 export const authentication = async ({
   email,
@@ -45,6 +45,19 @@ export const forgotPassword = async (formValues: {email: string}) => {
 
     return response;
     
+  } catch (error) {
+    throw error
+  }
+}
+
+export const resetPassword = async (formValues: {password: string; token: string}) => {
+  try {
+    return await request({
+			url: `${ApiConfig.students}/resetpassword/${formValues.token}`,
+			method: "POST",
+      mode: 'cors',
+			data: {password: formValues.password},
+		});
   } catch (error) {
     throw error
   }
