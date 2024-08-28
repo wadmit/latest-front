@@ -10,6 +10,7 @@ import { useFormik } from 'formik'
 import { FORM_VALIDATION_FORGOTPASSWORD } from '@/page-components/apply-now/forgot-password/utils/formik-validation'
 import { useMutation } from '@tanstack/react-query'
 import { forgotPassword } from '@/api/web/authentication.action'
+import { errorMessageBox } from '../../utils/provider'
 
 type Props = {}
 
@@ -25,22 +26,9 @@ const ForgotPassword = (props: Props) => {
     setSuccessMessageOpen(true);
   };
 
-  const {isPending, error, mutate, data, isError} = useMutation({
+  const {isPending, error:axiosError, mutate, data, isError} = useMutation({
     mutationFn: forgotPassword
   })
-
-  function errorMessageBox() {
-    return (
-      <Box border={1} borderRadius={1} borderColor="error.light" py={2} px={2}>
-        <Stack direction="row" alignItems="center">
-          <ReportProblemIcon color="error" />
-          <Typography variant="body2" component="p" color="error.main" ml={1}>
-            {error?.message[0] || ''}
-          </Typography>
-        </Stack>
-      </Box>
-    );
-  }
 
   useEffect(() => {
     let timer: any;
@@ -128,7 +116,7 @@ const ForgotPassword = (props: Props) => {
             formik.touched.email &&
             Boolean(
               formik.errors.email ||
-              error?.message ||
+              axiosError?.message ||
               ''
             )
           }
@@ -136,7 +124,8 @@ const ForgotPassword = (props: Props) => {
           fullWidth
         />
       </Box>
-      {isError && errorMessageBox()}
+      {isError &&
+				errorMessageBox((axiosError as any)?.response?.data?.errors[0]?.message || "")}
       <Box mt={2}>
         <ButtonWrapper type="submit" disabled={isPending}>
           {isPending ? <Loader /> : successMessageOpen ? 'Resend verification email' : 'Send verification email'}

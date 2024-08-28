@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { IStatus } from "@/page-components/dashboard/utils/type";
 import { Box, Button, Stack } from "@mui/material";
 import { EApplicationStatus } from "@/types/application";
@@ -26,6 +26,8 @@ const ApplicationDocuments = ({ status, activeStep }: Props) => {
   const { enqueueSnackbar } = useSnackbar();
   const boxRef = useRef<HTMLDivElement>(null);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const applicationId = params.applicationId ?? "";
 
   const applications = useAppSelector(
@@ -46,7 +48,11 @@ const ApplicationDocuments = ({ status, activeStep }: Props) => {
 
   const { mutate } = useMutation({
     mutationFn: submitApplication,
+    onMutate: () => {
+      setIsSubmitting(true);
+    },
     onError: (err) => {
+      setIsSubmitting(false);
       analytics.trackEvent(EAnalyticsEvents.ERROR, {
         source: "Application Submit Failure",
         message: err,
@@ -62,6 +68,7 @@ const ApplicationDocuments = ({ status, activeStep }: Props) => {
       document.getElementById("box_container")?.scrollIntoView(true);
     },
     onSuccess: (data) => {
+      setIsSubmitting(false);
       dispatch(setNewStatus({ status: "review" }));
       enqueueSnackbar("Successfully Submitted Application", {
         variant: "success",
@@ -84,7 +91,9 @@ const ApplicationDocuments = ({ status, activeStep }: Props) => {
   });
 
   const handleSubmit = () => {
-    mutate(applicationId as string);
+    if (!isSubmitting) {
+      mutate(applicationId as string);
+    }
   };
 
   const isSubmitDisabled = !(activeStep === 2 && status === "pending");
