@@ -49,6 +49,7 @@ import { StyledTableCell } from "../utils/provider";
 import Alert from "./Alert";
 import { Chip } from "./Chip";
 import PaymentStatus from "./PaymentStatus";
+import { filter } from "lodash";
 
 interface Column {
   id: string;
@@ -88,12 +89,12 @@ function ApplicationTable({ status }: IProps) {
   const currentCountry = useAppSelector(
     (state) => state.currency.currentCountry
   );
-  const [applications, setApplications] = useState<IApplication[]>([]);
   const [activePaymentType, setActivePaymentType] = useState<string>("");
   const { enqueueSnackbar } = useSnackbar();
   const userApplications = useAppSelector(
     (state) => state.applications.applications
   );
+  const [applications, setApplications] = useState<IApplication[]>(userApplications);
 
   // const to = useAppSelector((state) => state.currency.to);
   // const params = useParams();
@@ -328,13 +329,8 @@ function ApplicationTable({ status }: IProps) {
         (application) => application.id === id
       );
 
+      
       await mutate(id);
-      if (!isError) {
-        const newApplications = userApplications.filter(
-          (application) => application.id !== id
-        );
-        dispatch(setUserApplications({ data: newApplications }));
-      }
       analytics.websiteButtonInteractions({
         buttonName: "Remove Application",
         source: `User has deleted an shortlisted application for program: ${deletedApplication?.program?.name} after application has been started`,
@@ -346,13 +342,13 @@ function ApplicationTable({ status }: IProps) {
     }
   };
 
-  useEffect(() => {
-    // select only paid applications
-    const filterApplications = userApplications.filter(
-      (application) => application.paid === status
-    );
-    setApplications(filterApplications);
-  }, [userApplications]);
+  // useEffect(() => {
+  //   // select only paid applications
+  //   const filterApplications = userApplications.filter(
+  //     (application) => application.paid === status
+  //   );
+  //   setApplications(filterApplications);
+  // }, [userApplications]);
 
   // handle the payment when user clicks on handle click
   const handleSubmit = async (e: any) => {
@@ -377,9 +373,13 @@ function ApplicationTable({ status }: IProps) {
   const userProfileStatus = useAppSelector(
     (state) => state.user.dashboardDataGlobal?.data?.isProfileComplete
   );
+
+  const filterApplications = applications.filter(
+    (application) => application.paid === status
+  );
   return (
     <>
-      {applications.length > 0 && (
+      {filterApplications.length > 0 && (
         <Stack>
           {/* Displaying Table */}
           <TableContainer
@@ -446,13 +446,13 @@ function ApplicationTable({ status }: IProps) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {applications.map((row, i) => (
+                {filterApplications.map((row, i) => (
                   <TableRow role="checkbox" tabIndex={-1} key={row.id}>
                     {!status && (
                       <StyledTableCell
                         sx={{
                           borderBottom:
-                            applications.length === i + 1
+                            filterApplications.length === i + 1
                               ? "0px "
                               : "1px solid #EAEAEA",
                         }}
@@ -472,7 +472,7 @@ function ApplicationTable({ status }: IProps) {
                     <StyledTableCell
                       sx={{
                         borderBottom:
-                          applications.length === i + 1
+                          filterApplications.length === i + 1
                             ? "0px "
                             : "1px solid #EAEAEA",
                       }}
@@ -490,7 +490,7 @@ function ApplicationTable({ status }: IProps) {
                     <StyledTableCell
                       sx={{
                         borderBottom:
-                          applications.length === i + 1
+                          filterApplications.length === i + 1
                             ? "0px "
                             : "1px solid #EAEAEA",
                       }}
@@ -529,7 +529,7 @@ function ApplicationTable({ status }: IProps) {
                     <StyledTableCell
                       sx={{
                         borderBottom:
-                          applications.length === i + 1
+                          filterApplications.length === i + 1
                             ? "0px "
                             : "1px solid #EAEAEA",
                       }}
@@ -550,7 +550,7 @@ function ApplicationTable({ status }: IProps) {
                     <StyledTableCell
                       sx={{
                         borderBottom:
-                          applications.length === i + 1
+                          filterApplications.length === i + 1
                             ? "0px "
                             : "1px solid #EAEAEA",
                       }}
@@ -594,7 +594,7 @@ function ApplicationTable({ status }: IProps) {
                     <StyledTableCell
                       sx={{
                         borderBottom:
-                          applications.length === i + 1
+                          filterApplications.length === i + 1
                             ? "0px "
                             : "1px solid #EAEAEA",
                       }}
@@ -608,7 +608,7 @@ function ApplicationTable({ status }: IProps) {
                     <TableCell
                       sx={{
                         borderBottom:
-                          applications.length === i + 1
+                          filterApplications.length === i + 1
                             ? "0px "
                             : "1px solid #EAEAEA",
                       }}
@@ -653,6 +653,7 @@ function ApplicationTable({ status }: IProps) {
                             onClick={() => removeApplicationFromStack(row.id)}
                           >
                             <img
+                             
                               src="/images/dashboard/delete.svg"
                               alt="delete"
                             />

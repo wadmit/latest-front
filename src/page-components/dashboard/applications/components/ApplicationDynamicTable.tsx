@@ -1,3 +1,4 @@
+"use client"
 import useCostConverterMain from "@/hooks/costConverterMain";
 import { IApplication } from "@/types/application";
 import { Stack } from "@mui/material";
@@ -12,14 +13,14 @@ type Props = {
   statusHeader: string;
   status: boolean;
   isLoading: boolean;
-  applications: IApplication[];
+  // applications: IApplication[];
 };
 
 const ApplicationDynamicTable = ({
   statusHeader,
   status,
   isLoading,
-  applications,
+  // applications,
 }: Props) => {
   const getConvertedCosts = useCostConverterMain();
   return (
@@ -29,7 +30,7 @@ const ApplicationDynamicTable = ({
         <Loader />
       ) : (
         <ApplicationTable
-          applications={applications}
+          // applications={applications}
           status={status}
           getConvertedCosts={getConvertedCosts}
         />
