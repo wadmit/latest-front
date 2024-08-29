@@ -1,6 +1,6 @@
 "use client"
 import { useQuery, UseQueryOptions, UseQueryResult, QueryKey } from '@tanstack/react-query';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 type CustomQueryOptions<TData, TError> = Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn'> & {
   queryKey: QueryKey;
@@ -27,13 +27,13 @@ export function useCustomQuery<TData, TError>({
 		if (queryResult.isSuccess && onSuccess) {
 			onSuccess(queryResult.data);
 		}
-	}, [queryResult.isSuccess, queryResult.data, onSuccess]);
+	}, [queryResult.isSuccess, queryResult.data, onSuccess,queryResult.status]);
 
   useEffect(() => {
     if (queryResult.isError && onError) {
       onError(queryResult.error);
     }
-  }, [queryResult.isError, queryResult.error, onError]);
+  }, [queryResult.isError, queryResult.error, onError,queryResult.status]);
 
   return queryResult;
 }

@@ -33,18 +33,15 @@ const UserBox = (props: Props) => {
   const sortlistedGlobal = useAppSelector(selectShortListPrograms);
   const handleClose = () => setOpen(false);
 
-  const { data, error, isLoading ,status,isSuccess} = useQuery({
+  const { data, error, isLoading ,status,isSuccess} = useCustomQuery({
     queryKey: [CacheConfigKey.USER_PROFILE_QUERY_KEY,sortlistedGlobal,shortlistedPrograms,pathname],
     queryFn: getUserInformation,
     enabled: session.status === 'authenticated',
     refetchOnWindowFocus: false,
     refetchOnMount: false,
 
-    // onSuccess: (res) => {
-   
-  });
-  if(data && isSuccess && status === 'success'){
-   if (data.data) {
+    onSuccess: (res) => {
+      if (res.data) {
         dispatch(
           setActiveStepGlobal(
             data.data?.detail.additional_configuration.activeStep
@@ -73,7 +70,8 @@ const UserBox = (props: Props) => {
         }
       }
     }
-  
+   
+  });
   useEffect(() => {
     const checkIfClickedOutside = (e: any) => {
       if (refButton.current && refButton.current.contains(e.target)) {

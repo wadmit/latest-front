@@ -52,10 +52,11 @@ import {
   ApplicationPaymentDialogOptions,
   ApplicationTotalFeeDisplay,
 } from "@/page-components/dashboard/applications/components";
+import { filter } from "lodash";
 
 type Props = {
   status: boolean;
-  applications: IApplication[];
+  // applications: IApplication[];
   getConvertedCosts: (
     value: number,
     base_currency: string
@@ -65,7 +66,7 @@ type Props = {
   };
 };
 
-const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
+const ApplicationTable = ({ status, getConvertedCosts}: Props) => {
   const router = useRouter();
   const params = useParams();
   const dispatch = useAppDispatch();
@@ -77,15 +78,25 @@ const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
   const currentCountry = useAppSelector(
     (state) => state.currency.currentCountry
   );
-  const [applications, setApplications] = useState<IApplication[]>([]);
-  const [activePaymentType, setActivePaymentType] = useState<string>("");
-
   const userApplications = useAppSelector(
     (state) => state.applications.applications
   );
+  const [applications, setApplications] = useState<IApplication[]>(userApplications);
+  const [activePaymentType, setActivePaymentType] = useState<string>("");
+
+
 
   const { mutate, isPending, isError } = useMutation({
-    mutationFn: (id: string) => removeApplication(id),
+    mutationKey: ["removeApplication"],
+    mutationFn: async(id: string) => await removeApplication(id),
+    onSuccess: (data,variables) => {
+
+      const newApplications = userApplications.filter(
+        (application) => application.id !== variables
+      );
+      setApplications(newApplications);
+      dispatch(setUserApplications({ data: newApplications }));
+    },
   });
 
   const {
@@ -220,14 +231,7 @@ const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
       const deletedApplication = userApplications.find(
         (application) => application.id === id
       );
-
       mutate(id);
-      if (!isError) {
-        const newApplications = userApplications.filter(
-          (application) => application.id !== id
-        );
-        dispatch(setUserApplications({ data: newApplications }));
-      }
       analytics.websiteButtonInteractions({
         buttonName: "Remove Application",
         source: `User has deleted an shortlisted application for program: ${deletedApplication?.program?.name} after application has been started`,
@@ -239,13 +243,13 @@ const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
     }
   };
 
-  useEffect(() => {
-    // select only paid applications
-    const filterApplications = userApplications.filter(
-      (application) => application.paid === status
-    );
-    setApplications(filterApplications);
-  }, [userApplications]);
+  // useEffect(() => {
+  //   // select only paid applications
+  //   const filterApplications = userApplications.filter(
+  //     (application) => application.paid === status
+  //   );
+  //   setApplications(filterApplications);
+  // }, [userApplications]);
 
   // handle the payment when user clicks on handle click
   const handleSubmit = async (e: any) => {
@@ -271,9 +275,13 @@ const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
     (state) => state.user.dashboardDataGlobal?.data?.isProfileComplete
   );
 
+  const filteredApplications = applications.filter(
+    (application) => application.paid === status
+  );
+
   return (
     <>
-      {applications.length === 0 ? (
+      {filteredApplications.length === 0 ? (
         <Box width="100%" display="flex" justifyContent="center">
           <Typography fontWeight="bold">No Application Found</Typography>
         </Box>
@@ -333,7 +341,7 @@ const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {applications.map((row) => (
+                {filteredApplications.map((row) => (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                     {!status && (
                       <StyledTableCell padding="checkbox">
@@ -458,7 +466,7 @@ const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
                           <Button
                             onClick={() => removeApplicationFromStack(row.id)}
                             startIcon={
-                              <img src="/Dashboard/delete.svg" alt="" />
+                              <img src="/images/dashboard/delete.svg" alt="" />
                             }
                           />
                         )}
@@ -472,13 +480,13 @@ const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
 
           {/* Box for displaying total items */}
           <ApplicationTotalFeeDisplay
-            applications={applications}
+            applications={filteredApplications}
             status={status}
             selectedApplications={selectedApplications}
             getConvertedCosts={getConvertedCosts}
           />
           {/* Free Application Information Component */}
-          {applications.find((s) => s.university.admission_free) && (
+          {filteredApplications.find((s) => s.university.admission_free) && (
             <Grid container mt={2}>
               <Grid item xs={10}>
                 <Alert

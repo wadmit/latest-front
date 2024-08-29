@@ -14,7 +14,7 @@ export const getUserInformation = async () => {
     });
     return res.data;
   } catch (err) {
-    Promise.reject(err);
+    return Promise.reject(err);
   }
 };
 

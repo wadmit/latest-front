@@ -89,6 +89,10 @@ export function DashboardHome() {
       onSuccess: (res) => {
         dispatch(setUserApplications({ data: res }));
       },
+      onError: (error) => {
+        // eslint-disable-next-line no-console
+        console.error("Failed To Fetch Applications", error);
+      },
       refetchOnWindowFocus: false,
     }
   );

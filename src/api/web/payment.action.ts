@@ -1,4 +1,4 @@
-"use server";
+"use client";
 import { ApiConfig } from "@/constants";
 import ApiService from "@/services/api.service";
 

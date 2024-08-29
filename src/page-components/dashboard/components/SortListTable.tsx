@@ -154,11 +154,8 @@ function ShortListTable({
   };
 
   const { mutate: startApplications, isPending } = useMutation({
-    mutationFn: async () => {
-      await createApplication(Shortlists.map((s) => s.id));
-    },
+    mutationFn:()=>createApplication(Shortlists.map((s) => s.id)),
     onSuccess: (res: any) => {
-      console.log(res);
       afterStartingApplicationSuccess(res?.data.data as IApplication[]);
     },
     onError: (err) => {
