@@ -8,7 +8,7 @@ export const removeApplication = async (id: string) => {
       url: `${ApiConfig.applications}/${id}`,
       tokenNeeded: true,
     });
-    return response?.data?.data;
+    return response?.data;
   } catch (error) {
     Promise.reject(error);
   }

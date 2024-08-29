@@ -71,14 +71,14 @@ const columns: readonly Column[] = [
 
 interface IProps {
   status: boolean;
-  applications: IApplication[];
-  getConvertedCosts: (
-    value: number,
-    base_currency: string
-  ) => {
-    formattedValue: string;
-    amount: number;
-  };
+  // applications: IApplication[];
+  // getConvertedCosts: (
+  //   value: number,
+  //   base_currency: string
+  // ) => {
+  //   formattedValue: string;
+  //   amount: number;
+  // };
 }
 function ApplicationTable({ status }: IProps) {
   const [selectedApplications, setIsSelectedApplications] = useState<string[]>(
@@ -108,7 +108,13 @@ function ApplicationTable({ status }: IProps) {
   const getConvertedCosts = useCostConverterMain();
 
   const { mutate, isPending, isError } = useMutation({
-    mutationFn: (id: string) => removeApplication(id),
+    mutationFn: async (id: string) => await removeApplication(id),
+    onSuccess: (data, variables) => {
+      const newApplications = userApplications.filter(
+        (application) => application.id !== variables
+      );
+      dispatch(setUserApplications({ data: newApplications }));
+    },
   });
   const {
     mutate: paymentMutate,
@@ -315,14 +321,14 @@ function ApplicationTable({ status }: IProps) {
     return "N/A";
   };
 
-  const removeApplicationFromStack = (id: string) => {
+  const removeApplicationFromStack = async (id: string) => {
     if (!isPending) {
       // get deleted application
       const deletedApplication = userApplications.find(
         (application) => application.id === id
       );
 
-      mutate(id);
+      await mutate(id);
       if (!isError) {
         const newApplications = userApplications.filter(
           (application) => application.id !== id
@@ -351,7 +357,7 @@ function ApplicationTable({ status }: IProps) {
   // handle the payment when user clicks on handle click
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    // Create a Checkout Session.
+    // Create a Checkout Session
     if (currentCountry === "Nepal") {
       setShowPaymentOptions(true);
       return;
@@ -646,7 +652,10 @@ function ApplicationTable({ status }: IProps) {
                             sx={{ backgroundColor: "transparent" }}
                             onClick={() => removeApplicationFromStack(row.id)}
                           >
-                            <img src="/Dashboard/delete.svg" alt="delete" />
+                            <img
+                              src="/images/dashboard/delete.svg"
+                              alt="delete"
+                            />
                           </Button>
                         )}
                       </Stack>
@@ -927,7 +936,6 @@ function ApplicationTable({ status }: IProps) {
                 </Button>
               </Box>
             </Box>
-         
           </Dialog>
         </Stack>
       )}{" "}

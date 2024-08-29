@@ -2,13 +2,13 @@ import React from "react";
 import { Grid, Typography, Box } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
-import { WiseAdmitDefault } from "$/svg";
 import type { IUniversity } from "@/types/university";
 import { useRouter } from "next/navigation";
 import useCostConverterMain from "@/hooks/costConverterMain";
 import { analytics } from "@/services/analytics.service";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import applicationConfig from "@/config";
+import WiseAdmitDefault from "$/images/universities/wiseadmit_main.svg"
 
 function UniversityCard({ university }: { university: IUniversity }) {
   const router = useRouter();
@@ -21,17 +21,17 @@ function UniversityCard({ university }: { university: IUniversity }) {
       bgcolor="white"
       paddingBottom="24px"
       borderRadius="12px"
-      // onClick={() => {
-      // 	// window.open(`/universities/${university.slug}`);
-      // 	analytics.websiteButtonInteractions({
-      // 		buttonName: "University Info",
-      // 		source: `User clicked on ${university.name}`,
-      // 		urlPath: window.location.href,
-      // 		event_type: EAnalyticsEvents.UNIVERSITY,
-      // 		status: EAnalyticsStatus.SUCCESS,
-      // 		redirectPath: "",
-      // 	});
-      // }}
+      onClick={() => {
+      	// window.open(`/universities/${university.slug}`);
+      	analytics.websiteButtonInteractions({
+      		buttonName: "University Info",
+      		source: `User clicked on ${university.name}`,
+      		urlPath: window.location.href,
+      		event_type: EAnalyticsEvents.UNIVERSITY,
+      		status: EAnalyticsStatus.SUCCESS,
+      		redirectPath: "",
+      	});
+      }}
       sx={{
         cursor: "pointer",
         transition: "all .3s cubic- bezier(0.19, 1, 0.22, 1) ease",
@@ -53,7 +53,7 @@ function UniversityCard({ university }: { university: IUniversity }) {
                 borderRadius: "12px 12px 0px 0px",
               }}
               alt="University image"
-              src={`${applicationConfig.distributionKey}/${university.cover_key}`}
+              src={university.cover_key ? `${applicationConfig.distributionKey}/${university.cover_key}` : WiseAdmitDefault.src}
             />
           </Box>
         ) : (
