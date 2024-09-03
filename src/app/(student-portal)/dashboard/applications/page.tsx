@@ -1,7 +1,7 @@
 import { generateMetadata } from "@/components/common/head-component/HeadComponent";
 import ApplicationHome from "@/page-components/dashboard/applications";
 import { Metadata } from "next";
-import React from "react";
+import React, { Suspense } from "react";
 
 // export const metadata: Metadata = {
 //   title: "My Applications | WiseAdmit",
@@ -20,7 +20,9 @@ export const viewport = {
 };
 
 const page = () => {
-  return <ApplicationHome />;
-};
-
+  return( <Suspense>
+    <ApplicationHome />
+    </Suspense>
+  )
+}
 export default page;
