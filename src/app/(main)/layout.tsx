@@ -9,6 +9,8 @@ import { usePathname } from "next/navigation";
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
+  // Build Trigger
+
   const renderFooter = () => {
     switch (pathname) {
       case "/contactus":

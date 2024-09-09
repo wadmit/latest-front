@@ -1,9 +1,11 @@
 import ScannedHome from '@/page-components/scanned'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 const page = () => {
   return (
-    <ScannedHome />
+    <Suspense>
+      <ScannedHome />
+    </Suspense>
   )
 }
 

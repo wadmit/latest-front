@@ -18,6 +18,7 @@ const ConfirmNewProfileModal = ({
   const imageUrl = URL.createObjectURL(imageFile);
   const { mutate: uploadImageMutate, isPending } = useMutation({
     mutationFn: uploadStudentProfile,
+
     onSuccess: (data) => {
       enqueueSnackbar("Image uploaded successfully", {
         variant: "success",

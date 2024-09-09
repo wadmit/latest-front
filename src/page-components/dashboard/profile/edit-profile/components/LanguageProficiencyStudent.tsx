@@ -269,6 +269,7 @@ const LanguageProficiencyStudent = () => {
 							<Grid item md={6} xs={12} key={item.name}>
 								<Stack direction="column" spacing={1}>
 									<Label htmlFor={item.name}>{item.label}</Label>
+
 									<TextFieldWrapper
 										name={item.name}
 										placeholder={item.placeholder}

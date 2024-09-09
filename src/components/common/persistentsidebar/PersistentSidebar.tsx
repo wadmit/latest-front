@@ -1,24 +1,20 @@
-"use client"
-import React, { useMemo, useState } from 'react';
-import Hidden from '@mui/material/Hidden';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Drawer from '@mui/material/Drawer';
-import { Paper } from '@mui/material';
-import { AppBar, Main } from './utils/provider';
-import SidebarContentComponent from './SidebarContentComponent';
-import NavBarHeaderContext from '@/context/navbar-header';
-import { AuthNavbar } from './AuthNavbar';
+"use client";
+import React, { useMemo, useState } from "react";
+import Hidden from "@mui/material/Hidden";
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+import Drawer from "@mui/material/Drawer";
+import { Paper } from "@mui/material";
+import { AppBar, Main } from "./utils/provider";
+import SidebarContentComponent from "./SidebarContentComponent";
+import NavBarHeaderContext from "@/context/navbar-header";
+import { AuthNavbar } from "./AuthNavbar";
 
 const drawerWidth = 270;
 
-
-
-
-
 export function PersistentSidebar({ children }: { children: React.ReactNode }) {
   const [openDrawer, setOpenDrawer] = useState(true);
-  const [navbarHeader, setNavbarHeader] = useState('');
+  const [navbarHeader, setNavbarHeader] = useState("");
 
   const changeNavbarHeader = (header: string) => {
     setNavbarHeader(header);
@@ -34,32 +30,29 @@ export function PersistentSidebar({ children }: { children: React.ReactNode }) {
     setOpenDrawer((prev) => !prev);
   };
 
-  const [showFeedbackForm, setShowFeedbackForm] = React.useState(false);
-  const [showThankyouForm, setShowThankyouForm] = React.useState(false);
-
   return (
     <Box
-      sx={{ position: 'relative' }}
+      sx={{ position: "relative" }}
       display={{
-        xs: 'block',
-        lg: 'flex',
+        xs: "block",
+        lg: "flex",
       }}
     >
       <CssBaseline />
       <Paper
-      sx={{
-        display: {
-          xs: 'block',
-          lg: 'none',
-        },
-        zIndex: 9999999,
-      }}
+        sx={{
+          display: {
+            xs: "block",
+            lg: "none",
+          },
+          zIndex: 1,
+        }}
       >
         <AppBar
           position="fixed"
           open={false}
           elevation={0}
-          sx={{ bgcolor: 'grey.A100' }}
+          sx={{ bgcolor: "grey.A100" }}
         >
           <NavBarHeaderContext.Provider value={navbarValue}>
             <AuthNavbar handleDrawerOpen={() => setOpenDrawer(false)} />
@@ -68,18 +61,18 @@ export function PersistentSidebar({ children }: { children: React.ReactNode }) {
       </Paper>
       <Paper
         sx={{
-            display: {
-              xs: 'none',
-              lg: 'block',
-            },
-            zIndex: 9999999,
-          }}
+          display: {
+            xs: "none",
+            lg: "block",
+          },
+          zIndex: 1,
+        }}
       >
         <AppBar
           position="fixed"
           open={openDrawer}
           elevation={0}
-          sx={{ bgcolor: 'grey.A100' }}
+          sx={{ bgcolor: "grey.A100" }}
         >
           <AuthNavbar handleDrawerOpen={handleDrawerOpen} />
         </AppBar>
@@ -87,10 +80,10 @@ export function PersistentSidebar({ children }: { children: React.ReactNode }) {
           sx={{
             width: drawerWidth,
             flexShrink: 0,
-            '& .MuiDrawer-paper': {
+            "& .MuiDrawer-paper": {
               width: drawerWidth,
-              boxSizing: 'border-box',
-              backgroundColor: 'grey.400',
+              boxSizing: "border-box",
+              backgroundColor: "grey.400",
             },
           }}
           variant="persistent"

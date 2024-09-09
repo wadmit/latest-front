@@ -90,7 +90,9 @@ function LanguageScore({ handleNext, handleGoBack }: IScreenProps) {
 			score: values.language_overall_score,
 			language_proficiency: values.language_proficiency,
 		});
+
 		handleNext();
+
 	};
 
 	return (
