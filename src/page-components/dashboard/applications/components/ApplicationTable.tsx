@@ -56,7 +56,7 @@ import { filter } from "lodash";
 
 type Props = {
   status: boolean;
-  // applications: IApplication[];
+  applications: IApplication[];
   getConvertedCosts: (
     value: number,
     base_currency: string
@@ -66,7 +66,7 @@ type Props = {
   };
 };
 
-const ApplicationTable = ({ status, getConvertedCosts}: Props) => {
+const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
   const router = useRouter();
   const params = useParams();
   const dispatch = useAppDispatch();
@@ -81,20 +81,18 @@ const ApplicationTable = ({ status, getConvertedCosts}: Props) => {
   const userApplications = useAppSelector(
     (state) => state.applications.applications
   );
-  const [applications, setApplications] = useState<IApplication[]>(userApplications);
+  const [applications, setApplications] =
+    useState<IApplication[]>(userApplications);
   const [activePaymentType, setActivePaymentType] = useState<string>("");
-
-
 
   const { mutate, isPending, isError } = useMutation({
     mutationKey: ["removeApplication"],
-    mutationFn: async(id: string) => await removeApplication(id),
-    onSuccess: (data,variables) => {
-
+    mutationFn: async (id: string) => await removeApplication(id),
+    onSuccess: (data, variables) => {
       const newApplications = userApplications.filter(
         (application) => application.id !== variables
       );
-      setApplications(newApplications);
+      // setApplications(newApplications);
       dispatch(setUserApplications({ data: newApplications }));
     },
   });
@@ -243,13 +241,13 @@ const ApplicationTable = ({ status, getConvertedCosts}: Props) => {
     }
   };
 
-  // useEffect(() => {
-  //   // select only paid applications
-  //   const filterApplications = userApplications.filter(
-  //     (application) => application.paid === status
-  //   );
-  //   setApplications(filterApplications);
-  // }, [userApplications]);
+  useEffect(() => {
+    // select only paid applications
+    const filterApplications = userApplications.filter(
+      (application) => application.paid === status
+    );
+    setApplications(filterApplications);
+  }, [userApplications]);
 
   // handle the payment when user clicks on handle click
   const handleSubmit = async (e: any) => {

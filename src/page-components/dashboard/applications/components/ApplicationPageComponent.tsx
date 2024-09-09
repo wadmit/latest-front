@@ -33,7 +33,7 @@ const ApplicationPageComponent = (props: Props) => {
 
   const { data, isLoading: applicationsLoading } = useCustomQuery({
     queryKey: ["Applications/GET", Object.fromEntries(searchParams), "student"],
-    queryFn: async() => await getApplicationsStudent(),
+    queryFn: async () => await getApplicationsStudent(),
     onSuccess: (res) => {
       console.log(res);
       dispatch(setUserApplications({ data: res }));
@@ -87,7 +87,7 @@ const ApplicationPageComponent = (props: Props) => {
         status={false}
         statusHeader="Unpaid Applications"
         isLoading={applicationsLoading}
-        // applications={applicationWithStatus.unpaid}
+        applications={applicationWithStatus.unpaid}
       />
 
       <Divider
@@ -102,7 +102,7 @@ const ApplicationPageComponent = (props: Props) => {
       <ApplicationDynamicTable
         isLoading={applicationsLoading}
         status
-        // applications={applicationWithStatus.paid}
+        applications={applicationWithStatus.paid}
         statusHeader="Paid Applications"
       />
     </Stack>
