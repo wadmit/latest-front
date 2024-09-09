@@ -18,6 +18,7 @@ type Props = {
 
 const ProfileInformationCard = ({ data, title }: Props) => {
   const user = useAppSelector(selectDashboardDataGlobal);
+  console.log(user)
   const dashboardData = useMemo(() => user, [user]);
   const countryList = useAppSelector(selectCountryList);
   return (

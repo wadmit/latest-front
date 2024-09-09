@@ -160,12 +160,13 @@ const AcademicInformation = () => {
             }
             if (
               each.name === "attended_institution_from" ||
-              each.name === "attended_institution_to"
+              each.name === "attended_institution_to" 
+
             ) {
               return (
                 <Grid item md={6} xs={12} key={each.name}>
                   <DateField
-                    disableFuture={each.name === "attended_institution_from"}
+                    // disableFuture={each.name === "attended_institution_from"}
                     name={each.name}
                     label={each.label}
                   />
@@ -175,6 +176,7 @@ const AcademicInformation = () => {
             if (each.name === "graduation_date") {
               return (
                 <Grid item md={6} xs={12} key={each.name}>
+                  hi
                   <DateField
                     name={each.name}
                     label={each.label}

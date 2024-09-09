@@ -19,6 +19,7 @@ export function AuthNavbar({ handleDrawerOpen }: any) {
     
       const splitPath = pathname.split('/');
       const selectedPath = splitPath[splitPath.length - 1];
+      console.log(selectedPath)
       switch (selectedPath) {
         case 'dashboard':
           setHeader('Dashboard');
@@ -35,9 +36,11 @@ export function AuthNavbar({ handleDrawerOpen }: any) {
         case 'universitiesandprograms':
           setHeader('University and Program');
           break;
-
+        case 'wisescore':
+          setHeader('Wisescore');
+          break;
         default:
-          setHeader('Show Application');
+          setHeader('Edit Profile');
           break;
       }
     

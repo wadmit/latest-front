@@ -28,7 +28,7 @@ const DocumentPageComponent = () => {
 
   return (
     <Stack pt={0} mt={0}>
-      <Typography variant="h4" component="h4" textAlign="center">
+      <Typography variant="h4" component="h4" textAlign="center" mt={2}>
         My Documents
       </Typography>
       <DocumentUploadHeader />

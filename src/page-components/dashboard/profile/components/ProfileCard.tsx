@@ -53,9 +53,9 @@ const ProfileCard = ({ student }: Props) => {
   };
 
   const selectedImagePreviewHandler = (
-    event: ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if (event.target.files && event.target.files[0]) {
+    if (event?.target?.files && event?.target?.files[0]) {
       setAnchorEl(null);
       setUploadedImageModal(true);
       setSelectedImage(event.target.files[0]);
@@ -117,7 +117,7 @@ const ProfileCard = ({ student }: Props) => {
                     style={{ display: "none" }}
                     id={inputLabelId}
                     type="file"
-                    onChange={selectedImagePreviewHandler}
+                    onChange={(e)=> selectedImagePreviewHandler(e)}
                   />
                   <label htmlFor={inputLabelId} style={{ width: "100%" }}>
                     {/* Upload */}
