@@ -44,6 +44,7 @@ const ApplicationStepper = ({ activeStep }: Props) => {
     <Box
       display={{ lg: "flex", md: "flex", xs: "none" }}
       sx={{ width: "100%" }}
+      mt={2}
     >
       <Stack sx={{ width: "100%" }} spacing={4}>
         <Stepper

@@ -273,6 +273,8 @@ const WiseScoreComponent = () => {
 				<Formik
 					initialValues={INITIAL_WISE_STATE}
 					validationSchema={WISESCORE_FORM_VALIDATION}
+					// validationSchema={FORM_VALIDATION}
+
 					onSubmit={(values) => {
 						// console.log(values)
 					}}

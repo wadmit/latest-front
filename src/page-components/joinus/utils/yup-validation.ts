@@ -2,12 +2,13 @@ import { authentication } from "@/api/web/authentication.action";
 import { debounce } from "lodash";
 import * as Yup from "yup";
 
-declare module "yup" {
-	interface StringSchema {
-		isUniqueEmail(message: string): StringSchema;
-		isUniquePhone(message: string): StringSchema;
-	}
-}
+// declare module "yup" {
+// 	interface StringSchema {
+// 		isUniqueEmail(message: string): StringSchema;
+// 		isUniquePhone(message: string): StringSchema;
+// 	}
+// }
+
 
 const validateEmail = async (email: string) => {
 	try {

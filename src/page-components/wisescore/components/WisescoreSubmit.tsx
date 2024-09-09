@@ -54,7 +54,6 @@ function WiseScoreSubmit({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [open, setOpen] = useState(false);
-
   const dispatch = useAppDispatch();
   const wiseScoreFormData = useAppSelector(
     (state) => state.wisescore.submitFormData
@@ -64,82 +63,16 @@ function WiseScoreSubmit({
   const country = useAppSelector((state) => state.currency.currentCountry);
   const city = useAppSelector((state) => state.currency.city);
   const [consentChecked, setConsentChecked] = useState(false);
+  const [isLoading, setLoading]= useState(false)
 
-  const { data, isPending, mutate, error, isSuccess, isError } = useMutation({
-    mutationKey: ["wisescore", wiseScoreFormData],
-    mutationFn: (data) => submitWiseScore(data),
-
-    onSuccess: (res) => {
-      if (res?.data?.email && res?.leadId) {
-        mixpanelSubmit({
-          email: res?.data?.email,
-          event_title: EAnalyticsEvents.WEBSITE_BUTTON_INTERACTIONS,
-          event_type: EAnalyticsEvents.WISESCORE_RESULT,
-          status: EAnalyticsStatus.SUCCESS,
-          reference: "Lead",
-          user_id: res?.leadId,
-          url_path: window.location.href,
-          location: {
-            countryName: country,
-            city,
-          },
-          description: `User has checked their wisescore. The score is ${res.data.score}`,
-          redirectPath: "",
-        });
-        localStorage.setItem("leadId", res?.leadId);
-      }
-      localStorage.setItem("email", res?.data?.email);
-      localStorage.setItem("phone", res?.data?.phone);
-      analytics.wisescoreSubmit(res.data.id, {
-        name: res.data.name,
-        email: res.data.email,
-        phone: res.data.phone,
-        score: res.data.score,
-        reference: "Lead",
+  useEffect(() => {
+    if (dashboardData)
+      formik.setValues({
+        email: dashboardData?.data?.email ?? "",
+        fullName: `${dashboardData?.data?.first_name} ${dashboardData?.data?.last_name}`,
+        phone: dashboardData?.data?.phone?.toLocaleString() ?? "",
       });
-      analytics.trackEvent(EAnalyticsEvents.WISESCORE_RESULT, {
-        name: res.data.name,
-        email: res.data.email,
-        phone: res.data.phone,
-        score: res.data.score,
-        reference: "Lead",
-      });
-      if (pathname.startsWith("/dashboard")) {
-        patchSortList([]).then(() => {
-          router.push("/dashboard/universitiesandprograms");
-        });
-      } else {
-        router.push(endPoint);
-      }
-    },
-    onError: (err) => {
-      console.log(err);
-      const leadId = localStorage.getItem("leadId");
-      const email = localStorage.getItem("email");
-      if (leadId && email) {
-        mixpanelSubmit({
-          email,
-          event_title: EAnalyticsEvents.WEBSITE_BUTTON_INTERACTIONS,
-          event_type: EAnalyticsEvents.WISESCORE_RESULT,
-          status: EAnalyticsStatus.ERROR,
-          reference: "Lead",
-          user_id: leadId,
-          url_path: window.location.href,
-          location: {
-            countryName: country,
-            city,
-          },
-          description: err,
-          redirectPath: "",
-        });
-      }
-      analytics.trackEvent(EAnalyticsEvents.ERROR, {
-        source: "Wisescore Submit",
-        message: err,
-      });
-      setOpen(true);
-    },
-  });
+  }, [dashboardData]);
 
   const formik = useFormik({
     initialValues: {
@@ -193,14 +126,88 @@ function WiseScoreSubmit({
     },
   });
 
-  useEffect(() => {
-    if (dashboardData)
-      formik.setValues({
-        email: dashboardData?.data?.email ?? "",
-        fullName: `${dashboardData?.data?.first_name} ${dashboardData?.data?.last_name}`,
-        phone: dashboardData?.data?.phone?.toLocaleString() ?? "",
-      });
-  }, [dashboardData]);
+  const { data, isPending, mutate, error, isSuccess, isError, status } =
+    useMutation({
+      mutationKey: ["wisescore-submit", wiseScoreFormData],
+      mutationFn: (data) => submitWiseScore(data),
+      onMutate: () => {
+        setLoading(true)
+      },
+      onSuccess: (res) => {
+        if (res?.data?.email && res?.leadId) {
+          mixpanelSubmit({
+            email: res?.data?.email,
+            event_title: EAnalyticsEvents.WEBSITE_BUTTON_INTERACTIONS,
+            event_type: EAnalyticsEvents.WISESCORE_RESULT,
+            status: EAnalyticsStatus.SUCCESS,
+            reference: "Lead",
+            user_id: res?.leadId,
+            url_path: window.location.href,
+            location: {
+              countryName: country,
+              city,
+            },
+            description: `User has checked their wisescore. The score is ${res.data.score}`,
+            redirectPath: "",
+          });
+          localStorage.setItem("leadId", res?.leadId);
+        }
+        localStorage.setItem("email", res?.data?.email);
+        localStorage.setItem("phone", res?.data?.phone);
+        analytics.wisescoreSubmit(res.data.id, {
+          name: res.data.name,
+          email: res.data.email,
+          phone: res.data.phone,
+          score: res.data.score,
+          reference: "Lead",
+        });
+        analytics.trackEvent(EAnalyticsEvents.WISESCORE_RESULT, {
+          name: res.data.name,
+          email: res.data.email,
+          phone: res.data.phone,
+          score: res.data.score,
+          reference: "Lead",
+        });
+        if (pathname.startsWith("/dashboard")) {
+          patchSortList([]).then(() => {
+            router.push("/dashboard/universitiesandprograms");
+          });
+        } else {
+          router.push(endPoint);
+        }
+        setLoading(false)
+
+      },
+      onError: (err) => {
+        console.log(err);
+        const leadId = localStorage.getItem("leadId");
+        const email = localStorage.getItem("email");
+        if (leadId && email) {
+          mixpanelSubmit({
+            email,
+            event_title: EAnalyticsEvents.WEBSITE_BUTTON_INTERACTIONS,
+            event_type: EAnalyticsEvents.WISESCORE_RESULT,
+            status: EAnalyticsStatus.ERROR,
+            reference: "Lead",
+            user_id: leadId,
+            url_path: window.location.href,
+            location: {
+              countryName: country,
+              city,
+            },
+            description: err,
+            redirectPath: "",
+          });
+        }
+        analytics.trackEvent(EAnalyticsEvents.ERROR, {
+          source: "Wisescore Submit",
+          message: err,
+        });
+        setOpen(true);
+        setLoading(false)
+
+      },
+    });
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   // new Date().toUTCString
@@ -627,7 +634,7 @@ function WiseScoreSubmit({
                 isSuccess ? (
                   <CheckCircleIcon />
                 ) : (
-                  isPending && <Loader buttonState />
+                  isLoading && <Loader buttonState />
                 )
               }
               sx={{
@@ -642,11 +649,7 @@ function WiseScoreSubmit({
                 textTransform: "none",
               }}
             >
-              {isSuccess
-                ? "Submitted"
-                : isPending
-                ? "Submitting..."
-                : "Show me now!"}
+              {isLoading ? "Submitting..." : "Show me now!"}
             </ButtonWrapper>
           </Stack>
         </Box>

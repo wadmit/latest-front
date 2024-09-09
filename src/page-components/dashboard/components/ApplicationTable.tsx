@@ -94,7 +94,7 @@ function ApplicationTable({ status }: IProps) {
   const userApplications = useAppSelector(
     (state) => state.applications.applications
   );
-  const [applications, setApplications] = useState<IApplication[]>(userApplications);
+  const [applications, setApplications] = useState<IApplication[]>([]);
 
   // const to = useAppSelector((state) => state.currency.to);
   // const params = useParams();
@@ -114,6 +114,9 @@ function ApplicationTable({ status }: IProps) {
       const newApplications = userApplications.filter(
         (application) => application.id !== variables
       );
+      //This is hack not a good approach to reload a page
+      window.location.reload();
+
       dispatch(setUserApplications({ data: newApplications }));
     },
   });
@@ -329,7 +332,6 @@ function ApplicationTable({ status }: IProps) {
         (application) => application.id === id
       );
 
-      
       await mutate(id);
       analytics.websiteButtonInteractions({
         buttonName: "Remove Application",
@@ -342,13 +344,13 @@ function ApplicationTable({ status }: IProps) {
     }
   };
 
-  // useEffect(() => {
-  //   // select only paid applications
-  //   const filterApplications = userApplications.filter(
-  //     (application) => application.paid === status
-  //   );
-  //   setApplications(filterApplications);
-  // }, [userApplications]);
+  useEffect(() => {
+    // select only paid applications
+    const filterApplications = userApplications.filter(
+      (application) => application.paid === status
+    );
+    setApplications(filterApplications);
+  }, [userApplications]);
 
   // handle the payment when user clicks on handle click
   const handleSubmit = async (e: any) => {
@@ -376,6 +378,10 @@ function ApplicationTable({ status }: IProps) {
 
   const filterApplications = applications.filter(
     (application) => application.paid === status
+  );
+  console.log(
+    "🚀 ~ ApplicationTable ~ filterApplications:",
+    filterApplications
   );
   return (
     <>
@@ -645,7 +651,7 @@ function ApplicationTable({ status }: IProps) {
                             backgroundColor: "transparent",
                           }}
                         >
-                          View
+                          Viewpppppppppppppp
                         </Button>
                         {!status && (
                           <Button
@@ -653,7 +659,6 @@ function ApplicationTable({ status }: IProps) {
                             onClick={() => removeApplicationFromStack(row.id)}
                           >
                             <img
-                             
                               src="/images/dashboard/delete.svg"
                               alt="delete"
                             />

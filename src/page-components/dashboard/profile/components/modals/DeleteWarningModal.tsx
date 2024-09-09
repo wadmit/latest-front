@@ -1,4 +1,5 @@
 import { deleteStudentAccount } from "@/api/web/user.action";
+import { signOut } from "@/auth/auth";
 import {
   Box,
   Button,
@@ -11,16 +12,25 @@ import {
 } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import { enqueueSnackbar } from "notistack";
-import React from "react";
+import React, { useState } from "react";
+import { logout } from "@/api/web/logout.action";
 
 type Props = {
   deleteWarningModalHandler: () => void;
 };
 
 const DeleteWarningModal = ({ deleteWarningModalHandler }: Props) => {
+
+  const [isLoading, setLoading]= useState(false)
+
   const { mutate: deleteAccountMutate, isPending } = useMutation({
     mutationFn: deleteStudentAccount,
-    onSuccess: (data) => {
+    onMutate: () => {
+      setLoading(true)
+    },
+    onSuccess: async (data) => {
+      logout();
+      setLoading(false)
       enqueueSnackbar("Account deleted successfully", {
         variant: "success",
         anchorOrigin: {
@@ -28,10 +38,11 @@ const DeleteWarningModal = ({ deleteWarningModalHandler }: Props) => {
           horizontal: "right",
         },
       });
-      // auth.logOut(Cookies, router);
+      deleteWarningModalHandler()
     },
 
     onError: (data) => {
+      setLoading(false)
       enqueueSnackbar("Failed to delete account", {
         variant: "error",
         anchorOrigin: {
@@ -39,12 +50,13 @@ const DeleteWarningModal = ({ deleteWarningModalHandler }: Props) => {
           horizontal: "right",
         },
       });
+      deleteWarningModalHandler()
+
     },
   });
 
   const confirmDelete = async () => {
     await deleteAccountMutate();
-    deleteWarningModalHandler();
   };
   return (
     <Dialog open sx={{ p: 2 }}>
@@ -69,7 +81,7 @@ const DeleteWarningModal = ({ deleteWarningModalHandler }: Props) => {
           Cancel
         </Button>
         <Button size="small" variant="contained" onClick={confirmDelete}>
-          Confirm
+          {isLoading ? "Deleting..." : "Confirm"}
         </Button>
       </DialogActions>
     </Dialog>
