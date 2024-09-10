@@ -33,7 +33,7 @@ export const StyledContainerWrapper = styled(Box, {
 })`
   margin: 0 auto;
   max-width: 1440px;
-  padding: 0px 130px;
+  padding: 0px 90px;
 
   ${(props) => props.theme.breakpoints.down("xl")} {
     padding: 0px 130px;
@@ -50,7 +50,7 @@ export const SvgWrapper = styled(Box, {
   name: "Svg-Wrapper",
 })`
   display: contents;
-  ${(props) => props.theme.breakpoints.down("lg")} {
+  ${(props) => props.theme.breakpoints.down("xl")} {
     display: none;
   }
 `;
