@@ -60,7 +60,14 @@ export function usePrograms(
 	};
 
 	const fetchNextPrograms = async () => {
-		// const currentParams = handlePageParams();
+		const currentParams = handlePageParams();
+
+		if(currentParams && currentParams.get('type')){
+			queryParams.append("type", currentParams.get('type')!);
+		}
+		if(currentParams && currentParams.get('country')){
+			queryParams.append("country", currentParams.get('country')!);
+		}
 		try {
 			if (hasNext) {
 				queryParams.append("page", String(page + 1));
