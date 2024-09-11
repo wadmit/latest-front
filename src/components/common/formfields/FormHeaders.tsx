@@ -1,4 +1,4 @@
-import { titleType } from "@/types/other";
+import { ItitleType } from "@/types/other";
 import { Box, styled, Typography } from "@mui/material";
 import React from "react";
 
@@ -27,7 +27,7 @@ const CustomTypography = styled(Typography)(({ theme }) => ({
   },
 }));
 
-const FormHeaders = ({ title }: titleType) => {
+const FormHeaders = ({ title }: ItitleType) => {
   return (
     <Box>
       <CustomTypography>{title}</CustomTypography>

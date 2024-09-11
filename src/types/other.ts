@@ -26,7 +26,7 @@ export interface IDropzone {
   type?: "Requried" | "Optional" | "Others" | "Default";
 }
 
-export interface titleType {
+export interface ItitleType {
   title: string;
 }
 
@@ -35,7 +35,7 @@ export interface ILabelinterface {
   htmlFor: string | undefined;
 }
 
-export interface TextFieldType {
+export interface ITextFieldType {
   label: string | React.ReactElement;
   placeholder?: string;
   required?: boolean;
@@ -50,7 +50,7 @@ export interface TextFieldType {
   name: string;
 }
 
-export interface SelectFieldType {
+export interface ISelectFieldType {
   label: string | React.ReactElement;
   placeholder?: string;
   options?: {
@@ -62,7 +62,7 @@ export interface SelectFieldType {
   configFunction?: () => void;
 }
 
-export interface FormStepperProps {
+export interface IFormStepperProps {
   activeStep: number;
   completed: { [k: number]: boolean };
   steps: string[];
@@ -93,12 +93,12 @@ export interface ImageComponentProps extends ImageProps {
   src: string | StaticImageData;
   fallbackSrc?: string | StaticImageData;
 }
-export interface RootContainerProps extends BoxProps {
+export interface IRootContainerProps extends BoxProps {
   children: React.ReactNode;
   component?: React.ElementType;
 }
 
-export interface ScoreGaugeProps extends CircularProgressProps {
+export interface IScoreGaugeProps extends CircularProgressProps {
   value: number;
   offsetColor?: "primary" | "grey";
   showValue?: boolean;

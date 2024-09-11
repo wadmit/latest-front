@@ -1,6 +1,6 @@
-import { TextFieldType } from "@/page-components/joinus/types/TextFieldType";
+import { ITextFieldType } from "@/page-components/joinus/types/TextFieldType";
 
-export const contactInformationData: TextFieldType[] = [
+export const contactInformationData: ITextFieldType[] = [
   {
     label: "Owner’s first name",
     placeholder: "Enter owner’s first name",
@@ -96,7 +96,7 @@ export const imageUploadFields: {
   },
 ];
 
-export const recruitmentInformationData: TextFieldType[] = [
+export const recruitmentInformationData: ITextFieldType[] = [
   {
     label: "What types of marketing methods do you choose?",
     placeholder: "Select your options",
@@ -152,7 +152,7 @@ export const recruitmentInformationData: TextFieldType[] = [
   },
 ];
 
-export const businessDataInformation: TextFieldType[] = [
+export const businessDataInformation: ITextFieldType[] = [
   {
     label: "Business name",
     placeholder: "Enter business name",
@@ -196,7 +196,7 @@ export const businessDataInformation: TextFieldType[] = [
   },
 ];
 
-export const businessSocialData: TextFieldType[] = [
+export const businessSocialData: ITextFieldType[] = [
   {
     label: "Facebook (optional)",
     placeholder: "Enter Facebook URL",

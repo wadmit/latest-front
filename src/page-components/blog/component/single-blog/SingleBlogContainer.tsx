@@ -1,9 +1,9 @@
 import React from "react";
 import { Box } from "@mui/material";
-import { RootContainerProps } from "@/types/other";
+import { IRootContainerProps } from "@/types/other";
 import { StyledContainerWrapper } from "@/components/common";
 
-function SingleBlogContainer(props: RootContainerProps) {
+function SingleBlogContainer(props: IRootContainerProps) {
 	const { children, component = "section", ...rest } = props;
 
 	return (

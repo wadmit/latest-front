@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { animate, motion, useMotionValue, useTransform } from "framer-motion";
-import type { IRedoAnimTextProps } from "@/page-components/students/utils/types";
+import type { IRedoAnimITextProps } from "@/page-components/students/utils/types";
 
-export default function RedoAnimText({ delay }: IRedoAnimTextProps) {
+export default function RedoAnimText({ delay }: IRedoAnimITextProps) {
   const textIndex = useMotionValue(0);
   const [showText, setShowText] = useState(true);
 

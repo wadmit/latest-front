@@ -42,7 +42,6 @@ function CheckboxInput({ isChecked, checkBoxLabel, onClick, ...rest }: Props) {
 			borderRadius="8px"
 			border="1px solid #ADADAD"
 			boxShadow={isChecked ? "0px 8px 20px 0px rgba(0, 0, 0, 0.06)" : "0px"}
-			// bgColor="#F6F6F4"
 			padding="20px 40px"
 			width={{ lg: "fit-content", md: "fit-content", sm: "100%", xs: "100%" }}
 			justifyContent="flex-start"

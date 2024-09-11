@@ -2,7 +2,7 @@
 import React from 'react';
 import { Grid, Stack, Typography } from '@mui/material';
 import useCostConverterMain from '@/hooks/costConverterMain';
-import { Shortlist, TShortListDetails } from '@/types/sortlist';
+import { IShortlist, TShortListDetails } from '@/types/sortlist';
 import { Chip } from './Chip';
 import TopMatches from './TopMatches';
 import ShortListTable from './SortListTable';

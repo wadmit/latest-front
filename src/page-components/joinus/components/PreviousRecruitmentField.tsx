@@ -3,9 +3,9 @@ import StyledInputField from "@/components/common/formfields/StyleFormFields";
 import { Box, Grid } from "@mui/material";
 import { useFormikContext } from "formik";
 import React, { useEffect } from "react";
-import { TextFieldType } from "@/page-components/joinus/types/TextFieldType";
+import { ITextFieldType } from "@/page-components/joinus/types/TextFieldType";
 
-const volume: TextFieldType = {
+const volume: ITextFieldType = {
   label: "What is your expected volume of students?",
   placeholder: "Select your options",
   name: "previous_recruitment",
@@ -40,7 +40,7 @@ const PreviousRecruitmentField = ({
   placeholder,
   options,
   type,
-}: TextFieldType) => {
+}: ITextFieldType) => {
   const { values, setFieldValue }: any = useFormikContext();
   useEffect(() => {
     if (values.expected_recruitment === "No") {

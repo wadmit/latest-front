@@ -1,7 +1,7 @@
-import { TextFieldType } from "@/types/other";
+import { ITextFieldType } from "@/types/other";
 import { EReligion } from "@/types/student";
 
-interface TextFieldTypeEducation {
+interface ITextFieldTypeEducation {
 	label: string;
 	name: string;
 	placeholder?: string;
@@ -97,7 +97,7 @@ export const DATE_FIELDS = [
 	"tenth_end_date",
 ];
 
-export const personalInformationData: TextFieldType[] = [
+export const personalInformationData: ITextFieldType[] = [
 	{
 		label: "First Name",
 		placeholder: "Enter your first name",
@@ -194,7 +194,7 @@ export const personalInformationData: TextFieldType[] = [
 	},
 ];
 
-export const addressDetailData: TextFieldType[] = [
+export const addressDetailData: ITextFieldType[] = [
 	{
 		label: "Address ",
 		placeholder: "Enter your address",
@@ -234,7 +234,7 @@ export const addressDetailData: TextFieldType[] = [
 	},
 ];
 
-export const parentsDetails: TextFieldType[] = [
+export const parentsDetails: ITextFieldType[] = [
 	{
 		label: "Father’s Full Name",
 		placeholder: "Enter father’s name",
@@ -305,7 +305,7 @@ export const parentsDetails: TextFieldType[] = [
 	},
 ];
 
-export const educationInformationData: TextFieldTypeEducation[] = [
+export const educationInformationData: ITextFieldTypeEducation[] = [
 	{
 		label: "Country of Education",
 		placeholder: "Enter Country",
@@ -356,7 +356,7 @@ export const educationInformationData: TextFieldTypeEducation[] = [
 	// },
 ];
 
-export const educationBackgroundData: TextFieldTypeEducation[] = [
+export const educationBackgroundData: ITextFieldTypeEducation[] = [
 	{
 		label: "Name of institution",
 		placeholder: "Enter name of institution",

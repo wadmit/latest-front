@@ -11,7 +11,7 @@ import {
   EAnalyticsFieldName,
   EAnalyticsStatus,
 } from "@/types/mix-panel-analytic";
-import { Shortlist, TShortListDetails } from "@/types/sortlist";
+import { TShortListDetails } from "@/types/sortlist";
 import {
   Box,
   Button,

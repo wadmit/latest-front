@@ -1,10 +1,9 @@
 "use client";
 import { IDiscipline } from "./discipline";
 import { IProgram, IProgramDetail, TypeClass } from "./program";
-import { EBaseCurrency, IUniversity, IUniversityDetail } from "./university";
-import { ScholarShipRangeType } from "./utils";
+import { IUniversity } from "./university";
 
-export interface Fees {
+export interface IFees {
 	tution_fee: number;
 	living_cost: number;
 	housing_cost: number;
@@ -12,7 +11,7 @@ export interface Fees {
 	_id: string;
 }
 
-export interface Shortlist {
+export interface IShortlist {
 	name: string;
 	university: IUniversity;
 	detail: IProgramDetail;

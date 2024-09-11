@@ -1,4 +1,4 @@
-import { ScoreGaugeProps } from '@/types/other';
+import { IScoreGaugeProps } from '@/types/other';
 import {
     Box,
     CircularProgress,
@@ -14,7 +14,7 @@ import {
     showValue = true,
     color = 'primary.light',
     ...rest
-  }: ScoreGaugeProps) {
+  }: IScoreGaugeProps) {
     return (
       <Box
         sx={{

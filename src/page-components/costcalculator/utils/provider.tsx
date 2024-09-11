@@ -1,6 +1,5 @@
 import { Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import type { ITextFieldType } from "@/page-components/costcalculator/utils/types";
 
 export const HeroSectionContainer = styled(
 	Stack,
@@ -50,7 +49,7 @@ export const wrapperDisplayStyle = {
 export const TitlefontSize = { xl: "50px", sm: "32px", xs: "22px" };
 export const TitleDescfontSize = { xl: "24px", sm: "22px", xs: "16px" };
 
-export interface TextFieldType {
+export interface ITextFieldType {
 	inputLabel: string;
 	name: string;
 	label?: string;

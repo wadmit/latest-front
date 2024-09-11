@@ -1,6 +1,6 @@
 import type { IProgram } from "@/types/program";
 
-export interface IRedoAnimTextProps {
+export interface IRedoAnimITextProps {
 	delay: number;
 }
 
