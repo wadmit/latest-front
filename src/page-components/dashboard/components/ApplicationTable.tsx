@@ -379,10 +379,7 @@ function ApplicationTable({ status }: IProps) {
   const filterApplications = applications.filter(
     (application) => application.paid === status
   );
-  console.log(
-    "🚀 ~ ApplicationTable ~ filterApplications:",
-    filterApplications
-  );
+
   return (
     <>
       {filterApplications.length > 0 && (
