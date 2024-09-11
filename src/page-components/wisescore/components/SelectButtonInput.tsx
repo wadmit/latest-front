@@ -13,7 +13,7 @@ interface Props extends InputProps {
 }
 
 function SelectButtonInput({ isActive, text, onClick }: Props) {
-	const { primaryColor, secondaryColor } = useContext(WiseScoreDetailsContext);
+	const { secondaryColor } = useContext(WiseScoreDetailsContext);
 	const { values, handleChange } =
 		useFormikContext<typeof INITIAL_WISE_STATE>();
 	return (

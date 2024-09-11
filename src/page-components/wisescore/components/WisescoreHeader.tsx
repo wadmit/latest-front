@@ -84,19 +84,6 @@ function WisescoreHeader({ screenHeader, step, maxStep, noheader }: Props) {
             >
                 Step {step} of {step !== 1 ? maxStep! : '..'}
             </Typography>
-
-
-            {/* <Typography
-                color="rgba(0, 0, 0, 0.85)"
-                width={{ lg: '35%', md: '50%', sm: '100%', xs: '100%' }}
-                fontSize="14px"
-                lineHeight="130%"
-                textAlign={{ lg: 'center', md: 'center', sm: 'left', xs: 'left' }}
-                mt={{ lg: '24px', md: '24px', sm: '16px', xs: '16px' }}
-                component="h3"
-            >
-                {screenSubHeader}
-            </Typography> */}
         </Box>
     );
 }

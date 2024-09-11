@@ -1,17 +1,25 @@
 "use client";
+import { GreenTickSvg } from "$/svg";
+import { mixpanelSubmit } from "@/api/web/mixpanel.action";
+import { patchSortList } from "@/api/web/shortlist.action";
+import { submitWiseScore } from "@/api/web/wisescore.action";
+import { theme } from "@/common/muicustomtheme/theme";
+import { ButtonWrapper } from "@/components/common";
+import Loader from "@/components/common/circular-loader/Loader";
+import { PhoneField } from "@/components/common/formfields/phone-field";
+import { IconWrapper } from "@/components/common/icon-wrapper/IconWrapper";
+import ThinScoreGauge from "@/components/common/score-gauge/ThinScoreGauge";
 import WiseScoreDetailsContext from "@/context/wisescore-context";
 import { useAppDispatch, useAppSelector } from "@/global-states/hooks/hooks";
 import { selectDashboardDataGlobal } from "@/global-states/reducers/userReducer";
-import { useFormik } from "formik";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useContext, useEffect, useState } from "react";
-import { FORM_VALIDATION_WISESCORE_SUBMIT } from "../utils/formik";
+import { setSubmitFormData } from "@/global-states/reducers/wisescore";
+import { analytics } from "@/services/analytics.service";
 import {
   EAnalyticsEvents,
   EAnalyticsFieldName,
   EAnalyticsStatus,
 } from "@/types/mix-panel-analytic";
-import { setSubmitFormData } from "@/global-states/reducers/wisescore";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import {
   Box,
   Dialog,
@@ -22,22 +30,13 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import { theme } from "@/common/muicustomtheme/theme";
-import { ScoreWrapper, StyledCheckBox } from "../utils/provider";
-import { IconWrapper } from "@/components/common/icon-wrapper/IconWrapper";
-import { GreenTickSvg } from "$/svg";
-import { GetCelebIcon, GetCelebIconMobile } from "../svgs";
-import { PhoneField } from "@/components/common/formfields/phone-field";
-import { ButtonWrapper } from "@/components/common";
-import Loader from "@/components/common/circular-loader/Loader";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useMutation } from "@tanstack/react-query";
-import { submitWiseScore } from "@/api/web/wisescore.action";
-import { analytics } from "@/services/analytics.service";
-import { useShortListSetter } from "@/hooks";
-import ThinScoreGauge from "@/components/common/score-gauge/ThinScoreGauge";
-import { mixpanelSubmit } from "@/api/web/mixpanel.action";
-import { patchSortList } from "@/api/web/shortlist.action";
+import { useFormik } from "formik";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
+import { GetCelebIcon, GetCelebIconMobile } from "../svgs";
+import { FORM_VALIDATION_WISESCORE_SUBMIT } from "../utils/formik";
+import { ScoreWrapper, StyledCheckBox } from "../utils/provider";
 type Props = {
   endPoint?: string;
   version?: string;
@@ -401,14 +400,7 @@ function WiseScoreSubmit({
           >
             But before that we need few more information
             <br /> to send you your WiseScore® on the email.
-            {/* {version}{version === 'WiseScore' ? '®' : <sup
-                            style={{
-                                fontSize: '12px',
-                            }}
-                        >
-                            TM
-                        </sup>}
-                        {' '} */}
+          
           </Typography>
 
           <Box
@@ -570,39 +562,6 @@ function WiseScoreSubmit({
                 disabled={
                   !!dashboardData?.data?.phone || isSuccess || isPending
                 }
-                // sx={{
-                //     width: '100%',
-                //     '&:hover fieldset': {
-                //         borderColor: `${primaryColor} !important`,
-                //         borderWidth: '2px !important',
-                //     },
-                //     '&:active fieldset': {
-                //         borderColor: `${primaryColor} !important`,
-                //         borderWidth: '2px !important',
-                //     },
-                //     '& .MuiOutlinedInput-notchedOutline': {
-                //         borderRadius: '8px !important',
-                //         '&:focus,&:active': {
-                //             borderColor: `${primaryColor} !important`,
-                //             borderWidth: '2px !important',
-                //         },
-                //     },
-                //     '& input': {
-                //         height: '28px',
-                //     },
-                //     '&:hover': {
-                //         borderColor: `${primaryColor} !important`,
-                //         borderWidth: '2px !important',
-                //     },
-                //     '&.Mui-focused': {
-                //         borderColor: `${primaryColor} !important`,
-                //         borderWidth: '2px !important',
-                //     },
-                //     '&.Mui-focused fieldset': {
-                //         borderColor: `${primaryColor} !important`,
-                //         borderWidth: '2px !important',
-                //     },
-                // }}
               />
             </Box>
 
@@ -659,12 +618,6 @@ function WiseScoreSubmit({
       <ScoreWrapper
         width="100%"
         height="100vh"
-        sx={
-          {
-            // backgroundImage: "url('/wisescore/swatch.svg')",
-            // backgroundColor: "red"
-          }
-        }
         display={{ lg: "none", md: "none", sm: "flex", xs: "flex" }}
       >
         <Box
@@ -817,19 +770,6 @@ function WiseScoreSubmit({
                 disabled={
                   !!dashboardData?.data?.phone || isSuccess || isPending
                 }
-                // sx={{
-                //     width: '100%',
-                //     '& .MuiOutlinedInput-notchedOutline': {
-                //         borderRadius: '8px !important',
-                //         '&:focus,&:active': {
-                //             borderColor: `${primaryColor} !important`,
-                //             borderWidth: '2px !important',
-                //         },
-                //     },
-                //     '& input': {
-                //         height: '20px',
-                //     },
-                // }}
               />
             </Box>
             <Box display="flex" alignItems="center" gap="8px">
@@ -856,15 +796,6 @@ function WiseScoreSubmit({
               variant="contained"
               type="submit"
               disabled={isPending || isSuccess}
-              // endIcon={
-              //     isSuccess ? (
-              //         <CheckCircleIcon />
-              //     ) : isLoading ? (
-              //         <Loader buttonState />
-              //     ) : (
-              //         <KeyboardArrowRightIcon />
-              //     )
-              // }
               sx={{
                 maxWidth: "9.375rem",
                 width: "100%",

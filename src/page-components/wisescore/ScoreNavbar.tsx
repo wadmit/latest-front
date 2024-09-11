@@ -43,15 +43,6 @@ function ScoreNavbar({ Logo }: Props) {
 					</Link>
 
 					<Box display="flex" gap="20px" alignItems="center">
-						{/* <Box
-                            fontSize={{ lg: '16px', md: '14px', sm: '12px', xs: '12px' }}
-                            fontFamily="HankenGroteskExtraBold"
-                            padding="10px 16px"
-                            borderRadius="32px"
-                            border="1px solid #000"
-                        >
-                            Questions?
-                        </Box> */}
 						<IconButton id="close-modal" onClick={closeModal}>
 							<CrossIcon />
 						</IconButton>

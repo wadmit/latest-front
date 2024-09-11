@@ -1,4 +1,4 @@
-import { SelectFieldType } from "@/types/other";
+import { ISelectFieldType } from "@/types/other";
 import { InputLabel, MenuItem, Stack, Typography } from "@mui/material";
 import { useField, useFormikContext } from "formik";
 import React from "react";
@@ -12,7 +12,7 @@ const SelectField = ({
 	options,
 	placeholder,
 	name,
-}: SelectFieldType) => {
+}: ISelectFieldType) => {
 	const { setFieldValue } = useFormikContext();
 	const [field, meta] = useField(name);
 

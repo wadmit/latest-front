@@ -1,7 +1,6 @@
 "use client";
 import WiseScoreDetailsContext from "@/context/wisescore-context";
 import { Box, SliderProps } from "@mui/material";
-import { useSnackbar } from "notistack";
 import React, { useContext } from "react";
 import { StyledInputFiled, StyledSlider } from "../utils/provider";
 
@@ -14,8 +13,6 @@ interface Props extends Omit<SliderProps, "value"> {
 
 function SliderValue({ value, onValueChange, min, max, ...rest }: Props) {
 	const { primaryColor, secondaryColor } = useContext(WiseScoreDetailsContext);
-
-	const { enqueueSnackbar } = useSnackbar();
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const newValue = event.target.value;
 		if (newValue === "") {
@@ -44,21 +41,10 @@ function SliderValue({ value, onValueChange, min, max, ...rest }: Props) {
 			<StyledInputFiled
 				type="number"
 				value={value}
-				// key={value}
-
 				placeholder="0"
 				name="sliderValue"
 				id="sliderValue"
 				onChange={handleInputChange}
-				// InputProps={{
-				//     inputProps: {
-				//         min:
-				//             min,
-				//         max:
-				//             max,
-
-				//     },
-				// }}
 			/>
 			<StyledSlider
 				value={Number(value)}

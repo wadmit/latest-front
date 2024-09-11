@@ -106,9 +106,6 @@ export function DashboardHome() {
     refetchOnWindowFocus: false,
   });
 
-  // console.assert(!applicationsLoading && applications, 'Failed To Fetch Applications');
-  // console.assert(!topMatchLoading && topMatch, 'Failed To Fetch Applications');
-
   // Handle shortlist post request
   const { mutate } = useShortListSetter();
 
@@ -269,14 +266,10 @@ export function DashboardHome() {
         paymentEsewaFailed((query.get("signature") as string) ?? ""),
       onSuccess: (data) => {
         router.replace("/dashboard");
-        // window.location.reload();
-        // router.reload()
       },
       onError: (error) => {
         enqueueSnackbar("Payment verification failed", { variant: "error" });
         router.replace("/dashboard");
-
-        // window.location.reload();
       },
       enabled: !!query.get("signature"),
     });
@@ -422,12 +415,6 @@ export function DashboardHome() {
                 )}
               </Grid>
             </Grid>
-
-            {/* {activeStep === 3 &&
-                        <TopMatches
-                            getConvertedCosts={getConvertedCosts}
-                            handleStep={handleStep} muted={false} wiseScore={wiseScore} />
-                    } */}
           </Box>
         )}
         {activeStep === 2 && (

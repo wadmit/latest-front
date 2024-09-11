@@ -1,9 +1,9 @@
 import React from "react";
 import { Box } from "@mui/material";
-import { RootContainerProps } from "@/types/other";
+import { IRootContainerProps } from "@/types/other";
 import { StyledContainerWrapper } from "@/components/common";
 
-export function RootContainer(props: RootContainerProps) {
+export function RootContainer(props: IRootContainerProps) {
   const { children, component = "section", ...rest } = props;
 
   return (

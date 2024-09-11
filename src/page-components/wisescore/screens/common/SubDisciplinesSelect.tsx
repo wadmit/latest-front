@@ -37,7 +37,6 @@ function SubDisciplinesSelect({
 	value,
 	handleGoBack,
 }: IScreenProps) {
-	const [searchTerm, setSearchTerm] = React.useState("");
 	const [filteredSubDisciplines, setFilteredSubDisciplines] = React.useState<
 		any[]
 	>([]);
@@ -175,70 +174,8 @@ function SubDisciplinesSelect({
 						},
 					}}
 				/>
-				{/* <TextField
-                    placeholder='Search Sub-disciplines'
-
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton
-
-                                    edge="end"
-                                >
-                                    <Search />
-                                </IconButton>
-                            </InputAdornment>
-                        ),
-                    }}
-                    sx={{
-                        width: { sm: '100%', xs: '100%', md: 'auto', lg: 'auto' },
-                        '& .MuiInputBase-root': {
-
-                            width: { lg: '445px', md: '445px', sm: '100%', xs: '100%' },
-                            height: '48px',
-                            '& input': {
-                                fontSize: '14px',
-                                color: 'rgba(173, 173, 173, 1)',
-                                borderRadius: '8px !important',
-                            }
-                        }
-                    }}
-                /> */}
+				
 			</Box>
-			{/* <StyledBox
-                gap={{ lg: '25px', md: '25px', sm: '32px', xs: '32px' }}
-                alignItems="center"
-                justifyContent="center"
-                height={{ lg: '220px', md: '220px', sm: '100%', xs: '100%' }}
-                overflow="auto"
-                // bgcolor={"blue"}
-                mt={{ lg: '64px', md: '64px', sm: '46px', xs: '32px' }}
-                display="flex"
-                flexWrap="wrap"
-                padding={{
-                    lg: '0px 60px',
-                    md: '0px 60px',
-                    sm: '0 16px',
-                    xs: '0 16px 50px 16px',
-                }}
-                flexDirection={{ xs: 'column', sm: 'column', lg: 'row', md: 'row' }}
-            >
-                {filteredSubDisciplines &&
-                    filteredSubDisciplines.length > 0 &&
-                    filteredSubDisciplines.map((subDiscipline: any) => (
-                        <CheckboxInput
-                            id={subDiscipline.id}
-                            key={subDiscipline.id}
-                            name={subDiscipline.name}
-                            isChecked={(values.sub_disciplines as string[]).includes(
-                                subDiscipline.id
-                            )}
-                            onClick={() => handleOnChange(subDiscipline.id)}
-                            checkBoxLabel={subDiscipline.name}
-                        />
-                    ))}
-            </StyledBox> */}
-
 			<StyledBox
 				gap={{ lg: "25px", md: "25px", sm: "32px", xs: "32px" }}
 				alignItems="center"

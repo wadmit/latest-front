@@ -1,5 +1,5 @@
 "use client";
-import { ScoreGaugeProps } from "@/types/other";
+import { IScoreGaugeProps } from "@/types/other";
 import {
   Box,
   CircularProgress,
@@ -16,7 +16,7 @@ function ThinScoreGauge({
   boxSize = 240,
   method,
   ...rest
-}: ScoreGaugeProps) {
+}: IScoreGaugeProps) {
   const ringSize = 200;
   return (
     <Box

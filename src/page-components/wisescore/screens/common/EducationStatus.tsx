@@ -11,13 +11,8 @@ import { motion } from "framer-motion";
 import GoBackButton from "../GoBackButton";
 
 function EducationStatus({ value, handleNext, handleGoBack }: IScreenProps) {
-	// const dispatch = useAppDispatch();
-	// const { primaryColor, secondaryColor } = useContext(WiseScoreDetailsContext);
-
 	const { setFieldValue, values, resetForm } =
 		useFormikContext<typeof INITIAL_WISE_STATE>();
-	// const [option, setOption] = React.useState<string>('');
-
 	const educationStatus = [
 		{ key: "Completed Current Level", thisValue: "true" },
 		{ key: "I am still studying", thisValue: "false" },
@@ -39,7 +34,6 @@ function EducationStatus({ value, handleNext, handleGoBack }: IScreenProps) {
 			});
 			handleNext();
 		}
-		// handleNext();
 	};
 	const handleGapOnClick = (fieldValue: string) => {
 		setFieldValue("gapYear", fieldValue);
@@ -188,35 +182,6 @@ function EducationStatus({ value, handleNext, handleGoBack }: IScreenProps) {
 				}}
 			>
 				<GoBackButton handleGoBack={handleGoBack} />
-				{/* <Box
-                    disabled={values.program_type === ''}
-                    // onClick={onClick}
-                    onClick={() => handleNext()}
-                    borderRadius="8px"
-                    bgcolor={primaryColor}
-                    padding="16px 42px"
-                    border="none"
-                    sx={{
-                        cursor: 'pointer',
-                        '&:disabled': {
-                            bgcolor: secondaryColor,
-                            color: '#fff',
-                        },
-                    }}
-                    color="#fff"
-                    fontFamily="HankenGroteskSemiBold"
-                    minWidth="161px"
-                    width={{
-                        lg: 'fit-content',
-                        md: 'fit-content',
-                        sm: '100%',
-                        xs: '100%',
-                    }}
-                    mt={{ lg: '60px', md: '60px', sm: '30px', xs: '30px' }}
-                    component="button"
-                >
-                    Next
-                </Box> */}
 			</Box>
 		</>
 	);
