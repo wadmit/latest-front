@@ -1,6 +1,6 @@
 //sync both forntend and backend for this type
 
-export enum StoragePath {
+export enum EStoragePath {
   University = "university",
   UniversityLogo = "university/logo",
   UniversityCover = "university/cover",

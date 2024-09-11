@@ -1,14 +1,8 @@
 import { EBaseCurrency } from "@/types/university";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { ICurrencyStateRedux } from "@/global-states/reducers/types";
 
-interface ICurrencyState {
-  currency: Record<string, any> | null;
-  to: string | null;
-  currentCountry: string | null;
-  city: string | null;
-}
-
-const initialState: ICurrencyState = {
+const initialState: ICurrencyStateRedux = {
   currency: null,
   to: null,
   currentCountry: null,

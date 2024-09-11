@@ -90,7 +90,6 @@ export function DashboardHome() {
         dispatch(setUserApplications({ data: res }));
       },
       onError: (error) => {
-        // eslint-disable-next-line no-console
         console.error("Failed To Fetch Applications", error);
       },
       refetchOnWindowFocus: false,
@@ -241,7 +240,6 @@ export function DashboardHome() {
   };
   // Future Function non implemented
   const handleStepperClick = (StepId: number) => {
-    // eslint-disable-next-line no-console
   };
   // Alert button props for completing profile
   const completeProfileAlertProps: AlertButtonProps = {

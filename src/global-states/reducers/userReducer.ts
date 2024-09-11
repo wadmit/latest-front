@@ -1,22 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-
 import type { RootState } from "@/global-states/store";
 import type { IProgram } from "@/types/program";
 import type { IUniversity } from "@/types/university";
 import type { IUserDashboardData } from "@/types/user";
-
-interface IUserState {
-	didUserSignedUp: boolean;
-	shortList: string[];
-	shortlistedPrograms: IProgram[];
-	shortlistDetails: { program: IProgram; foundation: IProgram }[];
-	shortListLoading: boolean;
-	activeStepGlobal: number | undefined;
-	maxActiveStepGlobal: number;
-	universities: IUniversity[] | null;
-	dashboardDataGlobal: IUserDashboardData | null;
-}
+import { IUserState } from "@/global-states/reducers/types";
 
 const initialState: IUserState = {
 	dashboardDataGlobal: null,

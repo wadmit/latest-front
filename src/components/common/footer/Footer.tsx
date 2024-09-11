@@ -15,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { RootContainer } from "../wrapper/RootContainer";
 import { WiseAdmitFooterSvg, WiseAdmitMobileFooterSvg } from "$/svg";
+import { IFooterDataProps } from "@/components/common/footer/utils/types";
 
 function SmallDot() {
 	return (
@@ -30,28 +31,24 @@ function SmallDot() {
 	);
 }
 
-interface dataProps {
-	title: string;
-	link: string;
-}
 
-const studyInChina: dataProps[] = [
+const studyInChina: IFooterDataProps[] = [
 	{ title: "Eligibility", link: "/wisescore" },
 	{ title: "Institutions", link: "/institution" },
 	{ title: "Courses", link: "/programs" },
 	{ title: "Scholarships", link: "/" },
 ];
 
-const ourServices: dataProps[] = [
+const ourServices: IFooterDataProps[] = [
 	{ title: "Students", link: "/students" },
 	{ title: "Institutions", link: "/institution" },
 	{ title: "Recruiting partners", link: "/recruiting-partners" },
 ];
-const message: dataProps[] = [
+const message: IFooterDataProps[] = [
 	{ title: "Message from CEO", link: "/" },
 	{ title: "Open positions", link: "/" },
 ];
-const aboutAndContact: dataProps[] = [
+const aboutAndContact: IFooterDataProps[] = [
 	{ title: "Our story", link: "/aboutus" },
 	{ title: "Blog", link: "/blogs" },
 	{ title: "News", link: "/news" },
@@ -164,7 +161,7 @@ function LinkComponent({
 	linkArray,
 	title,
 }: {
-	linkArray: dataProps[];
+	linkArray: IFooterDataProps[];
 	title: string;
 }) {
 	return (

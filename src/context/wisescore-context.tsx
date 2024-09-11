@@ -7,9 +7,7 @@ const WiseScoreDetailsContext = createContext<IWiseScoreDetailsContext>({
     secondaryColor: '',
     variant: '',
     version: '',
-    endPoint: '',
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    closeModal: () => { },
+    endPoint: '',    closeModal: () => { },
 });
 
 export default WiseScoreDetailsContext;
