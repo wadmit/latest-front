@@ -651,7 +651,7 @@ function ApplicationTable({ status }: IProps) {
                             backgroundColor: "transparent",
                           }}
                         >
-                          Viewpppppppppppppp
+                          View
                         </Button>
                         {!status && (
                           <Button
