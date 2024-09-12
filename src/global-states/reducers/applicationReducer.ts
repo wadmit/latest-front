@@ -20,10 +20,13 @@ export const applicationSlice = createSlice({
     setUserApplications: (
       state,
       action: PayloadAction<ResponseUtils<IApplication>>
-    ) => ({
-      ...state,
-      applications: action.payload.data,
-    }),
+    ) => {
+      console.log("Redux value", action.payload.data);
+      return {
+        ...state,
+        applications: action.payload.data,
+      };
+    },
     setCreatedApplications: (state, action: PayloadAction<IApplication[]>) => ({
       ...state,
       applications: [...state.applications, ...action.payload],

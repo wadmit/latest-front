@@ -86,7 +86,7 @@ function MenuSwiper() {
                   <motion.img
                     key={menu.title}
                     width="100%"
-                    height={isMobile ? "300px" : "auto"}
+                    height={isMobile ? "300px" : "550px"}
                     src={menu.imageUrl}
                     alt={menu.title}
                     initial={{ opacity: 0 }} // Initial state before animation
