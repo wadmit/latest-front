@@ -38,7 +38,7 @@ import {
   GlobeSvg,
   GreenTickSvg,
   UniversitySortedSvg,
-} from "$/svg";
+} from "public/svg";
 import { FRONTEND_URL_CONFIG } from "@/config/config";
 import { CourseIcon, GetBookOpenIcon } from "@/page-components/wisescore/svgs";
 import { Close } from "@mui/icons-material";

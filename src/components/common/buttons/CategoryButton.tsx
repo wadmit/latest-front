@@ -3,7 +3,7 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { CustomTooltip, CustomTypography } from "./styled-components";
-import { ArrowDown, CategoryIcon, MessageIcon, SmileIcon } from "$/svg";
+import { ArrowDown, CategoryIcon, MessageIcon, SmileIcon } from "public/svg";
 import FeedbackForm from "@/page-components/feedback";
 import ThankYouFeedback from "@/page-components/feedback/components/ThankYouFeedback";
 import ChatBotBox from "@/page-components/chatbot";

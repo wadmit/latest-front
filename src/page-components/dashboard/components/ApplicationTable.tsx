@@ -1,5 +1,5 @@
 "use client";
-import { PlusIcon } from "$/svg";
+import { PlusIcon } from "public/svg";
 import { removeApplication } from "@/api/web/application.action";
 import {
   paymentEsewaVerify,

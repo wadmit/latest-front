@@ -1,5 +1,5 @@
 "use client"
-import { WiseSvg } from '$/svg';
+import { WiseSvg } from 'public/svg';
 import ScoreGauge from '@/components/common/score-gauge/ScoreGauge';
 import useCostConverter from '@/hooks/costConverter';
 import { Box, Grid, Stack, Typography } from '@mui/material';

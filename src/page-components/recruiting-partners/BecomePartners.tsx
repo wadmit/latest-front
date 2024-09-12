@@ -6,7 +6,7 @@ import {
 	PartnerData,
 	styles,
 } from "@/page-components/recruiting-partners/utils/provider";
-import { FillUpAFormSvg, GetReviewedSvg, StartEarningSvg } from "$/svg";
+import { FillUpAFormSvg, GetReviewedSvg, StartEarningSvg } from "public/svg";
 import { RootContainer } from "@/components/common";
 import BecomeOurPartnerCard from "@/page-components/recruiting-partners/components/BecomeOurPartnerCard";
 

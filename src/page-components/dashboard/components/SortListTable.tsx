@@ -26,7 +26,7 @@ import {
 } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import { StyledTableCell } from "../utils/provider";
-import { PlusIcon } from "$/svg";
+import { PlusIcon } from "public/svg";
 import {
   calculateScholarship,
   getScholarshipInfo,

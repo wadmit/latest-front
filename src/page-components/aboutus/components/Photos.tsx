@@ -1,5 +1,5 @@
 "use client";
-import { Linkedin } from "$/svg";
+import { Linkedin } from "public/svg";
 import {
   Box,
   Button,
