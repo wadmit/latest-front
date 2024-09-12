@@ -48,7 +48,12 @@ const OurServices = () => {
 
   return (
     <RootContainer>
-      <Box display="flex" justifyContent="center" alignItems="center" mt="50px">
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        mt={{ lg: "100px", md: "100px", sm: "70px", xs: "70px" }}
+      >
         <Typography
           component={"h2"}
           lineHeight="41.6px"
@@ -70,7 +75,7 @@ const OurServices = () => {
       </Box>
 
       <Box
-        mt="80px"
+        mt={{ lg: "80px", md: "80px", sm: "50px", xs: "50px" }}
         position="relative"
         sx={{
           "&::before": {
@@ -112,11 +117,11 @@ const OurServices = () => {
           bgcolor="white"
           border="1px solid rgba(18, 2, 112, 1)"
           borderRadius="20px"
-          padding={{ lg: "48px", md: "48px", sm: "30px", xs: "30px" }}
+          padding={{ lg: "48px 0px 48px", md: "48px", sm: "30px", xs: "30px" }}
         >
-          <Grid container spacing={3}>
+          <Grid container spacing={3} justifyContent="space-evenly">
             {serviceItems.map((item, index) => (
-              <Grid item xs={12} sm={6} key={index}>
+              <Grid item xs={12} sm={5} key={index}>
                 <Box
                   display="flex"
                   flexDirection={{

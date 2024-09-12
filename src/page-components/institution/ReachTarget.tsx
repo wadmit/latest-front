@@ -1,6 +1,7 @@
 "use client";
 import { RootContainer } from "@/components/common";
 import { Box, Typography } from "@mui/material";
+import BankOutline from "$/images/institution/bankoutline.svg";
 
 function ReachTarget() {
   return (
@@ -8,15 +9,20 @@ function ReachTarget() {
       <RootContainer>
         <Box
           display="flex"
-          flexDirection={{ lg: "row", md: "row", sm: "column", xs: "column" }}
+          flexDirection={{
+            lg: "row",
+            md: "column",
+            sm: "column",
+            xs: "column",
+          }}
           padding="64px 0px 64px"
-          gap={{ lg: "133px", md: "133px", sm: "41px", xs: "41px" }}
+          gap={{ lg: "133px", md: "41px", sm: "41px", xs: "41px" }}
         >
           <Box
             display="flex"
             flexDirection="column"
             justifyContent="center"
-            width={{ lg: "283px", md: "283px", sm: "100%", xs: "100%" }}
+            width={{ lg: "283px", md: "100%", sm: "100%", xs: "100%" }}
           >
             <Typography
               fontWeight={800}
@@ -36,9 +42,14 @@ function ReachTarget() {
             <Typography
               fontWeight={400}
               mt="10px"
-              fontSize="16px"
+              fontSize={{ lg: "16px", md: "16px", sm: "16px", xs: "16px" }}
               fontFamily="HankenGroteskRegular"
-              lineHeight="22.4px"
+              lineHeight={{
+                lg: "22.4px",
+                md: "22.4px",
+                sm: "19.6px",
+                xs: "19.6px",
+              }}
               color="rgba(32, 28, 26, 0.9)"
             >
               We help your attract quality students from all around the world
@@ -46,8 +57,13 @@ function ReachTarget() {
           </Box>
 
           <Box
-            display={{ lg: "flex", md: "flex", sm: "none", xs: "none" }}
-            flexDirection={{ lg: "row", md: "row", sm: "column", xs: "column" }}
+            display={{ lg: "flex", md: "none", sm: "none", xs: "none" }}
+            flexDirection={{
+              lg: "row",
+              md: "column",
+              sm: "column",
+              xs: "column",
+            }}
             gap={{ lg: "24px", md: "24px", sm: "32px", xs: "32px" }}
           >
             <Box
@@ -57,17 +73,24 @@ function ReachTarget() {
               bgcolor="rgba(255, 255, 255, 1)"
               padding="25px 24px 41px"
               width={{ lg: "245px", md: "245px", sm: "100%", xs: "100%" }}
+              boxShadow=" 0px 2px 4px 0px rgba(0, 0, 0, 0.16)"
+              borderRadius="12px"
             >
-              <img
-                width="32px"
-                height="32px"
-                src="/images/institution/bankoutline.svg"
-                alt="University"
-                style={{
-                  borderBottom: "2px solid rgba(170, 68, 1, 1)",
-                  paddingBottom: "5px",
-                }}
-              />
+              <Box
+                display="flex"
+                alignItems="flex-start"
+                borderBottom="2px solid rgba(170, 68, 1, 1)"
+                width="60px"
+                pb="5px"
+              >
+                <img
+                  width="32px"
+                  height="32px"
+                  src="/images/institution/bankoutline.svg"
+                  alt="University"
+                />
+              </Box>
+
               <Typography
                 component={"h3"}
                 fontWeight={800}
@@ -101,17 +124,27 @@ function ReachTarget() {
               bgcolor="rgba(255, 255, 255, 1)"
               padding="25px 24px 41px"
               width={{ lg: "245px", md: "245px", sm: "100%", xs: "100%" }}
+              boxShadow=" 0px 2px 4px 0px rgba(0, 0, 0, 0.16)"
+              borderRadius="12px"
             >
-              <img
-                width="32px"
-                height="32px"
-                src="/images/institution/search-favorite.svg"
-                alt="Search favourite"
-                style={{
-                  borderBottom: "2px solid rgba(170, 68, 1, 1)",
-                  paddingBottom: "5px",
-                }}
-              />
+              <Box
+                display="flex"
+                alignItems="flex-start"
+                borderBottom="2px solid rgba(170, 68, 1, 1)"
+                width="60px"
+                pb="5px"
+              >
+                <img
+                  width="32px"
+                  height="32px"
+                  src="/images/institution/search-favorite.svg"
+                  alt="Search favourite"
+                  // style={{
+                  //   borderBottom: "2px solid rgba(170, 68, 1, 1)",
+                  //   paddingBottom: "5px",
+                  // }}
+                />
+              </Box>
               <Typography
                 component={"h3"}
                 fontWeight={800}
@@ -144,17 +177,27 @@ function ReachTarget() {
               bgcolor="rgba(255, 255, 255, 1)"
               padding="25px 24px 41px"
               width={{ lg: "245px", md: "245px", sm: "100%", xs: "100%" }}
+              boxShadow=" 0px 2px 4px 0px rgba(0, 0, 0, 0.16)"
+              borderRadius="12px"
             >
-              <img
-                width="32px"
-                height="32px"
-                src="/images/institution/user-tick.svg"
-                alt="user tick"
-                style={{
-                  borderBottom: "2px solid rgba(170, 68, 1, 1)",
-                  paddingBottom: "5px",
-                }}
-              />
+              <Box
+                display="flex"
+                alignItems="flex-start"
+                borderBottom="2px solid rgba(170, 68, 1, 1)"
+                width="60px"
+                pb="5px"
+              >
+                <img
+                  width="32px"
+                  height="32px"
+                  src="/images/institution/user-tick.svg"
+                  alt="user tick"
+                  // style={{
+                  //   borderBottom: "2px solid rgba(170, 68, 1, 1)",
+                  //   paddingBottom: "5px",
+                  // }}
+                />
+              </Box>
               <Typography
                 component={"h3"}
                 fontWeight={800}
@@ -182,8 +225,13 @@ function ReachTarget() {
 
           {/* For mobile view */}
           <Box
-            display={{ lg: "none", md: "none", sm: "flex", xs: "flex" }}
-            flexDirection={{ lg: "row", md: "row", sm: "column", xs: "column" }}
+            display={{ lg: "none", md: "flex", sm: "flex", xs: "flex" }}
+            flexDirection={{
+              lg: "row",
+              md: "column",
+              sm: "column",
+              xs: "column",
+            }}
             gap={{ lg: "24px", md: "24px", sm: "32px", xs: "32px" }}
           >
             <Box
@@ -192,18 +240,24 @@ function ReachTarget() {
               flexDirection="column"
               bgcolor="rgba(255, 255, 255, 1)"
               padding="25px 24px 41px"
-              width={{ lg: "245px", md: "245px", sm: "100%", xs: "100%" }}
+              width={{ lg: "245px", md: "100%", sm: "100%", xs: "100%" }}
+              boxShadow=" 0px 2px 4px 0px rgba(0, 0, 0, 0.16)"
+              borderRadius="12px"
             >
-              <img
-                width="32px"
-                height="32px"
-                src="/images/institution/bankoutline.svg"
-                alt="University"
-                style={{
-                  borderBottom: "2px solid rgba(170, 68, 1, 1)",
-                  paddingBottom: "5px",
-                }}
-              />
+              <Box
+                display="flex"
+                alignItems="flex-start"
+                borderBottom="2px solid rgba(170, 68, 1, 1)"
+                width="60px"
+                pb="5px"
+              >
+                <img
+                  width="32px"
+                  height="32px"
+                  src="/images/institution/bankoutline.svg"
+                  alt="University"
+                />
+              </Box>
               <Typography
                 component={"h3"}
                 fontWeight={800}
@@ -240,18 +294,24 @@ function ReachTarget() {
               flexDirection="column"
               bgcolor="rgba(255, 255, 255, 1)"
               padding="25px 24px 41px"
-              width={{ lg: "245px", md: "245px", sm: "100%", xs: "100%" }}
+              width={{ lg: "245px", md: "100%", sm: "100%", xs: "100%" }}
+              boxShadow=" 0px 2px 4px 0px rgba(0, 0, 0, 0.16)"
+              borderRadius="12px"
             >
-              <img
-                width="32px"
-                height="32px"
-                src="/images/institution/search-favorite.svg"
-                alt="Search favourite"
-                style={{
-                  borderBottom: "2px solid rgba(170, 68, 1, 1)",
-                  paddingBottom: "5px",
-                }}
-              />
+              <Box
+                display="flex"
+                alignItems="flex-start"
+                borderBottom="2px solid rgba(170, 68, 1, 1)"
+                width="60px"
+                pb="5px"
+              >
+                <img
+                  width="32px"
+                  height="32px"
+                  src="/images/institution/search-favorite.svg"
+                  alt="Search favourite"
+                />
+              </Box>
               <Typography
                 component={"h3"}
                 fontWeight={800}
@@ -287,18 +347,24 @@ function ReachTarget() {
               flexDirection="column"
               bgcolor="rgba(255, 255, 255, 1)"
               padding="25px 24px 41px"
-              width={{ lg: "245px", md: "245px", sm: "100%", xs: "100%" }}
+              width={{ lg: "245px", md: "100%", sm: "100%", xs: "100%" }}
+              boxShadow=" 0px 2px 4px 0px rgba(0, 0, 0, 0.16)"
+              borderRadius="12px"
             >
-              <img
-                width="32px"
-                height="32px"
-                src="/images/institution/user-tick.svg"
-                alt="User Tick"
-                style={{
-                  borderBottom: "2px solid rgba(170, 68, 1, 1)",
-                  paddingBottom: "5px",
-                }}
-              />
+              <Box
+                display="flex"
+                alignItems="flex-start"
+                borderBottom="2px solid rgba(170, 68, 1, 1)"
+                width="60px"
+                pb="5px"
+              >
+                <img
+                  width="32px"
+                  height="32px"
+                  src="/images/institution/user-tick.svg"
+                  alt="User Tick"
+                />
+              </Box>
               <Typography
                 component={"h3"}
                 fontWeight={800}

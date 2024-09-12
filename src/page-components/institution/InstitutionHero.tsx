@@ -17,7 +17,18 @@ function InstitutionHero() {
         <Box
           display="flex"
           flexDirection={{ lg: "row", md: "row", sm: "column", xs: "column" }}
-          justifyContent="space-between"
+          justifyContent={{
+            lg: "space-between",
+            md: "space-between",
+            sm: "flex-end",
+            xs: "flex-end",
+          }}
+          // alignItems={{
+          //   lg: "none",
+          //   md: "none",
+          //   sm: "flex-end",
+          //   xs: "flex-end",
+          // }}
         >
           <Box
             pt={{ lg: "140px", md: "140px", sm: "32px", xs: "32px" }}

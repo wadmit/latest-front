@@ -1,8 +1,10 @@
+"use client";
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import { RootContainer } from "@/components/common";
 
 function FindWiseScore() {
+  const isMobile = useMediaQuery("(max-width:600px)");
   return (
     <RootContainer>
       <Box
@@ -44,7 +46,7 @@ function FindWiseScore() {
           display="flex"
         >
           <Box
-            padding="41px"
+            padding={{ lg: "41px", md: "41px", sm: "28px", xs: "28px" }}
             maxWidth={{ lg: "380px", md: "320px", sm: "100%", xs: "100%" }}
             width="100%"
             display="flex"
@@ -69,12 +71,12 @@ function FindWiseScore() {
               letterSpacing="-2%"
               color="rgba(32, 28, 26, 1)"
             >
-              Students check their eligibility in less than 60 seconds with with
-              WiseScore®
+              Students check their eligibility in {isMobile && <br />} less than
+              60 seconds with {isMobile && <br />} WiseScore®
             </Typography>
           </Box>
           <Box
-            padding="41px"
+            padding={{ lg: "41px", md: "41px", sm: "28px", xs: "28px" }}
             maxWidth={{ lg: "380px", md: "320px", sm: "100%", xs: "100%" }}
             width="100%"
             display="flex"
@@ -99,12 +101,12 @@ function FindWiseScore() {
               letterSpacing="-2%"
               color="rgba(32, 28, 26, 1)"
             >
-              Students apply to their best-matched program with the required
-              info and documents.
+              Students apply to their best-{isMobile && <br />}matched program
+              with the {isMobile && <br />} required info and documents.
             </Typography>
           </Box>
           <Box
-            padding="41px"
+            padding={{ lg: "41px", md: "41px", sm: "28px", xs: "28px" }}
             maxWidth={{ lg: "380px", md: "320px", sm: "100%", xs: "100%" }}
             width="100%"
             display="flex"
@@ -129,8 +131,9 @@ function FindWiseScore() {
               letterSpacing="-2%"
               color="rgba(32, 28, 26, 1)"
             >
-              Students get an offer letter from the university once they fulfill
-              all the requirements.
+              Students get an offer letter from {isMobile && <br />} the
+              university once they fulfill all {isMobile && <br />} the
+              requirements.
             </Typography>
           </Box>
         </Box>
