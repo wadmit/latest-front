@@ -30,6 +30,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/components/*": ["./src/components/*"],
+      "@/components/common": ["./src/components/common"],
+      "@/page-components/*": ["./src/page-components/*"],
       "public/*": ["./public/*"]
     }
   },
