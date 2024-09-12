@@ -35,6 +35,7 @@ function MenuSwiper() {
               flexDirection="column"
               onClick={() => setActiveIndex(index)}
               key={menu.title}
+              width={{ lg: "396px", md: "396px", sm: "100%", xs: "100%" }}
             >
               <Typography
                 color={
