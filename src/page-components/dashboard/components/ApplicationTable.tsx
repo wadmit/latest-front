@@ -114,10 +114,15 @@ function ApplicationTable({ status }: IProps) {
       const newApplications = userApplications.filter(
         (application) => application.id !== variables
       );
-      //This is hack not a good approach to reload a page
-      window.location.reload();
 
       dispatch(setUserApplications({ data: newApplications }));
+      enqueueSnackbar("Application deleted successfully", {
+        variant: "success",
+        anchorOrigin: {
+          vertical: "top",
+          horizontal: "right",
+        },
+      });
     },
   });
   const {

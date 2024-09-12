@@ -85,7 +85,7 @@ const OurServices = () => {
             backgroundColor: "rgba(235, 219, 255, 1)",
             top: { xs: "-10px", sm: "-25px" },
             left: { xs: "5px", sm: "10px" },
-            right: { xs: "-10px", sm: "-20px" },
+            right: { xs: "-7px", sm: "-20px" },
             height: "100%",
             zIndex: -2,
           },

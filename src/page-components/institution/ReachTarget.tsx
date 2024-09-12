@@ -79,7 +79,7 @@ function ReachTarget() {
                 display="flex"
                 alignItems="flex-start"
                 borderBottom="2px solid rgba(170, 68, 1, 1)"
-                width="60px"
+                width="50px"
                 pb="5px"
               >
                 <img
@@ -130,7 +130,7 @@ function ReachTarget() {
                 display="flex"
                 alignItems="flex-start"
                 borderBottom="2px solid rgba(170, 68, 1, 1)"
-                width="60px"
+                width="50px"
                 pb="5px"
               >
                 <img
@@ -183,7 +183,7 @@ function ReachTarget() {
                 display="flex"
                 alignItems="flex-start"
                 borderBottom="2px solid rgba(170, 68, 1, 1)"
-                width="60px"
+                width="50px"
                 pb="5px"
               >
                 <img
@@ -247,7 +247,7 @@ function ReachTarget() {
                 display="flex"
                 alignItems="flex-start"
                 borderBottom="2px solid rgba(170, 68, 1, 1)"
-                width="60px"
+                width="50px"
                 pb="5px"
               >
                 <img
@@ -301,7 +301,7 @@ function ReachTarget() {
                 display="flex"
                 alignItems="flex-start"
                 borderBottom="2px solid rgba(170, 68, 1, 1)"
-                width="60px"
+                width="50px"
                 pb="5px"
               >
                 <img
@@ -354,7 +354,7 @@ function ReachTarget() {
                 display="flex"
                 alignItems="flex-start"
                 borderBottom="2px solid rgba(170, 68, 1, 1)"
-                width="60px"
+                width="50px"
                 pb="5px"
               >
                 <img

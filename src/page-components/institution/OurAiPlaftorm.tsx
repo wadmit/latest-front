@@ -21,13 +21,23 @@ function TitleComponent() {
       >
         <Typography
           component={"h2"}
-          lineHeight="41.6px"
+          lineHeight={{
+            lg: "36.4px",
+            md: "36.4px",
+            sm: "31.2px",
+            xs: "31.2px",
+          }}
           fontSize={{ lg: "28px", md: "28px", sm: "24px", xs: "22px" }}
           fontFamily="HankenGroteskExtraBold"
         >
           Stay ahead with our{" "}
           <Typography
-            lineHeight="41.6px"
+            lineHeight={{
+              lg: "36.4px",
+              md: "36.4px",
+              sm: "31.2px",
+              xs: "31.2px",
+            }}
             fontSize={{ lg: "28px", md: "28px", sm: "24px", xs: "22px" }}
             fontFamily="HankenGroteskExtraBold"
             color="rgba(170, 68, 1, 1)"

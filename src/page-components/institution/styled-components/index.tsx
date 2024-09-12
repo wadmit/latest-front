@@ -1,8 +1,7 @@
 "use client";
+import { IRootContainerProps } from "@/types/other";
 import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React from "react";
-import { RootContainerProps } from "@/types/other";
 
 export const StyledContainerWrapper = styled(Box, {
   name: "Root-Layout-Wrapper",
@@ -22,7 +21,7 @@ export const StyledContainerWrapper = styled(Box, {
   }
 `;
 
-export function InstitutionHeaderContainer(props: RootContainerProps) {
+export function InstitutionHeaderContainer(props: IRootContainerProps) {
   const { children, component = "section", ...rest } = props;
 
   return (
