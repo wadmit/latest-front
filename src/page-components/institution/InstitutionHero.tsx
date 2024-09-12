@@ -4,8 +4,8 @@ import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { RootContainer } from "@/components/common";
 import Image from "next/image";
-import InstitutionHeroSvg from "$/images/institution/InstitutionHero.svg";
-import InstitutionHeroMobileSvg from "$/images/institution/InstitutionHeroMobile.svg";
+import InstitutionHeroSvg from "public/images/institution/InstitutionHero.svg";
+import InstitutionHeroMobileSvg from "public/images/institution/InstitutionHeroMobile.svg";
 import { InstitutionHeaderContainer } from "./styled-components";
 
 function InstitutionHero() {

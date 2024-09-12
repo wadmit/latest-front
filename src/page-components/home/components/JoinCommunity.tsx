@@ -5,8 +5,8 @@ import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import React from "react";
 import { ArrowPointChat } from "../svg";
-import Community from "$/images/home/community.svg";
-import CommunitySm from "$/images/home/communitysm.svg";
+import Community from "public/images/home/community.svg";
+import CommunitySm from "public/images/home/communitysm.svg";
 
 const JoinCommunity = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
