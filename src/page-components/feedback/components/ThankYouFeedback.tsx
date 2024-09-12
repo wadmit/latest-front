@@ -1,4 +1,4 @@
-import { GreenSmileFace } from "$/svg";
+import { GreenSmileFace } from "public/svg";
 import { ButtonWrapper } from "@/components/common";
 import {
   Box,

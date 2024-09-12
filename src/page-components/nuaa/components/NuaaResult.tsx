@@ -1,5 +1,5 @@
 "use client";
-import { GreenTickSvg, RedCrossSvg } from "$/svg";
+import { GreenTickSvg, RedCrossSvg } from "public/svg";
 import { postWisescoreDataForNuaa } from "@/api/web/wisescore.action";
 import { theme } from "@/common/muicustomtheme/theme";
 import { filterStatus } from "@/common/utils/filterEligibilityStatus";

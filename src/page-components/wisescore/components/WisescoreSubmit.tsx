@@ -1,5 +1,5 @@
 "use client";
-import { GreenTickSvg } from "$/svg";
+import { GreenTickSvg } from "public/svg";
 import { mixpanelSubmit } from "@/api/web/mixpanel.action";
 import { patchSortList } from "@/api/web/shortlist.action";
 import { submitWiseScore } from "@/api/web/wisescore.action";

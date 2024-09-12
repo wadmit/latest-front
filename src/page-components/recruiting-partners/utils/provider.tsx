@@ -2,9 +2,9 @@ import type {
   ICardtype,
   IWhyChooseType,
 } from "@/page-components/recruiting-partners/utils/types";
-import Img1 from "$/images/partners/recruiting-partners-stories1.webp";
-import Img2 from "$/images/partners/recruiting-partners-stories2.webp";
-import Img3 from "$/images/partners/recruiting-partners-stories3.webp";
+import Img1 from "public/images/partners/recruiting-partners-stories1.webp";
+import Img2 from "public/images/partners/recruiting-partners-stories2.webp";
+import Img3 from "public/images/partners/recruiting-partners-stories3.webp";
 export const attractmorestudents: IWhyChooseType[] = [
   {
     title: (

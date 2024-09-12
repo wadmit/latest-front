@@ -5,7 +5,7 @@ import { theme } from "@/common/muicustomtheme/theme";
 import { Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { ButtonWrapper } from "@/components/common";
-import { AddIcon } from "$/svg";
+import { AddIcon } from "public/svg";
 import { Remove } from "@mui/icons-material";
 
 const matchArray = ["Excellent Match!", "Good Match", "Fair Match!"];

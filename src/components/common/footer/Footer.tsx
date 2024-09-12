@@ -14,7 +14,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { RootContainer } from "../wrapper/RootContainer";
-import { WiseAdmitFooterSvg, WiseAdmitMobileFooterSvg } from "$/svg";
+import { WiseAdmitFooterSvg, WiseAdmitMobileFooterSvg } from "public/svg";
 import { IFooterDataProps } from "@/components/common/footer/utils/types";
 
 function SmallDot() {

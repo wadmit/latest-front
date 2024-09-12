@@ -1,5 +1,5 @@
 "use client";
-import { WiseAdmitColorFulSvg } from "$/svg";
+import { WiseAdmitColorFulSvg } from "public/svg";
 import { theme } from "@/common/muicustomtheme/theme";
 import { IUniversityTemplateConfig } from "@/types/utils";
 import { Box, Divider, Stack } from "@mui/material";

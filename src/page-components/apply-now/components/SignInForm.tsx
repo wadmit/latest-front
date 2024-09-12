@@ -1,5 +1,5 @@
 "use client";
-import { WiseAdmitColorFulSvg } from "$/svg";
+import { WiseAdmitColorFulSvg } from "public/svg";
 import { useAppSelector } from "@/global-states/hooks/hooks";
 import {
 	Box,

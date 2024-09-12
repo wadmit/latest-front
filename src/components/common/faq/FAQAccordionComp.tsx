@@ -3,7 +3,7 @@ import { useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import { MinusIcon, PlusIcon } from "$/svg";
+import { MinusIcon, PlusIcon } from "public/svg";
 import { BodyB2, HeadingH5 } from "@/components/styled-components/design";
 import type { IFAQData } from "@/page-components/faq/utils/types";
 import { Stack } from "@mui/material";

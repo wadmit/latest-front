@@ -16,7 +16,7 @@ import {
 	useTheme,
 } from "@mui/material";
 import WiseScoreDetailsContext from "@/context/wisescore-context";
-import { WiseAdmitColorFulSvg } from "$/svg";
+import { WiseAdmitColorFulSvg } from "public/svg";
 import {
 	CustomTextField,
 	errorMessageBox,

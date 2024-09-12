@@ -10,7 +10,7 @@ import { WaitingScreen } from './components/WaitingScreen';
 import { filterStatus } from '@/common/utils/filterEligibilityStatus';
 import { StyledContainerWrapper } from '@/components/common';
 import ThinScoreGauge from '@/components/common/score-gauge/ThinScoreGauge';
-import { DownArrowSmallSvg, DownArrowSvg, Exclaim, RedCrossWhiteSvg, RobotSvg, WhiteTickSvg } from '$/svg';
+import { DownArrowSmallSvg, DownArrowSvg, Exclaim, RedCrossWhiteSvg, RobotSvg, WhiteTickSvg } from 'public/svg';
 import { analytics } from '@/services/analytics.service';
 import { EAnalyticsEvents, EAnalyticsStatus } from '@/types/mix-panel-analytic';
 import { TextFieldWrapper } from '@/components/common/formfields/styles/StyledInput';

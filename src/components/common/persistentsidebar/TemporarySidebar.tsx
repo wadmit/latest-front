@@ -2,7 +2,7 @@ import * as React from 'react';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import SidebarContentComponent from './SidebarContentComponent';
 import { IconButton } from '@mui/material';
-import { HamburgerMenuWhiteSvg } from '$/svg';
+import { HamburgerMenuWhiteSvg } from 'public/svg';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 

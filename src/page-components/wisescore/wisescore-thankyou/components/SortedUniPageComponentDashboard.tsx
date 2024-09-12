@@ -28,7 +28,7 @@ import {
   RedCrossWhiteSvg,
   RobotSvg,
   WhiteTickSvg,
-} from "$/svg";
+} from "public/svg";
 import { IconWrapper } from "@/components/common/icon-wrapper/IconWrapper";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import { analytics } from "@/services/analytics.service";

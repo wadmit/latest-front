@@ -6,7 +6,7 @@ import { RootContainer } from "@/components/common";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import { analytics } from "@/services/analytics.service";
 import Link from "next/link";
-import { WiseAdmitColorFulSvg2 } from "$/svg/index";
+import { WiseAdmitColorFulSvg2 } from "public/svg/index";
 import { CloseIcon } from "@/components/common";
 import { SubMenuItemMobile, SubMenuItems } from "@/components/common";
 import { ButtonWrapper } from "@/components/common";

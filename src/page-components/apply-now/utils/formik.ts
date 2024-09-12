@@ -7,7 +7,7 @@ export const FORM_VALIDATION_SIGN_IN = GlobalYup.object().shape({
   
 export const FORM_VALIDATION_SIGN_UP = GlobalYup.object().shape({
     email: GlobalYup.string()
-      .matches(/^[^\s][\s\S]*$/, 'Email cannot start with a space')
+      .matches(/^[^\s][\s\S]*public/, 'Email cannot start with a space')
       .email('Invalid Email')
       .required('Required'),
     phone: GlobalYup.string().required('Required').customPhoneSign().label('Phone'),
@@ -19,10 +19,10 @@ export const FORM_VALIDATION_SIGN_UP = GlobalYup.object().shape({
       .matches(/^(?=.*[0-9])/, '  Must Contain One Number Character')
       .matches(/^(?=.*[!@#$%^&*])/, '  Must Contain  One Special Case Character'),
     first_name: GlobalYup.string()
-      .matches(/^[^\s][\s\S]*$/, 'First Name cannot start with a space')
+      .matches(/^[^\s][\s\S]*public/, 'First Name cannot start with a space')
       .required('Required'),
     last_name: GlobalYup.string()
-      .matches(/^[^\s][\s\S]*$/, 'Last name cannot start with a space')
+      .matches(/^[^\s][\s\S]*public/, 'Last name cannot start with a space')
       .required('Required'),
     confirmPassword: GlobalYup.string()
       .oneOf([GlobalYup.ref('password'), ""], 'Passwords must match')

@@ -1,10 +1,10 @@
 "use client";
 import { Grid, useMediaQuery } from "@mui/material";
 import React from "react";
-import SmallImageOne from "$/images/home/SmallImageOne.webp";
-import SmallImageTwo from "$/images/home/SmallImgTwo.webp";
-import SmallImageThree from "$/images/home/SmallImgThree.webp";
-import SmallImageFour from "$/images/home/SmallImgFour.webp";
+import SmallImageOne from "public/images/home/SmallImageOne.webp";
+import SmallImageTwo from "public/images/home/SmallImgTwo.webp";
+import SmallImageThree from "public/images/home/SmallImgThree.webp";
+import SmallImageFour from "public/images/home/SmallImgFour.webp";
 import Image from "next/image";
 import { theme } from "@/common/muicustomtheme/theme";
 

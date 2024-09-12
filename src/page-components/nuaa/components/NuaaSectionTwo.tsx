@@ -9,7 +9,7 @@ import { badgeArray } from "../utils/provider";
 import BadgeComponent from "./BadgeComponent";
 import WiseScoreWelcome from "@/page-components/wisescore/WisescoreWelcome";
 import WiseScoreModal from "@/page-components/wisescore/WisescoreModal";
-import { NuaaScoreSvg } from "$/svg";
+import { NuaaScoreSvg } from "public/svg";
 import WiseScoreSubmit from "@/page-components/wisescore/components/WisescoreSubmit";
 
 type Props = {

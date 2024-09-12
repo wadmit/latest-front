@@ -1,4 +1,4 @@
-import { GreenUpArrow } from "$/svg";
+import { GreenUpArrow } from "public/svg";
 import { Box, Divider, Stack, Typography } from "@mui/material";
 
 function CurrentRevCard({
