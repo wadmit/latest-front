@@ -141,7 +141,13 @@ export function LinearGradient() {
   );
 }
 
-export function BookIconSvg({direction, isMobile}: {direction: "left" | "right", isMobile?: boolean}) {
+export function BookIconSvg({
+  direction,
+  isMobile,
+}: {
+  direction: "left" | "right";
+  isMobile?: boolean;
+}) {
   return (
     <svg
       width={isMobile ? 26 : 36}
@@ -150,7 +156,7 @@ export function BookIconSvg({direction, isMobile}: {direction: "left" | "right",
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       style={{
-        transform: direction === "left" ? "scaleX(-1)" : "scaleX(1)"
+        transform: direction === "left" ? "scaleX(-1)" : "scaleX(1)",
       }}
     >
       <path
@@ -159,7 +165,6 @@ export function BookIconSvg({direction, isMobile}: {direction: "left" | "right",
         strokeWidth="2.9322"
         strokeLinecap="round"
         strokeLinejoin="round"
-        
       />
       <path
         d="M25.659 2.92969H5.86659V32.2517H25.659C26.6311 32.2517 27.5633 31.8656 28.2507 31.1782C28.9381 30.4908 29.3242 29.5586 29.3242 28.5865V6.59494C29.3242 5.62286 28.9381 4.69058 28.2507 4.00322C27.5633 3.31585 26.6311 2.92969 25.659 2.92969Z"
@@ -167,13 +172,12 @@ export function BookIconSvg({direction, isMobile}: {direction: "left" | "right",
         strokeWidth="2.9322"
         strokeLinecap="round"
         strokeLinejoin="round"
-        
       />
     </svg>
   );
 }
 
-export function Star({isMobile}: {isMobile: boolean}) {
+export function Star({ isMobile }: { isMobile: boolean }) {
   return (
     <svg
       width={isMobile ? 20 : 35}
@@ -188,6 +192,31 @@ export function Star({isMobile}: {isMobile: boolean}) {
         strokeWidth="1.71832"
         strokeLinecap="round"
         strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function ArrowPointChat() {
+  return (
+    <svg
+      width="42"
+      height="40"
+      viewBox="0 0 42 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M40.6596 0.496684C37.7744 20.2448 20.0551 29.8371 1.55704 32.0182C1.23939 32.0562 1.01101 32.3446 1.04907 32.6623C1.08712 32.9799 1.37548 33.2083 1.69312 33.1702C20.7094 30.9291 38.8415 20.965 41.8072 0.663542C41.854 0.34736 41.6344 0.0531377 41.3168 0.00629601C41.0006 -0.0405456 40.7064 0.179039 40.6596 0.496684Z"
+        fill="black"
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M1.97324 32.557C2.79589 31.9554 3.83666 31.2117 3.9523 31.1239C7.0863 28.7438 9.68309 26.005 11.9695 22.792C12.1555 22.5314 12.0939 22.1684 11.8334 21.9825C11.5728 21.7966 11.2098 21.8581 11.0239 22.1186C8.80774 25.2351 6.29002 27.8919 3.2497 30.2003C3.07258 30.335 0.731928 32.0051 0.284004 32.3784C0.0995652 32.5306 0.042517 32.6741 0.0322704 32.7092C-0.0292093 32.8937 0.00737429 33.0386 0.0571436 33.144C0.114232 33.2625 0.256183 33.4353 0.531378 33.5231C0.819747 33.6139 1.46092 33.6549 1.62194 33.6783C4.05039 34.0384 6.79211 34.2287 9.28789 34.9196C11.668 35.5783 13.8271 36.6937 15.2119 38.9289C15.3802 39.2012 15.7388 39.2846 16.0111 39.1163C16.2834 38.948 16.3668 38.5893 16.1985 38.3171C14.6498 35.8184 12.2579 34.5375 9.59816 33.8012C7.11702 33.1147 4.40022 32.9068 1.97324 32.557Z"
+        fill="black"
       />
     </svg>
   );

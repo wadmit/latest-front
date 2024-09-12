@@ -10,3 +10,4 @@ export { default as StartApplying } from "@/page-components/home/components/Star
 export { default as Support } from "@/page-components/home/components/Support";
 export { default as Testimonials } from "@/page-components/home/components/Testimonials";
 export { default as TrustedBy } from "@/page-components/home/components/TrustedBy";
+export { default as JoinCommunity } from "@/page-components/home/components/JoinCommunity";

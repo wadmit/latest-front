@@ -123,6 +123,7 @@ export enum EAnalyticsEvents {
   APPLICATION_VIEW_TAB = "APPLICATION_VIEW_TAB",
   DOWNLOAD_DOCUMENT = "DOWNLOAD_DOCUMENT",
   GET_ROADMAP = "GET_ROADMAP",
+  CHAT_WITH_US = "CHAT_WITH_US",
 }
 export enum EAnalyticsPageEvent {
   HOME_PAGE = "HOME_PAGE",
@@ -175,4 +176,3 @@ export enum EAnalyticsStatus {
   SUCCESS = "SUCCESS",
   ERROR = "ERROR",
 }
-

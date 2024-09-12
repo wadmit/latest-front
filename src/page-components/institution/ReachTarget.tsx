@@ -4,63 +4,78 @@ import { Box, Typography } from "@mui/material";
 
 function ReachTarget() {
   return (
-    <Box bgcolor="rgba(252, 250, 248, 1)">
+    <Box bgcolor="rgba(249, 249, 252, 1)" mt="50px">
       <RootContainer>
         <Box
           display="flex"
-          flexDirection="column"
-          mt={{ lg: "102px", md: "102px", sm: "80px", xs: "80px" }}
-          padding={{
-            lg: "51px 0px",
-            md: "51px 0px",
-            sm: "34px 0px",
-            xs: "34px 0px",
-          }}
+          flexDirection={{ lg: "row", md: "row", sm: "column", xs: "column" }}
+          padding="64px 0px 64px"
+          gap={{ lg: "133px", md: "133px", sm: "41px", xs: "41px" }}
         >
-          <Typography
-            component="h2"
-            color="rgba(32, 28, 26, 1)"
-            fontSize={{ lg: "32px", md: "32px", sm: "24px", xs: "24px" }}
-            fontFamily="HankenGroteskExtraBold"
-            lineHeight="41.6px"
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            width={{ lg: "283px", md: "283px", sm: "100%", xs: "100%" }}
           >
-            Reach your target
-          </Typography>
-          <Typography
-            component="p"
-            mt="10px"
-            fontSize="16px"
-            fontFamily="HankenGroteskRegular"
-            lineHeight="20.8px"
-          >
-            We help your attract quality students from all around the world
-          </Typography>
+            <Typography
+              fontWeight={800}
+              color="rgba(32, 28, 26, 1)"
+              fontSize={{ lg: "32px", md: "32px", sm: "24px", xs: "24px" }}
+              fontFamily="HankenGroteskExtraBold"
+              lineHeight={{
+                lg: "41.6px",
+                md: "41.6px",
+                sm: "31.2px",
+                xs: "31.2px",
+              }}
+              letterSpacing="-2%"
+            >
+              Reach your target
+            </Typography>
+            <Typography
+              fontWeight={400}
+              mt="10px"
+              fontSize="16px"
+              fontFamily="HankenGroteskRegular"
+              lineHeight="22.4px"
+              color="rgba(32, 28, 26, 0.9)"
+            >
+              We help your attract quality students from all around the world
+            </Typography>
+          </Box>
 
           <Box
-            flexDirection={{
-              lg: "row",
-              md: "row",
-              sm: "column",
-              xs: "column",
-            }}
-            justifyContent="space-between"
-            display="flex"
-            mt="54px"
-            gap="24px"
+            display={{ lg: "flex", md: "flex", sm: "none", xs: "none" }}
+            flexDirection={{ lg: "row", md: "row", sm: "column", xs: "column" }}
+            gap={{ lg: "24px", md: "24px", sm: "32px", xs: "32px" }}
           >
-            <Box gap="26px" display="flex" flexDirection="column">
+            <Box
+              gap="26px"
+              display="flex"
+              flexDirection="column"
+              bgcolor="rgba(255, 255, 255, 1)"
+              padding="25px 24px 41px"
+              width={{ lg: "245px", md: "245px", sm: "100%", xs: "100%" }}
+            >
               <img
                 width="32px"
                 height="32px"
-                src="/images/institution/bank.svg"
+                src="/images/institution/bankoutline.svg"
                 alt="University"
+                style={{
+                  borderBottom: "2px solid rgba(170, 68, 1, 1)",
+                  paddingBottom: "5px",
+                }}
               />
               <Typography
                 component={"h3"}
+                fontWeight={800}
                 color="rgba(32, 28, 26, 1)"
                 fontFamily="HankenGroteskExtraBold"
                 lineHeight="26px"
                 fontSize="20px !important"
+                letterSpacing="-2%"
               >
                 {" "}
                 Promote your university
@@ -74,84 +89,38 @@ function ReachTarget() {
                 lineHeight="20.8px"
                 color="rgba(32, 28, 26, 0.9)"
               >
-                Promote your university via WiseAdmit and reach your target
-                audience from all around the world
+                Promote your university via WiseAdmit and reach your <br />{" "}
+                target audience from all <br /> around the world
               </Typography>
             </Box>
+
             <Box
-              width={{
-                lg: "1px",
-                md: "1px",
-                sm: "100%",
-                xs: "100%",
-              }}
-              height={{
-                lg: "180px",
-                md: "180px",
-                sm: "1px",
-                xs: "1px",
-              }}
-              bgcolor="rgba(187, 187, 187, 1)"
-            />
-            <Box gap="26px" display="flex" flexDirection="column">
-              <img
-                width="32px"
-                height="32px"
-                src="/images/institution/user-tick.svg"
-                alt="University"
-              />
-              <Typography
-                component={"h3"}
-                color="rgba(32, 28, 26, 1)"
-                fontFamily="HankenGroteskExtraBold"
-                lineHeight="26px"
-                fontSize="20px !important"
-              >
-                {" "}
-                Connect with students{" "}
-              </Typography>
-              <Typography
-                mt="-6px"
-                width="264px"
-                component={"p"}
-                fontSize="16px"
-                fontFamily="HankenGroteskRegular"
-                lineHeight="20.8px"
-                color="rgba(32, 28, 26, 0.9)"
-              >
-                Connect with your target students via WiseAdmit
-              </Typography>
-            </Box>
-            <Box
-              width={{
-                lg: "1px",
-                md: "1px",
-                sm: "100%",
-                xs: "100%",
-              }}
-              height={{
-                lg: "180px",
-                md: "180px",
-                sm: "1px",
-                xs: "1px",
-              }}
-              bgcolor="rgba(187, 187, 187, 1)"
-            />
-            <Box gap="26px" display="flex" flexDirection="column">
+              gap="26px"
+              display="flex"
+              flexDirection="column"
+              bgcolor="rgba(255, 255, 255, 1)"
+              padding="25px 24px 41px"
+              width={{ lg: "245px", md: "245px", sm: "100%", xs: "100%" }}
+            >
               <img
                 width="32px"
                 height="32px"
                 src="/images/institution/search-favorite.svg"
-                alt="University"
+                alt="Search favourite"
+                style={{
+                  borderBottom: "2px solid rgba(170, 68, 1, 1)",
+                  paddingBottom: "5px",
+                }}
               />
               <Typography
                 component={"h3"}
+                fontWeight={800}
                 color="rgba(32, 28, 26, 1)"
                 fontFamily="HankenGroteskExtraBold"
                 lineHeight="26px"
                 fontSize="20px !important"
+                letterSpacing="-2%"
               >
-                {" "}
                 Enhance your recruitment
               </Typography>
               <Typography
@@ -163,8 +132,198 @@ function ReachTarget() {
                 lineHeight="20.8px"
                 color="rgba(32, 28, 26, 0.9)"
               >
+                Enhance your recruitment <br /> process by reaching the <br />{" "}
+                right audience segment
+              </Typography>
+            </Box>
+
+            <Box
+              gap="26px"
+              display="flex"
+              flexDirection="column"
+              bgcolor="rgba(255, 255, 255, 1)"
+              padding="25px 24px 41px"
+              width={{ lg: "245px", md: "245px", sm: "100%", xs: "100%" }}
+            >
+              <img
+                width="32px"
+                height="32px"
+                src="/images/institution/user-tick.svg"
+                alt="user tick"
+                style={{
+                  borderBottom: "2px solid rgba(170, 68, 1, 1)",
+                  paddingBottom: "5px",
+                }}
+              />
+              <Typography
+                component={"h3"}
+                fontWeight={800}
+                color="rgba(32, 28, 26, 1)"
+                fontFamily="HankenGroteskExtraBold"
+                lineHeight="26px"
+                fontSize="20px !important"
+                letterSpacing="-2%"
+              >
+                Connect with students
+              </Typography>
+              <Typography
+                component={"p"}
+                mt="-6px"
+                width="264px"
+                fontSize="16px"
+                fontFamily="HankenGroteskRegular"
+                lineHeight="20.8px"
+                color="rgba(32, 28, 26, 0.9)"
+              >
+                Connect with your target <br /> students via WiseAdmit
+              </Typography>
+            </Box>
+          </Box>
+
+          {/* For mobile view */}
+          <Box
+            display={{ lg: "none", md: "none", sm: "flex", xs: "flex" }}
+            flexDirection={{ lg: "row", md: "row", sm: "column", xs: "column" }}
+            gap={{ lg: "24px", md: "24px", sm: "32px", xs: "32px" }}
+          >
+            <Box
+              gap="26px"
+              display="flex"
+              flexDirection="column"
+              bgcolor="rgba(255, 255, 255, 1)"
+              padding="25px 24px 41px"
+              width={{ lg: "245px", md: "245px", sm: "100%", xs: "100%" }}
+            >
+              <img
+                width="32px"
+                height="32px"
+                src="/images/institution/bankoutline.svg"
+                alt="University"
+                style={{
+                  borderBottom: "2px solid rgba(170, 68, 1, 1)",
+                  paddingBottom: "5px",
+                }}
+              />
+              <Typography
+                component={"h3"}
+                fontWeight={800}
+                color="rgba(32, 28, 26, 1)"
+                fontFamily="HankenGroteskExtraBold"
+                lineHeight="26px"
+                fontSize="20px !important"
+                letterSpacing="-2%"
+              >
+                {" "}
+                Promote your university
+              </Typography>
+              <Typography
+                mt="-6px"
+                fontWeight={400}
+                fontSize={{ lg: "16px", md: "16px", sm: "14px", xs: "16px" }}
+                fontFamily="HankenGroteskRegular"
+                lineHeight={{
+                  lg: "20.8px",
+                  md: "20.8px",
+                  sm: "19.6px",
+                  xs: "19.6px",
+                }}
+                color="rgba(32, 28, 26, 0.9)"
+              >
+                Promote your university via WiseAdmit and reach your target
+                audience from all around the world
+              </Typography>
+            </Box>
+
+            <Box
+              gap="26px"
+              display="flex"
+              flexDirection="column"
+              bgcolor="rgba(255, 255, 255, 1)"
+              padding="25px 24px 41px"
+              width={{ lg: "245px", md: "245px", sm: "100%", xs: "100%" }}
+            >
+              <img
+                width="32px"
+                height="32px"
+                src="/images/institution/search-favorite.svg"
+                alt="Search favourite"
+                style={{
+                  borderBottom: "2px solid rgba(170, 68, 1, 1)",
+                  paddingBottom: "5px",
+                }}
+              />
+              <Typography
+                component={"h3"}
+                fontWeight={800}
+                color="rgba(32, 28, 26, 1)"
+                fontFamily="HankenGroteskExtraBold"
+                lineHeight="26px"
+                fontSize="20px !important"
+                letterSpacing="-2%"
+              >
+                Enhance your recruitment
+              </Typography>
+              <Typography
+                mt="-6px"
+                fontWeight={400}
+                fontSize={{ lg: "16px", md: "16px", sm: "14px", xs: "16px" }}
+                fontFamily="HankenGroteskRegular"
+                lineHeight={{
+                  lg: "20.8px",
+                  md: "20.8px",
+                  sm: "19.6px",
+                  xs: "19.6px",
+                }}
+                color="rgba(32, 28, 26, 0.9)"
+              >
                 Enhance your recruitment process by reaching the right audience
                 segment
+              </Typography>
+            </Box>
+
+            <Box
+              gap="26px"
+              display="flex"
+              flexDirection="column"
+              bgcolor="rgba(255, 255, 255, 1)"
+              padding="25px 24px 41px"
+              width={{ lg: "245px", md: "245px", sm: "100%", xs: "100%" }}
+            >
+              <img
+                width="32px"
+                height="32px"
+                src="/images/institution/user-tick.svg"
+                alt="User Tick"
+                style={{
+                  borderBottom: "2px solid rgba(170, 68, 1, 1)",
+                  paddingBottom: "5px",
+                }}
+              />
+              <Typography
+                component={"h3"}
+                fontWeight={800}
+                color="rgba(32, 28, 26, 1)"
+                fontFamily="HankenGroteskExtraBold"
+                lineHeight="26px"
+                fontSize="20px !important"
+                letterSpacing="-2%"
+              >
+                Connect with students
+              </Typography>
+              <Typography
+                mt="-6px"
+                fontWeight={400}
+                fontSize={{ lg: "16px", md: "16px", sm: "14px", xs: "16px" }}
+                fontFamily="HankenGroteskRegular"
+                lineHeight={{
+                  lg: "20.8px",
+                  md: "20.8px",
+                  sm: "19.6px",
+                  xs: "19.6px",
+                }}
+                color="rgba(32, 28, 26, 0.9)"
+              >
+                Connect with your target students via WiseAdmit
               </Typography>
             </Box>
           </Box>
