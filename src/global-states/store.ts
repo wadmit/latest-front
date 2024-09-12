@@ -12,7 +12,6 @@ import userApplicationDocumentsReducer from "@/global-states/reducers/userApplic
 import wiseScoreReducer from "@/global-states/reducers/wisescore";
 import universityCountryListReducer from "@/global-states/reducers/universityCountryReducer";
 import socketSlice from "@/global-states/reducers/socketReducer";
-import { socketMiddleware } from "@/middleware/socket-middleware";
 import { thunk } from "redux-thunk";
 
 export const socket = new CustomSocket();

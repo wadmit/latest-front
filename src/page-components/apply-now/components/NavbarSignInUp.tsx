@@ -1,4 +1,4 @@
-import { WiseAdmitColorFulSvg } from "$/svg";
+import { WiseAdmitColorFulSvg } from "public/svg";
 import { RootContainer } from "@/components/common";
 import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";

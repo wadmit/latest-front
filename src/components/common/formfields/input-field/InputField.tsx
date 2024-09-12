@@ -1,4 +1,4 @@
-import { TextFieldType } from "@/types/other";
+import { ITextFieldType } from "@/types/other";
 import { Stack, Typography } from "@mui/material";
 import { useField } from "formik";
 import React from "react";
@@ -14,7 +14,7 @@ const InputField = ({
   placeholder,
   name,
   multiline,
-}: TextFieldType) => {
+}: ITextFieldType) => {
   const [field, meta] = useField(name);
 
   const configTextField = {

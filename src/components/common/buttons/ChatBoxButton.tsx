@@ -2,9 +2,8 @@ import { Button, Stack, Typography } from "@mui/material";
 import React from "react";
 import { CustomTooltip } from "@/components/common";
 import { ChatBubble } from "@mui/icons-material";
-import { ChatBoxProps } from "@/components/common";
 
-export const ChatBoxButton = ({ onClick }: ChatBoxProps) => {
+export const ChatBoxButton = ({ onClick }: { onClick: () => void }) => {
   return (
     <>
       <CustomTooltip

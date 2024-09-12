@@ -8,7 +8,8 @@ import {
 } from "./utils/provider";
 import { GetWaveIcon, SmallHand } from "./svgs";
 import RenderSvg from "./components/RenderSvg";
-interface Props extends BoxProps {
+
+interface IWisescoreWelcomeProps extends BoxProps {
   primaryColor: string;
   version?: string;
   secondaryColor: string;
@@ -25,7 +26,7 @@ function WiseScoreWelcome({
   onClick,
   header: { title, subHeader },
   ...rest
-}: Props) {
+}: IWisescoreWelcomeProps) {
   const findOut = [
     {
       id: 1,

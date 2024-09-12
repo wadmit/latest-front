@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Divider, Typography, Box, Stack } from "@mui/material";
 import Image from "next/image";
-import { WiseAdmitDefault } from "$/svg";
+import { WiseAdmitDefault } from "public/svg";
 import UniversityDetailContext from "@/context/university-detail-context";
 import applicationConfig from "@/config";
 import type { IUniversity } from "@/types/university";

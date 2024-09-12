@@ -1,18 +1,10 @@
-import { EApplicationStatus, IApplication } from "@/types/application";
-import { ResponseUtils } from "@/types/response";
+import { EApplicationStatus, type IApplication } from "@/types/application";
+import type { ResponseUtils } from "@/types/response";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "@/global-states/store";
+import type { RootState } from "@/global-states/store";
+import { IApplicationResourceRedux } from "@/global-states/reducers/types";
 
-interface ApplicationResource {
-  applications: IApplication[];
-  applicationsWithStatus: {
-    paid: IApplication[];
-    unpaid: IApplication[];
-  };
-  singleApplication: IApplication;
-}
-
-const initialState: ApplicationResource = {
+const initialState: IApplicationResourceRedux = {
   applications: [],
   applicationsWithStatus: {
     paid: [],

@@ -34,7 +34,6 @@ const SnackBar = ({ message, severity, open, handleClose }: Props) => {
           top: "6.25rem",
         },
       }}
-      // eslint-disable-next-line react/no-unstable-nested-components
       TransitionComponent={(props: SlideProps) => (
         <Slide {...props} direction="down" />
       )}

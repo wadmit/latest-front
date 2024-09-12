@@ -1,5 +1,18 @@
 "use client";
-import React, {
+import WiseScoreDetailsContext from "@/context/wisescore-context";
+import { useAppDispatch, useAppSelector } from "@/global-states/hooks/hooks";
+import { setSubmitFormData } from "@/global-states/reducers/wisescore";
+import { analytics } from "@/services/analytics.service";
+import { EAnalyticsEvents } from "@/types/mix-panel-analytic";
+import { IWisescoreForm } from "@/types/wisescore";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import {
+	Box,
+	Divider
+} from "@mui/material";
+import { Formik, FormikProps } from "formik";
+import { motion } from "framer-motion";
+import {
 	useContext,
 	useDeferredValue,
 	useEffect,
@@ -7,30 +20,13 @@ import React, {
 	useRef,
 	useState,
 } from "react";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
-import {
-	Box,
-	Divider,
-	LinearProgress,
-	linearProgressClasses,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
-import { Formik, FormikProps } from "formik";
-import { motion } from "framer-motion";
-import { useAppDispatch, useAppSelector } from "@/global-states/hooks/hooks";
-import WiseScoreDetailsContext from "@/context/wisescore-context";
-import { EAnalyticsEvents } from "@/types/mix-panel-analytic";
-import { IWisescoreForm } from "@/types/wisescore";
-import { getMainFields, getRemainingFields, masterFields } from "./utils/data";
-import SubjectWiseGrade from "./screens/bachelors/SubjectWiseGrade";
-import { INITIAL_WISE_STATE, WISESCORE_FORM_VALIDATION } from "./utils/formik";
-import { analytics } from "@/services/analytics.service";
-import { BorderLinearProgress, SvgWrapper } from "./utils/provider";
-import { getTotalSteps } from "./utils/getTotalSteps";
 import WisescoreHeader from "./components/WisescoreHeader";
-import RenderSvg from "./components/RenderSvg";
-import { setSubmitFormData } from "@/global-states/reducers/wisescore";
 import WiseScoreSubmit from "./components/WisescoreSubmit";
+import SubjectWiseGrade from "./screens/bachelors/SubjectWiseGrade";
+import { getMainFields, getRemainingFields, masterFields } from "./utils/data";
+import { INITIAL_WISE_STATE, WISESCORE_FORM_VALIDATION } from "./utils/formik";
+import { getTotalSteps } from "./utils/getTotalSteps";
+import { BorderLinearProgress } from "./utils/provider";
 
 const WiseScoreComponent = () => {
 	const disciplineName = useAppSelector(
@@ -242,17 +238,6 @@ const WiseScoreComponent = () => {
 		// if(values)
 	};
 
-	// useEffect(() => {
-	//     const keyDownHandler = (event: KeyboardEvent) => {
-	//         if (valuesScreensMapping[steps].value&& event.key === 'Enter') {
-	//             handleNext();
-	//         }
-	//     };
-	//     document.addEventListener('keydown', keyDownHandler);
-	//     return () => {
-	//         document.removeEventListener('keydown', keyDownHandler);
-	//     };
-	// }, []);
 	return !isSubmitted ? (
 		<Box
 			sx={{
@@ -395,41 +380,8 @@ const WiseScoreComponent = () => {
 						</>
 					)}
 				</Formik>
-
-				{/* <motion.div
-                    key={linearStep}
-                    initial={{ opacity: 0, scale: 0.5, x: xAxisProperty }}
-                    animate={{ opacity: 1, scale: 1, x: 0 }}
-                    transition={{ ease: 'easeOut', duration: 0.5 }}
-                    style={{
-                        position: 'relative',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        zIndex: -1,
-                    }}
-                >
-                    <Box
-                        onClick={handleGoBack}
-                        sx={{
-                            textDecoration: 'underline',
-                            cursor: 'pointer',
-                        }}
-                        width="fit-content"
-                        height="50px"
-                        component="a"
-                        fontSize="16px"
-                        mt={{ xs: '00px', md: '4%', lg: '4%', sm: '00px' }}
-                        fontFamily="HankenGroteskSemiBold"
-                    >
-                        Go Back
-                    </Box>
-                </motion.div> */}
 			</>
-			{/* display={{ lg: 'contents', md: 'none', sm: 'none', xs: 'none' }} */}
-			{/* <SvgWrapper>
-				<RenderSvg step={linearStep} />
-			</SvgWrapper> */}
+		
 		</Box>
 	) : (
 		<motion.div

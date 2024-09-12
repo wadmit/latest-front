@@ -14,8 +14,6 @@ import GoBackButton from "../GoBackButton";
 import { analytics } from "@/services/analytics.service";
 import { getCountry } from "@/api/web/wisescore.action";
 
-type Props = {};
-
 function NationalitySelect({ handleNext, value, handleGoBack }: IScreenProps) {
 	const { setFieldValue, values, errors, touched } =
 		useFormikContext<typeof INITIAL_WISE_STATE>();
@@ -44,24 +42,6 @@ function NationalitySelect({ handleNext, value, handleGoBack }: IScreenProps) {
 			setFieldValue(value, "");
 		}
 	};
-
-	// useEffect(() => {
-	//     if (values.nationality) {
-	//         const findNationalityName = data.find(
-	//             (country: any) => country.id === values.nationality
-	//         );
-	//         if (findNationalityName) {
-	//             setInitialValue(findNationalityName);
-	//         } else {
-	//             setInitialValue({ name: '' });
-	//         }
-	//     }
-	// }, [data]);
-
-	// useEffect(() => {
-	//     handleAPI();
-	// }, []);
-
 	return (
 		<Box
 			gap={{ lg: "25px", md: "25px", sm: "32px", xs: "32px" }}

@@ -1,4 +1,4 @@
-export interface TextFieldType {
+export interface ITextFieldType {
 	label: any | React.ReactElement;
 	placeholder?: string;
 	name: string;

@@ -10,7 +10,7 @@ import { analytics } from "@/services/analytics.service";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import Cookies from "js-cookie";
 import applicationConfig from "@/config";
-import { WiseAdmitDefault } from "$/svg";
+import { WiseAdmitDefault } from "public/svg";
 
 function ProgramHeader({ isFoundation }: { isFoundation?: boolean }) {
   const program = useContext(ProgramsDetailContext);

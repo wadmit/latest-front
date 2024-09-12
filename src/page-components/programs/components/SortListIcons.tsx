@@ -1,4 +1,4 @@
-import { CalendarSvg, PriceSvg } from "$/svg";
+import { CalendarSvg, PriceSvg } from "public/svg";
 import { IconWrapper } from "@/components/common/icon-wrapper/IconWrapper";
 import { Stack, Typography } from "@mui/material";
 

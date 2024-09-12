@@ -8,7 +8,7 @@ import useCostConverterMain from "@/hooks/costConverterMain";
 import { analytics } from "@/services/analytics.service";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import applicationConfig from "@/config";
-import WiseAdmitDefault from "$/images/universities/wiseadmit_main.svg"
+import WiseAdmitDefault from "public/images/universities/wiseadmit_main.svg"
 
 function UniversityCard({ university }: { university: IUniversity }) {
   const router = useRouter();

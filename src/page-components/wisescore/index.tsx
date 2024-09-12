@@ -3,7 +3,7 @@ import { analytics } from "@/services/analytics.service";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import React, { useState } from "react";
 import WiseScoreWelcome from "./WisescoreWelcome";
-import { WiseAdmitColorFulSvg } from "$/svg";
+import { WiseAdmitColorFulSvg } from "public/svg";
 import WiseScoreModal from "./WisescoreModal";
 
 

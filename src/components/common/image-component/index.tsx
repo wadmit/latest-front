@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import fallbackURL from "$/images/partners/wiseadmit-logo-large.png";
+import fallbackURL from "public/images/partners/wiseadmit-logo-large.png";
 import { ImageComponentProps } from "@/types/other";
 
 const circularAnimation =

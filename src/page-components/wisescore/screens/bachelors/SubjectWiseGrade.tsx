@@ -12,8 +12,6 @@ import SelectButtons from "../../components/SelectButtons";
 import GoBackButton from "../GoBackButton";
 import SliderValue from "../../components/SliderValue";
 
-type Props = {};
-
 function SubjectWiseGrade({ handleNext, value, handleGoBack }: IScreenProps) {
 	const overAllGrade = useAppSelector((state) => state.wisescore.overallGrade);
 	const { values, setFieldValue, touched, setTouched } =
@@ -130,53 +128,6 @@ function SubjectWiseGrade({ handleNext, value, handleGoBack }: IScreenProps) {
 							Next
 						</Box>
 					</Box>
-
-					{/* <Box
-                        bgcolor="white"
-                        zIndex={99999999999}
-                        borderTop="1px solid rgba(209, 209, 209, 1) "
-                        width="100%"
-                        display={{ xs: 'flex', md: 'none', lg: 'none', sm: 'none' }}
-                        justifyContent="center"
-                        alignItems="center"
-                        height="72px"
-                        position="fixed" bottom={0}>
-                        <Box
-                            display="flex"
-                            fontSize="14px"
-                            fontWeight={500}
-                            lineHeight="14px"
-                            justifyContent="center"
-                            alignItems="center"
-                            gap="8px"
-                            onClick={handleGoBack}
-                            sx={{
-                                cursor: 'pointer'
-                            }}
-                            flex={1}><ArrowBack /> Go Back</Box>
-                        <Divider
-                            sx={{
-                                height: '24px'
-                            }}
-                            orientation='vertical' />
-                        <Box
-                            color="rgba(255, 107, 38, 1)"
-                            fontSize="14px"
-                            fontWeight={500}
-                            lineHeight="14px"
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                            gap="8px"
-                            onClick={handleNext}
-                            sx={{
-                                cursor: 'pointer'
-                            }}
-                            flex={1}> Next
-                            <ArrowForward />
-                        </Box>
-
-                    </Box> */}
 				</>
 			)}
 		</Box>

@@ -11,7 +11,7 @@ import {
   EAnalyticsFieldName,
   EAnalyticsStatus,
 } from "@/types/mix-panel-analytic";
-import { Shortlist, TShortListDetails } from "@/types/sortlist";
+import { TShortListDetails } from "@/types/sortlist";
 import {
   Box,
   Button,
@@ -26,7 +26,7 @@ import {
 } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import { StyledTableCell } from "../utils/provider";
-import { PlusIcon } from "$/svg";
+import { PlusIcon } from "public/svg";
 import {
   calculateScholarship,
   getScholarshipInfo,

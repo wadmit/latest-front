@@ -175,7 +175,6 @@ const FeedbackForm = ({ setShowThankyouForm, setShowFeedbackForm }: Props) => {
             try {
               mutate(values as any);
             } catch (err) {
-              // eslint-disable-next-line no-console
               console.log(err);
             }
           }}

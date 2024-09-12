@@ -3,7 +3,7 @@ export * from "@/components/common/buttons/ButtonWrapper";
 export * from "@/components/common/buttons/FeedbackButton";
 export * from "@/components/common/buttons/PaginationButton";
 export * from "@/components/common/buttons/styled-components";
-export * from "@/components/common/buttons/provider";
+export * from "@/components/common/buttons/utils/provider";
 
 //navbar exports
 export * from "@/components/common/navbar/Navbar";

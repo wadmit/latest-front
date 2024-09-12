@@ -8,14 +8,14 @@ import {
   SettlingDownSvg,
   TeacherSvg,
   VisaAssitanceSvg,
-} from "$/svg";
+} from "public/svg";
 import { Box, IconButton, Typography } from "@mui/material";
 import ImageComponent from "@/components/common/image-component";
-import MeherImage from "$/images/home/testimonial1.webp";
-import SampadaImage from "$/images/home/testimonial2.webp";
-import BackedBy1 from "$/images/student/founder-institute.webp";
-import BackedBy2 from "$/images/student/nuaa.webp";
-import BackedBy3 from "$/images/student/ubc.webp";
+import MeherImage from "public/images/home/testimonial1.webp";
+import SampadaImage from "public/images/home/testimonial2.webp";
+import BackedBy1 from "public/images/student/founder-institute.webp";
+import BackedBy2 from "public/images/student/nuaa.webp";
+import BackedBy3 from "public/images/student/ubc.webp";
 import type { ISupportedByCard } from "@/page-components/students/utils/types";
 import Image from "next/image";
 

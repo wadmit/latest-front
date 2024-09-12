@@ -3,7 +3,7 @@ import ApiService from "@/services/api.service";
 
 export const submitPartner = async (data: any) => {
   try {
-    ("use server");
+    // ("use server");
     const response = await ApiService.post({
       url: `${ApiConfig.partner}`,
       options: data,

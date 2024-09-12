@@ -1,4 +1,4 @@
-import { DashboardSvg, DashboardSvgFilled, MyApplicationFilled, MyApplicationSvg, MyDocumentFilled, MyDocumentSvg, MyProfileFilled, MyProfileSvg, MyUniversities, MyUniversitiesFilled, WiseAdmitColorFulSvg } from '$/svg';
+import { DashboardSvg, DashboardSvgFilled, MyApplicationFilled, MyApplicationSvg, MyDocumentFilled, MyDocumentSvg, MyProfileFilled, MyProfileSvg, MyUniversities, MyUniversitiesFilled, WiseAdmitColorFulSvg } from 'public/svg';
 import { analytics } from '@/services/analytics.service';
 import { EAnalyticsEvents, EAnalyticsStatus } from '@/types/mix-panel-analytic';
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, Typography } from '@mui/material';

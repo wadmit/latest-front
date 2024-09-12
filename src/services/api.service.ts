@@ -2,7 +2,7 @@ import { auth } from "@/auth/auth";
 import { AppConfig } from "@/constants";
 import axios from "axios";
 import type { CancelToken } from "axios";
-import { getSession } from "next-auth/react";
+import { getSession, signOut } from "next-auth/react";
 
 const URL = `${process.env.NEXT_PUBLIC_BASE_URL}/${AppConfig.API_VERSION}`;
 
@@ -80,9 +80,10 @@ instance.interceptors.response.use(
   (response) => response,
   (error) => {
     const { response } = error;
-    if (response && (response.status === 401 || response.status === 403)) {
+    if (response && (response.status === 401 || response.status === 403)) { 
       if (error?.config?.headers?.tokenNeeded) {
         // Logout here function please
+        // await signOut();
       }
     }
     return Promise.reject(error);
@@ -103,7 +104,7 @@ const ApiService = {
       },
     });
   },
-
+  
   async post<T = any, R extends Record<string, any> = Record<string, any>>({
     url,
     tokenNeeded,

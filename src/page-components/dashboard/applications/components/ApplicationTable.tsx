@@ -43,7 +43,7 @@ import {
 } from "@/page-components/dashboard/applications/utils/provider";
 import Loader from "@/components/common/circular-loader/Loader";
 import { StyledTableCell } from "@/page-components/dashboard/applications/styled-components";
-import { PlusIcon } from "$/svg";
+import { PlusIcon } from "public/svg";
 import { Chip } from "@/page-components/dashboard/components/Chip";
 import PaymentStatus from "@/page-components/dashboard/components/PaymentStatus";
 import Alert from "@/page-components/dashboard/components/Alert";

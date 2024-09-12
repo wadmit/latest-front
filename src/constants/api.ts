@@ -1,4 +1,4 @@
-import { StoragePath } from "@/types/storage-path";
+import { EStoragePath } from "@/types/storage-path";
 
 export default {
   students: "/web/students",
@@ -9,7 +9,7 @@ export default {
   country: "/common/countries",
   partner: "/web/partners",
   authentication: "/web/auth/validate",
-  partnerdocument: `common/file-upload/upload_partner_file?path=${StoragePath.PartnerDocument}`,
+  partnerdocument: `common/file-upload/upload_partner_file?path=${EStoragePath.PartnerDocument}`,
   filters: "/web/filters",
   blog: "/web/blogs",
   news: "/web/news",

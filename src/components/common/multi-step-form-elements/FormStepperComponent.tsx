@@ -1,5 +1,5 @@
 import { theme } from "@/common/muicustomtheme/theme";
-import { FormStepperProps } from "@/types/other";
+import { IFormStepperProps } from "@/types/other";
 import { Box, StepButton, Stepper, Typography } from "@mui/material";
 import React from "react";
 import { StyledSteps } from "@/components/common/form-components/StyledSteps";
@@ -10,7 +10,7 @@ const FormStepperComponent = ({
   completed,
   handleStep,
   width,
-}: FormStepperProps) => {
+}: IFormStepperProps) => {
   return (
     <Box sx={{ width, mx: "auto" }}>
       <Stepper

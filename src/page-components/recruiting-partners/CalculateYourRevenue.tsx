@@ -3,8 +3,8 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import bigEllipse from "$/images/partners/big-ellipse.webp";
-import smallEllipse from "$/images/partners/small-ellipse.webp";
+import bigEllipse from "public/images/partners/big-ellipse.webp";
+import smallEllipse from "public/images/partners/small-ellipse.webp";
 import { ButtonWrapper, RootContainer } from "@/components/common";
 
 function CalculateYourRevenue() {

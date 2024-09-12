@@ -1,7 +1,6 @@
 "use client";
 import { RootContainer } from "@/components/common";
 import { Box, Typography } from "@mui/material";
-import BankOutline from "$/images/institution/bankoutline.svg";
 
 function ReachTarget() {
   return (

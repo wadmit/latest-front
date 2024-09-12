@@ -1,14 +1,12 @@
 "use client";
 
-import { Box } from "@mui/material";
-import React from "react";
 import NavbarSignInUp from "@/page-components/apply-now/components/NavbarSignInUp";
-import {
-  BoxWrapper,
-  ResponsiveBox,
-} from "@/page-components/apply-now/utils/provider";
-import Image from "next/image";
 import SignUpForm from "@/page-components/apply-now/components/SignUpForm";
+import {
+  BoxWrapper
+} from "@/page-components/apply-now/utils/provider";
+import { Box } from "@mui/material";
+import Image from "next/image";
 
 function SignUp({
   handleLoginPages,

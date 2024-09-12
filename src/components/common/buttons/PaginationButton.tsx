@@ -1,8 +1,8 @@
 import { Button, ButtonProps } from "@mui/material";
 import Link from "next/link";
-import { wrapperButtonTypes } from "@/components/common";
+import { IWapperButtonTypes } from "@/components/common";
 
-export function PaginationButton(props: wrapperButtonTypes) {
+export function PaginationButton(props: IWapperButtonTypes) {
   const { children, url, ...rest } = props;
   return (
     <Link href={url} shallow>

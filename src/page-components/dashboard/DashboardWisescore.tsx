@@ -4,7 +4,7 @@ import WiseScoreWelcome from "../wisescore/WisescoreWelcome";
 import { Breadcrumbs } from "@mui/material";
 import Link from "next/link";
 import WiseScoreModal from "../wisescore/WisescoreModal";
-import { WiseAdmitColorFulSvg } from "$/svg";
+import { WiseAdmitColorFulSvg } from "public/svg";
 
 type Props = {};
 

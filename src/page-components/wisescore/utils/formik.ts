@@ -575,11 +575,11 @@ export const WISESCORE_FORM_VALIDATION = Yup.object().shape({
 
 export const FORM_VALIDATION_WISESCORE_SUBMIT = Yup.object().shape({
   email: Yup.string()
-    .matches(/^[^\s][\s\S]*$/, "Email cannot start with a space")
+    .matches(/^[^\s][\s\S]*public/, "Email cannot start with a space")
     .email("Invalid Email")
     .required("Required"),
   fullName: Yup.string()
-    .matches(/^[^\s][\s\S]*$/, "Full Name cannot start with a space")
+    .matches(/^[^\s][\s\S]*public/, "Full Name cannot start with a space")
     .required("Required"),
   phone: Yup.string().required("Required").customPhoneSign().label("Phone"),
 });

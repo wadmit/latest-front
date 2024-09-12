@@ -12,7 +12,7 @@ import {
 	Typography,
 } from "@mui/material";
 import { TextFieldWrapper } from "@/components/common/formfields/styles/StyledInput";
-import { AddMoreIcons, DeleteIcons } from "$/svg";
+import { AddMoreIcons, DeleteIcons } from "public/svg";
 
 const CountryVolumeFields = () => {
 	const { setFieldValue, touched, errors, values } =

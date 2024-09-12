@@ -2,7 +2,7 @@ import { Box, Stack, Typography } from "@mui/material";
 import { usePathname, useRouter } from "next/navigation";
 import { Suspense, useContext, useEffect, useMemo, useState } from "react";
 import { DashboardWrapper } from "../wrapper/DashboardWrapper";
-import { WiseAdmitColorFulSvg } from "$/svg";
+import { WiseAdmitColorFulSvg } from "public/svg";
 import { TemporarySidebar } from "./TemporarySidebar";
 import dynamic from "next/dynamic";
 import UserBox from "./UserBox";

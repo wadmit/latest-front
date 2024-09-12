@@ -10,7 +10,7 @@ import { WaitingScreen } from './components/WaitingScreen';
 import { filterStatus } from '@/common/utils/filterEligibilityStatus';
 import { StyledContainerWrapper } from '@/components/common';
 import ThinScoreGauge from '@/components/common/score-gauge/ThinScoreGauge';
-import { DownArrowSmallSvg, DownArrowSvg, Exclaim, RedCrossWhiteSvg, RobotSvg, WhiteTickSvg } from '$/svg';
+import { DownArrowSmallSvg, DownArrowSvg, Exclaim, RedCrossWhiteSvg, RobotSvg, WhiteTickSvg } from 'public/svg';
 import { analytics } from '@/services/analytics.service';
 import { EAnalyticsEvents, EAnalyticsStatus } from '@/types/mix-panel-analytic';
 import { TextFieldWrapper } from '@/components/common/formfields/styles/StyledInput';
@@ -27,28 +27,11 @@ import { IconWrapper } from '@/components/common/icon-wrapper/IconWrapper';
 export default function SortedUniversitiesPageComponent() {
   const UniversityComponentRef = useRef<HTMLDivElement>(null);
   const getConvertedCosts = useCostConverterMain();
-  // const ArrowRef = useRef<HTMLDivElement>(null);
-  // const animateArrow = () => {
-  //   // Add your animation logic here
-  //   // For example, you can use the ref to access the DOM element and apply a CSS class
-  //   if (ArrowRef.current) {
-  //     ArrowRef.current.classList.add('animate');
-  //   }
-  // };
-  // useEffect(() => {
-  //   // Trigger animation on component mount
-  //   animateArrow();
-  // }, []);
-
   // check if mobile
-
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-
   const [isDataResolved, setIsDataResolved] = useState(false);
   const [isMedicalFromNepal, setIsMedicalFromNepal] = useState(false);
-
   const [scoreData, setScoreData] = useState<number>(0);
-
   const [filteredPrograms, setFilteredPrograms] = useState<any>([]);
   const [activeCountry, setActiveCountry] = useState('China');
 
@@ -65,17 +48,17 @@ export default function SortedUniversitiesPageComponent() {
   );
   
   // Todo: Enable this after implementing login
-  // const data = useCustomQuery({
-  //   queryKey: [CacheConfigKey.APPLICATION_GET_QUERY_KEY],
-  //   queryFn: () => getApplications(),
-  //   onSuccess: (data) => {
-  //     dispatch(setUserApplications({
-  //       data: data
-  //     }))
-  //   },
-  //   refetchOnWindowFocus: false,
-  //   enabled: applications && applications.length < 1
-  // })
+  const data = useCustomQuery({
+    queryKey: [CacheConfigKey.APPLICATION_GET_QUERY_KEY],
+    queryFn: () => getApplications(),
+    onSuccess: (data) => {
+      dispatch(setUserApplications({
+        data: data
+      }))
+    },
+    refetchOnWindowFocus: false,
+    enabled: applications && applications.length < 1
+  })
    
   const {mutate,error,isPending,isError} = useMutation({
     mutationFn: (email:string) => postWiseScoreData(email),
@@ -363,14 +346,7 @@ export default function SortedUniversitiesPageComponent() {
                       gap={2}
                       sx={{
                         cursor: 'pointer',
-                        // '&:hover': {
-                        //   // Add styles for hover
-                        //   transform: 'translateY(10px)', // Adjust the value as needed
-                        // },
-                        // '.animate': {
-                        //   // Add styles for initial animation
-                        //   transform: 'translateY(10px)', // Adjust the value as needed
-                        // },
+                    
                       }}
                       onClick={() => scrollToSection(UniversityComponentRef)}
                     >

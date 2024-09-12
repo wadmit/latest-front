@@ -5,7 +5,7 @@ import { useDropzone } from "react-dropzone";
 import React, { useEffect, useState } from "react";
 import CircularLoaderWithLabel from "../../circular-loader-with-label/CircularLoaderWithLabel";
 import ReportProblemOutlinedIcon from "@mui/icons-material/ReportProblemOutlined";
-import { DocumentUploadSvg } from "$/svg";
+import { DocumentUploadSvg } from "public/svg";
 import DropzoneHOC from "./DropzoneHOC";
 
 function UploadSvg() {

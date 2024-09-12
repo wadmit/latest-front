@@ -90,7 +90,6 @@ export function DashboardHome() {
         dispatch(setUserApplications({ data: res }));
       },
       onError: (error) => {
-        // eslint-disable-next-line no-console
         console.error("Failed To Fetch Applications", error);
       },
       refetchOnWindowFocus: false,
@@ -105,9 +104,6 @@ export function DashboardHome() {
     },
     refetchOnWindowFocus: false,
   });
-
-  // console.assert(!applicationsLoading && applications, 'Failed To Fetch Applications');
-  // console.assert(!topMatchLoading && topMatch, 'Failed To Fetch Applications');
 
   // Handle shortlist post request
   const { mutate } = useShortListSetter();
@@ -244,7 +240,6 @@ export function DashboardHome() {
   };
   // Future Function non implemented
   const handleStepperClick = (StepId: number) => {
-    // eslint-disable-next-line no-console
   };
   // Alert button props for completing profile
   const completeProfileAlertProps: AlertButtonProps = {
@@ -269,14 +264,10 @@ export function DashboardHome() {
         paymentEsewaFailed((query.get("signature") as string) ?? ""),
       onSuccess: (data) => {
         router.replace("/dashboard");
-        // window.location.reload();
-        // router.reload()
       },
       onError: (error) => {
         enqueueSnackbar("Payment verification failed", { variant: "error" });
         router.replace("/dashboard");
-
-        // window.location.reload();
       },
       enabled: !!query.get("signature"),
     });
@@ -422,12 +413,6 @@ export function DashboardHome() {
                 )}
               </Grid>
             </Grid>
-
-            {/* {activeStep === 3 &&
-                        <TopMatches
-                            getConvertedCosts={getConvertedCosts}
-                            handleStep={handleStep} muted={false} wiseScore={wiseScore} />
-                    } */}
           </Box>
         )}
         {activeStep === 2 && (
