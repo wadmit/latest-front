@@ -97,6 +97,7 @@ function StyledInputField({
 			<InputFieldPartner
 				type={type}
 				label={label}
+				multiline={true}
 				placeholder={placeholder}
 				labelTextColor={labelTextColor}
 				name="experience_with_wiseadmit"
