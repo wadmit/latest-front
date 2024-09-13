@@ -35,76 +35,93 @@ function TrustedBy() {
         </Typography>
       </Box>
       <Box
+        width="100%"
         pb={{
           lg: "96px",
           md: "96px",
           sm: "80px",
           xs: "80px",
         }}
-        ref={ref}
-        width="100%"
-        display="flex"
-        flexDirection="column"
+        sx={{
+          mt: { lg: "28px", md: "28px", sm: "34px", xs: "34px" },
+          position: "relative",
+          "&::before, &::after": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            width: "25%",
+            zIndex: 2,
+            pointerEvents: "none",
+          },
+          "&::before": {
+            left: 0,
+            background: "linear-gradient(to right, transparent, transparent)",
+          },
+          "&::after": {
+            right: 0,
+            background: "linear-gradient(to left, transparent, transparent)",
+          },
+        }}
       >
-        <Box
-          width="100%"
-          sx={{
-            overflowx: "scroll",
-            "&::-webkit-scrollbar": {
-              display: "none",
+        <Swiper
+          modules={[Autoplay]}
+          loop
+          slidesPerView={7}
+          speed={3000}
+          autoplay={{
+            delay: 0,
+            disableOnInteraction: false,
+          }}
+          centeredSlides={true}
+          breakpoints={{
+            0: {
+              slidesPerView: 3,
+              spaceBetween: 10,
             },
-            "&  .swiper-wrapper": {
-              transitionTimingFunction: "linear !important",
+            600: {
+              slidesPerView: 5,
+              spaceBetween: 20,
+            },
+            960: {
+              slidesPerView: 7,
+              spaceBetween: 30,
+            },
+            1280: {
+              slidesPerView: 9,
+              spaceBetween: 40,
             },
           }}
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          mt={{ lg: "32px", md: "32px", sm: "34px", xs: "34px" }}
         >
-          <Swiper
-            modules={[Autoplay]}
-            loop
-            slidesPerView={10}
-            spaceBetween={50}
-            speed={1500}
-            autoplay={{
-              delay: 0,
-              disableOnInteraction: false,
-            }}
-            breakpoints={{
-              0: {
-                slidesPerView: 4,
-                spaceBetween: 10,
-              },
-              600: {
-                slidesPerView: 5,
-                spaceBetween: 10,
-              },
-              960: {
-                slidesPerView: 8,
-                spaceBetween: 10,
-              },
-              1280: {
-                slidesPerView: 10,
-                spaceBetween: 10,
-              },
-            }}
-          >
-            {universityImages.map((image, index) => (
-              <SwiperSlide key={`_${index}`}>
-                <Image
-                  width={68}
-                  height={68}
-                  style={{ width: "68px", height: "68px", objectFit: "cover" }}
-                  loading="lazy"
-                  alt={altTags[index]}
-                  src={image}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </Box>
+          {universityImages.map((image, index) => (
+            <SwiperSlide key={index}>
+              {({ isActive, isNext, isPrev }) => (
+                <Box
+                  sx={{
+                    opacity: isActive ? 1 : isNext || isPrev ? 0.5 : 0.2,
+                    transform: isActive ? "scale(1.2)" : "scale(1)",
+                    transition: "all 0.3s ease",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100px",
+                  }}
+                >
+                  <img
+                    loading="lazy"
+                    alt="University Logo"
+                    style={{
+                      width: "68px",
+                      height: "68px",
+                      objectFit: "contain",
+                    }}
+                    src={image}
+                  />
+                </Box>
+              )}
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </Box>
     </RootContainer>
   );

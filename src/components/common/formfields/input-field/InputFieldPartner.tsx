@@ -43,6 +43,8 @@ const InputFieldPartner = ({
       <TextFieldWrapperPartner
         id={name}
         variant="outlined"
+        multiline
+    
         required={required ?? false}
         placeholder={placeholder}
         disabled={!!disabled}

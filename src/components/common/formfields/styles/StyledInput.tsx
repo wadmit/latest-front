@@ -73,9 +73,14 @@ export const TextFieldWrapperPartner = styled(
     height: "105px",
     borderRadius: "8px",
     alignItems: "flex-end",
+    
     border: "black",
     backgroundColor: "#FFFFFF",
     "& input": {
+
+      height: "100% !important",
+    },
+    "& textarea": {
       height: "100% !important",
     },
   },
