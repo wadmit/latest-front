@@ -75,6 +75,23 @@ const ApplicationDetailPageComponent = ({ isLoading, isError }: Props) => {
   const [displayText, setDisplayText] = useState("");
   const applicationId = params.applicationId;
 
+  const handleIfAllDocumentsUploaded = (): string[] => {
+    const localRequiredDocuments: string[] = [];
+    singleApplication?.documents?.forEach((doc) => {
+      if (
+        (doc.type === EApplicationDocumentStatus.REQUIRED ||
+          doc.type === EApplicationDocumentStatus.ADDITIONAL) &&
+        singleApplication?.status === EApplicationStatus.incomplete_document
+      ) {
+        if (doc.link.length === 0) {
+          localRequiredDocuments.push(doc?.coreDocument?.name || "");
+        }
+      }
+    });
+
+    return localRequiredDocuments;
+  };
+
   useMemo(() => {
     switch (singleApplication?.status) {
       case "incomplete_document":
@@ -313,23 +330,6 @@ const ApplicationDetailPageComponent = ({ isLoading, isError }: Props) => {
   const buttonProps: PaymentButtonProps = {
     buttonClick: handlePayment,
     buttonName: "Pay Now",
-  };
-
-  const handleIfAllDocumentsUploaded = (): string[] => {
-    const localRequiredDocuments: string[] = [];
-    singleApplication?.documents?.forEach((doc) => {
-      if (
-        (doc.type === EApplicationDocumentStatus.REQUIRED ||
-          doc.type === EApplicationDocumentStatus.ADDITIONAL) &&
-        singleApplication?.status === EApplicationStatus.incomplete_document
-      ) {
-        if (doc.link.length === 0) {
-          localRequiredDocuments.push(doc?.coreDocument?.name || "");
-        }
-      }
-    });
-
-    return localRequiredDocuments;
   };
 
   const handleShowOrCloseDialogBox = () => {

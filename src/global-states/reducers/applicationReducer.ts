@@ -21,7 +21,6 @@ export const applicationSlice = createSlice({
       state,
       action: PayloadAction<ResponseUtils<IApplication>>
     ) => {
-      console.log("Redux value", action.payload.data);
       return {
         ...state,
         applications: action.payload.data,
