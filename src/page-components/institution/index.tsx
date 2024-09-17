@@ -6,6 +6,7 @@ import FindWiseScore from "@/page-components/institution/FindWisescore";
 import OurAiPlatform from "@/page-components/institution/OurAiPlaftorm";
 import dynamic from "next/dynamic";
 import OurServices from "@/page-components/institution/OurServices";
+import OurGallery from "@/page-components/institution/OurGallery";
 
 const MenuSwiper = dynamic(
   () => import("@/page-components/institution/MenuList"),
@@ -20,6 +21,7 @@ const InstitutionHome = () => {
       <ReachTarget />
       <FindWiseScore />
       <OurServices />
+      <OurGallery />
       <OurAiPlatform />
       <MenuSwiper />
     </>

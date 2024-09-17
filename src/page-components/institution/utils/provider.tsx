@@ -18,3 +18,16 @@ export const menuListItem = [
     imageUrl: "/images/institution/third-image.webp",
   },
 ];
+
+export const galleryImages = [
+  "/images/institution/1.jpg",
+  "/images/institution/2.jpg",
+  "/images/institution/3.jpg",
+  "/images/institution/4.jpg",
+  "/images/institution/5.jpg",
+  "/images/institution/6.jpg",
+  "/images/institution/7.jpg",
+  "/images/institution/8.jpg",
+  "/images/institution/9.jpeg",
+  "/images/institution/10.jpg",
+];
