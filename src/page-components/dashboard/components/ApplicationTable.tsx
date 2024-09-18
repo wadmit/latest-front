@@ -111,9 +111,11 @@ function ApplicationTable({ status }: IProps) {
   const { mutate, isPending, isError } = useMutation({
     mutationFn: async (id: string) => await removeApplication(id),
     onSuccess: (data, variables) => {
-      const newApplications = userApplications.filter(
+      const newApplications = applications.filter(
         (application) => application.id !== variables
       );
+
+      setApplications(newApplications);
 
       dispatch(setUserApplications({ data: newApplications }));
       enqueueSnackbar("Application deleted successfully", {
@@ -354,8 +356,9 @@ function ApplicationTable({ status }: IProps) {
     const filterApplications = userApplications.filter(
       (application) => application.paid === status
     );
+
     setApplications(filterApplications);
-  }, [userApplications]);
+  }, []);
 
   // handle the payment when user clicks on handle click
   const handleSubmit = async (e: any) => {
@@ -384,6 +387,7 @@ function ApplicationTable({ status }: IProps) {
   const filterApplications = applications.filter(
     (application) => application.paid === status
   );
+  console.log("🚀 ~ ApplicationTable ~ applications:", applications);
 
   return (
     <>
