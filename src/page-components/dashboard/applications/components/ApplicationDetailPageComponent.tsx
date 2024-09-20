@@ -185,7 +185,7 @@ const ApplicationDetailPageComponent = ({ isLoading, isError }: Props) => {
         });
         break;
       case "accepted":
-        setActiveStep(4);
+        setActiveStep(6);
         setStatus("success");
         setDisplayText("Accepted");
         setAlertPropsData({
@@ -221,7 +221,7 @@ const ApplicationDetailPageComponent = ({ isLoading, isError }: Props) => {
         });
         break;
       case "pre_enrollment":
-        setActiveStep(4);
+        setActiveStep(6);
         setStatus("success");
         setDisplayText("Accepted");
         setAlertPropsData({

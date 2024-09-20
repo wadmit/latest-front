@@ -117,7 +117,7 @@ const ProfileCard = ({ student }: Props) => {
                     style={{ display: "none" }}
                     id={inputLabelId}
                     type="file"
-                    onChange={(e)=> selectedImagePreviewHandler(e)}
+                    onChange={(e) => selectedImagePreviewHandler(e)}
                   />
                   <label htmlFor={inputLabelId} style={{ width: "100%" }}>
                     {/* Upload */}

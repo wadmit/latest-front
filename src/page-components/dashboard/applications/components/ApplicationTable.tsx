@@ -81,19 +81,25 @@ const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
   const userApplications = useAppSelector(
     (state) => state.applications.applications
   );
-  const [applications, setApplications] =
-    useState<IApplication[]>(userApplications);
+  const [applications, setApplications] = useState<IApplication[]>([]);
   const [activePaymentType, setActivePaymentType] = useState<string>("");
 
   const { mutate, isPending, isError } = useMutation({
     mutationKey: ["removeApplication"],
     mutationFn: async (id: string) => await removeApplication(id),
     onSuccess: (data, variables) => {
-      const newApplications = userApplications.filter(
+      const newApplications = applications.filter(
         (application) => application.id !== variables
       );
-      // setApplications(newApplications);
+      setApplications(newApplications);
       dispatch(setUserApplications({ data: newApplications }));
+      enqueueSnackbar("Application deleted successfully", {
+        variant: "success",
+        anchorOrigin: {
+          vertical: "top",
+          horizontal: "right",
+        },
+      });
     },
   });
 
@@ -247,7 +253,7 @@ const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
       (application) => application.paid === status
     );
     setApplications(filterApplications);
-  }, [userApplications]);
+  }, []);
 
   // handle the payment when user clicks on handle click
   const handleSubmit = async (e: any) => {
