@@ -1,52 +1,54 @@
-'use client'
-import React, { useEffect } from 'react'
-import API_VERSION from "@/constants/app"
-import { Typography } from '@mui/material';
-import { Loader, RootContainer } from '@/page-components/scanned/styled-components';
-import { useRouter, useSearchParams } from 'next/navigation';
-import axios from 'axios';
-
+"use client";
+import React, { useEffect } from "react";
+import API_VERSION from "@/constants/app";
+import { Typography } from "@mui/material";
+import {
+  Loader,
+  RootContainer,
+} from "@/page-components/scanned/styled-components";
+import { useRouter, useSearchParams } from "next/navigation";
+import axios from "axios";
 
 const URL = `${process.env.NEXT_PUBLIC_BASE_URL}/${API_VERSION}`;
 
 const ScannedHome = () => {
-    const router = useRouter();
-    const searchParams = useSearchParams()
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-    const uuid = searchParams.get('uuid');
-    const source = searchParams.get('source');
+  const uuid = searchParams.get("uuid");
+  const source = searchParams.get("source");
 
-    const fetchData = async () => {
-        try {
-            const response = await axios.get(`${URL}/web/qr-data/${uuid}`);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${URL}/web/qr-data/${uuid}`);
 
-            if (response) {
-                // console.log(response);
+      if (response) {
+        // console.log(response);
 
-                // Data retrieval successful
-                // Process the data here if needed
-                router.push(`${source}`);
-            } else {
-                // Data retrieval failed
-                router.push('/');
-            }
-        } catch (error) {
-            // Error occurred while fetching data
-            router.push('/');
-        }
-    };
+        // Data retrieval successful
+        // Process the data here if needed
+        router.push(`${source}`);
+      } else {
+        // Data retrieval failed
+        router.push("/");
+      }
+    } catch (error) {
+      // Error occurred while fetching data
+      router.push("/");
+    }
+  };
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <RootContainer>
-            <Loader />
-            <Typography variant="h6" component="p">
-                Wait, we are redirecting...
-            </Typography>
-        </RootContainer>
-  )
-}
+      <Loader />
+      <Typography variant="h6" component="p">
+        Wait, we are redirecting...
+      </Typography>
+    </RootContainer>
+  );
+};
 
-export default ScannedHome
+export default ScannedHome;
