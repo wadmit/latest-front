@@ -34,7 +34,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import {
@@ -68,7 +68,7 @@ type Props = {
 
 const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
   const router = useRouter();
-  const params = useParams();
+  const params = useSearchParams();
   const dispatch = useAppDispatch();
   const [selectedApplications, setIsSelectedApplications] = useState<string[]>(
     []
@@ -178,7 +178,7 @@ const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
   const { data: esewaData, isLoading: esewaVerificationLoading } =
     useCustomQuery({
       queryKey: ["esewaVerifty"],
-      queryFn: () => paymentEsewaVerify((params.data as string) ?? ""),
+      queryFn: () => paymentEsewaVerify((params.get("data") as string) ?? ""),
       onSuccess: (data) => {
         router.replace("/dashboard");
       },
@@ -186,7 +186,7 @@ const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
         enqueueSnackbar("Payment verification failed", { variant: "error" });
         router.replace("/dashboard");
       },
-      enabled: params && !!params.data,
+      enabled: params && !!params.get("data"),
       refetchOnWindowFocus: false,
       refetchOnMount: false,
     });
