@@ -15,8 +15,6 @@ const ScannedHome = () => {
 
     const uuid = searchParams.get('uuid');
     const source = searchParams.get('source');
-    console.log(uuid, source);
-
     const fetchData = async () => {
         try {
             const response = await axios.get(`${URL}/web/qr-data/${uuid}`);
