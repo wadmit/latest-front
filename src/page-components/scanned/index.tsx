@@ -19,7 +19,11 @@ const ScannedHome = () => {
   const source = searchParams.get("source");
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${URL}/web/qr-data/${uuid}`);
+      const response = await axios.get(`${URL}/web/qr-data/${uuid}`,{
+        headers:{
+            "X-API-KEY": process.env.NEXT_PUBLIC_API_KEY
+        }
+      });
       if (response) {
         // console.log(response);
 
