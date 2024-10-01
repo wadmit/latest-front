@@ -107,8 +107,8 @@ function ScoreComponent() {
                 router.push("/dashboard/wisescore");
                 analytics.websiteButtonInteractions({
                   location: {
-                    countryName: currency.currentCountry,
-                    city: currency.city,
+                    countryName: currency?.currentCountry ?? "",
+                    city: currency?.city ?? "",
                   },
                   buttonName: `${score > 0} ? Recheck : Check WiseScore® `,
                   source: `User has clicked on ${
