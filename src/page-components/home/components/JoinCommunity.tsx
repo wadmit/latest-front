@@ -7,9 +7,11 @@ import React from "react";
 import { ArrowPointChat } from "../svg";
 import Community from "public/images/home/community.svg";
 import CommunitySm from "public/images/home/communitysm.svg";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 const JoinCommunity = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
+  const currency = useAppSelector((state) => state.currency);
   return (
     <Box bgcolor="rgba(234, 243, 255, 1)" mt="90px">
       <RootContainer>
@@ -88,6 +90,10 @@ const JoinCommunity = () => {
                 }}
                 onClick={() => {
                   analytics.websiteButtonInteractions({
+                    location: {
+                      countryName: currency?.currentCountry ?? "",
+                      city: currency?.city ?? "",
+                    },
                     buttonName: "Chat with us",
                     source: "Clicked on Chat with us from Home Page",
                     urlPath: window.location.href,

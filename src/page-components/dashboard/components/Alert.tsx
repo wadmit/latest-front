@@ -80,6 +80,7 @@ function Alert({
   const program = useAppSelector(
     (state) => state?.applications.singleApplication
   );
+  const currency = useAppSelector((state) => state.currency);
 
   return (
     <Box
@@ -143,6 +144,10 @@ function Alert({
                     onClick={() => {
                       file.buttonClick();
                       analytics.websiteButtonInteractions({
+                        location: {
+                          countryName: currency?.currentCountry ?? "",
+                          city: currency?.city ?? "",
+                        },
                         buttonName: "Download Documents",
                         source: `User has downloaded their ${file.buttonName} for their application for program ${program.program?.name}`,
                         urlPath: window.location.href,

@@ -25,9 +25,14 @@ const ApplicationUploadButton = ({
   const application = useAppSelector(
     (state) => state.applications.singleApplication
   );
+  const currency = useAppSelector((state) => state.currency);
 
   const handleClick = () => {
     analytics.websiteButtonInteractions({
+      location: {
+        countryName: currency?.currentCountry ?? "",
+        city: currency?.city ?? "",
+      },
       buttonName: "Upload Document",
       source: "Student clicked on upload document icon",
       urlPath: window.location.href,

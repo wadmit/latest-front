@@ -43,6 +43,8 @@ export function DashboardHome() {
   const router = useRouter();
   const query = useSearchParams();
 
+  const currency = useAppSelector((state) => state.currency);
+
   const [expandedInfo, setExpandedInfo] = useState(true);
   const [programMatched, setProgramMatched] = useState<"YES" | "NO" | "NA">(
     "NA"
@@ -239,13 +241,16 @@ export function DashboardHome() {
     }
   };
   // Future Function non implemented
-  const handleStepperClick = (StepId: number) => {
-  };
+  const handleStepperClick = (StepId: number) => {};
   // Alert button props for completing profile
   const completeProfileAlertProps: AlertButtonProps = {
     buttonName: "Complete Profile",
     buttonClick: () => {
       analytics.websiteButtonInteractions({
+        location: {
+          countryName: currency?.currentCountry ?? "",
+          city: currency?.city ?? "",
+        },
         buttonName: "Complete Profile",
         source: "Clicked on complete profile button in dashboard page",
         urlPath: "/dashboard/profile/edit-profile",

@@ -8,10 +8,12 @@ import useCostConverterMain from "@/hooks/costConverterMain";
 import { analytics } from "@/services/analytics.service";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import applicationConfig from "@/config";
-import WiseAdmitDefault from "public/images/universities/wiseadmit_main.svg"
+import WiseAdmitDefault from "public/images/universities/wiseadmit_main.svg";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 function UniversityCard({ university }: { university: IUniversity }) {
   const router = useRouter();
+  const currency = useAppSelector((state) => state.currency);
 
   const getConvertedCost = useCostConverterMain();
   return (
@@ -22,15 +24,19 @@ function UniversityCard({ university }: { university: IUniversity }) {
       paddingBottom="24px"
       borderRadius="12px"
       onClick={() => {
-      	// window.open(`/universities/${university.slug}`);
-      	analytics.websiteButtonInteractions({
-      		buttonName: "University Info",
-      		source: `User clicked on ${university.name}`,
-      		urlPath: window.location.href,
-      		event_type: EAnalyticsEvents.UNIVERSITY,
-      		status: EAnalyticsStatus.SUCCESS,
-      		redirectPath: "",
-      	});
+        // window.open(`/universities/${university.slug}`);
+        analytics.websiteButtonInteractions({
+          location: {
+            countryName: currency?.currentCountry ?? "",
+            city: currency?.city ?? "",
+          },
+          buttonName: "University Info",
+          source: `User clicked on ${university.name}`,
+          urlPath: window.location.href,
+          event_type: EAnalyticsEvents.UNIVERSITY,
+          status: EAnalyticsStatus.SUCCESS,
+          redirectPath: "",
+        });
       }}
       sx={{
         cursor: "pointer",
@@ -53,7 +59,11 @@ function UniversityCard({ university }: { university: IUniversity }) {
                 borderRadius: "12px 12px 0px 0px",
               }}
               alt="University image"
-              src={university.cover_key ? `${applicationConfig.distributionKey}/${university.cover_key}` : WiseAdmitDefault.src}
+              src={
+                university.cover_key
+                  ? `${applicationConfig.distributionKey}/${university.cover_key}`
+                  : WiseAdmitDefault.src
+              }
             />
           </Box>
         ) : (

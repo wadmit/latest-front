@@ -24,6 +24,7 @@ import {
   ConfirmNewProfileModal,
   RemoveProfileWarningModal,
 } from "@/page-components/dashboard/profile/components/modals";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 type Props = {
   student?: IStudent;
@@ -43,6 +44,8 @@ const ProfileCard = ({ student }: Props) => {
   const open = Boolean(anchorEl);
 
   const id = open ? profileButtonId : undefined;
+
+  const currency = useAppSelector((state) => state.currency);
 
   const closeRemoveImageModal = () => {
     setRemoveImageModal(false);
@@ -170,6 +173,10 @@ const ProfileCard = ({ student }: Props) => {
             }}
             onClick={() => {
               analytics.websiteButtonInteractions({
+                location: {
+                  countryName: currency?.currentCountry ?? "",
+                  city: currency?.city ?? "",
+                },
                 buttonName: "Edit Profile",
                 source: "User clicked on Edit Profile to edit the information",
                 urlPath: window.location.href,

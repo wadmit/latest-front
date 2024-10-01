@@ -14,7 +14,7 @@ import {
   ApplicationImageDisplay,
   ApplicationUploadButton,
 } from "@/page-components/dashboard/applications/components";
-import { useAppDispatch } from "@/global-states/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/global-states/hooks/hooks";
 import { useSnackbar } from "notistack";
 import { DocumentContext } from "@/context/document-context";
 import { analytics } from "@/services/analytics.service";
@@ -42,6 +42,7 @@ const ApplicationDocumentsCard = ({
 }: Props) => {
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
+  const currency = useAppSelector((state) => state.currency);
 
   const { activeStep, reaskedDocuments } = useContext(DocumentContext);
 
@@ -201,6 +202,10 @@ const ApplicationDocumentsCard = ({
 
   const viewSample = (url: string) => {
     analytics.websiteButtonInteractions({
+      location: {
+        countryName: currency?.currentCountry ?? "",
+        city: currency?.city ?? "",
+      },
       buttonName: "View Sample Document",
       source: "Student clicked on view sample document icon",
       urlPath: window.location.href,

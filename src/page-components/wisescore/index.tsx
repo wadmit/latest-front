@@ -5,15 +5,21 @@ import React, { useState } from "react";
 import WiseScoreWelcome from "./WisescoreWelcome";
 import { WiseAdmitColorFulSvg } from "public/svg";
 import WiseScoreModal from "./WisescoreModal";
-
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 const WiseScoreHome = () => {
   const [showModal, setShowModal] = useState(false);
+
+  const currency = useAppSelector((state) => state.currency);
 
   const handleShowOrHideModel = () => {
     if (!showModal) {
       analytics.timeEvent(EAnalyticsEvents.WISESCORE_STARTED);
       analytics.websiteButtonInteractions({
+        location: {
+          countryName: currency?.currentCountry ?? "",
+          city: currency?.city ?? "",
+        },
         buttonName: "Let's Start",
         source: "User clicked on Lets Start button of wisescore first page",
         urlPath: window.location.href,

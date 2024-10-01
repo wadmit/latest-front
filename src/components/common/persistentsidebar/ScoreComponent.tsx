@@ -1,13 +1,12 @@
-import { useRouter } from 'next/navigation';
-import { monthShort } from './utils/provider';
-import React from 'react';
-import { useAppSelector } from '@/global-states/hooks/hooks';
-import { selectDashboardDataGlobal } from '@/global-states/reducers/userReducer';
-import { Box, CircularProgress, Stack, Typography } from '@mui/material';
-import { analytics } from '@/services/analytics.service';
-import { EAnalyticsEvents, EAnalyticsStatus } from '@/types/mix-panel-analytic';
-import ScoreGauge from '../score-gauge/ScoreGauge';
-
+import { useRouter } from "next/navigation";
+import { monthShort } from "./utils/provider";
+import React from "react";
+import { useAppSelector } from "@/global-states/hooks/hooks";
+import { selectDashboardDataGlobal } from "@/global-states/reducers/userReducer";
+import { Box, CircularProgress, Stack, Typography } from "@mui/material";
+import { analytics } from "@/services/analytics.service";
+import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
+import ScoreGauge from "../score-gauge/ScoreGauge";
 
 function ScoreComponent() {
   const router = useRouter();
@@ -18,15 +17,18 @@ function ScoreComponent() {
     [dashboardData?.score]
   );
 
+  const currency = useAppSelector((state) => state.currency);
+
   const getDateFromDate = React.useCallback(
     (date: Date | undefined): string => {
       if (date) {
         const localDate = new Date(date);
 
-        return `${localDate.getDate()} ${monthShort[localDate.getMonth()]
-          },${localDate.getFullYear()}`;
+        return `${localDate.getDate()} ${
+          monthShort[localDate.getMonth()]
+        },${localDate.getFullYear()}`;
       }
-      return '';
+      return "";
     },
     [dashboardData]
   );
@@ -58,9 +60,9 @@ function ScoreComponent() {
             <Typography
               variant="body1"
               sx={{
-                fontSize: '18px',
-                fontStyle: 'normal',
-                fontFamily: 'HankenGroteskRegular',
+                fontSize: "18px",
+                fontStyle: "normal",
+                fontFamily: "HankenGroteskRegular",
               }}
             >
               Your WiseScore®
@@ -70,7 +72,7 @@ function ScoreComponent() {
               color="var(--gray-600, #627D98)"
               variant="subtitle2"
             >
-              Checked on:{' '}
+              Checked on:{" "}
               {getDateFromDate(dashboardData?.latestWisescoreCheckDate)}
             </Typography>
           </Stack>
@@ -94,27 +96,32 @@ function ScoreComponent() {
               justifyContent="center"
               alignItems="center"
               sx={{
-                borderRadius: '4px',
-                border: '1px solid #83868B',
-                padding: '4px 8px 0px 8px',
-                width: '150px',
-                height: '36px',
-                cursor: 'pointer',
+                borderRadius: "4px",
+                border: "1px solid #83868B",
+                padding: "4px 8px 0px 8px",
+                width: "150px",
+                height: "36px",
+                cursor: "pointer",
               }}
               onClick={() => {
-                router.push('/dashboard/wisescore')
+                router.push("/dashboard/wisescore");
                 analytics.websiteButtonInteractions({
+                  location: {
+                    countryName: currency.currentCountry,
+                    city: currency.city,
+                  },
                   buttonName: `${score > 0} ? Recheck : Check WiseScore® `,
-                  source: `User has clicked on ${score > 0 ? 'Recheck' : 'Check WiseScore®'} from Student dashboard sidebar`,
+                  source: `User has clicked on ${
+                    score > 0 ? "Recheck" : "Check WiseScore®"
+                  } from Student dashboard sidebar`,
                   urlPath: window.location.href,
                   event_type: EAnalyticsEvents.FIND_SCHOLARSHIP_NOW,
                   status: EAnalyticsStatus.SUCCESS,
-                  redirectPath: ''
+                  redirectPath: "",
                 });
-              }
-              }
+              }}
             >
-              {score > 0 ? 'Recheck' : 'Check WiseScore®'}
+              {score > 0 ? "Recheck" : "Check WiseScore®"}
             </Box>
           </Stack>
         </Stack>

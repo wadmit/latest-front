@@ -11,11 +11,13 @@ import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import Cookies from "js-cookie";
 import applicationConfig from "@/config";
 import { WiseAdmitDefault } from "public/svg";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 function ProgramHeader({ isFoundation }: { isFoundation?: boolean }) {
   const program = useContext(ProgramsDetailContext);
   const router = useRouter();
   const imageUrl = applicationConfig.distributionKey;
+  const currency = useAppSelector((state) => state.currency);
 
   return (
     <Box>
@@ -96,6 +98,10 @@ function ProgramHeader({ isFoundation }: { isFoundation?: boolean }) {
             onClick={() => {
               try {
                 analytics.websiteButtonInteractions({
+                  location: {
+                    countryName: currency?.currentCountry ?? "",
+                    city: currency?.city ?? "",
+                  },
                   buttonName: "Start Application",
                   source: `Clicked on start application from program header of ${program?.name}`,
                   urlPath: window.location.href,

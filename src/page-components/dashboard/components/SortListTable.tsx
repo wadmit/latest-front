@@ -91,12 +91,17 @@ function ShortListTable({
   );
   const country = useAppSelector((state) => state.currency.currentCountry);
   const city = useAppSelector((state) => state.currency.city);
+  const currency = useAppSelector((state) => state.currency);
 
   const { mutate: deleteShortlist } = useMutation({
     mutationFn: async (programId: string) => await deleteSortlist(programId),
     onSuccess: (res) => {
       dispatch(removeShortlistedProgram(res));
       analytics.websiteButtonInteractions({
+        location: {
+          countryName: currency?.currentCountry ?? "",
+          city: currency?.city ?? "",
+        },
         buttonName: "Delete Shortlist",
         source: `Deleted shortlisted application from shortlist table`,
         urlPath: window.location.href,
@@ -154,7 +159,7 @@ function ShortListTable({
   };
 
   const { mutate: startApplications, isPending } = useMutation({
-    mutationFn:()=>createApplication(Shortlists.map((s) => s.id)),
+    mutationFn: () => createApplication(Shortlists.map((s) => s.id)),
     onSuccess: (res: any) => {
       afterStartingApplicationSuccess(res?.data.data as IApplication[]);
     },
@@ -420,6 +425,10 @@ function ShortListTable({
             variant="contained"
             onClick={() => {
               analytics.websiteButtonInteractions({
+                location: {
+                  countryName: currency?.currentCountry ?? "",
+                  city: currency?.city ?? "",
+                },
                 buttonName: "Start Applications",
                 source: "Student has started an application",
                 urlPath: window.location.href,

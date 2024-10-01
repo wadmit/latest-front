@@ -68,6 +68,7 @@ export default function SortedUniPageComponentDashboard() {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const userData = useAppSelector(selectDashboardDataGlobal);
+  const currency = useAppSelector((state) => state.currency);
 
   const [isDataResolved, setIsDataResolved] = useState(false);
   const [isMedicalFromNepal, setIsMedicalFromNepal] = useState(false);
@@ -441,6 +442,10 @@ export default function SortedUniPageComponentDashboard() {
           }}
           onClick={() => {
             analytics.websiteButtonInteractions({
+              location: {
+                countryName: currency?.currentCountry ?? "",
+                city: currency?.city ?? "",
+              },
               buttonName: "Get career pathway",
               source: "User clicked on get career pathway button",
               urlPath: window.location.href,
@@ -628,10 +633,15 @@ export default function SortedUniPageComponentDashboard() {
                       source: `${name} has been selected in student dashboard`,
                     });
                     // analytics.websiteButtonInteractions({
-                    //     buttonName: "Country Button",
-                    //     source: `${name} has been selected in student dashboard`,
-                    //     urlPath: window.location.href
-                    // })
+                    //   location: {
+                    //     countryName: currency?.currentCountry ?? "",
+                    //     city: currency?.city ?? "",
+                    //   },
+                    //   event_type:
+                    //   buttonName: "Country Button",
+                    //   source: `${name} has been selected in student dashboard`,
+                    //   urlPath: window.location.href,
+                    // });
                     handleCountryClick(name);
                   }}
                   border={

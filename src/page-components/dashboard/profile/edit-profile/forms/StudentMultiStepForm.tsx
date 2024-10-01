@@ -55,20 +55,16 @@ const StudentMultiStepForm = ({
   firstPage,
   secondPage,
   thirdPage,
-  loadingPage,
   formHeader,
   steps,
   initialValues,
-  validationSchema,
-  submitEndpoint,
 }: MultiStepFormProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const dispatch = useAppDispatch();
   const dashboardData = useAppSelector(selectDashboardDataGlobal);
 
-  const country = useAppSelector((state) => state.currency.currentCountry);
-  const city = useAppSelector((state) => state.currency.city);
+  const currency = useAppSelector((state) => state.currency);
   const [activeStep, setActiveStep] = useState(0);
 
   const [completed, setCompleted] = useState<{
@@ -99,13 +95,18 @@ const StudentMultiStepForm = ({
         if (pathname.startsWith("/dashboard/profile/edit-profile")) {
           router.push("/dashboard");
           setSubmitted(true);
-          // analytics.websiteButtonInteractions({
-          //   buttonName: 'Edit Profile',
-          //   source: 'Updated entire student profile information',
-          //   urlPath: window.location.href,
-          //   event_type: EAnalyticsEvents.EDIT_PROFILE_COMPLETE,
-          //   status: EStatus.SUCCESS,
-          // });
+          analytics.websiteButtonInteractions({
+            location: {
+              countryName: currency?.currentCountry ?? "",
+              city: currency?.city ?? "",
+            },
+            redirectPath: window.location.href,
+            buttonName: "Edit Profile",
+            source: "Updated entire student profile information",
+            urlPath: window.location.href,
+            event_type: EAnalyticsEvents.EDIT_PROFILE_COMPLETE,
+            status: EAnalyticsStatus.SUCCESS,
+          });
         } else {
           // -------email trigger api-----------------
           request({
@@ -165,6 +166,10 @@ const StudentMultiStepForm = ({
       );
       mutate(filteredPostData);
       analytics.websiteButtonInteractions({
+        location: {
+          countryName: currency?.currentCountry ?? "",
+          city: currency?.city ?? "",
+        },
         buttonName: "Edit Profile",
         source: `Updated ${steps[activeStep]} profile`,
         urlPath: window.location.href,

@@ -15,6 +15,7 @@ import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import ProgramUniversityHeader from "@/components/common/program-university-components/ProgramUniversityHeader";
 import { useUniversitys } from "@/hooks/useUniversitys";
 import Image from "next/image";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 const UniversityHome = ({
   universities,
@@ -26,6 +27,8 @@ const UniversityHome = ({
     total: number;
   };
 }) => {
+  const currency = useAppSelector((state) => state.currency);
+
   const {
     isLoading,
     isSearchButtonLoading,
@@ -120,7 +123,12 @@ const UniversityHome = ({
                       >
                         Sort
                       </Typography>
-                      <Image height={20} width={20} src="/images/common/sort.webp" alt="sort" />
+                      <Image
+                        height={20}
+                        width={20}
+                        src="/images/common/sort.webp"
+                        alt="sort"
+                      />
                     </Box>
                   </Button>
                 </Box>
@@ -170,6 +178,10 @@ const UniversityHome = ({
                         setSortDirection("asc");
                         fetchNextUniversities();
                         analytics.websiteButtonInteractions({
+                          location: {
+                            countryName: currency?.currentCountry ?? "",
+                            city: currency?.city ?? "",
+                          },
                           buttonName: "See More",
                           pageName: "Universities",
                           source:

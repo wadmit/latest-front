@@ -19,26 +19,26 @@ export const socket = new CustomSocket();
 export const middlewares = [thunk];
 
 export const makeStore = () => {
-	return configureStore({
-		reducer: {
-			eligibility: eligibilityReducer,
-			user: userReducer,
-			payment: paymentReducer,
-			additionalForm: additionalFormReducer,
-			countryList: countryListReducer,
-			applications: applicationReducer,
-			topMatches: topMatchesReducer,
-			currency: currencyReducer,
-			applicationDocuments: userApplicationDocumentsReducer,
-			wisescore: wiseScoreReducer,
-			universityList: universityCountryListReducer,
-			socket: socketSlice,
-		},
-		middleware: (getDefaultMiddleware) =>
-			getDefaultMiddleware({
-				serializableCheck: false,
-			}).concat(middlewares),
-	});
+  return configureStore({
+    reducer: {
+      eligibility: eligibilityReducer,
+      user: userReducer,
+      payment: paymentReducer,
+      additionalForm: additionalFormReducer,
+      countryList: countryListReducer,
+      applications: applicationReducer,
+      topMatches: topMatchesReducer,
+      currency: currencyReducer,
+      applicationDocuments: userApplicationDocumentsReducer,
+      wisescore: wiseScoreReducer,
+      universityList: universityCountryListReducer,
+      socket: socketSlice,
+    },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }).concat(middlewares),
+  });
 };
 
 // Infer the type of makeStore

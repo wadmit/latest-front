@@ -143,9 +143,14 @@ function ProgramsSubCard({
           source: `User has clicked on Apply Now button from the wisescore result page for ${program.name} of ${univerisity.name}. Score: ${wisescore}`,
         });
         // analytics.websiteButtonInteractions({
+        //   location: {
+        //     countryName: currency?.currentCountry,
+        //     city: currency?.city,
+        //   },
+        //   redirectPath:
         //   buttonName: "Apply Now",
-        //   source: `${program.name} of ${univerisity.name} has been applied by ${userData?.data?.first_name}`
-        // })
+        //   source: `${program.name} of ${univerisity.name} has been applied by ${userData?.data?.first_name}`,
+        // });
       } else {
         alert("Already Shortlisted");
       }

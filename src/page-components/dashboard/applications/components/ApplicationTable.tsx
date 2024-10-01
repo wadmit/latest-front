@@ -75,9 +75,8 @@ const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
   );
 
   const [showPaymentOptions, setShowPaymentOptions] = useState<boolean>(false);
-  const currentCountry = useAppSelector(
-    (state) => state.currency.currentCountry
-  );
+  const currency = useAppSelector((state) => state.currency);
+
   const userApplications = useAppSelector(
     (state) => state.applications.applications
   );
@@ -237,6 +236,10 @@ const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
       );
       mutate(id);
       analytics.websiteButtonInteractions({
+        location: {
+          countryName: currency?.currentCountry ?? "",
+          city: currency?.city ?? "",
+        },
         buttonName: "Remove Application",
         source: `User has deleted an shortlisted application for program: ${deletedApplication?.program?.name} after application has been started`,
         urlPath: window.location.href,
@@ -259,12 +262,16 @@ const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     // Create a Checkout Session.
-    if (currentCountry === "Nepal") {
+    if (currency?.currentCountry === "Nepal") {
       setShowPaymentOptions(true);
       return;
     }
     paymentMutate({ formValues: selectedApplications, type: "multiple" });
     analytics.websiteButtonInteractions({
+      location: {
+        countryName: currency?.currentCountry ?? "",
+        city: currency?.city ?? "",
+      },
       buttonName: "Pay",
       source:
         "User has clicked on Continue To Payment button and started the application payment process for programs",

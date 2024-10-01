@@ -16,6 +16,7 @@ import { usePrograms } from "@/hooks";
 import type { IProgram } from "@/types/program";
 import ProgramUniversityHeader from "@/components/common/program-university-components/ProgramUniversityHeader";
 import Image from "next/image";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 const ProgramHome = ({
   programs,
@@ -40,6 +41,7 @@ const ProgramHome = ({
   const [sortedPrograms, setSortedrograms] = useState<IProgram[]>(programsData);
 
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
+  const currency = useAppSelector((state) => state.currency);
 
   const handleSort = () => {
     const sortedData = [...programsData];
@@ -124,7 +126,12 @@ const ProgramHome = ({
                       >
                         Sort
                       </Typography>
-                      <Image height={20} width={20} src="/images/common/sort.webp" alt="sort" />
+                      <Image
+                        height={20}
+                        width={20}
+                        src="/images/common/sort.webp"
+                        alt="sort"
+                      />
                     </Box>
                   </Button>
                 </Box>
@@ -169,6 +176,10 @@ const ProgramHome = ({
                       }}
                       onClick={() => {
                         analytics.websiteButtonInteractions({
+                          location: {
+                            countryName: currency?.currentCountry ?? "",
+                            city: currency?.city ?? "",
+                          },
                           buttonName: "See More Programs",
                           source:
                             "User has clicked on See more Universities button from University page",
