@@ -48,6 +48,7 @@ import { IconWrapper } from "@/components/common/icon-wrapper/IconWrapper";
 
 export default function SortedUniversitiesPageComponent() {
   const UniversityComponentRef = useRef<HTMLDivElement>(null);
+  const currency = useAppSelector((state) => state.currency);
   const getConvertedCosts = useCostConverterMain();
   // check if mobile
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -230,7 +231,6 @@ export default function SortedUniversitiesPageComponent() {
 
   const countries = [{ name: "China" }, { name: "Korea" }];
 
-  const currency = useAppSelector((state) => state.currency);
 
   const handleCountryClick = (name: string) => {
     setActiveCountry(name);
