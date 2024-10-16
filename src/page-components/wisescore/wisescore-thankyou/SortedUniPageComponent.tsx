@@ -49,56 +49,42 @@ import { IconWrapper } from "@/components/common/icon-wrapper/IconWrapper";
 export default function SortedUniversitiesPageComponent() {
   const UniversityComponentRef = useRef<HTMLDivElement>(null);
   const getConvertedCosts = useCostConverterMain();
-  // check if mobile
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const currency = useAppSelector((state) => state.currency);
   const [isDataResolved, setIsDataResolved] = useState(false);
   const [isMedicalFromNepal, setIsMedicalFromNepal] = useState(false);
   const [scoreData, setScoreData] = useState<number>(0);
   const [filteredPrograms, setFilteredPrograms] = useState<any>([]);
   const [activeCountry, setActiveCountry] = useState("China");
-
   const [responseEligibility, setResponseEligibility] = useState<any>();
-  const [updatedSubDiscipline, setUpdatedSubDiscipline] = useState<string[]>(
-    []
-  );
+  const [updatedSubDiscipline, setUpdatedSubDiscipline] = useState<string[]>([]);
 
   const router = useRouter();
-
   const dispatch = useAppDispatch();
-  const applications = useAppSelector(
-    (state) => state.applications.applications
-  );
+  const applications = useAppSelector((state) => state.applications.applications);
 
-  // Todo: Enable this after implementing login
-  const data = useCustomQuery({
+  // Fetch applications with query
+  const { data } = useCustomQuery({
     queryKey: [CacheConfigKey.APPLICATION_GET_QUERY_KEY],
     queryFn: () => getApplications(),
     onSuccess: (data) => {
-      dispatch(
-        setUserApplications({
-          data: data,
-        })
-      );
+      dispatch(setUserApplications({ data }));
     },
     refetchOnWindowFocus: false,
     enabled: applications && applications.length < 1,
   });
 
+  // Mutation to handle WISE score data
   const { mutate, error, isPending, isError } = useMutation({
     mutationFn: (email: string) => postWiseScoreData(email),
     onSuccess: (res: any) => {
       if (res.eligibility) {
         setResponseEligibility(res.eligibility);
       }
-      if (res.isMedicalFromNepal) {
-        setIsMedicalFromNepal(true);
-      } else {
-        setIsMedicalFromNepal(false);
-      }
+      setIsMedicalFromNepal(!!res.isMedicalFromNepal);
       setFilteredPrograms(res?.universities ?? []);
       setIsDataResolved(true);
-      const score = parseInt(res.score, 10);
-      setScoreData(score);
+      setScoreData(parseInt(res.score, 10));
 
       analytics.trackEvent(EAnalyticsEvents.WISESCORE_RESULT, {
         name: res.data.data.name,
@@ -106,55 +92,39 @@ export default function SortedUniversitiesPageComponent() {
         phone: res.data.data.phone,
         score: res.data.data.score,
       });
-      // analytics.trackEvent(EAnalyticsEvents.WISESCORE_RESULT, {
-      //   [EFieldName.SCORE]: res.score,
-      // });
     },
-    onError: (err: any) => {
-      // localStorage.removeItem('email');
+    onError: () => {
       setIsDataResolved(true);
     },
   });
 
-  // //   Searches for a university named 'Nanjing University Of Aeronautics & Astronautics'
-  // //   from the universities list in the response.If it exists, it removes this university
-  // //   from the list, adds it back to the beginning of the list, and updates setFilteredPrograms
-  // //    with the new list.If it doesn't exist, it just updates setFilteredPrograms with the universities list from the response.
-  // // Sets setIsDataResolved to true, indicating that the data has been processed
-
-  const { mutate: mutateNewEligibility, isPending: calculateAgainLoad } =
-    useMutation({
-      mutationFn: (data: any) => submitWiseScore(data),
-      onSuccess: (res: any) => {
-        if (res.eligibility) {
-          setResponseEligibility(res.eligibility);
-        }
-        // setIsDataResolved(false)
-        setFilteredPrograms([]);
-        mutate(responseEligibility.email);
-      },
-      onError: (err: any) => {
-        alert("Process Failed");
-      },
-    });
-  const {
-    data: subDisciplines,
-    isLoading: subDisciplinesLoading,
-    refetch,
-    isRefetching,
-  } = useQuery({
-    queryKey: [
-      CacheConfigKey.SUBDISCIPLINES_QUERY_KEY,
-      responseEligibility?.discipline,
-    ],
-    queryFn: () => getSubDisciplines(responseEligibility?.discipline),
-    enabled: responseEligibility !== undefined,
+  // Handle eligibility recalculation
+  const { mutate: mutateNewEligibility, isPending: calculateAgainLoad } = useMutation({
+    mutationFn: (data: any) => submitWiseScore(data),
+    onSuccess: (res: any) => {
+      if (res.eligibility) {
+        setResponseEligibility(res.eligibility);
+      }
+      setFilteredPrograms([]);
+      mutate(responseEligibility.email);
+    },
+    onError: () => {
+      alert("Process Failed");
+    },
   });
 
-  const calculateWisescoreAgain = async () => {
+  // Fetch sub-disciplines based on eligibility
+  const { data: subDisciplines, isLoading: subDisciplinesLoading, refetch, isRefetching } = useQuery({
+    queryKey: [CacheConfigKey.SUBDISCIPLINES_QUERY_KEY, responseEligibility?.discipline],
+    queryFn: () => getSubDisciplines(responseEligibility?.discipline),
+    enabled: !!responseEligibility,
+  });
+
+  // Trigger WISE score recalculation
+  const calculateWisescoreAgain = () => {
     mutateNewEligibility({
       ...responseEligibility,
-      discipline: responseEligibility.discipline,
+      discipline: responseEligibility?.discipline,
       sub_disciplines: updatedSubDiscipline,
     });
   };
@@ -162,7 +132,6 @@ export default function SortedUniversitiesPageComponent() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // dispatch(setEligibilityFormData(''));
     const email = localStorage.getItem("email");
     if (email) {
       mutate(email);
@@ -173,11 +142,14 @@ export default function SortedUniversitiesPageComponent() {
     }
   }, [pathname]);
 
+  // No data available message
   const noEligibilityData = {
     title: "Data Not Available",
     desc: "First check WiseScore® to get the list of sorted universities",
     btnText: " Click To Check Your WiseScore®",
   };
+
+  // No match found message
   const noMatchFoundData = {
     title: "No Match Found",
     desc: "",
@@ -186,13 +158,7 @@ export default function SortedUniversitiesPageComponent() {
 
   if (!isDataResolved) {
     return (
-      <Box
-        bgcolor="common.white"
-        borderRadius={1}
-        pt={5}
-        pb={9.5}
-        minHeight="80vh"
-      >
+      <Box bgcolor="common.white" borderRadius={1} pt={5} pb={9.5} minHeight="80vh">
         <Stack direction="row" justifyContent="center">
           <Loader />
           <Typography variant="h6" sx={{ ml: 2 }} color="primary">
@@ -205,21 +171,12 @@ export default function SortedUniversitiesPageComponent() {
 
   if ((!scoreData || scoreData === 0) && filteredPrograms.length === 0) {
     return (
-      <Box
-        bgcolor="common.white"
-        borderRadius={1}
-        pt={2}
-        pb={9.5}
-        minHeight="80vh"
-      >
-        <WaitingScreen
-          title={noEligibilityData.title}
-          desc={noEligibilityData.desc}
-          btnText={noEligibilityData.btnText}
-        />
+      <Box bgcolor="common.white" borderRadius={1} pt={2} pb={9.5} minHeight="80vh">
+        <WaitingScreen title={noEligibilityData.title} desc={noEligibilityData.desc} btnText={noEligibilityData.btnText} />
       </Box>
     );
   }
+
   const statuses = filterStatus(scoreData);
 
   function scrollToSection(ref: React.RefObject<HTMLDivElement>) {
@@ -229,9 +186,6 @@ export default function SortedUniversitiesPageComponent() {
   }
 
   const countries = [{ name: "China" }, { name: "Korea" }];
-
-  const currency = useAppSelector((state) => state.currency);
-
   const handleCountryClick = (name: string) => {
     setActiveCountry(name);
   };
@@ -427,8 +381,8 @@ export default function SortedUniversitiesPageComponent() {
             onClick={() => {
               analytics.websiteButtonInteractions({
                 location: {
-                  countryName: currency?.currentCountry ?? "",
-                  city: currency?.city ?? "",
+                  countryName:   "",
+                  city:   "",
                 },
                 buttonName: "Get career pathway",
                 source: "User clicked on get career pathway button",

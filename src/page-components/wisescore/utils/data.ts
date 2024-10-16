@@ -69,6 +69,7 @@ export const getMainFields = (
       showValidation: true,
       eventName: EAnalyticsEvents.WISESCORE_PROGRAM_SELECTION,
       multiple: version !== "NuaaScore",
+      
     },
     {
       screenHeader: "What stream do you want to pursue?",

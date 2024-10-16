@@ -3,7 +3,7 @@ import WiseScoreDetailsContext from "@/context/wisescore-context";
 import { useAppDispatch, useAppSelector } from "@/global-states/hooks/hooks";
 import { setSubmitFormData } from "@/global-states/reducers/wisescore";
 import { analytics } from "@/services/analytics.service";
-import { EAnalyticsEvents } from "@/types/mix-panel-analytic";
+import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import { IWisescoreForm } from "@/types/wisescore";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import {
@@ -36,6 +36,7 @@ const WiseScoreComponent = () => {
 	const overAllGrade = useAppSelector((state) => state.wisescore.overallGrade);
 	const ref = useRef<HTMLButtonElement>(null);
 	const [xAxisProperty, setXAxisProperty] = useState<"100%" | "-100%">("100%");
+	const currency = useAppSelector((state) => state.currency);
 	// for jumping from one screens to another
 	const { endPoint, version } = useContext(WiseScoreDetailsContext);
 	const MainFields = getMainFields(version, overAllGrade);
@@ -101,6 +102,19 @@ const WiseScoreComponent = () => {
 			await clearErrors(formik);
 			ref.current?.click();
 			setIsSubmitting(true);
+			analytics.websiteButtonInteractions({
+				buttonName: "Submit",
+				source: "User clicked on Submit button of wisescore",
+				event_type: ScreensMapping[steps].eventName ?? EAnalyticsEvents.WEBSITE_BUTTON_INTERACTIONS,
+				status: EAnalyticsStatus.SUCCESS,
+				redirectPath: "",
+				location:{
+					countryName: currency?.currentCountry ?? "",
+					city: currency?.city ?? "",
+				},
+				urlPath: window.location.href,
+			});
+
 			return;
 		}
 		// this was necessary for v1 so it wont hamper any code right now so don't worry don't touch
@@ -124,9 +138,32 @@ const WiseScoreComponent = () => {
 			if (steps === 0) {
 				setSteps((prev) => prev + 1);
 				setLinearStep((prev) => prev + 1);
-
+				analytics.websiteButtonInteractions({
+					buttonName: ScreensMapping[steps].value,
+					source: `User clicked on Next button of wisescore on ${ScreensMapping[steps].value}`,
+					event_type: ScreensMapping[steps].eventName ?? EAnalyticsEvents.WEBSITE_BUTTON_INTERACTIONS,
+					status: EAnalyticsStatus.SUCCESS,
+					redirectPath: "",
+					location:{
+						countryName: currency?.currentCountry ?? "",
+						city: currency?.city ?? "",
+					},
+					urlPath: window.location.href,
+				});
 				return;
 			}
+			analytics.websiteButtonInteractions({
+				buttonName: ScreensMapping[steps].value,
+				source: `User clicked on Next button of wisescore on ${ScreensMapping[steps].value}`,
+				event_type: ScreensMapping[steps].eventName ?? EAnalyticsEvents.WEBSITE_BUTTON_INTERACTIONS,
+				status: EAnalyticsStatus.SUCCESS,
+				redirectPath: "",
+				location:{
+					countryName: currency?.currentCountry ?? "",
+					city: currency?.city ?? "",
+				},
+				urlPath: window.location.href
+			});
 			setSteps((prev) => prev + ScreensMapping[steps].skipStep);
 		}
 		setLinearStep((prev) => prev + 1);
