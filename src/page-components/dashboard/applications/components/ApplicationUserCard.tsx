@@ -1,7 +1,7 @@
 "use client";
 import React, { useMemo, useState } from "react";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { useAppSelector } from "@/global-states/hooks/hooks";
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useAppDispatch, useAppSelector } from "@/global-states/hooks/hooks";
 import { Avatar, Box, Card, Divider, Stack, Typography } from "@mui/material";
 import Loader from "@/components/common/circular-loader/Loader";
 import { useCustomQuery } from "@/hooks/useCustomQuery";
@@ -13,6 +13,8 @@ import {
   ApplicationStatus,
 } from "@/page-components/dashboard/applications/components";
 import { PaymentButtonProps } from "@/page-components/dashboard/applications/types";
+import { useSnackbar } from "notistack";
+import { setStatusWhenPaid } from "@/global-states/reducers/applicationReducer";
 
 type Props = {
   status: string;
@@ -29,27 +31,35 @@ const ApplicationUserCard = ({
   buttonProps,
   isPaymentLoading,
 }: Props) => {
+  const dispatch= useAppDispatch();
   const router = useRouter();
   const searchParams = useSearchParams();
   const params = useParams();
-
-  const applicationId = params.applicationId;
-
-  const { data: esewaData, isLoading: esewaVerificationLoading } =
-    useCustomQuery({
-      queryKey: ["esewaVerify"],
-      queryFn: () => paymentEsewaVerify((params.applicationId as string) ?? ""),
-      onSuccess: (data) => {
-        router.replace(`/dashboard/applications/${applicationId}`);
-      },
-      //   onError: (error) => {
-      //     enqueueSnackbar("Payment verification failed", { variant: "error" });
-      //     router.replace(`/dashboard/applications/${applicationId}`);
-      //   },
-      //   enabled: params && !!params.applicationId,
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-    });
+  const pathname = usePathname();
+  const applicationId = params.applicationId as string;
+  const { enqueueSnackbar } = useSnackbar();
+  const [isPaymentProcessed, setIsPaymentProcessed] = useState(false);
+  const { data: esewaData, isLoading: esewaVerificationLoading } = useCustomQuery({
+    queryKey: ["esewaVerify"],
+    queryFn: () => paymentEsewaVerify((searchParams.get("data") as string) ?? ""),
+    onSuccess: (data) => {
+      if (!isPaymentProcessed) {
+        const params = new URLSearchParams(searchParams.toString())
+        params.set("data", "")
+        router.push(pathname + `?${params.toString()}`);
+        setIsPaymentProcessed(true);
+        dispatch(setStatusWhenPaid({}));
+      }
+    },
+    onError: (error) => {
+      enqueueSnackbar("Payment verification failed", { variant: "error" });
+      router.replace(`/dashboard/applications/${applicationId}`);
+    },
+    enabled: searchParams && !!searchParams.get("data"),
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  });
+  
 
   const [buttonText, setButtonText] = useState(displayText);
   const applications = useAppSelector(

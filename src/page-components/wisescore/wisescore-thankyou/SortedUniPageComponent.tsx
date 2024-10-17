@@ -45,8 +45,10 @@ import {
   submitWiseScore,
 } from "@/api/web/wisescore.action";
 import { IconWrapper } from "@/components/common/icon-wrapper/IconWrapper";
+import { getSession } from "next-auth/react";
+import { auth } from "@/auth/auth";
 
-export default function SortedUniversitiesPageComponent() {
+export default async  function SortedUniversitiesPageComponent() {
   const UniversityComponentRef = useRef<HTMLDivElement>(null);
   const currency = useAppSelector((state) => state.currency);
   const getConvertedCosts = useCostConverterMain();
@@ -62,7 +64,7 @@ export default function SortedUniversitiesPageComponent() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const applications = useAppSelector((state) => state.applications.applications);
-
+  // const session = await getSession();
   // Fetch applications with query
   const { data } = useCustomQuery({
     queryKey: [CacheConfigKey.APPLICATION_GET_QUERY_KEY],
@@ -71,7 +73,7 @@ export default function SortedUniversitiesPageComponent() {
       dispatch(setUserApplications({ data }));
     },
     refetchOnWindowFocus: false,
-    enabled: applications && applications.length < 1,
+    enabled: applications && applications.length < 1 
   });
 
   // Mutation to handle WISE score data
