@@ -1,7 +1,5 @@
 import { EAnalyticsFieldName } from "@/types/mix-panel-analytic";
 import * as Yup from "yup";
-import { RequiredStringSchema } from "yup/lib/string";
-import { AnyObject, Maybe } from "yup/lib/types";
 
 // declare module "yup" {
 //   interface StringSchema<
