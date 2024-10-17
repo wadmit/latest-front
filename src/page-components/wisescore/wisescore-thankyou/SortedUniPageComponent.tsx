@@ -48,9 +48,9 @@ import { IconWrapper } from "@/components/common/icon-wrapper/IconWrapper";
 
 export default function SortedUniversitiesPageComponent() {
   const UniversityComponentRef = useRef<HTMLDivElement>(null);
+  const currency = useAppSelector((state) => state.currency);
   const getConvertedCosts = useCostConverterMain();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const currency = useAppSelector((state) => state.currency);
   const [isDataResolved, setIsDataResolved] = useState(false);
   const [isMedicalFromNepal, setIsMedicalFromNepal] = useState(false);
   const [scoreData, setScoreData] = useState<number>(0);
