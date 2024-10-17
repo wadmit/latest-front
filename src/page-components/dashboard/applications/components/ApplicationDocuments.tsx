@@ -33,6 +33,7 @@ const ApplicationDocuments = ({ status, activeStep }: Props) => {
   const applications = useAppSelector(
     (state) => state.applications.singleApplication
   );
+  const currency = useAppSelector((state) => state.currency);
 
   // logic to implement that select all the documents from applications and distributed them in the documents wrapper component according to number of type of documents
   const documents = applications?.documents;
@@ -80,6 +81,10 @@ const ApplicationDocuments = ({ status, activeStep }: Props) => {
       boxRef?.current?.scrollIntoView(true);
       document.getElementById("box_container")?.scrollIntoView(true);
       analytics.websiteButtonInteractions({
+        location: {
+          countryName: currency?.currentCountry ?? "",
+          city: currency?.city ?? "",
+        },
         buttonName: "Submit",
         source: `User has submitted their application for Program: ${applications.program?.name} of University: ${applications.university.name}`,
         urlPath: `${process.env.NEXT_PUBLIC_PARTNER_URL}/${applications.id}`,

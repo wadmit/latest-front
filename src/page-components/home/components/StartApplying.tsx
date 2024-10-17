@@ -5,10 +5,14 @@ import Image from "next/image";
 import { analytics } from "@/services/analytics.service";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import { StartApplyStyledContainerWrapper } from "@/page-components/home/styled-components";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 function StartApplying() {
   const isMobile = useMediaQuery("(max-width:440px)");
   const router = useRouter();
+
+  const currency = useAppSelector((state) => state.currency);
+
   return (
     <Box
       position="relative"
@@ -101,6 +105,10 @@ function StartApplying() {
             }}
             onClick={() => {
               analytics.websiteButtonInteractions({
+                location: {
+                  countryName: currency?.currentCountry ?? "",
+                  city: currency?.city ?? "",
+                },
                 buttonName: "Apply Now",
                 source: "Clicked on Apply Now from Home Page",
                 urlPath: window.location.href,

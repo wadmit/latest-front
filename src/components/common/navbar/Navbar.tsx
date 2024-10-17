@@ -6,19 +6,23 @@ import { RootContainer } from "@/components/common";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import { analytics } from "@/services/analytics.service";
 import Link from "next/link";
-import { WiseAdmitColorFulSvg2 } from "$/svg/index";
+import { WiseAdmitColorFulSvg2 } from "public/svg/index";
 import { CloseIcon } from "@/components/common";
 import { SubMenuItemMobile, SubMenuItems } from "@/components/common";
 import { ButtonWrapper } from "@/components/common";
 import { DrawerWrapper } from "@/components/common";
 import { DeleteForever, MenuRounded } from "@mui/icons-material";
 import { navbarLinks } from "@/components/common";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 export function Navbar() {
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const isMobile = useMediaQuery("(max-width: 1000px)");
   const [showDrawer, setShowDrawer] = useState(false);
+
+  const currency = useAppSelector((state) => state.currency);
+
   return (
     <div
       style={{
@@ -110,11 +114,15 @@ export function Navbar() {
                     page: "Login",
                   });
                   analytics.navigationSelect(
+                    {
+                      countryName: currency?.currentCountry ?? "",
+                      city: currency?.city ?? "",
+                    },
                     "Login",
                     window.location.href,
                     EAnalyticsEvents.NAVIGATION_CLICK,
                     EAnalyticsStatus.SUCCESS,
-                    "",
+                    ""
                   );
                   router.push("/applynow");
                 }}
@@ -142,11 +150,15 @@ export function Navbar() {
                     page: "Apply Now",
                   });
                   analytics.navigationSelect(
+                    {
+                      countryName: currency?.currentCountry ?? "",
+                      city: currency?.city ?? "",
+                    },
                     "Apply Now",
                     window.location.href,
                     EAnalyticsEvents.NAVIGATION_CLICK,
                     EAnalyticsStatus.SUCCESS,
-                    "",
+                    ""
                   );
                   router.push("/applynow?signUp=true");
                 }}
@@ -186,11 +198,15 @@ export function Navbar() {
                 page: "Home",
               });
               analytics.navigationSelect(
+                {
+                  countryName: currency?.currentCountry ?? "",
+                  city: currency?.city ?? "",
+                },
                 "Home",
                 window.location.href,
                 EAnalyticsEvents.NAVIGATION_CLICK,
                 EAnalyticsStatus.SUCCESS,
-                "",
+                ""
               );
               router.push("/");
               setShowDrawer(false);
@@ -209,11 +225,15 @@ export function Navbar() {
                 page: "Login",
               });
               analytics.navigationSelect(
+                {
+                  countryName: currency?.currentCountry ?? "",
+                  city: currency?.city ?? "",
+                },
                 "Login",
                 window.location.href,
                 EAnalyticsEvents.NAVIGATION_CLICK,
                 EAnalyticsStatus.SUCCESS,
-                "",
+                ""
               );
               router.push("/applynow");
               setShowDrawer(false);
@@ -257,11 +277,15 @@ export function Navbar() {
                 page: "Apply Now",
               });
               analytics.navigationSelect(
+                {
+                  countryName: currency?.currentCountry ?? "",
+                  city: currency?.city ?? "",
+                },
                 "Apply Now",
                 window.location.href,
                 EAnalyticsEvents.NAVIGATION_CLICK,
                 EAnalyticsStatus.SUCCESS,
-                "",
+                ""
               );
               router.push("/applynow?signUp=true");
               setShowDrawer(false);

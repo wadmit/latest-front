@@ -10,6 +10,7 @@ function TitleComponent() {
       sx={{
         bgcolor: "#ffffff",
         pt: { lg: "120px", md: "124px", sm: "89px", xs: "89px" },
+        mb: "70px",
       }}
     >
       <Stack
@@ -20,21 +21,31 @@ function TitleComponent() {
       >
         <Typography
           component={"h2"}
-          lineHeight="41.6px"
-          fontSize={{ lg: "28px", md: "28px", sm: "24px", xs: "24px" }}
+          lineHeight={{
+            lg: "36.4px",
+            md: "36.4px",
+            sm: "31.2px",
+            xs: "31.2px",
+          }}
+          fontSize={{ lg: "28px", md: "28px", sm: "24px", xs: "22px" }}
           fontFamily="HankenGroteskExtraBold"
         >
-          Find the{" "}
+          Stay ahead with our{" "}
           <Typography
-            lineHeight="41.6px"
-            fontSize={{ lg: "28px", md: "28px", sm: "24px", xs: "24px" }}
+            lineHeight={{
+              lg: "36.4px",
+              md: "36.4px",
+              sm: "31.2px",
+              xs: "31.2px",
+            }}
+            fontSize={{ lg: "28px", md: "28px", sm: "24px", xs: "22px" }}
             fontFamily="HankenGroteskExtraBold"
             color="rgba(170, 68, 1, 1)"
             borderBottom="6px dotted rgba(170, 68, 1, 1)"
           >
-            right students
+            AI platform
           </Typography>{" "}
-          with WiseScore®
+          for your institution
         </Typography>
         <Box
           // mt={{lg:"35px",

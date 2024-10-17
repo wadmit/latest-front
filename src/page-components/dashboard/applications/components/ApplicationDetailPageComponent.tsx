@@ -63,6 +63,7 @@ const ApplicationDetailPageComponent = ({ isLoading, isError }: Props) => {
   const userProfileStatus = useAppSelector(
     (state) => state.user.dashboardDataGlobal?.data?.isProfileComplete
   );
+  const currency = useAppSelector((state) => state.currency);
 
   const [activeStep, setActiveStep] = useState(0);
   const [showDialogBox, setShowDialogBox] = useState(false);
@@ -74,6 +75,23 @@ const ApplicationDetailPageComponent = ({ isLoading, isError }: Props) => {
   });
   const [displayText, setDisplayText] = useState("");
   const applicationId = params.applicationId;
+
+  const handleIfAllDocumentsUploaded = (): string[] => {
+    const localRequiredDocuments: string[] = [];
+    singleApplication?.documents?.forEach((doc) => {
+      if (
+        (doc.type === EApplicationDocumentStatus.REQUIRED ||
+          doc.type === EApplicationDocumentStatus.ADDITIONAL) &&
+        singleApplication?.status === EApplicationStatus.incomplete_document
+      ) {
+        if (doc.link.length === 0) {
+          localRequiredDocuments.push(doc?.coreDocument?.name || "");
+        }
+      }
+    });
+
+    return localRequiredDocuments;
+  };
 
   useMemo(() => {
     switch (singleApplication?.status) {
@@ -168,7 +186,7 @@ const ApplicationDetailPageComponent = ({ isLoading, isError }: Props) => {
         });
         break;
       case "accepted":
-        setActiveStep(4);
+        setActiveStep(6);
         setStatus("success");
         setDisplayText("Accepted");
         setAlertPropsData({
@@ -204,7 +222,7 @@ const ApplicationDetailPageComponent = ({ isLoading, isError }: Props) => {
         });
         break;
       case "pre_enrollment":
-        setActiveStep(4);
+        setActiveStep(6);
         setStatus("success");
         setDisplayText("Accepted");
         setAlertPropsData({
@@ -279,6 +297,10 @@ const ApplicationDetailPageComponent = ({ isLoading, isError }: Props) => {
     try {
       paymentMutate({ formValues: [applicationId as string], type: "single" });
       analytics.websiteButtonInteractions({
+        location: {
+          countryName: currency?.currentCountry ?? "",
+          city: currency?.city ?? "",
+        },
         buttonName: "Pay",
         source: `User has clicked on Pay Now button and started the application payment process for program: ${singleApplication?.program?.name}`,
         urlPath: window.location.href,
@@ -313,23 +335,6 @@ const ApplicationDetailPageComponent = ({ isLoading, isError }: Props) => {
   const buttonProps: PaymentButtonProps = {
     buttonClick: handlePayment,
     buttonName: "Pay Now",
-  };
-
-  const handleIfAllDocumentsUploaded = (): string[] => {
-    const localRequiredDocuments: string[] = [];
-    singleApplication?.documents?.forEach((doc) => {
-      if (
-        (doc.type === EApplicationDocumentStatus.REQUIRED ||
-          doc.type === EApplicationDocumentStatus.ADDITIONAL) &&
-        singleApplication?.status === EApplicationStatus.incomplete_document
-      ) {
-        if (doc.link.length === 0) {
-          localRequiredDocuments.push(doc?.coreDocument?.name || "");
-        }
-      }
-    });
-
-    return localRequiredDocuments;
   };
 
   const handleShowOrCloseDialogBox = () => {

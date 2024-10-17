@@ -1,173 +1,164 @@
 import mixpanel from "mixpanel-browser";
 
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
+import { mixpanelSubmit } from "@/api/web/mixpanel.action";
+import { TLocation } from "@/types/analytics";
+import { socket } from "@/global-states/store";
 
 const KEY_ANALYTICS = process.env.NEXT_PUBLIC_ANALYTICS_KEY as string;
 
 try {
-	mixpanel.init(KEY_ANALYTICS, {
-		debug: true,
-		track_pageview: true,
-		persistence: "localStorage",
-	});
+  mixpanel.init(KEY_ANALYTICS, {
+    debug: true,
+    track_pageview: true,
+    persistence: "localStorage",
+  });
 } catch (error) {
-	console.error("Mixpanel initialization failed:", error);
+  console.error("Mixpanel initialization failed:", error);
 }
 
 export const analytics = {
-	trackPageView: (params: any) => mixpanel.track_pageview(params),
+  trackPageView: (params: any) => mixpanel.track_pageview(params),
 
-	trackEvent: (eventName: EAnalyticsEvents, params = {}) => {
-		mixpanel.track(eventName as string, params);
-	},
+  trackEvent: (eventName: EAnalyticsEvents, params = {}) => {
+    mixpanel.track(eventName as string, params);
+  },
 
-	timeEvent: (eventName: EAnalyticsEvents) =>
-		mixpanel.time_event(eventName as string),
+  timeEvent: (eventName: EAnalyticsEvents) =>
+    mixpanel.time_event(eventName as string),
 
-	logout: () => {
-		let leadId = "";
-		let email = "";
-		let data = "";
-		leadId = localStorage.getItem("leadId") ?? "";
-		email = localStorage.getItem("email") ?? "";
-		data = localStorage.getItem("startInfo") ?? "";
+  logout: ({ location }: { location: TLocation }) => {
+    let leadId = "";
+    let email = "";
+    let data = "";
+    leadId = localStorage.getItem("leadId") ?? "";
+    email = localStorage.getItem("email") ?? "";
+    data = localStorage.getItem("startInfo") ?? "";
 
-		//do later
+    if (data) {
+      const startInfo = JSON.parse(data);
+      const endTime = Date.now();
+      const totalTime = (endTime - startInfo.startTime) / 1000; // Convert milliseconds to seconds
+      if (leadId && email) {
+        socket.emit("websiteUserTime", {
+          timeSpend: totalTime,
+          userId: leadId,
+          reference: "Lead",
+          description: `User logged out of the system after ${(
+            totalTime / 60
+          ).toFixed(2)} minutes of session starting from ${
+            startInfo.startDate
+          }`,
+          location,
+          email,
+          date: new Date(Date.now()).toISOString(),
+        });
+        localStorage.removeItem("startInfo");
+      }
+    }
+    mixpanel.reset(); // Reset Mixpanel tracking for the current user
+    mixpanel.time_event(EAnalyticsEvents.LOGOUT); // Track logout event
+    mixpanel.register({ "User Status": "Anonymous" }); // Set user status as anonymous
+  },
 
-		// const state = store.getState();
-		// if (data) {
-		//   const startInfo = JSON.parse(data);
-		//   const endTime = Date.now();
-		//   const totalTime = (endTime - startInfo.startTime) / 1000; // Convert milliseconds to seconds
-		//   if (leadId && email) {
-		//     socket.emit('websiteUserTime', {
-		//       timeSpend: totalTime,
-		//       userId: leadId,
-		//       reference: 'Lead',
-		//       description: `User logged out of the system after ${(
-		//         totalTime / 60
-		//       ).toFixed(2)} minutes of session starting from ${
-		//         startInfo.startDate
-		//       }`,
-		//       location: {
-		//         countryName: state.currency.currentCountry,
-		//         city: state.currency.city,
-		//       },
-		//       email,
-		//       date: new Date(Date.now()).toISOString(),
-		//     });
-		//     localStorage.removeItem('startInfo');
-		//   }
-		// }
-		mixpanel.reset(); // Reset Mixpanel tracking for the current user
-		mixpanel.time_event(EAnalyticsEvents.LOGOUT); // Track logout event
-		mixpanel.register({ "User Status": "Anonymous" }); // Set user status as anonymous
-	},
+  login: (userId: string, userInfo: any) => {
+    mixpanel.identify(userId);
+    mixpanel.people.set(userInfo);
+    mixpanel.time_event(EAnalyticsEvents.SIGN_IN);
+    mixpanel.register({ "User Status": "Logged In" });
+  },
 
-	login: (userId: string, userInfo: any) => {
-		mixpanel.identify(userId);
-		mixpanel.people.set(userInfo);
-		mixpanel.time_event(EAnalyticsEvents.SIGN_IN);
-		mixpanel.register({ "User Status": "Logged In" });
-	},
+  enterWebsite: () => {
+    analytics.trackEvent(EAnalyticsEvents.ENTER_WEBSITE);
+  },
 
-	enterWebsite: () => {
-		analytics.trackEvent(EAnalyticsEvents.ENTER_WEBSITE);
-	},
+  navigationSelect: (
+    location: TLocation,
+    navigationOption: string,
+    urlPath: string,
+    event_type: EAnalyticsEvents,
+    status: EAnalyticsStatus,
+    redirectPath: string
+  ) => {
+    const email = localStorage.getItem("email");
+    const leadId = localStorage.getItem("leadId");
+    if (email && leadId) {
+      mixpanelSubmit({
+        email,
+        event_title: EAnalyticsEvents.NAVIGATION_SELECT,
+        event_type,
+        status,
+        reference: "Lead",
+        url_path: urlPath,
+        redirectPath,
+        location,
+        description: `User navigated to ${navigationOption}`,
+      });
+    }
+    analytics.trackEvent(EAnalyticsEvents.NAVIGATION_SELECT, {
+      navigationOption,
+      urlPath,
+    });
+  },
 
-	navigationSelect: (
-		navigationOption: string,
-		urlPath: string,
-		event_type: EAnalyticsEvents,
-		status: EAnalyticsStatus,
-		redirectPath: string,
-	) => {
-		const email = localStorage.getItem("email");
-		const leadId = localStorage.getItem("leadId");
-		if (email && leadId) {
-			//do later
-			//   const state = store.getState();
-			//   mixpanelSubmit.post({
-			//     email,
-			//     event_title: EAnalyticsEvents.NAVIGATION_SELECT,
-			//     event_type,
-			//     status,
-			//     reference: 'Lead',
-			//     url_path: urlPath,
-			//     redirectPath,
-			//     location: {
-			//       countryName: state.currency.currentCountry,
-			//       city: state.currency.city,
-			//     },
-			//     description: `User navigated to ${navigationOption}`,
-			//   });
-		}
-		analytics.trackEvent(EAnalyticsEvents.NAVIGATION_SELECT, {
-			navigationOption,
-			urlPath,
-		});
-	},
+  // User Activity: Website Button Interactions
+  websiteButtonInteractions: ({
+    buttonName,
+    location,
+    source,
+    urlPath,
+    redirectPath,
+    event_type,
+    status,
+    ...rest
+  }: {
+    buttonName: string;
+    location: TLocation;
+    source: string;
+    urlPath: string;
+    redirectPath: string;
+    event_type: EAnalyticsEvents;
+    status: EAnalyticsStatus;
+    [key: string]: any;
+  }) => {
+    const email = localStorage.getItem("email");
+    const leadId = localStorage.getItem("leadId");
+    if (email && leadId) {
+      mixpanelSubmit({
+        email,
+        event_type,
+        status,
+        event_title: EAnalyticsEvents.WEBSITE_BUTTON_INTERACTIONS,
+        reference: "Lead",
+        user_id: leadId,
+        url_path: urlPath,
+        redirectPath,
+        location,
+        description: source,
+      });
+    }
+    analytics.trackEvent(EAnalyticsEvents.WEBSITE_BUTTON_INTERACTIONS, {
+      buttonName,
+      source,
+      ...rest,
+    });
+  },
 
-	// User Activity: Website Button Interactions
-	websiteButtonInteractions: ({
-		buttonName,
-		source,
-		urlPath,
-		redirectPath,
-		event_type,
-		status,
-		...rest
-	}: {
-		buttonName: string;
-		source: string;
-		urlPath: string;
-		redirectPath: string;
-		event_type: EAnalyticsEvents;
-		status: EAnalyticsStatus;
-		[key: string]: any;
-	}) => {
-		const email = localStorage.getItem("email");
-		const leadId = localStorage.getItem("leadId");
-		if (email && leadId) {
-			//   const state = store.getState();
-			//   mixpanelSubmit.post({
-			//     email,
-			//     event_type,
-			//     status,
-			//     event_title: EAnalyticsEvents.WEBSITE_BUTTON_INTERACTIONS,
-			//     reference: 'Lead',
-			//     user_id: leadId,
-			//     url_path: urlPath,
-			//     redirectPath,
-			//     location: {
-			//       countryName: state.currency.currentCountry,
-			//       city: state.currency.city,
-			//     },
-			//     description: source,
-			//   });
-		}
-		analytics.trackEvent(EAnalyticsEvents.WEBSITE_BUTTON_INTERACTIONS, {
-			buttonName,
-			source,
-			...rest,
-		});
-	},
-
-	searchKeyword: ({
-		keyword,
-		source,
-	}: {
-		keyword: string;
-		source?: string;
-	}) => {
-		analytics.trackEvent(EAnalyticsEvents.SEARCH_KEYWORD, {
-			keyword,
-			source,
-		});
-	},
-	wisescoreSubmit: (userId: string, userInfo: any) => {
-		mixpanel.identify(userId);
-		mixpanel.people.set(userInfo);
-		mixpanel.time_event(EAnalyticsEvents.WISESCORE_RESULT);
-	},
+  searchKeyword: ({
+    keyword,
+    source,
+  }: {
+    keyword: string;
+    source?: string;
+  }) => {
+    analytics.trackEvent(EAnalyticsEvents.SEARCH_KEYWORD, {
+      keyword,
+      source,
+    });
+  },
+  wisescoreSubmit: (userId: string, userInfo: any) => {
+    mixpanel.identify(userId);
+    mixpanel.people.set(userInfo);
+    mixpanel.time_event(EAnalyticsEvents.WISESCORE_RESULT);
+  },
 };

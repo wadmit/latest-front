@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
@@ -8,6 +7,7 @@ import dynamic from "next/dynamic";
 import { theme } from "@/common/muicustomtheme/theme";
 import { RootContainer } from "@/components/common";
 import Image from "next/image";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 const RedoAnimText = dynamic(
   () => import("@/page-components/students/components/AnimatedText"),
@@ -20,10 +20,12 @@ const CursorBlinker = dynamic(
 
 // Main Section export
 function Herosection() {
-  const [showFeedbackForm, setShowFeedbackForm] = useState(false);
   const isMdScreen = useMediaQuery(theme.breakpoints.down("lg"));
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const router = useRouter();
+
+  const currency = useAppSelector((state) => state.currency);
+
   return (
     <Box
       sx={{
@@ -168,6 +170,11 @@ function Herosection() {
               }}
               onClick={() => {
                 analytics.websiteButtonInteractions({
+                  location: {
+                    countryName: currency?.currentCountry ?? "",
+                    city: currency?.city ?? "",
+                  },
+
                   buttonName: "Apply Now",
                   source:
                     "User clicked on Find scholarships now from Student page",

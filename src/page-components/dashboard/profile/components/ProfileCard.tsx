@@ -24,6 +24,7 @@ import {
   ConfirmNewProfileModal,
   RemoveProfileWarningModal,
 } from "@/page-components/dashboard/profile/components/modals";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 type Props = {
   student?: IStudent;
@@ -44,6 +45,8 @@ const ProfileCard = ({ student }: Props) => {
 
   const id = open ? profileButtonId : undefined;
 
+  const currency = useAppSelector((state) => state.currency);
+
   const closeRemoveImageModal = () => {
     setRemoveImageModal(false);
   };
@@ -53,9 +56,9 @@ const ProfileCard = ({ student }: Props) => {
   };
 
   const selectedImagePreviewHandler = (
-    event: ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if (event.target.files && event.target.files[0]) {
+    if (event?.target?.files && event?.target?.files[0]) {
       setAnchorEl(null);
       setUploadedImageModal(true);
       setSelectedImage(event.target.files[0]);
@@ -117,7 +120,7 @@ const ProfileCard = ({ student }: Props) => {
                     style={{ display: "none" }}
                     id={inputLabelId}
                     type="file"
-                    onChange={selectedImagePreviewHandler}
+                    onChange={(e) => selectedImagePreviewHandler(e)}
                   />
                   <label htmlFor={inputLabelId} style={{ width: "100%" }}>
                     {/* Upload */}
@@ -170,6 +173,10 @@ const ProfileCard = ({ student }: Props) => {
             }}
             onClick={() => {
               analytics.websiteButtonInteractions({
+                location: {
+                  countryName: currency?.currentCountry ?? "",
+                  city: currency?.city ?? "",
+                },
                 buttonName: "Edit Profile",
                 source: "User clicked on Edit Profile to edit the information",
                 urlPath: window.location.href,

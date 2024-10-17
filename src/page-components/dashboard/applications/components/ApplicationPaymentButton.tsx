@@ -14,6 +14,9 @@ import { useAppSelector } from "@/global-states/hooks/hooks";
 import useCostConverterMain from "@/hooks/costConverterMain";
 import { useMutation } from "@tanstack/react-query";
 import { postEsewaPayment } from "@/api/web/payment.action";
+import { analytics } from "@/services/analytics.service";
+import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
+import { IApplication } from "@/types/application";
 
 type Props = {
   buttonProps: PaymentButtonProps;
@@ -29,6 +32,7 @@ const ApplicationPaymentButton = (props: Props) => {
   const [showPaymentOptions, setShowPaymentOptions] = useState<boolean>(false);
   const [activePaymentType, setActivePaymentType] = useState<string>("");
   const applicationId = params.applicationId;
+  const currency = useAppSelector((state) => state.currency);
 
   const currentCountry = useAppSelector(
     (state) => state.currency.currentCountry
@@ -78,10 +82,36 @@ const ApplicationPaymentButton = (props: Props) => {
     if (activePaymentType === "stripe") {
       // stripe payment
       props.buttonProps.buttonClick();
+      analytics.websiteButtonInteractions({
+        buttonName: "Pay with Stripe",
+        pageName: "Application Payment",
+        event_type: EAnalyticsEvents.PAY_APPLICATION_FEE,
+        location: {
+          countryName: currency?.currentCountry ?? "",
+          city: currency?.city ?? "",
+        },
+        source:
+        "User has clicked on Continue To Payment button and started the application payment process for programs",        redirectPath: `${process.env.NEXT_PUBLIC_DASHBOARD_URL}/applications/${applicationId}`,
+        status: EAnalyticsStatus.SUCCESS,
+        urlPath: `${process.env.NEXT_PUBLIC_PARTNER_URL}/${applicationId}`,
+      })
     }
     if (activePaymentType === "esewa") {
       // esewa payment
       paymentEsewa({ formValues: [applicationId as string], type: "single" });
+      analytics.websiteButtonInteractions({
+        buttonName: "Pay with Esewa",
+        pageName: "Application Payment",
+        event_type: EAnalyticsEvents.PAY_APPLICATION_FEE,
+        location: {
+          countryName: currency?.currentCountry ?? "",
+          city: currency?.city ?? "",
+        },
+        source:
+        "User has clicked on Continue To Payment button and started the application payment process for programs",        redirectPath: `${process.env.NEXT_PUBLIC_DASHBOARD_URL}/applications/${applicationId}`,
+        status: EAnalyticsStatus.SUCCESS,
+        urlPath: `${process.env.NEXT_PUBLIC_PARTNER_URL}/${applicationId}`,
+      })
     }
   };
 
@@ -157,7 +187,7 @@ const ApplicationPaymentButton = (props: Props) => {
                   pb: "4px",
                 }}
               >
-                Select payment method
+                Select payment method...
               </Typography>
               <Box sx={{ cursor: "pointer" }} onClick={togglePaymentModal}>
                 <CrossIcon />

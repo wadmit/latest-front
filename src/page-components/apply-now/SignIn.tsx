@@ -1,12 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
-import { BoxWrapper } from "@/page-components/apply-now/utils/provider";
-import { Box, useMediaQuery } from "@mui/material";
-import { Flower, RainBow, Star } from "@/page-components/apply-now/svg";
 import { theme } from "@/common/muicustomtheme/theme";
 import NavbarSignInUp from "@/page-components/apply-now/components/NavbarSignInUp";
 import SignInForm from "@/page-components/apply-now/components/SignInForm";
+import { BoxWrapper } from "@/page-components/apply-now/utils/provider";
+import { Box, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 
 function SignIn({

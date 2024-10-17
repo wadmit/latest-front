@@ -7,7 +7,7 @@ import ProgramsDetailContext from "@/context/program-detail-context";
 import { analytics } from "@/services/analytics.service";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import { GetPopUpIcon } from "@/page-components/programs/svg";
-import Image from "next/image";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 const ProgramAdmissionCard = React.forwardRef(
   (
@@ -26,6 +26,8 @@ const ProgramAdmissionCard = React.forwardRef(
   ) => {
     const program = useContext(ProgramsDetailContext);
     const router = useRouter();
+    const currency = useAppSelector((state) => state.currency);
+
     return (
       <Box
         id="admissions"
@@ -72,6 +74,11 @@ const ProgramAdmissionCard = React.forwardRef(
               onClick={() => {
                 try {
                   analytics.websiteButtonInteractions({
+                    location: {
+                      countryName: currency?.currentCountry ?? "",
+                      city: currency?.city ?? "",
+                    },
+
                     buttonName: "Start Application",
                     source: `Clicked on start application from program admission of ${program?.name}`,
                     urlPath: window.location.href,
@@ -103,7 +110,7 @@ const ProgramAdmissionCard = React.forwardRef(
                 color: "#FF6B26",
               }}
             >
-              Start Application <GetPopUpIcon/>
+              Start Application <GetPopUpIcon />
             </Box>
           </Box>
         </Box>

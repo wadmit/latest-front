@@ -1,59 +1,81 @@
-import { DashboardSvg, DashboardSvgFilled, MyApplicationFilled, MyApplicationSvg, MyDocumentFilled, MyDocumentSvg, MyProfileFilled, MyProfileSvg, MyUniversities, MyUniversitiesFilled, WiseAdmitColorFulSvg } from '$/svg';
-import { analytics } from '@/services/analytics.service';
-import { EAnalyticsEvents, EAnalyticsStatus } from '@/types/mix-panel-analytic';
-import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, Typography } from '@mui/material';
-import { usePathname, useRouter } from 'next/navigation';
-import * as React from 'react';
-import ScoreComponent from './ScoreComponent';
-
+import {
+  DashboardSvg,
+  DashboardSvgFilled,
+  MyApplicationFilled,
+  MyApplicationSvg,
+  MyDocumentFilled,
+  MyDocumentSvg,
+  MyProfileFilled,
+  MyProfileSvg,
+  MyUniversities,
+  MyUniversitiesFilled,
+  WiseAdmitColorFulSvg,
+} from "public/svg";
+import { analytics } from "@/services/analytics.service";
+import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
+import {
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { usePathname, useRouter } from "next/navigation";
+import * as React from "react";
+import ScoreComponent from "./ScoreComponent";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 function SidebarContentComponent() {
   const router = useRouter();
-  const pathname = usePathname()
-  const [active, setActive] = React.useState('Dashboard');
+  const pathname = usePathname();
+  const [active, setActive] = React.useState("Dashboard");
 
   React.useEffect(() => {
     if (
-      pathname === '/dashboard' ||
-      pathname.startsWith('/dashboard/wisescore')
+      pathname === "/dashboard" ||
+      pathname.startsWith("/dashboard/wisescore")
     ) {
-      setActive('Dashboard');
+      setActive("Dashboard");
     } else if (
-      pathname === '/dashboard/profile' ||
-      pathname === '/dashboard/profile/edit-profile'
+      pathname === "/dashboard/profile" ||
+      pathname === "/dashboard/profile/edit-profile"
     ) {
-      setActive('My Profile');
-    } else if (pathname === '/dashboard/documents') {
-      setActive('Documents');
-    } else if (pathname.startsWith('/dashboard/applications')) {
-      setActive('Applications');
+      setActive("My Profile");
+    } else if (pathname === "/dashboard/documents") {
+      setActive("Documents");
+    } else if (pathname.startsWith("/dashboard/applications")) {
+      setActive("Applications");
     } else {
-      setActive('Universities & Programs');
+      setActive("Universities & Programs");
     }
   }, [pathname]);
 
   const handleSideBarButtonClick = (path: string) => {
     switch (path) {
-      case 'Dashboard':
-        router.push('/dashboard');
+      case "Dashboard":
+        router.push("/dashboard");
         break;
-      case 'My Profile':
-        router.push('/dashboard/profile');
+      case "My Profile":
+        router.push("/dashboard/profile");
         break;
-      case 'Documents':
-        router.push('/dashboard/documents');
+      case "Documents":
+        router.push("/dashboard/documents");
         break;
-      case 'Applications':
-        router.push('/dashboard/applications');
+      case "Applications":
+        router.push("/dashboard/applications");
         break;
-      case 'Universities & Programs':
-        router.push('/dashboard/universitiesandprograms');
+      case "Universities & Programs":
+        router.push("/dashboard/universitiesandprograms");
         break;
       default:
-        router.push('/dashboard');
+        router.push("/dashboard");
         break;
     }
   };
+
+  const currency = useAppSelector((state) => state.currency);
 
   return (
     <Stack
@@ -72,39 +94,43 @@ function SidebarContentComponent() {
         </ListItem>
         <Stack
           sx={{
-            marginTop: '48px',
+            marginTop: "48px",
           }}
         >
           {[
-            'Dashboard',
-            'My Profile',
-            'Documents',
-            'Applications',
-            'Universities & Programs',
+            "Dashboard",
+            "My Profile",
+            "Documents",
+            "Applications",
+            "Universities & Programs",
           ].map((text, index) => (
             <ListItem
               key={text}
               disablePadding
               sx={{
-                marginBottom: '12px',
-                height: '56px',
+                marginBottom: "12px",
+                height: "56px",
                 borderLeft:
                   text === active
-                    ? '4px solid #ffffff'
-                    : '4px solid transparent',
-                '&:hover': {
-                  backgroundColor: 'grey.500',
+                    ? "4px solid #ffffff"
+                    : "4px solid transparent",
+                "&:hover": {
+                  backgroundColor: "grey.500",
                 },
               }}
             >
               <ListItemButton
                 onClick={() => {
                   analytics.navigationSelect(
+                    {
+                      countryName: currency?.currentCountry ?? "",
+                      city: currency?.city ?? "",
+                    },
                     text,
                     window.location.href,
                     EAnalyticsEvents.NAVIGATION_CLICK,
                     EAnalyticsStatus.SUCCESS,
-                    ''
+                    ""
                   );
                   handleSideBarButtonClick(text);
                 }}

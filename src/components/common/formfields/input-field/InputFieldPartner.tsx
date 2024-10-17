@@ -1,4 +1,4 @@
-import { TextFieldType } from "@/types/other";
+import { ITextFieldType } from "@/types/other";
 import { Stack, Typography } from "@mui/material";
 import { useField } from "formik";
 import React from "react";
@@ -15,7 +15,7 @@ const InputFieldPartner = ({
   disabled,
   placeholder,
   name,
-}: TextFieldType) => {
+}: ITextFieldType) => {
   const [field, meta] = useField(name);
 
   const configTextField = {
@@ -43,6 +43,8 @@ const InputFieldPartner = ({
       <TextFieldWrapperPartner
         id={name}
         variant="outlined"
+        multiline
+    
         required={required ?? false}
         placeholder={placeholder}
         disabled={!!disabled}

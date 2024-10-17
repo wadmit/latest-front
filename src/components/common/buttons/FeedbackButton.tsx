@@ -13,10 +13,10 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { CustomTooltip } from "@/components/common";
-import { NewFeedback, NewFeedbackMobile } from "$/svg";
-import { FeedbackButtonProps } from "@/components/common";
+import { NewFeedback, NewFeedbackMobile } from "public/svg";
+import { IFeedbackButtonProps } from "@/components/common";
 
-export const FeedbackButton: React.FC<FeedbackButtonProps> = ({
+export const FeedbackButton: React.FC<IFeedbackButtonProps> = ({
   onClick,
   color,
 }) => {

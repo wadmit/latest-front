@@ -6,10 +6,14 @@ import { RootContainer } from "@/components/common";
 import { analytics } from "@/services/analytics.service";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import Image from "next/image";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 // About Us Section
 function AboutUs() {
   const router = useRouter();
+
+  const currency = useAppSelector((state) => state.currency);
+
   return (
     <RootContainer
       mb={{ lg: "6.25rem", md: "1.2rem", sm: "1rem", xs: "1rem" }}
@@ -120,6 +124,10 @@ function AboutUs() {
               <Button
                 onClick={() => {
                   analytics.websiteButtonInteractions({
+                    location: {
+                      countryName: currency?.currentCountry ?? "",
+                      city: currency?.city ?? "",
+                    },
                     buttonName: "Learn More",
                     source: "User clicked on Learn more from Student page",
                     urlPath: window.location.href,
@@ -227,6 +235,10 @@ function AboutUs() {
               color="rgba(32, 28, 26, 1)"
               onClick={() => {
                 analytics.websiteButtonInteractions({
+                  location: {
+                    countryName: currency?.currentCountry ?? "",
+                    city: currency?.city ?? "",
+                  },
                   buttonName: "About WiseAdmit",
                   source: "User clicked on What is WiseAdmit from Student page",
                   urlPath: window.location.href,
@@ -268,6 +280,10 @@ function AboutUs() {
               <Button
                 onClick={() => {
                   analytics.websiteButtonInteractions({
+                    location: {
+                      countryName: currency?.currentCountry ?? "",
+                      city: currency?.city ?? "",
+                    },
                     buttonName: "Learn More",
                     source: "User clicked on Learn more from Student page",
                     urlPath: window.location.href,

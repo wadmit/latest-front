@@ -9,7 +9,7 @@ import SwiperCore from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
 import { RootContainer } from "@/components/common";
 import { SuccessStoriesData } from "@/page-components/recruiting-partners/utils/provider";
-import { ClickableArrow } from "$/svg";
+import { ClickableArrow } from "public/svg";
 
 // Initialize Swiper core and add Navigation and Pagination modules
 SwiperCore.use([Navigation, Pagination]);

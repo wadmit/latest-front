@@ -8,7 +8,8 @@ import {
 } from "./utils/provider";
 import { GetWaveIcon, SmallHand } from "./svgs";
 import RenderSvg from "./components/RenderSvg";
-interface Props extends BoxProps {
+
+interface IWisescoreWelcomeProps extends BoxProps {
   primaryColor: string;
   version?: string;
   secondaryColor: string;
@@ -25,7 +26,7 @@ function WiseScoreWelcome({
   onClick,
   header: { title, subHeader },
   ...rest
-}: Props) {
+}: IWisescoreWelcomeProps) {
   const findOut = [
     {
       id: 1,
@@ -65,8 +66,8 @@ function WiseScoreWelcome({
       {...rest}
     >
       <StyledContainerWrapper zIndex={40}>
-        <Grid container spacing={10}>
-          <Grid item lg={6} xs={12}>
+        <Grid container spacing={5} justifyContent="space-between">
+          <Grid item xl={5} lg={12} xs={12}>
             <Box
               padding={{ lg: 0, md: 0, sm: "0 16px", xs: "0 16px 50px 16px" }}
               display="flex"
@@ -180,7 +181,7 @@ function WiseScoreWelcome({
               </Box>
             </Box>
           </Grid>
-          <Grid item lg={6} xs={12}>
+          <Grid item xl={6} lg={12} xs={12}>
             <Box
               border="1.16px solid #D3D7D9"
               bgcolor="#ffffff"

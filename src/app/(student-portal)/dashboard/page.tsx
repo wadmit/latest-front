@@ -3,7 +3,7 @@ import { generateMetadata } from "@/components/common/head-component/HeadCompone
 import { DashboardHome } from "@/page-components/dashboard";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 
 export const metadata: Metadata = generateMetadata({
   title: "Dashboard | WiseAdmit",
@@ -22,9 +22,9 @@ const page = async () => {
     redirect("/applynow");
   }
   return (
-    <>
+    <Suspense>
       <DashboardHome />
-    </>
+    </Suspense>
   );
 };
 

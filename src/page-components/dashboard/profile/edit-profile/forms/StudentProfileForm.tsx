@@ -60,7 +60,11 @@ const StudentProfileForm = () => {
           key === "attended_institution_to" ||
           key === "attended_institution_from" ||
           key === "graduation_date" ||
-          key === "passport_expiry_date"
+          key === "passport_expiry_date" || 
+          key === "tenth_start_date" || 
+          key === "tenth_end_date" || 
+          key === "eighth_start_date" || 
+          key === "eighth_end_date"
         ) {
           const date = new Date(dashboardData.data.detail[key]);
           temp[key] = moment(new Date(date)).format("YYYY-MM-DD");

@@ -33,34 +33,13 @@ const ApplicationPageComponent = (props: Props) => {
 
   const { data, isLoading: applicationsLoading } = useCustomQuery({
     queryKey: ["Applications/GET", Object.fromEntries(searchParams), "student"],
-    queryFn: async() => await getApplicationsStudent(),
+    queryFn: async () => await getApplicationsStudent(),
     onSuccess: (res) => {
-      console.log(res);
       dispatch(setUserApplications({ data: res }));
     },
     refetchOnWindowFocus: false,
   });
 
-  // useEffect(() => {
-  //   const initialObject: ApplicationStatus = {
-  //     paid: [],
-  //     unpaid: [],
-  //   };
-  //   if (userApplications.length > 0) {
-  //     if (userApplications.length > 0) {
-  //       const { paid, unpaid } = userApplications.reduce((acc, item) => {
-  //         if (item.paid) {
-  //           acc.paid.push(item);
-  //         } else {
-  //           acc.unpaid.push(item);
-  //         }
-  //         return acc;
-  //       }, initialObject);
-
-  //       setApplicationWithStatus({ paid, unpaid });
-  //     }
-  //   }
-  // }, [userApplications]);
 
   const isUserProfileComplete = useAppSelector(
     (state) => state.user.dashboardDataGlobal?.data?.isProfileComplete
@@ -87,7 +66,7 @@ const ApplicationPageComponent = (props: Props) => {
         status={false}
         statusHeader="Unpaid Applications"
         isLoading={applicationsLoading}
-        // applications={applicationWithStatus.unpaid}
+        applications={applicationWithStatus.unpaid}
       />
 
       <Divider
@@ -102,7 +81,7 @@ const ApplicationPageComponent = (props: Props) => {
       <ApplicationDynamicTable
         isLoading={applicationsLoading}
         status
-        // applications={applicationWithStatus.paid}
+        applications={applicationWithStatus.paid}
         statusHeader="Paid Applications"
       />
     </Stack>

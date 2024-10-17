@@ -1,26 +1,18 @@
 "use client";
-import { Box, Typography, useMediaQuery } from "@mui/material";
 import React from "react";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import CountUp from "react-countup";
-import SwiperCore from "swiper";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { universityImages } from "@/page-components/students/utils/provider";
 
-function PartnerUniversity() {
-  SwiperCore.use([Autoplay]);
+import "swiper/css";
 
-  const ref = React.useRef(null);
-  // check if visible
+const PartnerUniversity = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
+
   return (
-    <Box
-      ref={ref}
-      width="100%"
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-    >
+    <Box width="100%" display="flex" flexDirection="column" alignItems="center">
       {isMobile ? (
         <Typography
           fontSize="18px !important"
@@ -28,16 +20,16 @@ function PartnerUniversity() {
           lineHeight="31.2px"
           letterSpacing="-2%"
           mt="86px"
-          component={"h5"}
+          component="h5"
         >
-          Partner who love us
+          Partners who love us
         </Typography>
       ) : (
         <Typography
           fontSize="24px"
           fontFamily="HankenGroteskExtraBold"
           lineHeight="31.2px"
-          component={"h5"}
+          component="h5"
           letterSpacing="-2%"
           mt="104px"
           color="rgba(0, 0, 0, 0.6)"
@@ -51,66 +43,88 @@ function PartnerUniversity() {
       <Box
         width="100%"
         sx={{
-          overflowx: "scroll",
-          "&::-webkit-scrollbar": {
-            display: "none",
+          mt: { lg: "28px", md: "28px", sm: "34px", xs: "34px" },
+          position: "relative",
+          "&::before, &::after": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            width: "25%",
+            zIndex: 2,
+            pointerEvents: "none",
           },
-          "&  .swiper-wrapper": {
-            transitionTimingFunction: "linear !important",
+          "&::before": {
+            left: 0,
+            background: "linear-gradient(to right, white, transparent)",
+          },
+          "&::after": {
+            right: 0,
+            background: "linear-gradient(to left, white, transparent)",
           },
         }}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        mt={{ lg: "28px", md: "28px", sm: "34px", xs: "34px" }}
       >
         <Swiper
           modules={[Autoplay]}
           loop
-          slidesPerView={10}
-          speed={1500}
+          slidesPerView={7}
+          speed={3000}
           autoplay={{
             delay: 0,
             disableOnInteraction: false,
           }}
+          centeredSlides={true}
           breakpoints={{
             0: {
-              slidesPerView: 4,
+              slidesPerView: 3,
               spaceBetween: 10,
             },
             600: {
               slidesPerView: 5,
-              spaceBetween: 10,
+              spaceBetween: 20,
             },
             960: {
-              slidesPerView: 8,
-              spaceBetween: 10,
+              slidesPerView: 7,
+              spaceBetween: 30,
             },
             1280: {
-              slidesPerView: 10,
-              spaceBetween: 10,
+              slidesPerView: 9,
+              spaceBetween: 40,
             },
           }}
         >
           {universityImages.map((image, index) => (
             <SwiperSlide key={index}>
-              <img
-                loading="lazy"
-                alt="University Logo"
-                style={{
-                  aspectRatio: "4/3",
-                  objectFit: "cover",
-                  width: "68px",
-                  height: "68px",
-                }}
-                src={image}
-              />
+              {({ isActive, isNext, isPrev }) => (
+                <Box
+                  sx={{
+                    opacity: isActive ? 1 : isNext || isPrev ? 0.5 : 0.2,
+                    transform: isActive ? "scale(1.2)" : "scale(1)",
+                    transition: "all 0.3s ease",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100px",
+                  }}
+                >
+                  <img
+                    loading="lazy"
+                    alt="University Logo"
+                    style={{
+                      width: "68px",
+                      height: "68px",
+                      objectFit: "contain",
+                    }}
+                    src={image}
+                  />
+                </Box>
+              )}
             </SwiperSlide>
           ))}
         </Swiper>
       </Box>
     </Box>
   );
-}
+};
 
 export default PartnerUniversity;

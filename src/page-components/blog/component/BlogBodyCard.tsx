@@ -5,6 +5,7 @@ import Link from "next/link";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import { analytics } from "@/services/analytics.service";
 import { IBlog } from "@/types/blog";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 type Props = {
   blog: IBlog;
@@ -30,6 +31,8 @@ function GetArrow() {
   );
 }
 function BlogBodyCard({ blog }: Props) {
+  const currency = useAppSelector((state) => state.currency);
+
   return (
     <Box
       sx={{
@@ -80,6 +83,10 @@ function BlogBodyCard({ blog }: Props) {
         <Box
           onClick={() => {
             analytics.websiteButtonInteractions({
+              location: {
+                countryName: currency?.currentCountry ?? "",
+                city: currency?.city ?? "",
+              },
               buttonName: "Blog Info",
               source: `User selected post: ${blog.title} from blog`,
               urlPath: window.location.href,

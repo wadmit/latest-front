@@ -54,7 +54,7 @@ export const paymentEsewaFailed = async (token: string) => {
   try {
     const res = await ApiService.get({
       url: `/web/esewa/failed?signature=${token}`,
-      tokenNeeded: false,
+      tokenNeeded: true,
     });
     if (res.data) {
       return res.data;
@@ -68,7 +68,7 @@ export const paymentEsewaVerify = async (token: string) => {
   try {
     const res = await ApiService.get({
       url: `/web/esewa/verify?token=${token}`,
-      tokenNeeded: false,
+      tokenNeeded: true,
     });
     if (res.data) {
       return res.data;

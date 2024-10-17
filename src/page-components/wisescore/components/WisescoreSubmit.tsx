@@ -1,17 +1,25 @@
 "use client";
+import { GreenTickSvg } from "public/svg";
+import { mixpanelSubmit } from "@/api/web/mixpanel.action";
+import { patchSortList } from "@/api/web/shortlist.action";
+import { submitWiseScore } from "@/api/web/wisescore.action";
+import { theme } from "@/common/muicustomtheme/theme";
+import { ButtonWrapper } from "@/components/common";
+import Loader from "@/components/common/circular-loader/Loader";
+import { PhoneField } from "@/components/common/formfields/phone-field";
+import { IconWrapper } from "@/components/common/icon-wrapper/IconWrapper";
+import ThinScoreGauge from "@/components/common/score-gauge/ThinScoreGauge";
 import WiseScoreDetailsContext from "@/context/wisescore-context";
 import { useAppDispatch, useAppSelector } from "@/global-states/hooks/hooks";
 import { selectDashboardDataGlobal } from "@/global-states/reducers/userReducer";
-import { useFormik } from "formik";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useContext, useEffect, useState } from "react";
-import { FORM_VALIDATION_WISESCORE_SUBMIT } from "../utils/formik";
+import { setSubmitFormData } from "@/global-states/reducers/wisescore";
+import { analytics } from "@/services/analytics.service";
 import {
   EAnalyticsEvents,
   EAnalyticsFieldName,
   EAnalyticsStatus,
 } from "@/types/mix-panel-analytic";
-import { setSubmitFormData } from "@/global-states/reducers/wisescore";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import {
   Box,
   Dialog,
@@ -22,22 +30,13 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import { theme } from "@/common/muicustomtheme/theme";
-import { ScoreWrapper, StyledCheckBox } from "../utils/provider";
-import { IconWrapper } from "@/components/common/icon-wrapper/IconWrapper";
-import { GreenTickSvg } from "$/svg";
-import { GetCelebIcon, GetCelebIconMobile } from "../svgs";
-import { PhoneField } from "@/components/common/formfields/phone-field";
-import { ButtonWrapper } from "@/components/common";
-import Loader from "@/components/common/circular-loader/Loader";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useMutation } from "@tanstack/react-query";
-import { submitWiseScore } from "@/api/web/wisescore.action";
-import { analytics } from "@/services/analytics.service";
-import { useShortListSetter } from "@/hooks";
-import ThinScoreGauge from "@/components/common/score-gauge/ThinScoreGauge";
-import { mixpanelSubmit } from "@/api/web/mixpanel.action";
-import { patchSortList } from "@/api/web/shortlist.action";
+import { useFormik } from "formik";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
+import { GetCelebIcon, GetCelebIconMobile } from "../svgs";
+import { FORM_VALIDATION_WISESCORE_SUBMIT } from "../utils/formik";
+import { ScoreWrapper, StyledCheckBox } from "../utils/provider";
 type Props = {
   endPoint?: string;
   version?: string;
@@ -54,7 +53,6 @@ function WiseScoreSubmit({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [open, setOpen] = useState(false);
-
   const dispatch = useAppDispatch();
   const wiseScoreFormData = useAppSelector(
     (state) => state.wisescore.submitFormData
@@ -64,82 +62,16 @@ function WiseScoreSubmit({
   const country = useAppSelector((state) => state.currency.currentCountry);
   const city = useAppSelector((state) => state.currency.city);
   const [consentChecked, setConsentChecked] = useState(false);
+  const [isLoading, setLoading]= useState(false)
 
-  const { data, isPending, mutate, error, isSuccess, isError } = useMutation({
-    mutationKey: ["wisescore", wiseScoreFormData],
-    mutationFn: (data) => submitWiseScore(data),
-
-    onSuccess: (res) => {
-      if (res?.data?.email && res?.leadId) {
-        mixpanelSubmit({
-          email: res?.data?.email,
-          event_title: EAnalyticsEvents.WEBSITE_BUTTON_INTERACTIONS,
-          event_type: EAnalyticsEvents.WISESCORE_RESULT,
-          status: EAnalyticsStatus.SUCCESS,
-          reference: "Lead",
-          user_id: res?.leadId,
-          url_path: window.location.href,
-          location: {
-            countryName: country,
-            city,
-          },
-          description: `User has checked their wisescore. The score is ${res.data.score}`,
-          redirectPath: "",
-        });
-        localStorage.setItem("leadId", res?.leadId);
-      }
-      localStorage.setItem("email", res?.data?.email);
-      localStorage.setItem("phone", res?.data?.phone);
-      analytics.wisescoreSubmit(res.data.id, {
-        name: res.data.name,
-        email: res.data.email,
-        phone: res.data.phone,
-        score: res.data.score,
-        reference: "Lead",
+  useEffect(() => {
+    if (dashboardData)
+      formik.setValues({
+        email: dashboardData?.data?.email ?? "",
+        fullName: `${dashboardData?.data?.first_name} ${dashboardData?.data?.last_name}`,
+        phone: dashboardData?.data?.phone?.toLocaleString() ?? "",
       });
-      analytics.trackEvent(EAnalyticsEvents.WISESCORE_RESULT, {
-        name: res.data.name,
-        email: res.data.email,
-        phone: res.data.phone,
-        score: res.data.score,
-        reference: "Lead",
-      });
-      if (pathname.startsWith("/dashboard")) {
-        patchSortList([]).then(() => {
-          router.push("/dashboard/universitiesandprograms");
-        });
-      } else {
-        router.push(endPoint);
-      }
-    },
-    onError: (err) => {
-      console.log(err);
-      const leadId = localStorage.getItem("leadId");
-      const email = localStorage.getItem("email");
-      if (leadId && email) {
-        mixpanelSubmit({
-          email,
-          event_title: EAnalyticsEvents.WEBSITE_BUTTON_INTERACTIONS,
-          event_type: EAnalyticsEvents.WISESCORE_RESULT,
-          status: EAnalyticsStatus.ERROR,
-          reference: "Lead",
-          user_id: leadId,
-          url_path: window.location.href,
-          location: {
-            countryName: country,
-            city,
-          },
-          description: err,
-          redirectPath: "",
-        });
-      }
-      analytics.trackEvent(EAnalyticsEvents.ERROR, {
-        source: "Wisescore Submit",
-        message: err,
-      });
-      setOpen(true);
-    },
-  });
+  }, [dashboardData]);
 
   const formik = useFormik({
     initialValues: {
@@ -193,14 +125,88 @@ function WiseScoreSubmit({
     },
   });
 
-  useEffect(() => {
-    if (dashboardData)
-      formik.setValues({
-        email: dashboardData?.data?.email ?? "",
-        fullName: `${dashboardData?.data?.first_name} ${dashboardData?.data?.last_name}`,
-        phone: dashboardData?.data?.phone?.toLocaleString() ?? "",
-      });
-  }, [dashboardData]);
+  const { data, isPending, mutate, error, isSuccess, isError, status } =
+    useMutation({
+      mutationKey: ["wisescore-submit", wiseScoreFormData],
+      mutationFn: (data) => submitWiseScore(data),
+      onMutate: () => {
+        setLoading(true)
+      },
+      onSuccess: (res) => {
+        if (res?.data?.email && res?.leadId) {
+          mixpanelSubmit({
+            email: res?.data?.email,
+            event_title: EAnalyticsEvents.WEBSITE_BUTTON_INTERACTIONS,
+            event_type: EAnalyticsEvents.WISESCORE_RESULT,
+            status: EAnalyticsStatus.SUCCESS,
+            reference: "Lead",
+            user_id: res?.leadId,
+            url_path: window.location.href,
+            location: {
+              countryName: country,
+              city,
+            },
+            description: `User has checked their wisescore. The score is ${res.data.score}`,
+            redirectPath: "",
+          });
+          localStorage.setItem("leadId", res?.leadId);
+        }
+        localStorage.setItem("email", res?.data?.email);
+        localStorage.setItem("phone", res?.data?.phone);
+        analytics.wisescoreSubmit(res.data.id, {
+          name: res.data.name,
+          email: res.data.email,
+          phone: res.data.phone,
+          score: res.data.score,
+          reference: "Lead",
+        });
+        analytics.trackEvent(EAnalyticsEvents.WISESCORE_RESULT, {
+          name: res.data.name,
+          email: res.data.email,
+          phone: res.data.phone,
+          score: res.data.score,
+          reference: "Lead",
+        });
+        if (pathname.startsWith("/dashboard")) {
+          patchSortList([]).then(() => {
+            router.push("/dashboard/universitiesandprograms");
+          });
+        } else {
+          router.push(endPoint);
+        }
+        setLoading(false)
+
+      },
+      onError: (err) => {
+        console.log(err);
+        const leadId = localStorage.getItem("leadId");
+        const email = localStorage.getItem("email");
+        if (leadId && email) {
+          mixpanelSubmit({
+            email,
+            event_title: EAnalyticsEvents.WEBSITE_BUTTON_INTERACTIONS,
+            event_type: EAnalyticsEvents.WISESCORE_RESULT,
+            status: EAnalyticsStatus.ERROR,
+            reference: "Lead",
+            user_id: leadId,
+            url_path: window.location.href,
+            location: {
+              countryName: country,
+              city,
+            },
+            description: err,
+            redirectPath: "",
+          });
+        }
+        analytics.trackEvent(EAnalyticsEvents.ERROR, {
+          source: "Wisescore Submit",
+          message: err,
+        });
+        setOpen(true);
+        setLoading(false)
+
+      },
+    });
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   // new Date().toUTCString
@@ -394,14 +400,7 @@ function WiseScoreSubmit({
           >
             But before that we need few more information
             <br /> to send you your WiseScore® on the email.
-            {/* {version}{version === 'WiseScore' ? '®' : <sup
-                            style={{
-                                fontSize: '12px',
-                            }}
-                        >
-                            TM
-                        </sup>}
-                        {' '} */}
+          
           </Typography>
 
           <Box
@@ -563,39 +562,6 @@ function WiseScoreSubmit({
                 disabled={
                   !!dashboardData?.data?.phone || isSuccess || isPending
                 }
-                // sx={{
-                //     width: '100%',
-                //     '&:hover fieldset': {
-                //         borderColor: `${primaryColor} !important`,
-                //         borderWidth: '2px !important',
-                //     },
-                //     '&:active fieldset': {
-                //         borderColor: `${primaryColor} !important`,
-                //         borderWidth: '2px !important',
-                //     },
-                //     '& .MuiOutlinedInput-notchedOutline': {
-                //         borderRadius: '8px !important',
-                //         '&:focus,&:active': {
-                //             borderColor: `${primaryColor} !important`,
-                //             borderWidth: '2px !important',
-                //         },
-                //     },
-                //     '& input': {
-                //         height: '28px',
-                //     },
-                //     '&:hover': {
-                //         borderColor: `${primaryColor} !important`,
-                //         borderWidth: '2px !important',
-                //     },
-                //     '&.Mui-focused': {
-                //         borderColor: `${primaryColor} !important`,
-                //         borderWidth: '2px !important',
-                //     },
-                //     '&.Mui-focused fieldset': {
-                //         borderColor: `${primaryColor} !important`,
-                //         borderWidth: '2px !important',
-                //     },
-                // }}
               />
             </Box>
 
@@ -627,7 +593,7 @@ function WiseScoreSubmit({
                 isSuccess ? (
                   <CheckCircleIcon />
                 ) : (
-                  isPending && <Loader buttonState />
+                  isLoading && <Loader buttonState />
                 )
               }
               sx={{
@@ -642,11 +608,7 @@ function WiseScoreSubmit({
                 textTransform: "none",
               }}
             >
-              {isSuccess
-                ? "Submitted"
-                : isPending
-                ? "Submitting..."
-                : "Show me now!"}
+              {isLoading ? "Submitting..." : "Show me now!"}
             </ButtonWrapper>
           </Stack>
         </Box>
@@ -656,12 +618,6 @@ function WiseScoreSubmit({
       <ScoreWrapper
         width="100%"
         height="100vh"
-        sx={
-          {
-            // backgroundImage: "url('/wisescore/swatch.svg')",
-            // backgroundColor: "red"
-          }
-        }
         display={{ lg: "none", md: "none", sm: "flex", xs: "flex" }}
       >
         <Box
@@ -814,19 +770,6 @@ function WiseScoreSubmit({
                 disabled={
                   !!dashboardData?.data?.phone || isSuccess || isPending
                 }
-                // sx={{
-                //     width: '100%',
-                //     '& .MuiOutlinedInput-notchedOutline': {
-                //         borderRadius: '8px !important',
-                //         '&:focus,&:active': {
-                //             borderColor: `${primaryColor} !important`,
-                //             borderWidth: '2px !important',
-                //         },
-                //     },
-                //     '& input': {
-                //         height: '20px',
-                //     },
-                // }}
               />
             </Box>
             <Box display="flex" alignItems="center" gap="8px">
@@ -853,15 +796,6 @@ function WiseScoreSubmit({
               variant="contained"
               type="submit"
               disabled={isPending || isSuccess}
-              // endIcon={
-              //     isSuccess ? (
-              //         <CheckCircleIcon />
-              //     ) : isLoading ? (
-              //         <Loader buttonState />
-              //     ) : (
-              //         <KeyboardArrowRightIcon />
-              //     )
-              // }
               sx={{
                 maxWidth: "9.375rem",
                 width: "100%",

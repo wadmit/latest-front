@@ -3,7 +3,7 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { CustomTooltip, CustomTypography } from "./styled-components";
-import { ArrowDown, CategoryIcon, MessageIcon, SmileIcon } from "$/svg";
+import { ArrowDown, CategoryIcon, MessageIcon, SmileIcon } from "public/svg";
 import FeedbackForm from "@/page-components/feedback";
 import ThankYouFeedback from "@/page-components/feedback/components/ThankYouFeedback";
 import ChatBotBox from "@/page-components/chatbot";
@@ -175,7 +175,7 @@ const CategoryButton = (props: Props) => {
               </Stack>
             </Button>
           </CustomTooltip>
-          <CustomTooltip
+          {/* <CustomTooltip
             open={showMsgTooltip}
             placement="left"
             title={<Typography>Chat with our AI bot</Typography>}
@@ -211,11 +211,10 @@ const CategoryButton = (props: Props) => {
                   boxShadow: "0px 0px 8px 0px rgba(0, 0, 0, 0.3)",
                 }}
               >
-                {/* <NewWhatsApp /> */}
                 <MessageIcon />
               </Stack>
             </Button>
-          </CustomTooltip>
+          </CustomTooltip> */}
         </>
       )}
 

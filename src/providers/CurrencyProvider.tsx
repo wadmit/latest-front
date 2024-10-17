@@ -1,11 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
+import { useEffect } from "react";
 
-import { useDispatch } from "react-redux";
-import axios from "axios";
-import { EBaseCurrency } from "@/types/university";
-import { useAppSelector } from "@/global-states/hooks/hooks";
 import {
   setCurrency,
   setLocation,
@@ -14,6 +10,9 @@ import {
   socketConnect,
   socketDisconnectDispatch,
 } from "@/global-states/reducers/socketReducer";
+import { EBaseCurrency } from "@/types/university";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 
 const CurrencyList = [
   EBaseCurrency.USDOLLAR,
@@ -22,12 +21,8 @@ const CurrencyList = [
 ];
 
 function CurrencyProvider({ children }: { children: ReactNode }) {
-  const [showSurvey, setShowSurvey] = useState(false);
 
   const dispatch = useDispatch();
-  const user = useAppSelector(
-    (state) => state.user.dashboardDataGlobal?.data?.email
-  );
   const getCurrencyBasedOnBaseCurrency = async (
     baseCurrency: EBaseCurrency
   ) => {
@@ -58,7 +53,6 @@ function CurrencyProvider({ children }: { children: ReactNode }) {
         })
       );
     } catch (err) {
-      // Log or handle error appropriately
       dispatch(setLocation({ to: null, currentCountry: null, city: null }));
     }
   };
@@ -76,20 +70,6 @@ function CurrencyProvider({ children }: { children: ReactNode }) {
       dispatch(socketDisconnectDispatch());
     };
   }, []);
-  // const _ = useQuery(['check survey', showSurvey], () => studentService.checkSurvey(), {
-  //     onSuccess: (data) => {
-  //         if (data.hasSubmitted) {
-  //             setShowSurvey(false)
-  //         } else {
-  //             setShowSurvey(true)
-  //         }
-  //     },
-  //     onError: () => {
-  //         setShowSurvey(false)
-  //     },
-  //     enabled: !!user
-  // })
-
   return <>{children}</>;
 }
 

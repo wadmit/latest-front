@@ -34,7 +34,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import {
@@ -43,7 +43,7 @@ import {
 } from "@/page-components/dashboard/applications/utils/provider";
 import Loader from "@/components/common/circular-loader/Loader";
 import { StyledTableCell } from "@/page-components/dashboard/applications/styled-components";
-import { PlusIcon } from "$/svg";
+import { PlusIcon } from "public/svg";
 import { Chip } from "@/page-components/dashboard/components/Chip";
 import PaymentStatus from "@/page-components/dashboard/components/PaymentStatus";
 import Alert from "@/page-components/dashboard/components/Alert";
@@ -56,7 +56,7 @@ import { filter } from "lodash";
 
 type Props = {
   status: boolean;
-  // applications: IApplication[];
+  applications: IApplication[];
   getConvertedCosts: (
     value: number,
     base_currency: string
@@ -66,36 +66,39 @@ type Props = {
   };
 };
 
-const ApplicationTable = ({ status, getConvertedCosts}: Props) => {
+const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
   const router = useRouter();
-  const params = useParams();
+  const params = useSearchParams();
   const dispatch = useAppDispatch();
   const [selectedApplications, setIsSelectedApplications] = useState<string[]>(
     []
   );
 
   const [showPaymentOptions, setShowPaymentOptions] = useState<boolean>(false);
-  const currentCountry = useAppSelector(
-    (state) => state.currency.currentCountry
-  );
+  const currency = useAppSelector((state) => state.currency);
+
   const userApplications = useAppSelector(
     (state) => state.applications.applications
   );
-  const [applications, setApplications] = useState<IApplication[]>(userApplications);
+  const [applications, setApplications] = useState<IApplication[]>([]);
   const [activePaymentType, setActivePaymentType] = useState<string>("");
-
-
 
   const { mutate, isPending, isError } = useMutation({
     mutationKey: ["removeApplication"],
-    mutationFn: async(id: string) => await removeApplication(id),
-    onSuccess: (data,variables) => {
-
-      const newApplications = userApplications.filter(
+    mutationFn: async (id: string) => await removeApplication(id),
+    onSuccess: (data, variables) => {
+      const newApplications = applications.filter(
         (application) => application.id !== variables
       );
       setApplications(newApplications);
       dispatch(setUserApplications({ data: newApplications }));
+      enqueueSnackbar("Application deleted successfully", {
+        variant: "success",
+        anchorOrigin: {
+          vertical: "top",
+          horizontal: "right",
+        },
+      });
     },
   });
 
@@ -174,7 +177,7 @@ const ApplicationTable = ({ status, getConvertedCosts}: Props) => {
   const { data: esewaData, isLoading: esewaVerificationLoading } =
     useCustomQuery({
       queryKey: ["esewaVerifty"],
-      queryFn: () => paymentEsewaVerify((params.data as string) ?? ""),
+      queryFn: () => paymentEsewaVerify((params.get("data") as string) ?? ""),
       onSuccess: (data) => {
         router.replace("/dashboard");
       },
@@ -182,7 +185,7 @@ const ApplicationTable = ({ status, getConvertedCosts}: Props) => {
         enqueueSnackbar("Payment verification failed", { variant: "error" });
         router.replace("/dashboard");
       },
-      enabled: params && !!params.data,
+      enabled: params && !!params.get("data"),
       refetchOnWindowFocus: false,
       refetchOnMount: false,
     });
@@ -190,10 +193,38 @@ const ApplicationTable = ({ status, getConvertedCosts}: Props) => {
   const handlePopUpPayment = () => {
     if (activePaymentType === "stripe") {
       paymentMutate({ formValues: selectedApplications, type: "multiple" });
+      analytics.websiteButtonInteractions({
+        buttonName: "Pay with Stripe",
+        pageName: "Application Payment",
+        event_type: EAnalyticsEvents.PAY_APPLICATION_FEE,
+        location: {
+          countryName: currency?.currentCountry ?? "",
+          city: currency?.city ?? "",
+        },
+        source:
+        "User has clicked on Continue To Payment button and started the application payment process for programs",   
+        status: EAnalyticsStatus.SUCCESS,
+        urlPath: `${process.env.NEXT_PUBLIC_PARTNER_URL}/applications`,
+        redirectPath: `${process.env.NEXT_PUBLIC_PARTNER_URL}/applications`,
+      })
     }
     if (activePaymentType === "esewa") {
       // esewa payment
       paymentEsewa({ formValues: selectedApplications, type: "multiple" });
+      analytics.websiteButtonInteractions({
+        buttonName: "Pay with Stripe",
+        pageName: "Application Payment",
+        event_type: EAnalyticsEvents.PAY_APPLICATION_FEE,
+        location: {
+          countryName: currency?.currentCountry ?? "",
+          city: currency?.city ?? "",
+        },
+        source:
+        "User has clicked on Continue To Payment button and started the application payment process for programs",   
+        redirectPath: `${process.env.NEXT_PUBLIC_PARTNER_URL}/applications`,
+        status: EAnalyticsStatus.SUCCESS,
+        urlPath: `${process.env.NEXT_PUBLIC_PARTNER_URL}/applications`,
+      })
     }
   };
 
@@ -233,6 +264,10 @@ const ApplicationTable = ({ status, getConvertedCosts}: Props) => {
       );
       mutate(id);
       analytics.websiteButtonInteractions({
+        location: {
+          countryName: currency?.currentCountry ?? "",
+          city: currency?.city ?? "",
+        },
         buttonName: "Remove Application",
         source: `User has deleted an shortlisted application for program: ${deletedApplication?.program?.name} after application has been started`,
         urlPath: window.location.href,
@@ -243,24 +278,28 @@ const ApplicationTable = ({ status, getConvertedCosts}: Props) => {
     }
   };
 
-  // useEffect(() => {
-  //   // select only paid applications
-  //   const filterApplications = userApplications.filter(
-  //     (application) => application.paid === status
-  //   );
-  //   setApplications(filterApplications);
-  // }, [userApplications]);
+  useEffect(() => {
+    // select only paid applications
+    const filterApplications = userApplications.filter(
+      (application) => application.paid === status
+    );
+    setApplications(filterApplications);
+  }, []);
 
   // handle the payment when user clicks on handle click
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     // Create a Checkout Session.
-    if (currentCountry === "Nepal") {
+    if (currency?.currentCountry === "Nepal") {
       setShowPaymentOptions(true);
       return;
     }
     paymentMutate({ formValues: selectedApplications, type: "multiple" });
     analytics.websiteButtonInteractions({
+      location: {
+        countryName: currency?.currentCountry ?? "",
+        city: currency?.city ?? "",
+      },
       buttonName: "Pay",
       source:
         "User has clicked on Continue To Payment button and started the application payment process for programs",
@@ -415,7 +454,7 @@ const ApplicationTable = ({ status, getConvertedCosts}: Props) => {
                       >
                         {
                           getConvertedCosts(
-                            row.university.detail.fees["Application Fee"],
+                            row?.university?.detail?.fees["Application Fee"],
                             row.university.base_currency
                           ).formattedValue
                         }

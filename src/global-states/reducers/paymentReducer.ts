@@ -42,11 +42,9 @@ export const PaymentSlice = createSlice({
 			),
 		}),
 		setRequiredDocumentStatus: (state, action: PayloadAction<boolean>) => {
-			// eslint-disable-next-line no-param-reassign
 			state.requiredDocumentStatus = action.payload;
 		},
 		setDocSubmissionData: (state, action: PayloadAction<boolean>) => {
-			// eslint-disable-next-line no-param-reassign
 			state.docSubmissionData = action.payload;
 		},
 	},

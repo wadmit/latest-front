@@ -10,6 +10,7 @@ import {
   Country,
   Awards,
   Testimonials,
+  JoinCommunity,
 } from "@/page-components/home/components";
 import HomeScript from "@/page-components/scripts/HomeScript";
 
@@ -24,6 +25,7 @@ const HomePage = () => {
       <ReadBlog />
       <Country />
       <Awards />
+      <JoinCommunity />
       <Testimonials />
       <StartApply />
     </>

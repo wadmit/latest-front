@@ -37,7 +37,24 @@ const nextConfig = {
     fileLoaderRule.exclude = /\.svg$/i;
 
     return config;
-  }
+  },
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Access-Control-Allow-Credentials",
+            value: "true",
+          },
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "https://www.dev.wiseadmit.io",
+          }   
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

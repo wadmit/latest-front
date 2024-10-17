@@ -165,7 +165,7 @@ const AcademicInformation = () => {
               return (
                 <Grid item md={6} xs={12} key={each.name}>
                   <DateField
-                    disableFuture={each.name === "attended_institution_from"}
+                    // disableFuture={each.name === "attended_institution_from"}
                     name={each.name}
                     label={each.label}
                   />

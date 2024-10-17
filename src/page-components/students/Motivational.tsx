@@ -1,5 +1,6 @@
 "use client";
 import { RootContainer } from "@/components/common";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 import { analytics } from "@/services/analytics.service";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import { Box, Typography, useMediaQuery } from "@mui/material";
@@ -9,6 +10,9 @@ import { useRouter } from "next/navigation";
 function Motivational() {
   const router = useRouter();
   const isMobile = useMediaQuery("(max-width:830px)");
+
+  const currency = useAppSelector((state) => state.currency);
+
   return (
     <RootContainer pt="96px" position="relative" overflow="hidden">
       <Box
@@ -94,6 +98,10 @@ function Motivational() {
             }}
             onClick={() => {
               analytics.websiteButtonInteractions({
+                location: {
+                  countryName: currency?.currentCountry ?? "",
+                  city: currency?.city ?? "",
+                },
                 buttonName: "Find Programs",
                 source: "User clicked on Find programs from Student page",
                 urlPath: window.location.href,

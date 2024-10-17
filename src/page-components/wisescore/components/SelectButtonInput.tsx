@@ -7,13 +7,13 @@ import { useFormikContext } from "formik";
 import SelectButtons from "./SelectButtons";
 import { StyleInput } from "../utils/provider";
 
-interface Props extends InputProps {
+interface ISelectButtonInputProps extends InputProps {
 	isActive?: boolean;
 	text: string;
 }
 
-function SelectButtonInput({ isActive, text, onClick }: Props) {
-	const { primaryColor, secondaryColor } = useContext(WiseScoreDetailsContext);
+function SelectButtonInput({ isActive, text, onClick }: ISelectButtonInputProps) {
+	const { secondaryColor } = useContext(WiseScoreDetailsContext);
 	const { values, handleChange } =
 		useFormikContext<typeof INITIAL_WISE_STATE>();
 	return (

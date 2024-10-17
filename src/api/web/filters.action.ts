@@ -5,27 +5,27 @@ import axios from "axios";
 import { cache } from "react";
 
 export const getFilters = cache(
-	async ({ signal }: { signal: AbortSignal }): Promise<IFilterData[]> => {
-		const CancelToken = axios.CancelToken;
-		const source = CancelToken.source();
+  async ({ signal }: { signal: AbortSignal }): Promise<IFilterData[]> => {
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
 
-		// Set up cancellation
-		signal.addEventListener("abort", () => {
-			source.cancel("Request was cancelled");
-		});
+    // Set up cancellation
+    signal.addEventListener("abort", () => {
+      source.cancel("Request was cancelled");
+    });
 
-		try {
-			const response: { data: { data: IFilterData[] } } = await ApiService.get({
-				url: `${ApiConfig.filters}/uni-programs-filters`,
-				tokenNeeded: false,
-				options: {
-					cancelToken: source.token,
-				},
-			});
+    try {
+      const response: { data: { data: IFilterData[] } } = await ApiService.get({
+        url: `${ApiConfig.filters}/uni-programs-filters`,
+        tokenNeeded: false,
+        options: {
+          cancelToken: source.token,
+        },
+      });
 
-			return response.data.data ?? [];
-		} catch (e) {
-			throw e;
-		}
-	},
+      return response.data.data ?? [];
+    } catch (e) {
+      throw e;
+    }
+  }
 );

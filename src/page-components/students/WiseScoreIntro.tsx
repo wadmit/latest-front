@@ -6,9 +6,13 @@ import { RootContainer } from "@/components/common";
 import { analytics } from "@/services/analytics.service";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import Image from "next/image";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 function WiseScoreIntro() {
   const router = useRouter();
+
+  const currency = useAppSelector((state) => state.currency);
+
   return (
     <Box bgcolor="rgba(239, 233, 174, 1)">
       <RootContainer>
@@ -67,6 +71,10 @@ function WiseScoreIntro() {
             }}
             onClick={() => {
               analytics.websiteButtonInteractions({
+                location: {
+                  countryName: currency?.currentCountry ?? "",
+                  city: currency?.city ?? "",
+                },
                 buttonName: "Check My Score",
                 source: "Clicked on Check my score from Student page",
                 urlPath: window.location.href,

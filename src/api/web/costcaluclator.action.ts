@@ -15,7 +15,7 @@ export const getCostScale = async () => {
 
 export const postCostSubmission = async (data: any) => {
   try {
-    ("use server");
+    // ("use server");
     const response = await ApiService.post({
       url: `${ApiConfig.costScale}/sendmail`,
       options: data,

@@ -1,6 +1,6 @@
 import React from "react";
 import InputField from "./input-field/InputField";
-import { TextFieldType } from "@/types/other";
+import { ITextFieldType } from "@/types/other";
 import type { IPartnerFormState } from "@/page-components/joinus/types";
 import { useFormikContext } from "formik";
 import { Stack } from "@mui/material";
@@ -17,7 +17,7 @@ function StyledInputField({
 	disabled,
 	labelTextColor,
 	name,
-}: TextFieldType) {
+}: ITextFieldType) {
 	const formik = useFormikContext();
 	const thisValue = formik.values as IPartnerFormState;
 	const otherServiceIndex = thisValue?.service?.findIndex(
@@ -97,6 +97,7 @@ function StyledInputField({
 			<InputFieldPartner
 				type={type}
 				label={label}
+				multiline={true}
 				placeholder={placeholder}
 				labelTextColor={labelTextColor}
 				name="experience_with_wiseadmit"

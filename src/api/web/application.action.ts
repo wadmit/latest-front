@@ -4,7 +4,7 @@ import ApiService, { request } from "@/services/api.service";
 
 export const removeApplication = async (id: string) => {
   try {
-    "use client"
+    // ("use client");
     const response = await ApiService.delete({
       url: `${ApiConfig.applications}/${id}`,
       tokenNeeded: true,
@@ -17,7 +17,6 @@ export const removeApplication = async (id: string) => {
 
 export const createApplication = async (formValues: string[]) => {
   try {
-    "use client"
     const res = await ApiService.post({
       url: `${ApiConfig.applications}`,
       options: {
@@ -33,7 +32,6 @@ export const createApplication = async (formValues: string[]) => {
 
 export const getApplicationsStudent = async () => {
   try {
-    "use client"
     const response = await ApiService.get({
       url: `${ApiConfig.applications}/student`,
       tokenNeeded: true,

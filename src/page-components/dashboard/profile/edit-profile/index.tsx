@@ -6,7 +6,7 @@ import StudentProfileForm from "@/page-components/dashboard/profile/edit-profile
 const EditProfileHome = () => {
   return (
     <>
-      <Breadcrumbs>
+      <Breadcrumbs sx={{ mt: "7px" }}>
         <Link href="/dashboard/profile">Profile</Link>
       </Breadcrumbs>
       <StudentProfileForm />

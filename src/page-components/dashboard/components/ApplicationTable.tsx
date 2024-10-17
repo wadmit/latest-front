@@ -1,5 +1,5 @@
 "use client";
-import { PlusIcon } from "$/svg";
+import { PlusIcon } from "public/svg";
 import { removeApplication } from "@/api/web/application.action";
 import {
   paymentEsewaVerify,
@@ -86,15 +86,15 @@ function ApplicationTable({ status }: IProps) {
     []
   );
   const [showPaymentOptions, setShowPaymentOptions] = useState<boolean>(false);
-  const currentCountry = useAppSelector(
-    (state) => state.currency.currentCountry
-  );
+
+  const currency = useAppSelector((state) => state.currency);
+
   const [activePaymentType, setActivePaymentType] = useState<string>("");
   const { enqueueSnackbar } = useSnackbar();
   const userApplications = useAppSelector(
     (state) => state.applications.applications
   );
-  const [applications, setApplications] = useState<IApplication[]>(userApplications);
+  const [applications, setApplications] = useState<IApplication[]>([]);
 
   // const to = useAppSelector((state) => state.currency.to);
   // const params = useParams();
@@ -111,10 +111,20 @@ function ApplicationTable({ status }: IProps) {
   const { mutate, isPending, isError } = useMutation({
     mutationFn: async (id: string) => await removeApplication(id),
     onSuccess: (data, variables) => {
-      const newApplications = userApplications.filter(
+      const newApplications = applications.filter(
         (application) => application.id !== variables
       );
+
+      setApplications(newApplications);
+
       dispatch(setUserApplications({ data: newApplications }));
+      enqueueSnackbar("Application deleted successfully", {
+        variant: "success",
+        anchorOrigin: {
+          vertical: "top",
+          horizontal: "right",
+        },
+      });
     },
   });
   const {
@@ -329,9 +339,12 @@ function ApplicationTable({ status }: IProps) {
         (application) => application.id === id
       );
 
-      
       await mutate(id);
       analytics.websiteButtonInteractions({
+        location: {
+          countryName: currency?.currentCountry ?? "",
+          city: currency?.city ?? "",
+        },
         buttonName: "Remove Application",
         source: `User has deleted an shortlisted application for program: ${deletedApplication?.program?.name} after application has been started`,
         urlPath: window.location.href,
@@ -342,24 +355,29 @@ function ApplicationTable({ status }: IProps) {
     }
   };
 
-  // useEffect(() => {
-  //   // select only paid applications
-  //   const filterApplications = userApplications.filter(
-  //     (application) => application.paid === status
-  //   );
-  //   setApplications(filterApplications);
-  // }, [userApplications]);
+  useEffect(() => {
+    // select only paid applications
+    const filterApplications = userApplications.filter(
+      (application) => application.paid === status
+    );
+
+    setApplications(filterApplications);
+  }, []);
 
   // handle the payment when user clicks on handle click
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     // Create a Checkout Session
-    if (currentCountry === "Nepal") {
+    if (currency?.currentCountry === "Nepal") {
       setShowPaymentOptions(true);
       return;
     }
     paymentMutate({ formValues: selectedApplications, type: "multiple" });
     analytics.websiteButtonInteractions({
+      location: {
+        countryName: currency?.currentCountry ?? "",
+        city: currency?.city ?? "",
+      },
       buttonName: "Pay",
       source:
         "User has clicked on Continue To Payment button and started the application payment process for programs",
@@ -377,6 +395,7 @@ function ApplicationTable({ status }: IProps) {
   const filterApplications = applications.filter(
     (application) => application.paid === status
   );
+
   return (
     <>
       {filterApplications.length > 0 && (
@@ -653,7 +672,6 @@ function ApplicationTable({ status }: IProps) {
                             onClick={() => removeApplicationFromStack(row.id)}
                           >
                             <img
-                             
                               src="/images/dashboard/delete.svg"
                               alt="delete"
                             />

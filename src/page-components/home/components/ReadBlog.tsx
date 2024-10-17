@@ -6,12 +6,13 @@ import { analytics } from "@/services/analytics.service";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import LargeImage from "@/page-components/home/components/LargeImage";
 import MobileImageSlider from "@/page-components/home/components/MobileImageSlider";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 function ReadBlog() {
   const router = useRouter();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("lg"));
-
+  const currency = useAppSelector((state) => state.currency);
   return (
     <Box
       py={{
@@ -95,6 +96,10 @@ function ReadBlog() {
                 }}
                 onClick={() => {
                   analytics.websiteButtonInteractions({
+                    location: {
+                      countryName: currency?.currentCountry ?? "",
+                      city: currency?.city ?? "",
+                    },
                     buttonName: "Read Our blogs",
                     source: "Clicked on Read our blogs from Home Page",
                     urlPath: window.location.href,

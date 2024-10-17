@@ -5,10 +5,11 @@ import { Box, Typography, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import { ArrowDown, ArrowSvg } from "@/page-components/home/svg";
 import React from "react";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 const LandingHeroSection = () => {
   const isMobile = useMediaQuery("(max-width:1024px)");
-
+  const currency = useAppSelector((state) => state.currency);
   return (
     <Box position="relative">
       <RootContainer>
@@ -124,6 +125,10 @@ const LandingHeroSection = () => {
               href="/students"
               onClick={() => {
                 analytics.websiteButtonInteractions({
+                  location: {
+                    countryName: currency?.currentCountry ?? "",
+                    city: currency?.city ?? "",
+                  },
                   buttonName: "Student",
                   source: "Clicked on Student from Home Page",
                   urlPath: window.location.href,
@@ -167,6 +172,10 @@ const LandingHeroSection = () => {
                 href="/recruiting-partners"
                 onClick={() => {
                   analytics.websiteButtonInteractions({
+                    location: {
+                      countryName: currency?.currentCountry ?? "",
+                      city: currency?.city ?? "",
+                    },
                     buttonName: "Recruitment Partner",
                     source: "Clicked on Recruitment Partner from Home Page",
                     urlPath: window.location.href,
@@ -215,6 +224,10 @@ const LandingHeroSection = () => {
                 href="/institution"
                 onClick={() => {
                   analytics.websiteButtonInteractions({
+                    location: {
+                      countryName: currency?.currentCountry ?? "",
+                      city: currency?.city ?? "",
+                    },
                     buttonName: "Institution Partner",
                     source: "Clicked on Institution partner from Home Page",
                     urlPath: window.location.href,

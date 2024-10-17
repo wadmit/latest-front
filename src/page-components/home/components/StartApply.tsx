@@ -3,16 +3,15 @@ import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { analytics } from "@/services/analytics.service";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
-import {
-  BookIconSvg,
-  Star,
-} from "@/page-components/home/svg";
-import Image from "next/image";
+import { BookIconSvg, Star } from "@/page-components/home/svg";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 function StartApply() {
   const theme = useTheme();
   const router = useRouter();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const currency = useAppSelector((state) => state.currency);
   return (
     <Box bgcolor="rgba(246, 241, 238, 1)">
       <Box
@@ -62,6 +61,10 @@ function StartApply() {
           }}
           onClick={() => {
             analytics.websiteButtonInteractions({
+              location: {
+                countryName: currency?.currentCountry ?? "",
+                city: currency?.city ?? "",
+              },
               buttonName: "Apply Now",
               source: "Clicked on Apply now form Home Page",
               urlPath: window.location.href,
@@ -87,9 +90,8 @@ function StartApply() {
           top={{ lg: "320px", md: "320px", sm: "250px", xs: "240px" }}
           left={{ lg: "315px", md: "250px", sm: "100px", xs: "50px" }}
         >
-         
-         <Star isMobile={isMobile} />
-         </Box>
+          <Star isMobile={isMobile} />
+        </Box>
         <Box
           position="absolute"
           top={{ lg: "140px", md: "60px", sm: "60px", xs: "30px" }}

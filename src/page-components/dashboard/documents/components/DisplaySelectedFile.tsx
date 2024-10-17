@@ -1,4 +1,7 @@
 import { uploadStudentDocument } from "@/api/web/user.action";
+import { useAppSelector } from "@/global-states/hooks/hooks";
+import { analytics } from "@/services/analytics.service";
+import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import {
   Box,
   Button,
@@ -28,7 +31,7 @@ const DisplaySelectedFile = ({
   fileName,
 }: Props) => {
   const fileUrl = URL.createObjectURL(file);
-
+  const currency = useAppSelector((state) => state.currency);
   const { mutate: uploadImageMutate, isPending } = useMutation({
     mutationFn: uploadStudentDocument,
     onSuccess: (data) => {
@@ -40,13 +43,18 @@ const DisplaySelectedFile = ({
         },
       });
       updateFileDisplayHandler(data?.data?.linkKey ?? []);
-      // analytics.websiteButtonInteractions({
-      //   buttonName: 'Upload Document',
-      //   source: `${fileName} has been uploaded successfully`,
-      //   urlPath: window.location.href,
-      //   event_type: EAnalyticsEvents.NAVIGATION_DOCUMENT_UPLOAD,
-      //   status: EStatus.SUCCESS
-      // });
+      analytics.websiteButtonInteractions({
+        location: {
+          countryName: currency?.currentCountry ?? "",
+          city: currency?.city ?? "",
+        },
+        redirectPath: window.location.href,
+        buttonName: "Upload Document",
+        source: `${fileName} has been uploaded successfully`,
+        urlPath: window.location.href,
+        event_type: EAnalyticsEvents.NAVIGATION_DOCUMENT_UPLOAD,
+        status: EAnalyticsStatus.SUCCESS,
+      });
       closeUploadImageModal();
     },
   });

@@ -12,7 +12,6 @@ import userApplicationDocumentsReducer from "@/global-states/reducers/userApplic
 import wiseScoreReducer from "@/global-states/reducers/wisescore";
 import universityCountryListReducer from "@/global-states/reducers/universityCountryReducer";
 import socketSlice from "@/global-states/reducers/socketReducer";
-import { socketMiddleware } from "@/middleware/socket-middleware";
 import { thunk } from "redux-thunk";
 
 export const socket = new CustomSocket();
@@ -20,26 +19,26 @@ export const socket = new CustomSocket();
 export const middlewares = [thunk];
 
 export const makeStore = () => {
-	return configureStore({
-		reducer: {
-			eligibility: eligibilityReducer,
-			user: userReducer,
-			payment: paymentReducer,
-			additionalForm: additionalFormReducer,
-			countryList: countryListReducer,
-			applications: applicationReducer,
-			topMatches: topMatchesReducer,
-			currency: currencyReducer,
-			applicationDocuments: userApplicationDocumentsReducer,
-			wisescore: wiseScoreReducer,
-			universityList: universityCountryListReducer,
-			socket: socketSlice,
-		},
-		middleware: (getDefaultMiddleware) =>
-			getDefaultMiddleware({
-				serializableCheck: false,
-			}).concat(middlewares),
-	});
+  return configureStore({
+    reducer: {
+      eligibility: eligibilityReducer,
+      user: userReducer,
+      payment: paymentReducer,
+      additionalForm: additionalFormReducer,
+      countryList: countryListReducer,
+      applications: applicationReducer,
+      topMatches: topMatchesReducer,
+      currency: currencyReducer,
+      applicationDocuments: userApplicationDocumentsReducer,
+      wisescore: wiseScoreReducer,
+      universityList: universityCountryListReducer,
+      socket: socketSlice,
+    },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }).concat(middlewares),
+  });
 };
 
 // Infer the type of makeStore

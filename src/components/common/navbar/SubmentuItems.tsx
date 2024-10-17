@@ -2,43 +2,46 @@
 import { useState } from "react";
 import { KeyboardArrowDown } from "@mui/icons-material";
 import {
-	Accordion,
-	AccordionDetails,
-	AccordionSummary,
-	Box,
-	Divider,
-	Grid,
-	Typography,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Divider,
+  Grid,
+  Typography,
 } from "@mui/material";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { analytics } from "@/services/analytics.service";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import { INavbarMenu } from "@/components/common";
+import { useAppSelector } from "@/global-states/hooks/hooks";
 
 export function SubMenuItems({
-	nav,
-	closeDrawer,
+  nav,
+  closeDrawer,
 }: {
-	nav: INavbarMenu;
-	closeDrawer: () => void;
+  nav: INavbarMenu;
+  closeDrawer: () => void;
 }) {
-	const router = useRouter();
-	const pathName = usePathname();
-	const [showDropdown, setShowDropdown] = useState(false);
+  const router = useRouter();
+  const pathName = usePathname();
+  const [showDropdown, setShowDropdown] = useState(false);
 
-	const selectItems = {
-		position: "relative",
-		backgroundImage: "linear-gradient(to right,#ff6b26,#ff6b26)",
-		backgroundRepeat: "no-repeat",
-		backgroundSize: "0% 1px",
-		backgroundPosition: "left bottom",
-		transition: "background-size 0.3s ease",
-		"&:hover": {
-			backgroundSize: "100% 2px",
-			color: "#ff6b26",
-		},
-	};
+  const currency = useAppSelector((state) => state.currency);
+
+  const selectItems = {
+    position: "relative",
+    backgroundImage: "linear-gradient(to right,#ff6b26,#ff6b26)",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "0% 1px",
+    backgroundPosition: "left bottom",
+    transition: "background-size 0.3s ease",
+    "&:hover": {
+      backgroundSize: "100% 2px",
+      color: "#ff6b26",
+    },
+  };
 
   return (
     <Box
@@ -57,6 +60,10 @@ export function SubMenuItems({
         }}
         onClick={() => {
           analytics.navigationSelect(
+            {
+              countryName: currency?.currentCountry ?? "",
+              city: currency?.city ?? "",
+            },
             nav.name,
             pathName,
             EAnalyticsEvents.NAVIGATION_CLICK,
@@ -85,6 +92,10 @@ export function SubMenuItems({
               if (!nav.isDropdown) {
                 router.push(nav?.link ?? "");
                 analytics.navigationSelect(
+                  {
+                    countryName: currency?.currentCountry ?? "",
+                    city: currency?.city ?? "",
+                  },
                   nav.name,
                   pathName,
                   EAnalyticsEvents.NAVIGATION_CLICK,
@@ -138,6 +149,10 @@ export function SubMenuItems({
               onClick={() => {
                 router.push(option.link);
                 analytics.navigationSelect(
+                  {
+                    countryName: currency?.currentCountry ?? "",
+                    city: currency?.city ?? "",
+                  },
                   option.name,
                   pathName,
                   EAnalyticsEvents.NAVIGATION_CLICK,
@@ -224,14 +239,16 @@ export function SubMenuItems({
 }
 
 export function SubMenuItemMobile({
-	nav,
-	closeDrawer,
+  nav,
+  closeDrawer,
 }: {
-	nav: INavbarMenu;
-	closeDrawer: () => void;
+  nav: INavbarMenu;
+  closeDrawer: () => void;
 }) {
-	const router = useRouter();
-	const pathName = usePathname();
+  const router = useRouter();
+  const pathName = usePathname();
+  const currency = useAppSelector((state) => state.currency);
+
 
   return (
     <Box>
@@ -289,6 +306,10 @@ export function SubMenuItemMobile({
                 }}
                 onClick={() => {
                   analytics.navigationSelect(
+                    {
+                      countryName: currency?.currentCountry ?? "",
+                      city: currency?.city ?? "",
+                    },
                     option.name,
                     pathName,
                     EAnalyticsEvents.NAVIGATION_CLICK,
@@ -319,6 +340,10 @@ export function SubMenuItemMobile({
           onClick={() => {
             if (!nav.isDropdown) {
               analytics.navigationSelect(
+                {
+                  countryName: currency?.currentCountry ?? "",
+                  city: currency?.city ?? "",
+                },
                 nav.name,
                 pathName,
                 EAnalyticsEvents.NAVIGATION_CLICK,
@@ -346,11 +371,11 @@ export function SubMenuItemMobile({
         </Box>
       )}
 
-			<Divider
-				sx={{
-					bgcolor: "rgba(255, 255, 255, 0.3)",
-				}}
-			/>
-		</Box>
-	);
+      <Divider
+        sx={{
+          bgcolor: "rgba(255, 255, 255, 0.3)",
+        }}
+      />
+    </Box>
+  );
 }

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Typography } from '@mui/material';
 import WiseScoreWelcome from '@/page-components/wisescore/WisescoreWelcome';
 import WiseScoreModal from '@/page-components/wisescore/WisescoreModal';
-import { WiseAdmitColorFulSvg } from '$/svg';
+import { WiseAdmitColorFulSvg } from 'public/svg';
 import { RootContainer } from '@/components/common';
 type WiseScoreCalculatorProps = {
     handleStep: (value: number) => void;

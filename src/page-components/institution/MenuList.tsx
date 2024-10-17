@@ -35,6 +35,7 @@ function MenuSwiper() {
               flexDirection="column"
               onClick={() => setActiveIndex(index)}
               key={menu.title}
+              width={{ lg: "396px", md: "396px", sm: "100%", xs: "100%" }}
             >
               <Typography
                 color={
@@ -43,7 +44,12 @@ function MenuSwiper() {
                     : "rgba(32, 28, 26, 0.55)"
                 }
                 fontFamily="HankenGroteskExtraBold"
-                lineHeight="41.6px"
+                lineHeight={{
+                  lg: "36.4px",
+                  md: "36.4px",
+                  sm: "31.2px",
+                  xs: "31.2px",
+                }}
                 fontSize={{ lg: "32px", md: "32px", sm: "24px", xs: "24px" }}
               >
                 {menu.title}
@@ -86,7 +92,7 @@ function MenuSwiper() {
                   <motion.img
                     key={menu.title}
                     width="100%"
-                    height={isMobile ? "300px" : "auto"}
+                    height={isMobile ? "300px" : "600px"}
                     src={menu.imageUrl}
                     alt={menu.title}
                     initial={{ opacity: 0 }} // Initial state before animation
