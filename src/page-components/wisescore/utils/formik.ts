@@ -313,7 +313,8 @@ Yup.addMethod(Yup.string, "isValidTestScore", function (name, message, test) {
     return true;
   }).when("language_proficiency", {
     is: true,
-    then: Yup.string().required("Required"),
+    then: (schema) => schema,
+    otherwise: (schema) => schema.required("Required"),
   });
 });
 // ---------------------------------------------------isValidTestScoreForEachField---------------------------------------------------
@@ -379,7 +380,7 @@ Yup.addMethod(
       is: (language: boolean, test: string) =>
         test !== "Duolingo" && language === true,
       then: Yup.string(),
-    });
+    } as any);
   }
 );
 
@@ -517,7 +518,10 @@ export const WISESCORE_FORM_VALIDATION = Yup.object().shape({
   education_status: Yup.string(),
   test: Yup.string().when("language_proficiency", {
     is: true,
-    then: Yup.string().required("Proficiency must be provided"),
+    // then: Yup.string().required("Proficiency must be provided"),
+    // is: "Duolingo",
+    then: (schema) => schema,
+    otherwise: (schema) => schema.required("Proficiency must be provided"),
   }),
   score: Yup.string().isValidTestScore("score", "score must be with in range"),
   language_overall_score: Yup.string().isValidTestScore(
