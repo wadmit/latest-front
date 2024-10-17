@@ -35,32 +35,11 @@ const ApplicationPageComponent = (props: Props) => {
     queryKey: ["Applications/GET", Object.fromEntries(searchParams), "student"],
     queryFn: async () => await getApplicationsStudent(),
     onSuccess: (res) => {
-      console.log(res);
       dispatch(setUserApplications({ data: res }));
     },
     refetchOnWindowFocus: false,
   });
 
-  // useEffect(() => {
-  //   const initialObject: ApplicationStatus = {
-  //     paid: [],
-  //     unpaid: [],
-  //   };
-  //   if (userApplications.length > 0) {
-  //     if (userApplications.length > 0) {
-  //       const { paid, unpaid } = userApplications.reduce((acc, item) => {
-  //         if (item.paid) {
-  //           acc.paid.push(item);
-  //         } else {
-  //           acc.unpaid.push(item);
-  //         }
-  //         return acc;
-  //       }, initialObject);
-
-  //       setApplicationWithStatus({ paid, unpaid });
-  //     }
-  //   }
-  // }, [userApplications]);
 
   const isUserProfileComplete = useAppSelector(
     (state) => state.user.dashboardDataGlobal?.data?.isProfileComplete

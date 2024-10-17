@@ -173,7 +173,6 @@ export const applicationSlice = createSlice({
       const updatedApplications = state.applications.filter(
         (app) => app.id !== action.payload
       );
-      console.log("🚀 ~ updatedApplications:", updatedApplications);
       return {
         ...state,
         applications: updatedApplications,

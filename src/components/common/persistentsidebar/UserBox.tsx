@@ -39,7 +39,7 @@ const UserBox = (props: Props) => {
     enabled: session.status === 'authenticated',
     refetchOnWindowFocus: false,
     refetchOnMount: false,
-
+    
     onSuccess: (res) => {
       if (res.data) {
         dispatch(

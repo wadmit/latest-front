@@ -193,10 +193,38 @@ const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
   const handlePopUpPayment = () => {
     if (activePaymentType === "stripe") {
       paymentMutate({ formValues: selectedApplications, type: "multiple" });
+      analytics.websiteButtonInteractions({
+        buttonName: "Pay with Stripe",
+        pageName: "Application Payment",
+        event_type: EAnalyticsEvents.PAY_APPLICATION_FEE,
+        location: {
+          countryName: currency?.currentCountry ?? "",
+          city: currency?.city ?? "",
+        },
+        source:
+        "User has clicked on Continue To Payment button and started the application payment process for programs",   
+        status: EAnalyticsStatus.SUCCESS,
+        urlPath: `${process.env.NEXT_PUBLIC_PARTNER_URL}/applications`,
+        redirectPath: `${process.env.NEXT_PUBLIC_PARTNER_URL}/applications`,
+      })
     }
     if (activePaymentType === "esewa") {
       // esewa payment
       paymentEsewa({ formValues: selectedApplications, type: "multiple" });
+      analytics.websiteButtonInteractions({
+        buttonName: "Pay with Stripe",
+        pageName: "Application Payment",
+        event_type: EAnalyticsEvents.PAY_APPLICATION_FEE,
+        location: {
+          countryName: currency?.currentCountry ?? "",
+          city: currency?.city ?? "",
+        },
+        source:
+        "User has clicked on Continue To Payment button and started the application payment process for programs",   
+        redirectPath: `${process.env.NEXT_PUBLIC_PARTNER_URL}/applications`,
+        status: EAnalyticsStatus.SUCCESS,
+        urlPath: `${process.env.NEXT_PUBLIC_PARTNER_URL}/applications`,
+      })
     }
   };
 
@@ -426,7 +454,7 @@ const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
                       >
                         {
                           getConvertedCosts(
-                            row.university.detail.fees["Application Fee"],
+                            row?.university?.detail?.fees["Application Fee"],
                             row.university.base_currency
                           ).formattedValue
                         }
