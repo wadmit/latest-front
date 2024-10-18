@@ -31,7 +31,7 @@ const index = () => {
   const dispatch = useAppDispatch();
 
   const { isError } = useCustomQuery({
-    queryKey: [CacheConfigKey.APPLICATION_GET_QUERY_KEY],
+    queryKey: [CacheConfigKey.APPLICATION_GET_QUERY_KEY,applicationId],
     queryFn: () => getSingleApplication(applicationId as string),
     onSuccess: (res) => {
       dispatch(setSingleApplication(res));
@@ -41,7 +41,7 @@ const index = () => {
       setIsLoading(false);
     },
     enabled: !!applicationId,
-    networkMode:"online"
+    
   });
   const queryApplications = searchParams.get("applications");
   useEffect(() => {

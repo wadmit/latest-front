@@ -275,6 +275,7 @@ export function DashboardHome() {
         router.replace("/dashboard");
       },
       enabled: !!query.get("signature"),
+      retry:3,
     });
 
   return (
