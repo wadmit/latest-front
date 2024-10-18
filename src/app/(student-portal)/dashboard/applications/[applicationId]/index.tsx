@@ -40,8 +40,8 @@ const index = () => {
     onError: (err) => {
       setIsLoading(false);
     },
-    enabled: Boolean(applicationId),
-    refetchOnWindowFocus: false,
+    enabled: !!applicationId,
+    networkMode:"online"
   });
   const queryApplications = searchParams.get("applications");
   useEffect(() => {

@@ -144,30 +144,25 @@ export const FORM_VALIDATION_STUDENT = GlobalYup.object().shape({
     )
     .when("language_of_proficiency_test", {
       is: "Duolingo",
-      then: (schema) => schema,
-      otherwise: (schema) => schema.required("Required"),
+      then: GlobalYup.string(),
       // otherwise: GlobalYup.string().required('Required'),
-    }),
+    } as any),
 
   reading: GlobalYup.string()
     .isValidTestScoreForEachField("reading", "reading must be with in range")
     .when("language_of_proficiency_test", {
-      //old method
-      // is: "Duolingo",
-      // then: GlobalYup.string(),
-      // otherwise: GlobalYup.string().required('Required'),
-
       is: "Duolingo",
-      then: (schema) => schema,
-      otherwise: (schema) => schema.required("Required"),
-    }),
+      then: GlobalYup.string(),
+      // otherwise: GlobalYup.string().required('Required'),
+    } as any),
   speaking: GlobalYup.string()
     .isValidTestScoreForEachField("speaking", "speaking must be with in range")
     .when("language_of_proficiency_test", {
       is: "Duolingo",
-      then: (schema) => schema,
-      otherwise: (schema) => schema.required("Required"),
-    }),
+
+      then: GlobalYup.string(),
+      // otherwise: Yup.string().required('Required'),
+    } as any),
   father_company_name: GlobalYup.string(),
   mother_company_name: GlobalYup.string(),
   father_company_address: GlobalYup.string(),
