@@ -57,11 +57,15 @@ export default function SortedUniversitiesPageComponent() {
   const [filteredPrograms, setFilteredPrograms] = useState<any>([]);
   const [activeCountry, setActiveCountry] = useState("China");
   const [responseEligibility, setResponseEligibility] = useState<any>();
-  const [updatedSubDiscipline, setUpdatedSubDiscipline] = useState<string[]>([]);
+  const [updatedSubDiscipline, setUpdatedSubDiscipline] = useState<string[]>(
+    []
+  );
 
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const applications = useAppSelector((state) => state.applications.applications);
+  const applications = useAppSelector(
+    (state) => state.applications.applications
+  );
 
   // Fetch applications with query
   const { data } = useCustomQuery({
@@ -99,23 +103,32 @@ export default function SortedUniversitiesPageComponent() {
   });
 
   // Handle eligibility recalculation
-  const { mutate: mutateNewEligibility, isPending: calculateAgainLoad } = useMutation({
-    mutationFn: (data: any) => submitWiseScore(data),
-    onSuccess: (res: any) => {
-      if (res.eligibility) {
-        setResponseEligibility(res.eligibility);
-      }
-      setFilteredPrograms([]);
-      mutate(responseEligibility.email);
-    },
-    onError: () => {
-      alert("Process Failed");
-    },
-  });
+  const { mutate: mutateNewEligibility, isPending: calculateAgainLoad } =
+    useMutation({
+      mutationFn: (data: any) => submitWiseScore(data),
+      onSuccess: (res: any) => {
+        if (res.eligibility) {
+          setResponseEligibility(res.eligibility);
+        }
+        setFilteredPrograms([]);
+        mutate(responseEligibility.email);
+      },
+      onError: () => {
+        alert("Process Failed");
+      },
+    });
 
   // Fetch sub-disciplines based on eligibility
-  const { data: subDisciplines, isLoading: subDisciplinesLoading, refetch, isRefetching } = useQuery({
-    queryKey: [CacheConfigKey.SUBDISCIPLINES_QUERY_KEY, responseEligibility?.discipline],
+  const {
+    data: subDisciplines,
+    isLoading: subDisciplinesLoading,
+    refetch,
+    isRefetching,
+  } = useQuery({
+    queryKey: [
+      CacheConfigKey.SUBDISCIPLINES_QUERY_KEY,
+      responseEligibility?.discipline,
+    ],
     queryFn: () => getSubDisciplines(responseEligibility?.discipline),
     enabled: !!responseEligibility,
   });
@@ -158,7 +171,13 @@ export default function SortedUniversitiesPageComponent() {
 
   if (!isDataResolved) {
     return (
-      <Box bgcolor="common.white" borderRadius={1} pt={5} pb={9.5} minHeight="80vh">
+      <Box
+        bgcolor="common.white"
+        borderRadius={1}
+        pt={5}
+        pb={9.5}
+        minHeight="80vh"
+      >
         <Stack direction="row" justifyContent="center">
           <Loader />
           <Typography variant="h6" sx={{ ml: 2 }} color="primary">
@@ -171,8 +190,18 @@ export default function SortedUniversitiesPageComponent() {
 
   if ((!scoreData || scoreData === 0) && filteredPrograms.length === 0) {
     return (
-      <Box bgcolor="common.white" borderRadius={1} pt={2} pb={9.5} minHeight="80vh">
-        <WaitingScreen title={noEligibilityData.title} desc={noEligibilityData.desc} btnText={noEligibilityData.btnText} />
+      <Box
+        bgcolor="common.white"
+        borderRadius={1}
+        pt={2}
+        pb={9.5}
+        minHeight="80vh"
+      >
+        <WaitingScreen
+          title={noEligibilityData.title}
+          desc={noEligibilityData.desc}
+          btnText={noEligibilityData.btnText}
+        />
       </Box>
     );
   }
@@ -381,8 +410,8 @@ export default function SortedUniversitiesPageComponent() {
             onClick={() => {
               analytics.websiteButtonInteractions({
                 location: {
-                  countryName:   "",
-                  city:   "",
+                  countryName: "",
+                  city: "",
                 },
                 buttonName: "Get career pathway",
                 source: "User clicked on get career pathway button",

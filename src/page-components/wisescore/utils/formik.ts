@@ -313,9 +313,8 @@ Yup.addMethod(Yup.string, "isValidTestScore", function (name, message, test) {
     return true;
   }).when("language_proficiency", {
     is: true,
-    then: (schema) => schema,
-    otherwise: (schema) => schema.required("Required"),
-  });
+    then: Yup.string().required("Required"),
+  } as any);
 });
 // ---------------------------------------------------isValidTestScoreForEachField---------------------------------------------------
 Yup.addMethod(
@@ -518,11 +517,8 @@ export const WISESCORE_FORM_VALIDATION = Yup.object().shape({
   education_status: Yup.string(),
   test: Yup.string().when("language_proficiency", {
     is: true,
-    // then: Yup.string().required("Proficiency must be provided"),
-    // is: "Duolingo",
-    then: (schema) => schema,
-    otherwise: (schema) => schema.required("Proficiency must be provided"),
-  }),
+    then: Yup.string().required("Proficiency must be provided"),
+  } as any),
   score: Yup.string().isValidTestScore("score", "score must be with in range"),
   language_overall_score: Yup.string().isValidTestScore(
     "language_overall_score",
