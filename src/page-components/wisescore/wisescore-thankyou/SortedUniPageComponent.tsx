@@ -45,8 +45,10 @@ import {
   submitWiseScore,
 } from "@/api/web/wisescore.action";
 import { IconWrapper } from "@/components/common/icon-wrapper/IconWrapper";
+import { getSession } from "next-auth/react";
+import { auth } from "@/auth/auth";
 
-export default function SortedUniversitiesPageComponent() {
+export default async function SortedUniversitiesPageComponent() {
   const UniversityComponentRef = useRef<HTMLDivElement>(null);
   const currency = useAppSelector((state) => state.currency);
   const getConvertedCosts = useCostConverterMain();
@@ -66,7 +68,7 @@ export default function SortedUniversitiesPageComponent() {
   const applications = useAppSelector(
     (state) => state.applications.applications
   );
-
+  // const session = await getSession();
   // Fetch applications with query
   const { data } = useCustomQuery({
     queryKey: [CacheConfigKey.APPLICATION_GET_QUERY_KEY],
