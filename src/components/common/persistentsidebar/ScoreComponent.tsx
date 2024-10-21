@@ -1,3 +1,4 @@
+"use client"
 import { useRouter } from "next/navigation";
 import { monthShort } from "./utils/provider";
 import React from "react";
@@ -85,7 +86,7 @@ function ScoreComponent() {
             gap={1}
           >
             <ScoreGauge
-              value={score || 0 || 0}
+              value={score}
               offsetColor="primary"
               type="blue"
               size={99}
