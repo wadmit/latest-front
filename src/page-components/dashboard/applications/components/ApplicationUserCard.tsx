@@ -15,6 +15,8 @@ import {
 import { PaymentButtonProps } from "@/page-components/dashboard/applications/types";
 import { useSnackbar } from "notistack";
 import { setStatusWhenPaid } from "@/global-states/reducers/applicationReducer";
+import { useQueryClient } from "@tanstack/react-query";
+import { CacheConfigKey } from "@/constants";
 
 type Props = {
   status: string;
@@ -31,7 +33,7 @@ const ApplicationUserCard = ({
   buttonProps,
   isPaymentLoading,
 }: Props) => {
-  const dispatch= useAppDispatch();
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const searchParams = useSearchParams();
   const params = useParams();
@@ -39,6 +41,8 @@ const ApplicationUserCard = ({
   const applicationId = params.applicationId as string;
   const { enqueueSnackbar } = useSnackbar();
   const [isPaymentProcessed, setIsPaymentProcessed] = useState(false);
+  const queryClient = useQueryClient(); // Get the query client to invalidate cache
+
   const { data: esewaData, isLoading: esewaVerificationLoading } = useCustomQuery({
     queryKey: ["esewaVerify"],
     queryFn: () => paymentEsewaVerify((searchParams.get("data") as string) ?? ""),
@@ -46,20 +50,28 @@ const ApplicationUserCard = ({
       if (!isPaymentProcessed) {
         const params = new URLSearchParams(searchParams.toString())
         params.set("data", "")
-        router.push(pathname + `?${params.toString()}`);
+        router.replace(pathname + `?${params.toString()}`);
         setIsPaymentProcessed(true);
-        dispatch(setStatusWhenPaid({}));
+
+        // dispatch(setStatusWhenPaid({}));
+
+        // Invalidate the cache after payment success
+        queryClient.invalidateQueries({
+          queryKey: [CacheConfigKey.APPLICATION_GET_QUERY_KEY, applicationId],
+        });
+
+       
       }
     },
     onError: (error) => {
       enqueueSnackbar("Payment verification failed", { variant: "error" });
       router.replace(`/dashboard/applications/${applicationId}`);
     },
-    enabled: searchParams && !!searchParams.get("data"),
+    enabled: searchParams && !!searchParams.get("data") && !isPaymentProcessed,
+    retry: 1,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });
-  
 
   const [buttonText, setButtonText] = useState(displayText);
   const applications = useAppSelector(

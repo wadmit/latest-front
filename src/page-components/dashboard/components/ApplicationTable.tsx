@@ -246,6 +246,7 @@ function ApplicationTable({ status }: IProps) {
       enabled: params && !!params.get("data"),
       refetchOnWindowFocus: false,
       refetchOnMount: false,
+      retry:3
     });
   const handlePopUpPayment = () => {
     if (activePaymentType === "stripe") {
