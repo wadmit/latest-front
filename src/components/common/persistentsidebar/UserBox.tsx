@@ -9,7 +9,7 @@ import { CacheConfigKey } from '@/constants'
 import { getUserInformation } from '@/api/web/user.action'
 import { signOut, useSession } from 'next-auth/react'
 import { useAppDispatch, useAppSelector } from '@/global-states/hooks/hooks'
-import { SelectShortlistedPrograms, selectShortListPrograms, setActiveStepGlobal, setDashboardDataGlobal, setMaxActiveStepGlobal, setShortListedDetails, setShortListedPrograms } from '@/global-states/reducers/userReducer'
+import { selectDashboardDataGlobal, SelectShortlistedPrograms, selectShortListPrograms, setActiveStepGlobal, setDashboardDataGlobal, setMaxActiveStepGlobal, setShortListedDetails, setShortListedPrograms } from '@/global-states/reducers/userReducer'
 import { analytics } from '@/services/analytics.service'
 import { EAnalyticsEvents, EAnalyticsFieldName } from '@/types/mix-panel-analytic'
 import { useQuery } from '@tanstack/react-query'
@@ -25,11 +25,13 @@ const UserBox = (props: Props) => {
   const refBox = useRef<HTMLDivElement | null>(null);
   const session = useSession({
     required:true,
+
   });
+  
   const dispatch = useAppDispatch()
   const shortlistedPrograms = useAppSelector(SelectShortlistedPrograms);
   const pathname = usePathname()
-
+  const dashboardData = useAppSelector(selectDashboardDataGlobal);
   const sortlistedGlobal = useAppSelector(selectShortListPrograms);
   const handleClose = () => setOpen(false);
 
@@ -100,6 +102,7 @@ const UserBox = (props: Props) => {
     setOpen(true);
   };
 
+
   return (
     <Stack position="relative">
       <Box
@@ -143,8 +146,8 @@ const UserBox = (props: Props) => {
           >
             <Avatar
               src={
-                session?.data?.user?.imageUrl
-                  ? `${process.env.NEXT_PUBLIC_IMAGE_DISTRIBUTION_KEY}/${session?.data?.user?.imageUrl}`
+                dashboardData?.data?.photoUrl_key
+                  ? `${process.env.NEXT_PUBLIC_IMAGE_DISTRIBUTION_KEY}/${dashboardData?.data?.photoUrl_key}`
                   : ''
               }
             />

@@ -33,7 +33,7 @@ const ProfileInformationCard = ({ data, title }: Props) => {
         {data.map((item) => (
           <Grid item xs={12} md={3}>
             <Stack direction="column" columnGap={4}>
-              <Typography variant="subtitle1_sb" component="p">
+              <Typography variant="subtitle1_sb">
                 <CustomInfoBox
                   display={{ xs: "flex" }}
                   sx={{
