@@ -60,9 +60,13 @@ export function useUniversitys(
 	};
 
 	const fetchNextUniversities = async () => {
-		// const currentParams = handlePageParams();
+		handlePageParams();
+
+		// console.log("fetchNextUniversities",currentParams);
+		// console.log("fetchNextUniversities",queryParams);
 		try {
 			if (hasNext) {
+				queryParams && queryParams.delete("page");
 				queryParams.append("page", String(page + 1));
 				setIsLoading(true);
 				const response = await getUniversities(queryParams);

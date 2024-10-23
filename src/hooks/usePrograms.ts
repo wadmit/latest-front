@@ -60,16 +60,19 @@ export function usePrograms(
 	};
 
 	const fetchNextPrograms = async () => {
-		const currentParams = handlePageParams();
+		// const currentParams = handlePageParams();
+		// currentParams.has("page") && currentParams.delete("page");
+		// currentParams.append("page", String(page + 1));
 
-		if(currentParams && currentParams.get('type')){
-			queryParams.append("type", currentParams.get('type')!);
-		}
-		if(currentParams && currentParams.get('country')){
-			queryParams.append("country", currentParams.get('country')!);
-		}
+		// if(currentParams && currentParams.get('type')){
+		// 	queryParams.append("type", currentParams.get('type')!);
+		// }
+		// if(currentParams && currentParams.get('country')){
+		// 	queryParams.append("country", currentParams.get('country')!);
+		// }
 		try {
 			if (hasNext) {
+				queryParams && queryParams.delete("page");
 				queryParams.append("page", String(page + 1));
 				setIsLoading(true);
 				const response = await getPrograms(queryParams);
