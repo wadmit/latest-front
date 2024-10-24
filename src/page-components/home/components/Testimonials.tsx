@@ -7,7 +7,7 @@ import styles from "@/styles/testimonial.module.css";
 import { Navigation, Pagination } from "swiper/modules";
 import ThumbnailWrapper from "@/page-components/home/components/atoms/ThumbnailWrapper";
 import { RootContainer } from "@/components/common";
-import {  ClickableArrow } from "public/svg";
+import { ClickableArrow } from "public/svg";
 import { testimonialsData } from "@/page-components/home/utils/provider";
 import type { IThumbnailWrapperRef } from "@/page-components/home/utils/types";
 

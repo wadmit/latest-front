@@ -1319,6 +1319,224 @@ export function ClickableArrow({ direction }: { direction: "left" | "right" }) {
   );
 }
 
+export function ClickableArrowScholarship({
+  direction,
+}: {
+  direction: "left" | "right";
+}) {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{
+        transform: direction === "left" ? "scaleX(1)" : "scaleX(-1)",
+      }}
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M10.8314 14.7841L5.58138 9.53406C5.44169 9.39354 5.36328 9.20345 5.36328 9.00531C5.36328 8.80717 5.44169 8.61708 5.58138 8.47656L10.8314 3.22656L11.8889 4.28406L7.17138 9.00156L11.8889 13.7191L10.8314 14.7841Z"
+        fill="#FF6B26"
+      />
+    </svg>
+  );
+}
+
+export function LeftScholarshipTestimonialArrow() {
+  return (
+    <svg
+      width="117"
+      height="113"
+      viewBox="0 0 117 113"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g filter="url(#filter0_d_12919_39422)">
+        <g filter="url(#filter1_d_12919_39422)">
+          <circle cx="46" cy="42" r="16" fill="white" />
+        </g>
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M47.8314 47.7841L42.5814 42.5341C42.4417 42.3935 42.3633 42.2035 42.3633 42.0053C42.3633 41.8072 42.4417 41.6171 42.5814 41.4766L47.8314 36.2266L48.8889 37.2841L44.1714 42.0016L48.8889 46.7191L47.8314 47.7841Z"
+          fill="#FF6B26"
+        />
+      </g>
+      <defs>
+        <filter
+          id="filter0_d_12919_39422"
+          x="5"
+          y="1"
+          width="112"
+          height="112"
+          filterUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
+        >
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset dx="15" dy="15" />
+          <feGaussianBlur stdDeviation="20" />
+          <feComposite in2="hardAlpha" operator="out" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"
+          />
+          <feBlend
+            mode="normal"
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow_12919_39422"
+          />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="effect1_dropShadow_12919_39422"
+            result="shape"
+          />
+        </filter>
+        <filter
+          id="filter1_d_12919_39422"
+          x="0"
+          y="0"
+          width="92"
+          height="92"
+          filterUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
+        >
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset dy="4" />
+          <feGaussianBlur stdDeviation="15" />
+          <feComposite in2="hardAlpha" operator="out" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0.180392 0 0 0 0 0.176471 0 0 0 0 0.454902 0 0 0 0.05 0"
+          />
+          <feBlend
+            mode="normal"
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow_12919_39422"
+          />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="effect1_dropShadow_12919_39422"
+            result="shape"
+          />
+        </filter>
+      </defs>
+    </svg>
+  );
+}
+
+export function RightScholarshipTestimonialArrow() {
+  return (
+    <svg
+      width="117"
+      height="113"
+      viewBox="0 0 117 113"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g filter="url(#filter0_d_12919_39428)">
+        <g filter="url(#filter1_d_12919_39428)">
+          <circle cx="46" cy="42" r="16" fill="white" />
+        </g>
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M43.9716 47.7837L42.9141 46.7187L47.6316 42.0012L42.9141 37.2837L43.9716 36.2188L49.2216 41.4687C49.3613 41.6093 49.4397 41.7994 49.4397 41.9975C49.4397 42.1956 49.3613 42.3857 49.2216 42.5262L43.9716 47.7837Z"
+          fill="#FF6B26"
+        />
+      </g>
+      <defs>
+        <filter
+          id="filter0_d_12919_39428"
+          x="5"
+          y="1"
+          width="112"
+          height="112"
+          filterUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
+        >
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset dx="15" dy="15" />
+          <feGaussianBlur stdDeviation="20" />
+          <feComposite in2="hardAlpha" operator="out" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"
+          />
+          <feBlend
+            mode="normal"
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow_12919_39428"
+          />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="effect1_dropShadow_12919_39428"
+            result="shape"
+          />
+        </filter>
+        <filter
+          id="filter1_d_12919_39428"
+          x="0"
+          y="0"
+          width="92"
+          height="92"
+          filterUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
+        >
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset dy="4" />
+          <feGaussianBlur stdDeviation="15" />
+          <feComposite in2="hardAlpha" operator="out" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0.180392 0 0 0 0 0.176471 0 0 0 0 0.454902 0 0 0 0.05 0"
+          />
+          <feBlend
+            mode="normal"
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow_12919_39428"
+          />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="effect1_dropShadow_12919_39428"
+            result="shape"
+          />
+        </filter>
+      </defs>
+    </svg>
+  );
+}
+
 export function GreenUpArrow() {
   return (
     <svg
