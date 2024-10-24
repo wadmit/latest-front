@@ -46,6 +46,7 @@ function ThinScoreGauge({
         flexBasis: "5.5rem",
         flexShrink: 0,
       }}
+      zIndex={1}
     >
       <CircularProgress
         variant="determinate"
@@ -55,7 +56,7 @@ function ThinScoreGauge({
         sx={{
           color: "#FF6B26",
           position: "absolute",
-          zIndex: 10,
+          zIndex: -1,
           [`& .${circularProgressClasses.circle}`]: {
             strokeLinecap: "round",
           },
@@ -86,12 +87,13 @@ function ThinScoreGauge({
         variant="determinate"
         value={100}
         thickness={2.2}
+        
         size={boxSize}
         sx={{
           color: "#FFD3B9",
           // opacity: '20%',
           position: "absolute",
-          zIndex: 0,
+          zIndex: -2,
         }}
       />
     </Box>

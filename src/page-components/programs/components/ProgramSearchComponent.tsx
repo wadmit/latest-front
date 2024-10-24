@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Stack } from "@mui/material";
 import { TextFieldWrapper } from "@/components/common/formfields/styles/StyledInput";
 import { analytics } from "@/services/analytics.service";
@@ -16,6 +16,12 @@ function ProgramSearchComponent({
 	const [searchValue, setSearchValue] = useState(
 		searchParams.get("searchTerm") || "",
 	);
+
+	useEffect(() => {
+		if(!searchParams.get("searchTerm")) {
+			setSearchValue("");
+		}
+	}, [searchParams.get("searchTerm")]);
 
 	return (
 		<Stack
