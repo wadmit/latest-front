@@ -60,7 +60,7 @@ export function usePrograms(
 	};
 
 	const fetchNextPrograms = async () => {
-		// const currentParams = handlePageParams();
+		 handlePageParams();
 		// currentParams.has("page") && currentParams.delete("page");
 		// currentParams.append("page", String(page + 1));
 
