@@ -1,20 +1,19 @@
 "use client"
-import { Avatar, Box, Dialog, Paper, Skeleton, Stack, Typography } from '@mui/material'
-import React, { useEffect, useRef, useState } from 'react'
-import { GetArrowDown, GetHelpIcon, GetLogoutCrossIcon, GetLogoutIcon } from './svgs'
-import { MenuItems } from './utils/provider'
-import { ButtonWrapper } from '../buttons/ButtonWrapper'
-import { useCustomQuery } from '@/hooks/useCustomQuery'
-import { CacheConfigKey } from '@/constants'
+import { logout } from '@/api/web/logout.action'
 import { getUserInformation } from '@/api/web/user.action'
-import { signOut, useSession } from 'next-auth/react'
+import { CacheConfigKey } from '@/constants'
 import { useAppDispatch, useAppSelector } from '@/global-states/hooks/hooks'
 import { selectDashboardDataGlobal, SelectShortlistedPrograms, selectShortListPrograms, setActiveStepGlobal, setDashboardDataGlobal, setMaxActiveStepGlobal, setShortListedDetails, setShortListedPrograms } from '@/global-states/reducers/userReducer'
+import { useCustomQuery } from '@/hooks/useCustomQuery'
 import { analytics } from '@/services/analytics.service'
 import { EAnalyticsEvents, EAnalyticsFieldName } from '@/types/mix-panel-analytic'
-import { useQuery } from '@tanstack/react-query'
-import { redirect, usePathname } from 'next/navigation'
-import { logout } from '@/api/web/logout.action'
+import { Avatar, Box, Dialog, Paper, Skeleton, Stack, Typography } from '@mui/material'
+import { useSession } from 'next-auth/react'
+import { usePathname, useRouter } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
+import { ButtonWrapper } from '../buttons/ButtonWrapper'
+import { GetArrowDown, GetHelpIcon, GetLogoutCrossIcon, GetLogoutIcon } from './svgs'
+import { MenuItems } from './utils/provider'
 
 type Props = {}
 
@@ -27,6 +26,9 @@ const UserBox = (props: Props) => {
     required:true,
 
   });
+
+  const router = useRouter();
+  
   
   const dispatch = useAppDispatch()
   const shortlistedPrograms = useAppSelector(SelectShortlistedPrograms);
@@ -181,7 +183,9 @@ const UserBox = (props: Props) => {
           flexDirection="column"
           alignItems="center"
         >
-          <MenuItems text="Help" Icon={<GetHelpIcon />} />
+          <MenuItems
+          handleOnClick={() => router.push('/contactus')}
+          text="Help" Icon={<GetHelpIcon />} />
           <MenuItems
             text="Logout"
             Icon={<GetLogoutIcon />}

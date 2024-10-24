@@ -172,7 +172,7 @@ function ShortListTable({
   });
 
   const handleDeleteShortList = async (id: string) => {
-    if (window.confirm("Are you Sure you want to Unlist this program")) {
+    if (window.confirm("Are you Sure you want to un-list this program?")) {
       deleteShortlist(id);
     }
   };

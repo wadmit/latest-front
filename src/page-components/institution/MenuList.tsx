@@ -9,7 +9,36 @@ import { RootContainer } from "@/components/common";
 function MenuSwiper() {
   const [activeIndex, setActiveIndex] = useState(0);
   const isMobile = useMediaQuery("(max-width: 820px)");
-
+  const menuItemVariants = {
+    hidden: { opacity: 0, x: -50 },
+    show: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 100 } },
+  };
+  
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1, // Delay each child animation
+      },
+    },
+  };
+  const imageVariants = {
+    hidden: { opacity: 0, x: 200, scale: 0.9 },  // Start off to the right
+    show: {
+      opacity: 1,
+      x: 0,  // Slide in to original position
+      scale: 1,
+      transition: { type: "spring", duration: 0.8 }, // Smooth transition
+    },
+    exit: {
+      opacity: 0,
+      x: -200,  // Slide out to the left
+      scale: 0,
+      transition: { duration: 0.2 },
+    },
+  };
+  
   return (
     <RootContainer>
       <Box
@@ -25,18 +54,25 @@ function MenuSwiper() {
         }}
         mb="100px"
       >
-        <Box flex={0.35} gap="30px" display="flex" flexDirection="column">
+          <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          className="menu-list"
+          style={{
+            flex: 0.35,
+          }}
+        >
+        <Box  gap="30px" display="flex" flexDirection="column">
           {menuListItem.map((menu, index) => (
-            <Box
-              sx={{
-                cursor: "pointer",
-              }}
-              display="flex"
-              flexDirection="column"
-              onClick={() => setActiveIndex(index)}
-              key={menu.title}
-              width={{ lg: "396px", md: "396px", sm: "100%", xs: "100%" }}
-            >
+        <motion.div
+        key={menu.title}
+        variants={menuItemVariants}
+        whileHover={{ scale: 1.05 }} // Hover effect
+        whileTap={{ scale: 0.98 }} // Tap (click) effect
+        onClick={() => setActiveIndex(index)}
+        style={{ cursor: "pointer",display:"flex",flexDirection:"column" }}
+      >
               <Typography
                 color={
                   index === activeIndex
@@ -65,11 +101,12 @@ function MenuSwiper() {
                   {menu.subTitle}
                 </Typography>
               )}
-            </Box>
+            </motion.div>
           ))}
         </Box>
-        {/* for image */}
-        <Box
+        </motion.div>
+         {/* Image Swiper */}
+         <Box
           mt={{ lg: "0px", md: "0px", sm: "18px", xs: "18px" }}
           flex={{ lg: 0.55, md: 0.55, sm: 1, xs: 1 }}
           width={{
@@ -85,7 +122,7 @@ function MenuSwiper() {
             xs: "330px",
           }}
         >
-          <AnimatePresence>
+          <AnimatePresence mode="wait">
             {menuListItem.map(
               (menu, index) =>
                 index === activeIndex && (
@@ -95,10 +132,10 @@ function MenuSwiper() {
                     height={isMobile ? "300px" : "600px"}
                     src={menu.imageUrl}
                     alt={menu.title}
-                    initial={{ opacity: 0 }} // Initial state before animation
-                    animate={{ opacity: 5 }} // Target state of the animation
-                    exit={{ opacity: 0, display: "none" }} // State when component is removed from DOM
-                    transition={{ duration: 0.5, ease: "easeOut" }} // Transition duration and easing
+                    initial="hidden"
+                    animate="show"
+                    exit="exit"
+                    variants={imageVariants}
                   />
                 )
             )}

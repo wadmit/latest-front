@@ -48,7 +48,7 @@ import { IconWrapper } from "@/components/common/icon-wrapper/IconWrapper";
 import { getSession } from "next-auth/react";
 import { auth } from "@/auth/auth";
 
-export default async function SortedUniversitiesPageComponent() {
+export default  function SortedUniversitiesPageComponent() {
   const UniversityComponentRef = useRef<HTMLDivElement>(null);
   const currency = useAppSelector((state) => state.currency);
   const getConvertedCosts = useCostConverterMain();
@@ -102,6 +102,7 @@ export default async function SortedUniversitiesPageComponent() {
     onError: () => {
       setIsDataResolved(true);
     },
+    
   });
 
   // Handle eligibility recalculation
