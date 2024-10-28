@@ -25,6 +25,16 @@ export const userSlice = createSlice({
 		setActiveStepGlobal: (state, action: PayloadAction<number>) => {
 			state.activeStepGlobal = action.payload;
 		},
+		setProfileImage: (state, action: PayloadAction<{
+			photoUrl_key: string;
+			photoUrl: string;
+		}>) => {
+			if (state.dashboardDataGlobal?.data) {
+				state.dashboardDataGlobal.data.photoUrl_key = action.payload.photoUrl_key;
+				state.dashboardDataGlobal.data.photoUrl = action.payload.photoUrl;
+			}	
+		},
+		
 		setMaxActiveStepGlobal: (state, action: PayloadAction<number>) => {
 			state.maxActiveStepGlobal = action.payload;
 		},
@@ -106,6 +116,7 @@ export const {
 	setMaxActiveStepGlobal,
 	setUniversities,
 	setWiseScore,
+	setProfileImage
 } = userSlice.actions;
 
 export const selectShortListPrograms = (state: RootState) =>

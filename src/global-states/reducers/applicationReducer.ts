@@ -50,7 +50,7 @@ export const applicationSlice = createSlice({
       const { coreDocument, link, key, status } = action.payload;
 
       const documentIndex = state.singleApplication.documents.findIndex(
-        (doc) => doc.coreDocument === coreDocument
+        (doc) => doc?.coreDocument?.id === coreDocument
       );
 
       if (documentIndex !== -1) {

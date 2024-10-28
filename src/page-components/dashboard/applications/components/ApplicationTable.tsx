@@ -284,7 +284,7 @@ const ApplicationTable = ({ status, getConvertedCosts }: Props) => {
       (application) => application.paid === status
     );
     setApplications(filterApplications);
-  }, []);
+  }, [userApplications]);
 
   // handle the payment when user clicks on handle click
   const handleSubmit = async (e: any) => {

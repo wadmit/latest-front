@@ -1,3 +1,4 @@
+"use client"
 import { ApiConfig } from "@/constants";
 import ApiService from "@/services/api.service";
 
@@ -9,6 +10,6 @@ export const getApplications = async () => {
     });
     return res?.data?.data;
   } catch (e) {
-    Promise.reject(e);
+    return Promise.reject(e);
   }
 };

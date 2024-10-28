@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 const JWT_SECRET = process.env.NEXTAUTH_SECRET!;
 const isDevelopment = process.env.NODE_ENV === "development";
 
-export const { auth, handlers, signIn, signOut } = NextAuth({
+export const { auth, handlers, signIn, signOut,unstable_update } = NextAuth({
   providers: [
     CredentialsProvider({
       name: "credentials",

@@ -1,16 +1,21 @@
 import { ApiConfig } from "@/constants";
 import ApiService from "@/services/api.service";
 import type { IProgram } from "@/types/program";
+import { isArray } from "lodash";
 
 export const convertToSearchParams = (
   params: Record<string, string>
 ): URLSearchParams => {
   const searchParams = new URLSearchParams();
-  for (const key in params) {
-    if (params.hasOwnProperty(key)) {
-      searchParams.append(key, params[key]);
+  Object.entries(params).forEach(([key, value]) => {
+    if(isArray(value)) {
+      value.forEach((v) => {
+        searchParams.append(key, v);
+      });
+      return;
     }
-  }
+    searchParams.append(key, value);
+  });
   return searchParams;
 };
 
@@ -25,7 +30,6 @@ export const getInitialProgramsForProgramPage = async (
       url: `${ApiConfig.programs}?${query}`,
       tokenNeeded: false,
     });
-
     return {
       data: programsData?.data ?? [],
       paginate: {

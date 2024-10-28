@@ -1,3 +1,4 @@
+"use client"
 import { uploadStudentProfile } from "@/api/web/user.action";
 import { Box, Card, Dialog, DialogActions, DialogContent } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
@@ -5,6 +6,10 @@ import Image from "next/image";
 import { enqueueSnackbar } from "notistack";
 import { UpdateProfilePhotoButton } from "@/page-components/dashboard/profile/styled-components";
 import React from "react";
+import { useAppDispatch } from "@/global-states/hooks/hooks";
+import { setProfileImage } from "@/global-states/reducers/userReducer";
+import { useSession } from "next-auth/react";
+import { unstable_update } from "@/auth/auth";
 
 type Props = {
   imageFile: File;
@@ -16,10 +21,15 @@ const ConfirmNewProfileModal = ({
   closeUploadImageModal,
 }: Props) => {
   const imageUrl = URL.createObjectURL(imageFile);
+  const dispatch  = useAppDispatch();
+  const {update,data:userData} = useSession({
+    required:true,
+  });
+  
   const { mutate: uploadImageMutate, isPending } = useMutation({
     mutationFn: uploadStudentProfile,
 
-    onSuccess: (data) => {
+    onSuccess: ({data}) => {
       enqueueSnackbar("Image uploaded successfully", {
         variant: "success",
         anchorOrigin: {
@@ -27,6 +37,19 @@ const ConfirmNewProfileModal = ({
           horizontal: "right",
         },
       });
+      const { data: student } = data;
+      dispatch(setProfileImage({
+        photoUrl: student.link ?? "",
+        photoUrl_key:student.linkKey ?? "",
+      }));
+      update({
+        data:{
+          ...userData,
+          user:{
+            ...userData?.user,
+            imageUrl:student.linkKey ?? "",
+        }
+      }})
       closeUploadImageModal();
     },
     onError: (data) => {

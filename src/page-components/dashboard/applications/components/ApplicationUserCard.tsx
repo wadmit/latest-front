@@ -1,7 +1,7 @@
 "use client";
 import React, { useMemo, useState } from "react";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { useAppSelector } from "@/global-states/hooks/hooks";
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useAppDispatch, useAppSelector } from "@/global-states/hooks/hooks";
 import { Avatar, Box, Card, Divider, Stack, Typography } from "@mui/material";
 import Loader from "@/components/common/circular-loader/Loader";
 import { useCustomQuery } from "@/hooks/useCustomQuery";
@@ -13,6 +13,10 @@ import {
   ApplicationStatus,
 } from "@/page-components/dashboard/applications/components";
 import { PaymentButtonProps } from "@/page-components/dashboard/applications/types";
+import { useSnackbar } from "notistack";
+import { setStatusWhenPaid } from "@/global-states/reducers/applicationReducer";
+import { useQueryClient } from "@tanstack/react-query";
+import { CacheConfigKey } from "@/constants";
 
 type Props = {
   status: string;
@@ -29,27 +33,45 @@ const ApplicationUserCard = ({
   buttonProps,
   isPaymentLoading,
 }: Props) => {
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const searchParams = useSearchParams();
   const params = useParams();
+  const pathname = usePathname();
+  const applicationId = params.applicationId as string;
+  const { enqueueSnackbar } = useSnackbar();
+  const [isPaymentProcessed, setIsPaymentProcessed] = useState(false);
+  const queryClient = useQueryClient(); // Get the query client to invalidate cache
 
-  const applicationId = params.applicationId;
+  const { data: esewaData, isLoading: esewaVerificationLoading } = useCustomQuery({
+    queryKey: ["esewaVerify"],
+    queryFn: () => paymentEsewaVerify((searchParams.get("data") as string) ?? ""),
+    onSuccess: (data) => {
+      if (!isPaymentProcessed) {
+        const params = new URLSearchParams(searchParams.toString())
+        params.set("data", "")
+        router.replace(pathname + `?${params.toString()}`);
+        setIsPaymentProcessed(true);
 
-  const { data: esewaData, isLoading: esewaVerificationLoading } =
-    useCustomQuery({
-      queryKey: ["esewaVerify"],
-      queryFn: () => paymentEsewaVerify((params.applicationId as string) ?? ""),
-      onSuccess: (data) => {
-        router.replace(`/dashboard/applications/${applicationId}`);
-      },
-      //   onError: (error) => {
-      //     enqueueSnackbar("Payment verification failed", { variant: "error" });
-      //     router.replace(`/dashboard/applications/${applicationId}`);
-      //   },
-      //   enabled: params && !!params.applicationId,
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-    });
+        // dispatch(setStatusWhenPaid({}));
+
+        // Invalidate the cache after payment success
+        queryClient.invalidateQueries({
+          queryKey: [CacheConfigKey.APPLICATION_GET_QUERY_KEY, applicationId],
+        });
+
+       
+      }
+    },
+    onError: (error) => {
+      enqueueSnackbar("Payment verification failed", { variant: "error" });
+      router.replace(`/dashboard/applications/${applicationId}`);
+    },
+    enabled: searchParams && !!searchParams.get("data") && !isPaymentProcessed,
+    retry: 1,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  });
 
   const [buttonText, setButtonText] = useState(displayText);
   const applications = useAppSelector(

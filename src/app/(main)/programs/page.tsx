@@ -26,7 +26,6 @@ const ProgramPage = async ({
   searchParams: Record<string, string>;
 }) => {
   const query = convertToSearchParams(searchParams);
-
   const programsData = await getInitialProgramsForProgramPage(query);
 
   return (
