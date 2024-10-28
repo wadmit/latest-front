@@ -4,6 +4,8 @@ import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import { mixpanelSubmit } from "@/api/web/mixpanel.action";
 import { TLocation } from "@/types/analytics";
 import { socket } from "@/global-states/store";
+import { auth } from "@/auth/auth";
+import { getSession } from "next-auth/react";
 
 const KEY_ANALYTICS = process.env.NEXT_PUBLIC_ANALYTICS_KEY as string;
 
@@ -72,7 +74,7 @@ export const analytics = {
     analytics.trackEvent(EAnalyticsEvents.ENTER_WEBSITE);
   },
 
-  navigationSelect: (
+   navigationSelect: async(
     location: TLocation,
     navigationOption: string,
     urlPath: string,
@@ -80,8 +82,11 @@ export const analytics = {
     status: EAnalyticsStatus,
     redirectPath: string
   ) => {
-    const email = localStorage.getItem("email");
-    const leadId = localStorage.getItem("leadId");
+    const session = await getSession();
+   
+    const email = localStorage.getItem("email") ||  session?.user?.email;
+    const leadId = localStorage.getItem("leadId") || session?.user?.leadId;
+    console.log("email", email,leadId);
     if (email && leadId) {
       mixpanelSubmit({
         email,
@@ -102,7 +107,7 @@ export const analytics = {
   },
 
   // User Activity: Website Button Interactions
-  websiteButtonInteractions: ({
+  websiteButtonInteractions: async({
     buttonName,
     location,
     source,
@@ -121,8 +126,10 @@ export const analytics = {
     status: EAnalyticsStatus;
     [key: string]: any;
   }) => {
-    const email = localStorage.getItem("email");
-    const leadId = localStorage.getItem("leadId");
+    const session = await getSession();
+   
+    const email = localStorage.getItem("email") ||  session?.user?.email;
+    const leadId = localStorage.getItem("leadId") || session?.user?.leadId;
     if (email && leadId) {
       mixpanelSubmit({
         email,

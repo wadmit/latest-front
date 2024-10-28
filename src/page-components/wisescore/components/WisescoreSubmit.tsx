@@ -133,6 +133,7 @@ function WiseScoreSubmit({
         setLoading(true)
       },
       onSuccess: (res) => {
+        console.log(res)
         if (res?.data?.email && res?.leadId) {
           mixpanelSubmit({
             email: res?.data?.email,
