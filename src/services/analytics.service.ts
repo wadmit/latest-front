@@ -84,9 +84,8 @@ export const analytics = {
   ) => {
     const session = await getSession();
    
-    const email = localStorage.getItem("email") ||  session?.user?.email;
-    const leadId = localStorage.getItem("leadId") || session?.user?.leadId;
-    console.log("email", email,leadId);
+    const email =  session?.user?.email || localStorage.getItem("email");
+    const leadId = session?.user?.leadId || localStorage.getItem("leadId");
     if (email && leadId) {
       mixpanelSubmit({
         email,
@@ -128,8 +127,8 @@ export const analytics = {
   }) => {
     const session = await getSession();
    
-    const email = localStorage.getItem("email") ||  session?.user?.email;
-    const leadId = localStorage.getItem("leadId") || session?.user?.leadId;
+    const email =  session?.user?.email || localStorage.getItem("email");
+    const leadId = session?.user?.leadId || localStorage.getItem("leadId");
     if (email && leadId) {
       mixpanelSubmit({
         email,
