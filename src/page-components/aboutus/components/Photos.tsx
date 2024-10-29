@@ -97,7 +97,7 @@ const Photos = () => {
   ];
 
   const handleLinkedInClick = (url: string) => {
-    window.open(url, "_blank");
+    window.open(url, "_blank", "noreferrer");
   };
 
   return (
@@ -123,7 +123,13 @@ const Photos = () => {
                   width: isMobile ? "180px" : "280px",
                 }}
               >
-                <Image src={item.imgSrc} fill objectFit="cover" alt="photo" style={{borderRadius: "8px"}} />
+                <Image
+                  src={item.imgSrc}
+                  fill
+                  objectFit="cover"
+                  alt="photo"
+                  style={{ borderRadius: "8px" }}
+                />
               </Box>
               <Box
                 position="absolute"
@@ -148,36 +154,36 @@ const Photos = () => {
               </Box>
             </Box>
             <Box display="flex" flexDirection="column">
-            <Typography
-              fontWeight={800}
-              fontSize={{ lg: "20px", md: "20px", sm: "18px", xs: "18px" }}
-              lineHeight={{
-                lg: "26px",
-                md: "26px",
-                sm: "23.4px",
-                xs: "23.4px",
-              }}
-              letterSpacing="-2%"
-              color="rgba(32, 28, 26, 1)"
-              sx={{ cursor: "pointer" }}
-              onClick={() => handleLinkedInClick(item.linkedInUrl)}
-              mb="4px"
-            >
-              {item.name}
-            </Typography>
-            <Typography
-              fontWeight={400}
-              fontSize={{ lg: "16px", md: "16px", sm: "14px", xs: "14px" }}
-              lineHeight={{
-                lg: "20.8px",
-                md: "20.8px",
-                sm: "18.2px",
-                xs: "18.2px",
-              }}
-              color="rgba(0, 0, 0, 0.6)"
-            >
-              {item.position}
-            </Typography>
+              <Typography
+                fontWeight={800}
+                fontSize={{ lg: "20px", md: "20px", sm: "18px", xs: "18px" }}
+                lineHeight={{
+                  lg: "26px",
+                  md: "26px",
+                  sm: "23.4px",
+                  xs: "23.4px",
+                }}
+                letterSpacing="-2%"
+                color="rgba(32, 28, 26, 1)"
+                sx={{ cursor: "pointer" }}
+                onClick={() => handleLinkedInClick(item.linkedInUrl)}
+                mb="4px"
+              >
+                {item.name}
+              </Typography>
+              <Typography
+                fontWeight={400}
+                fontSize={{ lg: "16px", md: "16px", sm: "14px", xs: "14px" }}
+                lineHeight={{
+                  lg: "20.8px",
+                  md: "20.8px",
+                  sm: "18.2px",
+                  xs: "18.2px",
+                }}
+                color="rgba(0, 0, 0, 0.6)"
+              >
+                {item.position}
+              </Typography>
             </Box>
           </Box>
         </Grid>
