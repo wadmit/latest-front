@@ -34,7 +34,7 @@ const ChatBotHeader = () => {
               fontWeight={"600"}
               lineHeight={"16px"}
             >
-              Wise bot
+              Wise Dai
             </Typography>
             <Typography
               mt={"6px"}
