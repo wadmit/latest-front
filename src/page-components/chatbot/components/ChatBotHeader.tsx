@@ -72,11 +72,7 @@ const ChatBotHeader = () => {
         >
           Talk to expert
         </Typography>
-        <img
-          width={"28px"}
-          height={"28px"}
-          src="/images/home/whatsapp.webp"
-        />
+        <img width={"28px"} height={"28px"} src="/images/home/whatsapp.webp" />
       </Box>
     </Box>
   );
