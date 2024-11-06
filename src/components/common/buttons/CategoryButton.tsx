@@ -175,7 +175,7 @@ const CategoryButton = (props: Props) => {
               </Stack>
             </Button>
           </CustomTooltip>
-          <CustomTooltip
+          {/* <CustomTooltip
             open={showMsgTooltip}
             placement="left"
             title={<Typography>Chat with our AI bot</Typography>}
@@ -214,7 +214,7 @@ const CategoryButton = (props: Props) => {
                 <MessageIcon />
               </Stack>
             </Button>
-          </CustomTooltip>
+          </CustomTooltip> */}
         </>
       )}
 
