@@ -1,65 +1,75 @@
-"use client"
-import { ButtonWrapper } from '@/components/common'
-import Loader from '@/components/common/circular-loader/Loader'
-import PasswordField from '@/components/common/formfields/password-field/PasswordField'
-import { Box, FormHelperText, InputLabel, Stack, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import { DialogComponent } from "@/page-components/apply-now/reset-password/styled-components/DialogComponent"
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useFormik } from 'formik'
-import { FORM_VALIDATION_RESETPASSWORD } from '@/page-components/apply-now/reset-password/utils/formik-validation'
-import { errorMessageBox } from '../../utils/provider'
-import { useMutation } from '@tanstack/react-query'
-import { resetPassword } from '@/api/web/authentication.action'
+"use client";
+import { ButtonWrapper } from "@/components/common";
+import Loader from "@/components/common/circular-loader/Loader";
+import PasswordField from "@/components/common/formfields/password-field/PasswordField";
+import {
+  Box,
+  FormHelperText,
+  InputLabel,
+  Stack,
+  Typography,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { DialogComponent } from "@/page-components/apply-now/reset-password/styled-components/DialogComponent";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useFormik } from "formik";
+import { FORM_VALIDATION_RESETPASSWORD } from "@/page-components/apply-now/reset-password/utils/formik-validation";
+import { errorMessageBox } from "../../utils/provider";
+import { useMutation } from "@tanstack/react-query";
+import { resetPassword } from "@/api/web/authentication.action";
 
 const ResetPassword = () => {
-    const router = useRouter();
-    const searchParams = useSearchParams()
-    const [open, setOpen] = useState(false);
-    const handleClose = () => {
-      setOpen(false);
-    };
-    const handleOpen = () => {
-      setOpen(true);
-    };
+  const router = useRouter();
+  const { token } : {token: string} = useParams();
 
-    const {isPending, error: axiosError, mutate, data, isError} = useMutation({
-        mutationFn: resetPassword
-    })
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
-    const token = searchParams.get('token');
+  const {
+    isPending,
+    error: axiosError,
+    mutate,
+    data,
+    isError,
+  } = useMutation({
+    mutationFn: resetPassword,
+  });
 
-  
-    useEffect(() => {
-      let timer: any;
-      if (data?.data?.message) {
-        handleOpen();
-        timer = setTimeout(() => {
-          router.push('/applynow');
-        }, 5000);
+  useEffect(() => {
+    let timer: any;
+    if (data?.data?.message) {
+      handleOpen();
+      timer = setTimeout(() => {
+        router.push("/applynow");
+      }, 5000);
+    }
+    return () => clearTimeout(timer);
+  }, [data]);
+
+  const formik = useFormik({
+    initialValues: {
+      password: "",
+      confirmPassword: "",
+    },
+    validationSchema: FORM_VALIDATION_RESETPASSWORD,
+    onSubmit: (values) => {
+      try {
+        mutate({
+          password: values.password,
+          token: token || "",
+        });
+      } catch (err) {
+        console.log("ResetPassword-Email-Error");
       }
-      return () => clearTimeout(timer);
-    }, [data]);
+    },
+  });
 
-    const formik = useFormik({
-        initialValues: {
-          password: '',
-          confirmPassword: '',
-        },
-        validationSchema: FORM_VALIDATION_RESETPASSWORD,
-        onSubmit: (values) => {
-          try {
-            mutate({
-              password: values.password,
-              token: token || "",
-            });
-          } catch (err) {
-            console.log('ResetPassword-Email-Error');
-          }
-        },
-      });
-  
   return (
     <Stack
       component="form"
@@ -111,10 +121,12 @@ const ResetPassword = () => {
         )}
       </Box>
       {isError &&
-				errorMessageBox((axiosError as any)?.response?.data?.errors[0]?.message || "")}
+        errorMessageBox(
+          (axiosError as any)?.response?.data?.errors[0]?.message || ""
+        )}
       <Box mt={2}>
         <ButtonWrapper type="submit" disabled={isPending}>
-          {isPending ? <Loader /> : 'Reset Password'}
+          {isPending ? <Loader /> : "Reset Password"}
         </ButtonWrapper>
       </Box>
       <DialogComponent open={open} handleClose={handleClose}>
@@ -127,7 +139,7 @@ const ResetPassword = () => {
         </Typography>
       </DialogComponent>
     </Stack>
-  )
-}
+  );
+};
 
-export default ResetPassword
+export default ResetPassword;
