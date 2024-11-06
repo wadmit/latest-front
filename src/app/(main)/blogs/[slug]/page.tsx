@@ -82,6 +82,8 @@ export default async function Page({
 }) {
   const blogData = await getSingleBlog({ slug: params.slug });
 
+  console.log(blogData);
+
   if (!blogData?.blog) {
     notFound();
   }

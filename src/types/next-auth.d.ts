@@ -1,7 +1,7 @@
 import { DefaultSession, User } from "next-auth";
 
 declare module "next-auth" {
-	interface Session extends DefaultSession {
+	interface Session extends DefaultSession  {
 		accessToken: string;
 		expires: Date;
 		user: {
@@ -12,7 +12,7 @@ declare module "next-auth" {
 			leadId: string;
 			phone: string;
 		};
-	}
+	} ;
 
 	interface User {
 		email: string;
