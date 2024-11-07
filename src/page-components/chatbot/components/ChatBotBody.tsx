@@ -85,17 +85,20 @@ const ChatBotBody = ({
         />
       )}
       {message.length > 0 &&
-        message.map((msg, index) => (
-          <ChatBotMessage
-            key={index}
-            message={msg.message}
-            own={msg.own}
-            scrollToBottom={scrollToBottom}
-            onAnimationComplete={
-              index === message.length - 1 ? onAnimationComplete : undefined
-            }
-          />
-        ))}
+        message.map((msg, index) => {
+          // const message = await markdownToHtml(msg.message);
+          return (
+            <ChatBotMessage
+              key={index}
+              message={msg.message}
+              own={msg.own}
+              scrollToBottom={scrollToBottom}
+              onAnimationComplete={
+                index === message.length - 1 ? onAnimationComplete : undefined
+              }
+            />
+          );
+        })}
       {messageLoading && <ChatBotMessage loading message="" own={false} />}
 
       {similarQuestions.length > 0 &&

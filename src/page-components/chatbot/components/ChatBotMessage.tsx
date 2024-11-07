@@ -1,6 +1,7 @@
 import TextToClickableLinks from "@/utils/TextToClickableLinks";
 import { Avatar, Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import MarkdownPreview from "@uiw/react-markdown-preview";
 
 type Props = {
   own: boolean;
@@ -118,8 +119,16 @@ const ChatBotMessage = ({
               fontFamily={"HankenGroteskRegular"}
               color={own ? "#fff" : "rgba(32, 28, 26, 0.9)"}
             >
-              {/* {type !== "other" && !own ? messageSliced : message} */}
-              {renderMessage(message)}
+              {/* {renderMessage(message)} */}
+              <MarkdownPreview
+                source={message}
+                style={{
+                  padding: 16,
+                  background: "white",
+                  color: "black",
+                  fontSize: "12px",
+                }} 
+              />
             </Box>
           </Box>
         )}
