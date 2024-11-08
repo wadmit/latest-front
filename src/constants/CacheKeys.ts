@@ -2,6 +2,7 @@ export default {
   FILTER_QUERY_KEY: "FilterQuery",
   BLOG_QUERY_KEY: "BlogQuery",
   NEWS_QUERY_KEY: "NewsQuery",
+  SCHOLARSHIP_QUERY_KEY: "ScholarshipQuery",
   FUTURE_STREAMS_QUERY_KEY: "FutureStreamsQuery",
   SUBDISCIPLINES_QUERY_KEY: "SubDisciplinesQuery",
   DISCIPLINES_QUERY_KEY: "DisciplinesQuery",

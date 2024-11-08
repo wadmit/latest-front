@@ -1,5 +1,8 @@
 "use client";
-import { IApplicationDocument } from "@/types/application";
+import {
+  IApplicationDocument,
+  IStudentApplicationDocument,
+} from "@/types/application";
 import { Box, Grid, Stack, Tooltip, Typography } from "@mui/material";
 import React, {
   ChangeEvent,
@@ -40,6 +43,7 @@ const ApplicationDocumentsCard = ({
   document,
   applicationId,
 }: Props) => {
+  // console.log("doce", document);
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const currency = useAppSelector((state) => state.currency);
@@ -216,6 +220,11 @@ const ApplicationDocumentsCard = ({
     window.open(`${process.env.NEXT_PUBLIC_IMAGE_DISTRIBUTION_KEY}/${url}`);
   };
 
+  // console.log(
+  //   "caedeafa",
+  //   document?.linkKey.map((link, idx) => link)
+  // );
+
   return (
     <>
       {header && (
@@ -320,7 +329,10 @@ const ApplicationDocumentsCard = ({
                   name={`${uploadImagePreviewUrl}/${link}`}
                   key={`${uploadImagePreviewUrl}/${link}`}
                   handleRemove={() =>
-                    handleRemove({ link: document.link[idx], linkKey: link })
+                    handleRemove({
+                      link: document.link[idx],
+                      linkKey: link,
+                    })
                   }
                   imageUrl={`${uploadImagePreviewUrl}/${link}`}
                   previewUrl={`${uploadImagePreviewUrl}/${link}`}

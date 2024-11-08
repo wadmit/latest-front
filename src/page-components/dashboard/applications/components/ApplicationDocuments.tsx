@@ -47,6 +47,8 @@ const ApplicationDocuments = ({ status, activeStep }: Props) => {
     documents: (documents || []).filter((document) => document.type === type),
   }));
 
+  const studentDocument = applications?.student?.document.documents;
+
   const { mutate } = useMutation({
     mutationFn: submitApplication,
     onMutate: () => {

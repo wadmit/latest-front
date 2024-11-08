@@ -229,7 +229,7 @@ table {
 
 .swiper-button-prev,
 .swiper-button-next {
-  color: var(--primary-main) !important;
+  color: rgba(102, 102, 102, 1) !important;
 }
 .t {
 }
@@ -237,7 +237,7 @@ table {
 .swiper-button-prev::after {
   font-size: 1rem !important;
   font-weight: bold !important;
-  border: 0.0625rem solid var(--primary-main) !important;
+  /* border: 0.0625rem solid var(--primary-main) !important; */
   height: 2.375rem;
   min-width: 2.375rem;
   display: flex;

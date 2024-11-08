@@ -778,4 +778,8 @@ export const pages = [
     path: "/news",
     title: "News",
   },
+  {
+    path: "/scholarships",
+    title: "Scholarships",
+  },
 ];

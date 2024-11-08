@@ -22,4 +22,5 @@ export default {
   eligibility: "/web/eligibility",
   applications: "/web/applications",
   feedbacks: "/web/feedbacks",
+  scholarships: "/web/scholarships",
 };
