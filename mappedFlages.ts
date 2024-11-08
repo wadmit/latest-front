@@ -162,6 +162,7 @@
   { country: "Zimbabwe", countryCode: "ZW" },
   { country: "Nigeria", countryCode: "NG" },
   { country: "Singapore", countryCode: "SG" },
+  { country: "Kosovo", countryCode: "XK" },
 ];
 
 [
@@ -205,11 +206,7 @@
     correction: "Kazakhstan",
     countryCode: "KZ",
   },
-  {
-    country: "Kosovo",
-    correction: null,
-    countryCode: null,
-  },
+
   {
     country: "Laos",
     correction: "Lao People's Democratic Republic",
