@@ -5,6 +5,7 @@ import {
   NewsIcon,
   RecrutingPartnersIcon,
   RevenueIcon,
+  ScholarshipIcon,
 } from "@/components/common/navbar/svg";
 
 interface NavbarMenuPropsOptions {
@@ -82,7 +83,7 @@ export const navbarLinks: INavbarMenu[] = [
         name: "Scholarships",
         link: "/scholarships",
         desc: "Check scholarships",
-        icon: <InstitutionIcon />,
+        icon: <ScholarshipIcon />,
       },
     ],
   },

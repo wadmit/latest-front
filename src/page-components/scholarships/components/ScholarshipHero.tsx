@@ -6,88 +6,107 @@ import ScholarshipHat from "public/images/scholarships/hat.svg";
 import ScholarshipHatMobile from "public/images/scholarships/hat-small.svg";
 import React from "react";
 import { ScholarshipHeaderContainer } from "../styled-components";
+import { RootContainer } from "@/components/common";
 
 const ScholarshipHero = () => {
   const isMobile = useMediaQuery("(max-width:830px)");
   return (
     // <ScholarshipHeaderContainer>
     <Box
-      display="flex"
+      // display="flex"
       bgcolor="rgba(249, 249, 252, 1)"
-      justifyContent="center"
-      alignItems="center"
-      flexDirection={{
-        lg: "row",
-        md: "row",
-        sm: "column-reverse",
-        xs: "column-reverse",
-      }}
-      padding={{
-        lg: "74px 110px",
-        md: "84px 128px",
-        sm: "26px 15px",
-        xs: "26px 15px",
-      }}
-      gap={{ lg: "0px", md: "0px", sm: "25px", xs: "25px" }}
+      // justifyContent="center"
+      // alignItems="center"
+      // flexDirection={{
+      //   lg: "row",
+      //   md: "row",
+      //   sm: "column-reverse",
+      //   xs: "column-reverse",
+      // }}
+      // padding={{
+      //   lg: "74px 108px",
+      //   md: "74px 128px",
+      //   sm: "26px 15px",
+      //   xs: "26px 15px",
+      // }}
+      // gap={{ lg: "0px", md: "0px", sm: "25px", xs: "25px" }}
     >
-      <Box position="relative">
-        <Typography
-          fontFamily="HankenGroteskExtraBold"
-          fontWeight={800}
-          component="h1"
-          fontSize={{
-            lg: "48px",
-            md: "48px",
-            sm: "32px",
-            xs: "32px",
-          }}
-          lineHeight={{
-            lg: "62.4px",
-            md: "62.4px",
-            sm: "41.6px",
-            xs: "41.6px",
-          }}
-          letterSpacing="-2%"
-          color="rgba(32, 28, 26, 1)"
-          ml={{ lg: "0px", md: "0px", sm: "10px", xs: "10px" }}
-        >
-          Find your perfect{" "}
-          <Typography
-            fontFamily="HankenGroteskExtraBold"
-            fontWeight={800}
-            component="span"
-            fontSize={{
-              lg: "48px",
-              md: "48px",
-              sm: "32px",
-              xs: "32px",
-            }}
-            lineHeight={{
-              lg: "62.4px",
-              md: "62.4px",
-              sm: "41.6px",
-              xs: "41.6px",
-            }}
-            letterSpacing="-2%"
-            color="rgba(170, 68, 1, 1)"
-            borderBottom="4px dotted rgba(170, 68, 1, 1)"
-          >
-            scholarship
-          </Typography>{" "}
-          match
-        </Typography>
+      <RootContainer>
         <Box
-          position="absolute"
-          top={{ lg: "-50px", md: "-50px", sm: "-40px", xs: "-30px" }}
-          left={{ lg: "350px", md: "350px", sm: "500px", xs: "250px" }}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexDirection={{
+            lg: "row",
+            md: "row",
+            sm: "column-reverse",
+            xs: "column-reverse",
+          }}
+          gap={{ lg: "0px", md: "0px", sm: "25px", xs: "25px" }}
         >
-          {isMobile ? <ScholarshipHatMobile /> : <ScholarshipHat />}
-        </Box>
-      </Box>
+          <Box position="relative">
+            <Box width={{ lg: "388px", md: "350px", sm: "100%", xs: "100%" }}>
+              <Typography
+                fontFamily="HankenGroteskExtraBold"
+                fontWeight={800}
+                component="h1"
+                fontSize={{
+                  lg: "44px",
+                  md: "44px",
+                  sm: "32px",
+                  xs: "32px",
+                }}
+                lineHeight={{
+                  lg: "62.4px",
+                  md: "62.4px",
+                  sm: "41.6px",
+                  xs: "41.6px",
+                }}
+                letterSpacing="-2%"
+                color="rgba(32, 28, 26, 1)"
+                ml={{ lg: "0px", md: "0px", sm: "10px", xs: "10px" }}
+              >
+                Find your perfect{" "}
+                <Typography
+                  fontFamily="HankenGroteskExtraBold"
+                  fontWeight={800}
+                  component="span"
+                  fontSize={{
+                    lg: "44px",
+                    md: "44px",
+                    sm: "32px",
+                    xs: "32px",
+                  }}
+                  lineHeight={{
+                    lg: "62.4px",
+                    md: "62.4px",
+                    sm: "41.6px",
+                    xs: "41.6px",
+                  }}
+                  letterSpacing="-2%"
+                  color="rgba(170, 68, 1, 1)"
+                  borderBottom="4px dotted rgba(170, 68, 1, 1)"
+                >
+                  scholarship
+                </Typography>{" "}
+                match
+              </Typography>
+            </Box>
+            <Box
+              position="absolute"
+              top={{ lg: "-50px", md: "-50px", sm: "-40px", xs: "-30px" }}
+              left={{ lg: "350px", md: "350px", sm: "500px", xs: "250px" }}
+            >
+              {isMobile ? <ScholarshipHatMobile /> : <ScholarshipHat />}
+            </Box>
+          </Box>
 
-      <Box>{isMobile ? <ScholarshipMobileHero /> : <ScholarshipBigHero />}</Box>
+          <Box>
+            {isMobile ? <ScholarshipMobileHero /> : <ScholarshipBigHero />}
+          </Box>
+        </Box>
+      </RootContainer>
     </Box>
-    // </ScholarshipHeaderContainer>
   );
 };
 
