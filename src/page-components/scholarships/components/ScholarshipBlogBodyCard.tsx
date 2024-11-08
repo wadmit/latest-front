@@ -12,7 +12,6 @@ type Props = {
 };
 
 const ScholarshipBlogBodyCard = ({ blog }: Props) => {
-  console.log("🚀 ~ ScholarshipBlogBodyCard ~ blog:", blog);
   const currency = useAppSelector((state) => state.currency);
   return (
     <Box

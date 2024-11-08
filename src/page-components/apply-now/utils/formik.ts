@@ -20,7 +20,8 @@ export const FORM_VALIDATION_SIGN_UP = GlobalYup.object().shape({
     .matches(/^(?=.*[a-z])/, " Must Contain One Lowercase Character")
     .matches(/^(?=.*[A-Z])/, "  Must Contain One Uppercase Character")
     .matches(/^(?=.*[0-9])/, "  Must Contain One Number Character")
-    .matches(/^(?=.*[!@#$%^&*])/, "  Must Contain  One Special Case Character"),
+    .matches(/^(?=.*[!@#$%^&*])/, "  Must Contain  One Special Case Character")
+    .matches(/^\S*$/, "Password cannot contain spaces"),
   first_name: GlobalYup.string()
     .matches(/^[^\s][\s\S]*$/, "First Name cannot start with a space")
     .required("Required"),

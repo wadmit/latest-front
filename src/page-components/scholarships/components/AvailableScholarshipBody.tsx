@@ -15,7 +15,6 @@ import BlogBodyCardSkeleton from "@/page-components/blog/component/BlogSkeleton"
 import { scholarshipStyles } from "../utils/provider";
 import ScholarshipSearch from "./ScholarshipSearch";
 import Link from "next/link";
-import useCostConverterMain from "@/hooks/costConverterMain";
 import applicationConfig from "@/config";
 
 type Props = {
@@ -191,7 +190,12 @@ const AvailableScholarshipBody = ({
                             <Box
                               key={idx}
                               bgcolor={style.bgColor}
-                              padding="4px"
+                              padding={{
+                                lg: "4px 6px",
+                                md: "4px 6px",
+                                sm: "2px 4px",
+                                xs: "2px 4px",
+                              }}
                             >
                               <Typography
                                 fontWeight={600}
