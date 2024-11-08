@@ -34,7 +34,7 @@ const ChatBotHeader = () => {
               fontWeight={"600"}
               lineHeight={"16px"}
             >
-              Wise bot
+              Wise Dai
             </Typography>
             <Typography
               mt={"6px"}
@@ -72,11 +72,7 @@ const ChatBotHeader = () => {
         >
           Talk to expert
         </Typography>
-        <img
-          width={"28px"}
-          height={"28px"}
-          src="/images/home/whatsapp.webp"
-        />
+        <img width={"28px"} height={"28px"} src="/images/home/whatsapp.webp" />
       </Box>
     </Box>
   );

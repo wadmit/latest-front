@@ -59,14 +59,14 @@ export const serviceItems = [
 ];
 
 export const galleryImages = [
-  "/images/institution/1.jpg",
-  "/images/institution/2.jpg",
-  "/images/institution/3.jpg",
-  "/images/institution/4.jpg",
-  "/images/institution/5.jpg",
-  "/images/institution/6.jpg",
-  "/images/institution/7.jpg",
-  "/images/institution/8.jpg",
-  "/images/institution/9.jpeg",
-  "/images/institution/10.jpg",
+  "/images/institution/One.jpg",
+  "/images/institution/Two.jpg",
+  "/images/institution/Three.jpg",
+  "/images/institution/Four.jpg",
+  "/images/institution/Five.jpg",
+  "/images/institution/Six.jpg",
+  "/images/institution/Seven.jpg",
+  "/images/institution/Eight.jpg",
+  "/images/institution/Nine.jpg",
+  "/images/institution/Ten.jpg",
 ];

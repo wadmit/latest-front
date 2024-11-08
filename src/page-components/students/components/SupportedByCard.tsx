@@ -7,7 +7,7 @@ function SupportedByCard({ item }: { item: ISupportedByCard }) {
 
   return (
     <Paper elevation={0} style={{ backgroundColor: "white" }}>
-      <Link href={item.url} target="_blank">
+      <Link href={item.url} target="_blank" rel="noreferrer">
         <Stack direction="column" justifyContent="center" alignItems="center">
           <Stack
             width={size}

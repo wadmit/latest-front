@@ -6,7 +6,7 @@ import {
 	Stack,
 } from "@mui/material";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // function UniversitySearchComponent({
 // 	isLoading,
@@ -91,6 +91,14 @@ function UniversitySearchComponent({
 		searchParams.get("searchTerm") || "",
 	);
 
+
+	useEffect(() => {
+		if (!searchParams.get("searchTerm")) {
+			setSearchValue("");
+		}
+	}
+	, [searchParams.get("searchTerm")]);
+	
 	return (
 		<Stack
 			direction="column"

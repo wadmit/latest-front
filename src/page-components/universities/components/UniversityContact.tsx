@@ -8,7 +8,7 @@ function UniversityContact() {
   const university = useContext(UniversityDetailContext);
 
   const pushTourl = (url: string) => {
-    window.open(url, "_blank");
+    window.open(url, "_blank", "noreferrer");
   };
   return (
     <Box

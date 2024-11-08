@@ -19,6 +19,7 @@ import { TextFieldWrapper } from "@/components/common/formfields/styles/StyledIn
 import { ButtonWrapper } from "@/components/common";
 import { postCostSubmission } from "@/api/web/costcaluclator.action";
 import type { IDownloadFileProps } from "@/page-components/costcalculator/utils/types";
+import { PhoneField } from "@/components/common/formfields/phone-field";
 
 const DownloadFile: React.FC<IDownloadFileProps> = ({
 	showModal,
@@ -114,7 +115,7 @@ const DownloadFile: React.FC<IDownloadFileProps> = ({
 						validationSchema={FORM_VALIDATION_COST_CALCULATOR}
 						onSubmit={(values) => {
 							try {
-								// mutate(values)
+								mutate(values)
 							} catch (err) {
 								console.log(err);
 							}
@@ -170,12 +171,12 @@ const DownloadFile: React.FC<IDownloadFileProps> = ({
 								</div>
 
 								<div style={{ marginLeft: "32px", width: "450px" }}>
-									{/* <PhoneField
+									<PhoneField
                                         formik={formik}
                                         name="number"
                                         label="Contact number*"
 
-                                    /> */}
+                                    />
 								</div>
 								<Stack
 									height="100%"

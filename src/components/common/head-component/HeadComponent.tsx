@@ -27,7 +27,10 @@ export function generateMetadata({
     "international education",
   ],
 }: MetadataParams): Metadata {
-  const url = `${applicationConfig.frontendUrlConfig}/${endPoint}`;
+  const url =
+    endPoint === "/"
+      ? `${applicationConfig.frontendUrlConfig}`
+      : `${applicationConfig.frontendUrlConfig}/${endPoint}`;
   const pageImage =
     pageImg ||
     `${process.env.NEXT_PUBLIC_IMAGE_DISTRIBUTION_KEY}/utils/wiseadmit.png`;

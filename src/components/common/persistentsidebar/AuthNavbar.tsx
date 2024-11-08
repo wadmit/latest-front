@@ -47,7 +47,7 @@ export function AuthNavbar({ handleDrawerOpen }: any) {
       position="relative"
       top={0}
       width="100%"
-      zIndex={900}
+      zIndex={9999999999999999999999999999}
       display="flex"
       alignItems="center"
       justifyContent="center"

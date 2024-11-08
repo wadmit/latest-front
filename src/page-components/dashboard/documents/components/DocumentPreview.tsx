@@ -147,7 +147,8 @@ const DocumentPreview = ({
               onClick={() => {
                 window.open(
                   `${process.env.NEXT_PUBLIC_IMAGE_DISTRIBUTION_KEY}/${src[currentFrame]}`,
-                  "_blank"
+                  "_blank",
+                  "noreferrer"
                 );
               }}
             />
@@ -169,7 +170,8 @@ const DocumentPreview = ({
                   onClick={() => {
                     window.open(
                       `${process.env.NEXT_PUBLIC_IMAGE_DISTRIBUTION_KEY}/${src[currentFrame]}`,
-                      "_blank"
+                      "_blank",
+                      "noreferrer"
                     );
                   }}
                 >

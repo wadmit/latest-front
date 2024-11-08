@@ -110,7 +110,9 @@ const DisplayImageView = ({
       )}
 
       <Box
-        onClick={() => window.open(previewUrl || imageUrl, "_blank")}
+        onClick={() =>
+          window.open(previewUrl || imageUrl, "_blank", "noreferrer")
+        }
         top="30%"
         display="none"
         p="7px 12px 7px 11px"

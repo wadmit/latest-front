@@ -98,6 +98,9 @@ const UserBox = (props: Props) => {
 
   const handleLogout = () => {
       logout()
+      localStorage.removeItem('email');
+      localStorage.removeItem('phone');
+      localStorage.removeItem('leadId');
   };
 
   const clickOnLogout = () => {

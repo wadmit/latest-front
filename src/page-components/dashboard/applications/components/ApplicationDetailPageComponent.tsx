@@ -328,7 +328,8 @@ const ApplicationDetailPageComponent = ({ isLoading, isError }: Props) => {
   const handleLetterDownload = (key: string) => {
     window.open(
       `${process.env.NEXT_PUBLIC_IMAGE_DISTRIBUTION_KEY}/${key}`,
-      "_blank"
+      "_blank",
+      "noreferrer"
     );
   };
 
