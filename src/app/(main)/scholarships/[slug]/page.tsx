@@ -58,7 +58,6 @@ export default async function Page({
   };
 }) {
   const scholarshipData: any = await getSingleScholarship(params.slug);
-  console.log("🚀 ~ scholarshipData:", scholarshipData);
 
   if (!scholarshipData) {
     notFound();
