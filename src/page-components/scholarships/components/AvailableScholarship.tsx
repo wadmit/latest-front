@@ -2,7 +2,6 @@
 import { RootContainer } from "@/components/common";
 import { IScholarshipResponse } from "@/types/utils";
 import { Box, debounce, Typography } from "@mui/material";
-import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import AvailableScholarshipHeader from "./AvailableScholarshipHeader";
 import AvailableScholarshipBody from "./AvailableScholarshipBody";
@@ -16,18 +15,17 @@ type Props = {
 };
 
 const AvailableScholarship = ({ scholarships }: Props) => {
-  const searchParams = useSearchParams();
   const getConvertedCosts = useCostConverterMain();
-  const wiseScore = searchParams.get("wisescore") ?? 0;
 
-  const mainWisescore = localStorage.getItem("wisescore");
-
-  const hasWiseScore = !!wiseScore;
-
-  const hasMainWiseScore = !!mainWisescore;
+  const [hasMainWiseScore, setHasMainWiseScore] = useState(false);
   const [allScholarships, setAllScholarships] =
     useState<IScholarshipResponse>(scholarships);
   const [searchTerm, setSearchTerm] = useState<string>("");
+
+  useEffect(() => {
+    const mainWisescore = localStorage.getItem("wisescore");
+    setHasMainWiseScore(!!mainWisescore);
+  }, []);
 
   const {
     isLoading,

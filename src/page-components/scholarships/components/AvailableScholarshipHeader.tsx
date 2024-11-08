@@ -1,18 +1,16 @@
+"use client";
 import { Box, Typography } from "@mui/material";
-import { useSearchParams } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 type Props = {};
 
 const AvailableScholarshipHeader = (props: Props) => {
-  const searchParams = useSearchParams();
-  const wiseScore = searchParams.get("wisescore") ?? 0;
+  const [hasMainWiseScore, setHasMainWiseScore] = useState(false);
 
-  const mainWisescore = localStorage.getItem("wisescore");
-
-  const hasWiseScore = !!wiseScore;
-
-  const hasMainWiseScore = !!mainWisescore;
+  useEffect(() => {
+    const mainWisescore = localStorage.getItem("wisescore");
+    setHasMainWiseScore(!!mainWisescore);
+  }, []);
 
   return (
     <Box
