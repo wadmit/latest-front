@@ -161,13 +161,22 @@ const SingleScholarshipEligibilityCriteria = forwardRef(
 
                 <TableContainer
                   component={Paper}
-                  sx={{ overflowx: "auto", width: "100%" }}
+                  sx={{ overflowx: "auto", width: "100%", borderRadius: "8px" }}
                 >
                   <Table
                     sx={{ minWidth: "700px", mt: "16px", borderRadius: "8px" }}
                     aria-label="application table"
                   >
-                    <TableHead>
+                    <TableHead
+                      sx={{
+                        "& .MuiTableRow-root th:first-child": {
+                          borderTopLeftRadius: "8px",
+                        },
+                        "& .MuiTableRow-root th:last-child": {
+                          borderTopRightRadius: "8px",
+                        },
+                      }}
+                    >
                       <TableRow>
                         {columns.map((column) => (
                           <StyledTableCellScholarship
@@ -280,51 +289,61 @@ const SingleScholarshipEligibilityCriteria = forwardRef(
                     gap="14px"
                   >
                     {Object.entries(language).map(([lang, value], index) => (
-                      <Grid container spacing={2}>
-                        <Grid item lg={3} md={3} sm={4} xs={5}>
-                          <Typography
-                            fontFamily="HankenGroteskSemiBold"
-                            fontWeight={600}
-                            color="#201C1A"
-                            fontSize={{
-                              lg: "16px",
-                              md: "16px",
-                              sm: "14px",
-                              xs: "14px",
-                            }}
-                            lineHeight={{
-                              lg: "22.4px",
-                              md: "22.4px",
-                              sm: "19.6px",
-                              xs: "19.6px",
-                            }}
-                          >
-                            {lang}
-                          </Typography>
-                        </Grid>
+                      <React.Fragment key={lang}>
+                        <Grid container spacing={2}>
+                          <Grid item lg={3} md={3} sm={4} xs={5}>
+                            <Typography
+                              fontFamily="HankenGroteskSemiBold"
+                              fontWeight={600}
+                              color="#201C1A"
+                              fontSize={{
+                                lg: "16px",
+                                md: "16px",
+                                sm: "14px",
+                                xs: "14px",
+                              }}
+                              lineHeight={{
+                                lg: "22.4px",
+                                md: "22.4px",
+                                sm: "19.6px",
+                                xs: "19.6px",
+                              }}
+                            >
+                              {lang}
+                            </Typography>
+                          </Grid>
 
-                        <Grid item lg={9} md={9} sm={4} xs={5}>
-                          <Typography
-                            fontFamily="HankenGroteskRegular"
-                            fontWeight={400}
-                            color="#201C1A"
-                            fontSize={{
-                              lg: "16px",
-                              md: "16px",
-                              sm: "14px",
-                              xs: "14px",
-                            }}
-                            lineHeight={{
-                              lg: "22.4px",
-                              md: "22.4px",
-                              sm: "19.6px",
-                              xs: "19.6px",
-                            }}
-                          >
-                            {value}
-                          </Typography>
+                          <Grid item lg={9} md={9} sm={4} xs={5}>
+                            <Typography
+                              fontFamily="HankenGroteskRegular"
+                              fontWeight={400}
+                              color="#201C1A"
+                              fontSize={{
+                                lg: "16px",
+                                md: "16px",
+                                sm: "14px",
+                                xs: "14px",
+                              }}
+                              lineHeight={{
+                                lg: "22.4px",
+                                md: "22.4px",
+                                sm: "19.6px",
+                                xs: "19.6px",
+                              }}
+                            >
+                              {value}
+                            </Typography>
+                          </Grid>
                         </Grid>
-                      </Grid>
+                        {index < Object.entries(language).length - 1 && (
+                          <Divider
+                            sx={{
+                              borderColor: "rgba(32, 28, 26, 0.1)",
+                              width: "100%",
+                            }}
+                          />
+                        )}
+                      </React.Fragment>
                     ))}
                   </Box>
                 </Grid>
