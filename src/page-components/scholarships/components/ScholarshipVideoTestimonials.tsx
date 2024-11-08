@@ -48,8 +48,8 @@ const ScholarshipVideoTestimonials = () => {
   return (
     <Box bgcolor="rgba(249, 249, 252, 1)" pt="1px" pb="4px">
       <RootContainer
-        mt={{ lg: "6rem", md: "6rem", sm: "5rem", xs: "4rem" }}
-        mb="6.25rem"
+        mt={{ lg: "4rem", md: "4rem", sm: "2rem", xs: "2rem" }}
+        mb={{ lg: "4.25rem", md: "4.25rem", sm: "2rem", xs: "2rem" }}
       >
         <Box
           display="flex"

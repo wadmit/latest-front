@@ -1,4 +1,5 @@
 import { getBlogs } from "@/api/web/blog.actions";
+import { getScholarships } from "@/api/web/scholarship.action";
 import { generateMetadata } from "@/components/common/head-component/HeadComponent";
 import ScholarshipHome from "@/page-components/scholarships";
 import { Metadata } from "next";
@@ -15,7 +16,14 @@ const page = async () => {
     page: 1,
     limit: 3,
   });
-  return <ScholarshipHome blogs={response?.data?.data} />;
+
+  const scholarshipResponse = await getScholarships({ searchTerm: "" });
+  return (
+    <ScholarshipHome
+      blogs={response?.data?.data}
+      scholarships={scholarshipResponse?.data}
+    />
+  );
 };
 
 export default page;

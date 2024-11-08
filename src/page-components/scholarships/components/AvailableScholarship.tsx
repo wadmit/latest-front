@@ -1,12 +1,21 @@
 "use client";
 import { RootContainer } from "@/components/common";
-import { Box, Typography } from "@mui/material";
+import { IScholarshipResponse } from "@/types/utils";
+import { Box, debounce, Typography } from "@mui/material";
 import { useSearchParams } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import AvailableScholarshipHeader from "./AvailableScholarshipHeader";
+import AvailableScholarshipBody from "./AvailableScholarshipBody";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { CacheConfigKey } from "@/constants";
+import { getScholarships } from "@/api/web/scholarship.action";
 
-type Props = {};
+type Props = {
+  scholarships: IScholarshipResponse;
+};
 
-const AvailableScholarship = (props: Props) => {
+const AvailableScholarship = ({ scholarships }: Props) => {
+  console.log("🚀 ~ AvailableScholarship ~ scholarships:", scholarships);
   const searchParams = useSearchParams();
   const wiseScore = searchParams.get("wisescore") ?? 0;
   console.log("🚀 ~ AvailableScholarship ~ wiseScore:", wiseScore);
@@ -19,57 +28,48 @@ const AvailableScholarship = (props: Props) => {
 
   const hasMainWiseScore = !!mainWisescore;
   console.log("🚀 ~ AvailableScholarship ~ mainWisescore:", mainWisescore);
+  const [allScholarships, setAllScholarships] =
+    useState<IScholarshipResponse>(scholarships);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const {
+    isLoading,
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isFetching,
+    status,
+  } = useInfiniteQuery({
+    queryKey: [CacheConfigKey.BLOG_QUERY_KEY, searchTerm],
+    initialPageParam: 2,
+    queryFn: () => getScholarships({ searchTerm }),
+    getNextPageParam: (lastPage, pages) =>
+      lastPage?.data?.data.paginate?.hasMore ? pages.length + 1 : undefined,
+  });
+
+  const handleSearch = debounce((term: string) => {
+    setSearchTerm(term);
+  }, 300);
 
   return (
     <Box
       bgcolor={
         hasMainWiseScore ? "rgba(229, 242, 255, 1)" : "rgba(240, 234, 230, 1)"
       }
+      pt="1px"
+      pb="1px"
     >
       <RootContainer
-        mt={{ lg: "6rem", md: "6rem", sm: "5rem", xs: "4rem" }}
-        mb="6.25rem"
+        mt={{ lg: "3rem", md: "6rem", sm: "2rem", xs: "2rem" }}
+        mb={{ lg: "4.25rem", md: "4.25rem", sm: "2rem", xs: "2rem" }}
       >
-        <Box
-          display="flex"
-          gap="8px"
-          flexDirection="column"
-          mb={{ lg: "48px", md: "48px", sm: "42px", xs: "28px" }}
-        >
-          <Typography
-            fontWeight={800}
-            fontSize={{ lg: "28px", md: "28px", sm: "24px", xs: "24px" }}
-            fontFamily="HankenGroteskExtraBold"
-            lineHeight={{
-              lg: "36.4px",
-              md: "36.4px",
-              sm: "31.2px",
-              xs: "31.2px",
-            }}
-            letterSpacing="-2%"
-            color="rgba(32, 28, 26, 1)"
-            // textAlign="center"
-          >
-            {hasMainWiseScore ? "Your matched scholarships" : "Scholarships"}
-          </Typography>
-
-          <Typography
-            fontWeight={400}
-            fontFamily="HankenGroteskRegular"
-            fontSize={{ lg: "18px", md: "18px", sm: "14px", xs: "14px" }}
-            lineHeight={{
-              lg: "25.2px",
-              md: "25.2px",
-              sm: "19.6px",
-              xs: "19.6px",
-            }}
-            color="rgba(32, 28, 26, 0.9)"
-          >
-            {hasMainWiseScore
-              ? "Based on your WiseScore®, we’ve matched you with scholarships perfect for your academic profile."
-              : "Find fully and partially funded scholarships for international students. Study in top universities and experience a new culture."}
-          </Typography>
-        </Box>
+        <AvailableScholarshipHeader />
+        <AvailableScholarshipBody
+          handleSearch={handleSearch}
+          allScholarships={allScholarships}
+          loading={isFetching || isLoading}
+        />
       </RootContainer>
     </Box>
   );

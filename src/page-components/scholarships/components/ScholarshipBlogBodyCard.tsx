@@ -12,6 +12,7 @@ type Props = {
 };
 
 const ScholarshipBlogBodyCard = ({ blog }: Props) => {
+  console.log("🚀 ~ ScholarshipBlogBodyCard ~ blog:", blog);
   const currency = useAppSelector((state) => state.currency);
   return (
     <Box
@@ -22,14 +23,14 @@ const ScholarshipBlogBodyCard = ({ blog }: Props) => {
     >
       <Box height="250px">
         <img
-          alt={blog.title}
+          alt={blog?.title}
           style={{
             width: "100%",
             height: "100%",
             borderRadius: "8px",
             objectFit: "cover",
           }}
-          src={`${process.env.NEXT_PUBLIC_IMAGE_DISTRIBUTION_KEY}/${blog.cover_key}`}
+          src={`${process.env.NEXT_PUBLIC_IMAGE_DISTRIBUTION_KEY}/${blog?.cover_key}`}
         />
       </Box>
       <Box>
@@ -42,7 +43,7 @@ const ScholarshipBlogBodyCard = ({ blog }: Props) => {
           lineHeight="150%"
           width="80%"
         >
-          {blog.title}{" "}
+          {blog?.title ?? ""}{" "}
         </Typography>
         <Typography
           mt={2}
@@ -68,7 +69,7 @@ const ScholarshipBlogBodyCard = ({ blog }: Props) => {
                 city: currency?.city ?? "",
               },
               buttonName: "Blog Info",
-              source: `User selected post: ${blog.title} from blog`,
+              source: `User selected post: ${blog?.title} from blog`,
               urlPath: window.location.href,
               event_type: EAnalyticsEvents.BLOG,
               status: EAnalyticsStatus.SUCCESS,
@@ -78,13 +79,13 @@ const ScholarshipBlogBodyCard = ({ blog }: Props) => {
         >
           <Link
             about="Read More"
-            aria-label={`Read more ${blog.title}`}
+            aria-label={`Read more ${blog?.title}`}
             aria-description="Read More"
-            href={`/blogs/${blog.slug}`}
+            href={`/blogs/${blog?.slug}`}
           >
             <Typography
-              aria-description={`${blog.title}`}
-              aria-label={`Read more ${blog.title}`}
+              aria-description={`${blog?.title}`}
+              aria-label={`Read more ${blog?.title}`}
               component={"a"}
               mt={2}
               display="flex"

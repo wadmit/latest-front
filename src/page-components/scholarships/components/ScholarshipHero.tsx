@@ -8,7 +8,7 @@ import React from "react";
 import { ScholarshipHeaderContainer } from "../styled-components";
 
 const ScholarshipHero = () => {
-  const isMobile = useMediaQuery("(max-width:600px)");
+  const isMobile = useMediaQuery("(max-width:830px)");
   return (
     // <ScholarshipHeaderContainer>
     <Box
@@ -23,9 +23,9 @@ const ScholarshipHero = () => {
         xs: "column-reverse",
       }}
       padding={{
-        lg: "84px 128px",
+        lg: "74px 110px",
         md: "84px 128px",
-        sm: "26px 10px 26px 10px",
+        sm: "26px 15px",
         xs: "26px 15px",
       }}
       gap={{ lg: "0px", md: "0px", sm: "25px", xs: "25px" }}
@@ -73,7 +73,7 @@ const ScholarshipHero = () => {
             borderBottom="4px dotted rgba(170, 68, 1, 1)"
           >
             scholarship
-          </Typography>
+          </Typography>{" "}
           match
         </Typography>
         <Box

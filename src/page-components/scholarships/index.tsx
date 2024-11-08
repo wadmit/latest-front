@@ -4,19 +4,20 @@ import ScholarshipCuriosity from "./components/ScholarshipCuriosity";
 import ScholarshipVideoTestimonials from "./components/ScholarshipVideoTestimonials";
 import ScholarshipTestimonials from "./components/ScholarshipTestimonials";
 import ScholarshipBlogs from "./components/ScholarshipBlogs";
-import { IBlogResponse } from "@/types/utils";
+import { IBlogResponse, IScholarshipResponse } from "@/types/utils";
 import AvailableScholarship from "./components/AvailableScholarship";
 
 type Props = {
   blogs: IBlogResponse;
+  scholarships: IScholarshipResponse;
 };
 
-const ScholarshipHome = ({ blogs }: Props) => {
+const ScholarshipHome = ({ blogs, scholarships }: Props) => {
   return (
     <>
       <ScholarshipHero />
       <ScholarshipCuriosity />
-      <AvailableScholarship />
+      <AvailableScholarship scholarships={scholarships} />
       <ScholarshipBlogs blogs={blogs} />
       <ScholarshipVideoTestimonials />
       <ScholarshipTestimonials />

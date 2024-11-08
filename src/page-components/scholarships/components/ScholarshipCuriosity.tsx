@@ -1,10 +1,13 @@
+"use client";
 import { Box, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 import Ray from "public/images/scholarships/ray.svg";
 import React from "react";
 
 type Props = {};
 
 const ScholarshipCuriosity = (props: Props) => {
+  const router = useRouter();
   return (
     <Box
       display="flex"
@@ -13,7 +16,7 @@ const ScholarshipCuriosity = (props: Props) => {
       bgcolor="rgba(255, 255, 255, 1)"
       padding={{
         lg: "64px 330px",
-        md: "64px 330px",
+        md: "40px 100px",
         sm: "40px 16px",
         xs: "40px 16px",
       }}
@@ -50,6 +53,10 @@ const ScholarshipCuriosity = (props: Props) => {
           padding="12px 22px"
           borderRadius="8px"
           position="relative"
+          onClick={() => router.push("/wisescore")}
+          sx={{
+            cursor: "pointer",
+          }}
         >
           <Typography
             fontFamily="HankenGroteskSemiBold"
@@ -64,7 +71,7 @@ const ScholarshipCuriosity = (props: Props) => {
           <Box
             position="absolute"
             top={{ lg: "-10px", md: "-10px", sm: "-10px", xs: "-10px" }}
-            left={{ lg: "190px", md: "190px", sm: "190px", xs: "170px" }}
+            left={{ lg: "200px", md: "190px", sm: "190px", xs: "175px" }}
           >
             <Ray />
           </Box>

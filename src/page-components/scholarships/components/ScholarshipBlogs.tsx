@@ -22,6 +22,11 @@ const ScholarshipBlogs = ({ blogs }: Props) => {
   const [currentLimit, setCurrentLimit] = useState(isMobile ? 1 : 3);
 
   useEffect(() => {
+    console.log("Initial blogs prop:", blogs);
+    console.log("Initial allBlogs state:", allBlogs);
+  }, []);
+
+  useEffect(() => {
     const newLimit = isMobile ? 1 : 3;
     if (newLimit !== currentLimit && !showAll) {
       setCurrentLimit(newLimit);
@@ -63,24 +68,34 @@ const ScholarshipBlogs = ({ blogs }: Props) => {
     },
   });
 
-  useEffect(() => {
-    refetch();
-  }, [currentLimit]);
+  // useEffect(() => {
+  //   refetch();
+  // }, [currentLimit]);
 
-  useEffect(() => {
-    if (data) {
-      const newBlogs = data.pages.flatMap((page) => page?.data?.data?.blogs);
-      setAllBlogs(newBlogs);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     const newBlogs = data.pages.flatMap((page) => page?.data?.data?.blogs);
+  //     setAllBlogs(newBlogs);
+  //   }
+  // }, [data]);
 
-  const handleSeeAll = async () => {
-    setShowAll(true);
-    await refetch();
-  };
+  // const handleSeeAll = async () => {
+  //   setShowAll(true);
+  //   await refetch();
+  // };
+
+  console.log("Render state:", {
+    isLoading,
+    isFetching,
+    allBlogsLength: allBlogs?.length,
+    allBlogs,
+  });
 
   return (
-    <RootContainer mt="116px">
+    <RootContainer
+      mt={{ lg: "70px", md: "100px", sm: "60px", xs: "60px" }}
+      // mb={{ lg: "4.25rem", md: "4.25rem", sm: "2rem", xs: "10px" }}
+    >
       <Box>
         <Box display="flex" justifyContent="space-between">
           <Typography
@@ -108,7 +123,7 @@ const ScholarshipBlogs = ({ blogs }: Props) => {
             color="rgba(255, 107, 38, 1)"
             mt="10px"
             sx={{ cursor: "pointer" }}
-            onClick={handleSeeAll}
+            // onClick={handleSeeAll}
           >
             See all
           </Typography>
@@ -128,9 +143,9 @@ const ScholarshipBlogs = ({ blogs }: Props) => {
             Array.from(Array(3).keys()).map((item) => (
               <BlogBodyCardSkeleton key={item} />
             ))
-          ) : allBlogs && allBlogs.length > 0 ? (
-            allBlogs.map((blog) => (
-              <ScholarshipBlogBodyCard key={blog.id} blog={blog} />
+          ) : allBlogs && allBlogs?.length > 0 ? (
+            allBlogs?.map((blog) => (
+              <ScholarshipBlogBodyCard key={blog?.id} blog={blog} />
             ))
           ) : (
             <Typography variant="h6" component="h6">
