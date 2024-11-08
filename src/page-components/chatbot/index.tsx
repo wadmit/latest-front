@@ -82,7 +82,7 @@ const ChatBotBox = ({ onClick }: Props) => {
   return (
     <Dialog
       open={open}
-      maxWidth="xs"
+      maxWidth="xl"
       onClose={() => {
         setOpen(false);
         onClick();
@@ -116,8 +116,8 @@ const ChatBotBox = ({ onClick }: Props) => {
           borderRadius: "20px",
           margin: 0,
           width: {
-            lg: "423px",
-            md: "423px",
+            lg: "700px",
+            md: "550px",
             sm: "350px",
             xs: "90%",
           },
@@ -150,7 +150,8 @@ const ChatBotBox = ({ onClick }: Props) => {
               getChatResponse(message);
             }}
             resetSimilarQuestions={resetSimilarQuestions}
-            isDisabled={isAnimationPlaying}
+            // isDisabled={isAnimationPlaying}
+            isDisabled={messageLoading}
           />
         </Box>
       </Box>
