@@ -9,25 +9,22 @@ import AvailableScholarshipBody from "./AvailableScholarshipBody";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { CacheConfigKey } from "@/constants";
 import { getScholarships } from "@/api/web/scholarship.action";
+import useCostConverterMain from "@/hooks/costConverterMain";
 
 type Props = {
   scholarships: IScholarshipResponse;
 };
 
 const AvailableScholarship = ({ scholarships }: Props) => {
-  console.log("🚀 ~ AvailableScholarship ~ scholarships:", scholarships);
   const searchParams = useSearchParams();
+  const getConvertedCosts = useCostConverterMain();
   const wiseScore = searchParams.get("wisescore") ?? 0;
-  console.log("🚀 ~ AvailableScholarship ~ wiseScore:", wiseScore);
 
   const mainWisescore = localStorage.getItem("wisescore");
-  console.log("🚀 ~ AvailableScholarship ~ mainWisescore:", mainWisescore);
 
   const hasWiseScore = !!wiseScore;
-  console.log("🚀 ~ AvailableScholarship ~ hasWiseScore:", hasWiseScore);
 
   const hasMainWiseScore = !!mainWisescore;
-  console.log("🚀 ~ AvailableScholarship ~ mainWisescore:", mainWisescore);
   const [allScholarships, setAllScholarships] =
     useState<IScholarshipResponse>(scholarships);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -69,6 +66,7 @@ const AvailableScholarship = ({ scholarships }: Props) => {
           handleSearch={handleSearch}
           allScholarships={allScholarships}
           loading={isFetching || isLoading}
+          getConvertedCosts={getConvertedCosts}
         />
       </RootContainer>
     </Box>

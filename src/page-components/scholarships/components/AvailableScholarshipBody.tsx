@@ -22,6 +22,13 @@ type Props = {
   allScholarships: any;
   loading: boolean;
   handleSearch: (searchTermData: string) => void;
+  getConvertedCosts: (
+    value: number,
+    base_currency: string
+  ) => {
+    formattedValue: string;
+    amount: number;
+  };
 };
 
 SwiperCore.use([Navigation, Pagination]);
@@ -30,10 +37,10 @@ const AvailableScholarshipBody = ({
   loading,
   allScholarships,
   handleSearch,
+  getConvertedCosts,
 }: Props) => {
   const swiperRef = useRef(null) as any;
   const imageUrl = applicationConfig.distributionKey;
-  const getConvertedCosts = useCostConverterMain();
   const [filteredScholarships, setFilteredScholarships] = useState(
     allScholarships?.data || []
   );
@@ -296,16 +303,15 @@ const AvailableScholarshipBody = ({
                         lineHeight="19.6px"
                         color="rgba(32, 28, 26, 1)"
                       >
-                        {/* {
+                        {
                           getConvertedCosts(
                             scholarship?.scholarship?.scholarshipAmount ?? 0,
-                            scholarship?.scholarship
-                              ?.scholarshipAmountCurrency ?? "usd"
+                            scholarship?.scholarship?.scholarshipAmountCurrency
                           ).formattedValue
-                        } */}
-                        {scholarship?.scholarship?.scholarshipAmount ?? 0}{" "}
+                        }
+                        {/* {scholarship?.scholarship?.scholarshipAmount ?? 0}{" "}
                         {scholarship?.scholarship?.scholarshipAmountCurrency ??
-                          "CNY"}
+                          "CNY"} */}
                       </Typography>
                     </Box>
                   </Box>
