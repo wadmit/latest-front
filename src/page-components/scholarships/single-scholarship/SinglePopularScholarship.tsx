@@ -13,6 +13,7 @@ import { IScholarshipResponse } from "@/types/utils";
 import { scholarshipStyles } from "../utils/provider";
 import Link from "next/link";
 import applicationConfig from "@/config";
+import useCostConverterMain from "@/hooks/costConverterMain";
 
 type Props = {
   poplarScholarships: IScholarshipResponse[];
@@ -28,191 +29,201 @@ const ScholarshipCard = ({
   scholarship,
 }: {
   scholarship: IScholarshipResponse;
-}) => (
-  <Grid item xs={12} sm={12} md={6} lg={6}>
-    <Box
-      display="flex"
-      gap={{ lg: "17px", md: "17px", sm: "5px", xs: "20px" }}
-      flexDirection={{
-        lg: "row",
-        md: "row",
-        sm: "column",
-        xs: "column",
-      }}
-      boxShadow="0px 8px 20px 0px #0000000F"
-      p={2}
-      mb={2}
-      borderRadius="12px"
-      bgcolor="#FFFFFF"
-    >
+}) => {
+  const getConvertedCosts = useCostConverterMain();
+
+  return (
+    <Grid item xs={12} sm={12} md={6} lg={6}>
       <Box
-        height="194px"
-        width={{ lg: "205px", md: "353px", sm: "100%", xs: "100%" }}
-        borderRadius="8px"
-        overflow="hidden"
-        flex="0 0 auto"
+        display="flex"
+        gap={{ lg: "17px", md: "17px", sm: "5px", xs: "20px" }}
+        flexDirection={{
+          lg: "row",
+          md: "row",
+          sm: "column",
+          xs: "column",
+        }}
+        boxShadow="0px 8px 20px 0px #0000000F"
+        p={2}
+        mb={2}
+        borderRadius="12px"
+        bgcolor="#FFFFFF"
       >
-        <Image
-          layout="responsive"
-          alt="Scholarship"
-          width={100}
-          height={1}
-          src={`${applicationConfig.distributionKey}/${scholarship.scholarship.scholarshipCoverImage}`}
-        />
-      </Box>
-
-      <Box display="flex" flexDirection="column" gap="20px" flex="1 1 auto">
-        <Box display="flex" gap="8px">
-          {scholarship?.scholarship?.scholarshipType &&
-            scholarship.scholarship.scholarshipType.length > 0 &&
-            scholarship.scholarship.scholarshipType.map(
-              (type: string, idx: number) => {
-                const style = getScholarshipTypeStyle(type);
-                return (
-                  <Box key={idx} bgcolor={style.bgColor} padding="4px">
-                    <Typography
-                      fontWeight={600}
-                      fontFamily="HankenGroteskSemiBold"
-                      fontSize={{
-                        lg: "10px",
-                        md: "10px",
-                        sm: "10px",
-                        xs: "10px",
-                      }}
-                      lineHeight="12px"
-                      color={style.textColor}
-                    >
-                      {type ? type.toUpperCase() : "NOTHING"}
-                    </Typography>
-                  </Box>
-                );
-              }
-            )}
-        </Box>
-
-        <Typography
-          fontWeight={800}
-          fontFamily="HankenGroteskExtraBold"
-          fontSize={{ lg: "20px", md: "20px", sm: "18px", xs: "18px" }}
-          lineHeight={{
-            lg: "26px",
-            md: "26px",
-            sm: "23.4px",
-            xs: "23.4px",
-          }}
-          letterSpacing="-2%"
-          color="#201C1A"
+        <Box
+          height="194px"
+          width={{ lg: "205px", md: "353px", sm: "100%", xs: "100%" }}
+          borderRadius="8px"
+          overflow="hidden"
+          flex="0 0 auto"
         >
-          <Link href={`/scholarships/${scholarship.slug}`}>
-            {scholarship?.name}
-          </Link>
-        </Typography>
-        <Divider />
+          <Image
+            layout="responsive"
+            alt="Scholarship"
+            width={100}
+            height={1}
+            src={`${applicationConfig.distributionKey}/${scholarship.scholarship.scholarshipCoverImage}`}
+          />
+        </Box>
 
-        <Box display="flex" flexDirection="column" gap="12px">
-          <Box display="flex" alignItems="center" gap="4px">
-            <PersonRequest />
-            <Typography
-              fontWeight={400}
-              fontFamily="HankenGroteskRegular"
-              fontSize={{ lg: "14px", md: "14px", sm: "14px", xs: "14px" }}
-              lineHeight={{
-                lg: "19.6px",
-                md: "19.6px",
-                sm: "19.6px",
-                xs: "19.6px",
-              }}
-              color="rgba(32, 28, 26, 0.55)"
-            >
-              Scholarships:
-            </Typography>
-            <Typography
-              fontWeight={400}
-              fontFamily="HankenGroteskRegular"
-              fontSize={{ lg: "14px", md: "14px", sm: "14px", xs: "14px" }}
-              lineHeight={{
-                lg: "19.6px",
-                md: "19.6px",
-                sm: "19.6px",
-                xs: "19.6px",
-              }}
-              color="rgba(32, 28, 26, 1)"
-            >
-              {scholarship?.scholarship?.totalScholarshipRecipients
-                ? scholarship?.scholarship?.totalScholarshipRecipients
-                : 0}
-            </Typography>
+        <Box display="flex" flexDirection="column" gap="20px" flex="1 1 auto">
+          <Box display="flex" gap="8px">
+            {scholarship?.scholarship?.scholarshipType &&
+              scholarship.scholarship.scholarshipType.length > 0 &&
+              scholarship.scholarship.scholarshipType.map(
+                (type: string, idx: number) => {
+                  const style = getScholarshipTypeStyle(type);
+                  return (
+                    <Box key={idx} bgcolor={style.bgColor} padding="4px">
+                      <Typography
+                        fontWeight={600}
+                        fontFamily="HankenGroteskSemiBold"
+                        fontSize={{
+                          lg: "10px",
+                          md: "10px",
+                          sm: "10px",
+                          xs: "10px",
+                        }}
+                        lineHeight="12px"
+                        color={style.textColor}
+                      >
+                        {type ? type.toUpperCase() : "NOTHING"}
+                      </Typography>
+                    </Box>
+                  );
+                }
+              )}
           </Box>
 
-          <Box display="flex" alignItems="center" gap="4px">
-            <ScholarshipHat />
-            <Typography
-              fontWeight={400}
-              fontFamily="HankenGroteskRegular"
-              fontSize={{ lg: "14px", md: "14px", sm: "14px", xs: "14px" }}
-              lineHeight={{
-                lg: "19.6px",
-                md: "19.6px",
-                sm: "19.6px",
-                xs: "19.6px",
-              }}
-              color="rgba(32, 28, 26, 0.55)"
-            >
-              Education level:
-            </Typography>
-            <Typography
-              fontWeight={400}
-              fontFamily="HankenGroteskRegular"
-              fontSize={{ lg: "14px", md: "14px", sm: "14px", xs: "14px" }}
-              lineHeight={{
-                lg: "19.6px",
-                md: "19.6px",
-                sm: "19.6px",
-                xs: "19.6px",
-              }}
-              color="rgba(32, 28, 26, 1)"
-            >
-              {scholarship?.scholarship?.educationalLevel ?? "N/A"}
-            </Typography>
-          </Box>
+          <Typography
+            fontWeight={800}
+            fontFamily="HankenGroteskExtraBold"
+            fontSize={{ lg: "20px", md: "20px", sm: "18px", xs: "18px" }}
+            lineHeight={{
+              lg: "26px",
+              md: "26px",
+              sm: "23.4px",
+              xs: "23.4px",
+            }}
+            letterSpacing="-2%"
+            color="#201C1A"
+          >
+            <Link href={`/scholarships/${scholarship.slug}`}>
+              {scholarship?.name}
+            </Link>
+          </Typography>
+          <Divider />
 
-          <Box display="flex" alignItems="center" gap="4px">
-            <ScholarshipCurrency />
-            <Typography
-              fontWeight={400}
-              fontFamily="HankenGroteskRegular"
-              fontSize={{ lg: "14px", md: "14px", sm: "14px", xs: "14px" }}
-              lineHeight={{
-                lg: "19.6px",
-                md: "19.6px",
-                sm: "19.6px",
-                xs: "19.6px",
-              }}
-              color="rgba(32, 28, 26, 0.55)"
-            >
-              Value:
-            </Typography>
-            <Typography
-              fontWeight={400}
-              fontFamily="HankenGroteskRegular"
-              fontSize={{ lg: "14px", md: "14px", sm: "14px", xs: "14px" }}
-              lineHeight={{
-                lg: "19.6px",
-                md: "19.6px",
-                sm: "19.6px",
-                xs: "19.6px",
-              }}
-              color="rgba(32, 28, 26, 1)"
-            >
-              {scholarship?.scholarship?.scholarshipAmount ?? 0}{" "}
-              {scholarship?.scholarship?.scholarshipAmountCurrency ?? "CNY"}
-            </Typography>
+          <Box display="flex" flexDirection="column" gap="12px">
+            <Box display="flex" alignItems="center" gap="4px">
+              <PersonRequest />
+              <Typography
+                fontWeight={400}
+                fontFamily="HankenGroteskRegular"
+                fontSize={{ lg: "14px", md: "14px", sm: "14px", xs: "14px" }}
+                lineHeight={{
+                  lg: "19.6px",
+                  md: "19.6px",
+                  sm: "19.6px",
+                  xs: "19.6px",
+                }}
+                color="rgba(32, 28, 26, 0.55)"
+              >
+                Scholarships:
+              </Typography>
+              <Typography
+                fontWeight={400}
+                fontFamily="HankenGroteskRegular"
+                fontSize={{ lg: "14px", md: "14px", sm: "14px", xs: "14px" }}
+                lineHeight={{
+                  lg: "19.6px",
+                  md: "19.6px",
+                  sm: "19.6px",
+                  xs: "19.6px",
+                }}
+                color="rgba(32, 28, 26, 1)"
+              >
+                {scholarship?.scholarship?.totalScholarshipRecipients
+                  ? scholarship?.scholarship?.totalScholarshipRecipients
+                  : 0}
+              </Typography>
+            </Box>
+
+            <Box display="flex" alignItems="center" gap="4px">
+              <ScholarshipHat />
+              <Typography
+                fontWeight={400}
+                fontFamily="HankenGroteskRegular"
+                fontSize={{ lg: "14px", md: "14px", sm: "14px", xs: "14px" }}
+                lineHeight={{
+                  lg: "19.6px",
+                  md: "19.6px",
+                  sm: "19.6px",
+                  xs: "19.6px",
+                }}
+                color="rgba(32, 28, 26, 0.55)"
+              >
+                Education level:
+              </Typography>
+              <Typography
+                fontWeight={400}
+                fontFamily="HankenGroteskRegular"
+                fontSize={{ lg: "14px", md: "14px", sm: "14px", xs: "14px" }}
+                lineHeight={{
+                  lg: "19.6px",
+                  md: "19.6px",
+                  sm: "19.6px",
+                  xs: "19.6px",
+                }}
+                color="rgba(32, 28, 26, 1)"
+              >
+                {scholarship?.scholarship?.educationalLevel ?? "N/A"}
+              </Typography>
+            </Box>
+
+            <Box display="flex" alignItems="center" gap="4px">
+              <ScholarshipCurrency />
+              <Typography
+                fontWeight={400}
+                fontFamily="HankenGroteskRegular"
+                fontSize={{ lg: "14px", md: "14px", sm: "14px", xs: "14px" }}
+                lineHeight={{
+                  lg: "19.6px",
+                  md: "19.6px",
+                  sm: "19.6px",
+                  xs: "19.6px",
+                }}
+                color="rgba(32, 28, 26, 0.55)"
+              >
+                Value:
+              </Typography>
+              <Typography
+                fontWeight={400}
+                fontFamily="HankenGroteskRegular"
+                fontSize={{ lg: "14px", md: "14px", sm: "14px", xs: "14px" }}
+                lineHeight={{
+                  lg: "19.6px",
+                  md: "19.6px",
+                  sm: "19.6px",
+                  xs: "19.6px",
+                }}
+                color="rgba(32, 28, 26, 1)"
+              >
+                {
+                  getConvertedCosts(
+                    scholarship?.scholarship?.scholarshipAmount ?? 0,
+                    scholarship?.scholarship?.scholarshipAmountCurrency
+                  ).formattedValue
+                }
+                {/* {scholarship?.scholarship?.scholarshipAmount ?? 0}{" "}
+              {scholarship?.scholarship?.scholarshipAmountCurrency ?? "CNY"} */}
+              </Typography>
+            </Box>
           </Box>
         </Box>
       </Box>
-    </Box>
-  </Grid>
-);
+    </Grid>
+  );
+};
 
 const SinglePopularScholarship = ({ poplarScholarships }: Props) => {
   const [showAll, setShowAll] = useState(false);

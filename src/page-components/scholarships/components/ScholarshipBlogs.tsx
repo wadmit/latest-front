@@ -16,34 +16,24 @@ type Props = {
 
 const ScholarshipBlogs = ({ blogs }: Props) => {
   const isMobile = useMediaQuery("(max-width:600px)");
-  const [allBlogs, setAllBlogs] = useState<IBlog[]>(blogs?.blogs);
-  const [searchTerm, setSearchTerm] = useState<string>("");
   const [showAll, setShowAll] = useState(false);
   const [currentLimit, setCurrentLimit] = useState(isMobile ? 1 : 3);
-
-  useEffect(() => {
-    console.log("Initial blogs prop:", blogs);
-    console.log("Initial allBlogs state:", allBlogs);
-  }, []);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
     const newLimit = isMobile ? 1 : 3;
     if (newLimit !== currentLimit && !showAll) {
       setCurrentLimit(newLimit);
     }
-  }, [isMobile]);
+  }, [isMobile, currentLimit, showAll]);
 
-  const {
-    isLoading,
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    isFetching,
-    status,
-    refetch,
-  } = useInfiniteQuery({
-    queryKey: [CacheConfigKey.BLOG_QUERY_KEY, searchTerm],
+  const { isLoading, data, isFetching, refetch } = useInfiniteQuery({
+    queryKey: [
+      CacheConfigKey.BLOG_QUERY_KEY,
+      searchTerm,
+      showAll,
+      currentLimit,
+    ],
     initialPageParam: 1,
     queryFn: ({ pageParam }) =>
       getBlogs({
@@ -68,38 +58,19 @@ const ScholarshipBlogs = ({ blogs }: Props) => {
     },
   });
 
-  // useEffect(() => {
-  //   refetch();
-  // }, [currentLimit]);
+  const handleSeeAll = () => {
+    setShowAll((prev) => !prev);
+    refetch();
+  };
 
-  // useEffect(() => {
-  //   if (data) {
-  //     const newBlogs = data.pages.flatMap((page) => page?.data?.data?.blogs);
-  //     setAllBlogs(newBlogs);
-  //   }
-  // }, [data]);
-
-  // const handleSeeAll = async () => {
-  //   setShowAll(true);
-  //   await refetch();
-  // };
-
-  console.log("Render state:", {
-    isLoading,
-    isFetching,
-    allBlogsLength: allBlogs?.length,
-    allBlogs,
-  });
+  const allBlogs = data?.pages.flatMap((page) => page.data.data.blogs) || [];
 
   return (
-    <RootContainer
-      mt={{ lg: "70px", md: "100px", sm: "60px", xs: "60px" }}
-      // mb={{ lg: "4.25rem", md: "4.25rem", sm: "2rem", xs: "10px" }}
-    >
+    <RootContainer mt={{ lg: "70px", md: "100px", sm: "60px", xs: "60px" }}>
       <Box>
         <Box display="flex" justifyContent="space-between">
           <Typography
-            component={"h3"}
+            component="h3"
             fontFamily="HankenGroteskExtraBold"
             fontSize={{ lg: "28px", md: "28px", sm: "24px", xs: "24px" }}
             lineHeight={{
@@ -123,9 +94,9 @@ const ScholarshipBlogs = ({ blogs }: Props) => {
             color="rgba(255, 107, 38, 1)"
             mt="10px"
             sx={{ cursor: "pointer" }}
-            // onClick={handleSeeAll}
+            onClick={handleSeeAll}
           >
-            See all
+            {showAll ? "Show Less" : "See All"}
           </Typography>
         </Box>
 
@@ -140,11 +111,11 @@ const ScholarshipBlogs = ({ blogs }: Props) => {
           }}
         >
           {isLoading || isFetching ? (
-            Array.from(Array(3).keys()).map((item) => (
-              <BlogBodyCardSkeleton key={item} />
+            Array.from({ length: isMobile ? 1 : 3 }).map((_, index) => (
+              <BlogBodyCardSkeleton key={index} />
             ))
-          ) : allBlogs && allBlogs?.length > 0 ? (
-            allBlogs?.map((blog) => (
+          ) : allBlogs && allBlogs.length > 0 ? (
+            allBlogs.map((blog) => (
               <ScholarshipBlogBodyCard key={blog?.id} blog={blog} />
             ))
           ) : (
