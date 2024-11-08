@@ -21,7 +21,7 @@ function FAQAccordionCompSch({ title, details, index }: IFAQData) {
     if (isMobile) {
       return expanded ? <MinusIcon /> : <PlusIcon />;
     }
-    return expanded ? <UpArrowAcc /> : <DownArrowAcc />;
+    return expanded ? <MinusIcon /> : <PlusIcon />;
   };
 
   return (
