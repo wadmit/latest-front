@@ -28,41 +28,41 @@ const ChatBotMessage = ({
     }
   }, [message, type]);
 
-  useEffect(() => {
-    if (messageArray.length > 0 && type !== "other") {
-      const timer = setInterval(() => {
-        setIndex((prev) => {
-          if (prev < messageArray.length) {
-            scrollToBottom && scrollToBottom();
-            return prev + 1;
-          } else {
-            clearInterval(timer);
-            return prev;
-          }
-        });
-      }, 100);
-      return () => clearInterval(timer);
-    }
-  }, [messageArray]);
+  // useEffect(() => {
+  //   if (messageArray.length > 0 && type !== "other") {
+  //     const timer = setInterval(() => {
+  //       setIndex((prev) => {
+  //         if (prev < messageArray.length) {
+  //           scrollToBottom && scrollToBottom();
+  //           return prev + 1;
+  //         } else {
+  //           clearInterval(timer);
+  //           return prev;
+  //         }
+  //       });
+  //     }, 100);
+  //     return () => clearInterval(timer);
+  //   }
+  // }, [messageArray]);
 
-  const messageSliced = messageArray.slice(0, index).join(" ");
-  useEffect(() => {
-    if (
-      onAnimationComplete &&
-      message.split(" ").length === messageSliced.split(" ").length &&
-      !own
-    ) {
-      onAnimationComplete();
-    }
-  }, [messageSliced, index]);
+  // const messageSliced = messageArray.slice(0, index).join(" ");
+  // useEffect(() => {
+  //   if (
+  //     onAnimationComplete &&
+  //     message.split(" ").length === messageSliced.split(" ").length &&
+  //     !own
+  //   ) {
+  //     onAnimationComplete();
+  //   }
+  // }, [messageSliced, index]);
 
-  const renderMessage = (text: string) => {
-    if (type !== "other" && !own) {
-      return TextToClickableLinks(messageSliced);
-    } else {
-      return TextToClickableLinks(text);
-    }
-  };
+  // const renderMessage = (text: string) => {
+  //   if (type !== "other" && !own) {
+  //     return TextToClickableLinks(messageSliced);
+  //   } else {
+  //     return TextToClickableLinks(text);
+  //   }
+  // };
   return (
     <Box
       width={"100%"}
@@ -119,15 +119,14 @@ const ChatBotMessage = ({
               fontFamily={"HankenGroteskRegular"}
               color={own ? "#fff" : "rgba(32, 28, 26, 0.9)"}
             >
-              {/* {renderMessage(message)} */}
               <MarkdownPreview
                 source={message}
                 style={{
-                  padding: 16,
-                  background: "white",
-                  color: "black",
-                  fontSize: "12px",
-                }} 
+                  background: "transparent",
+                  color: own ? "#fff" : "rgba(32, 28, 26, 0.9)",
+                  fontSize: "14px",
+                  fontFamily: "HankenGroteskRegular",
+                }}
               />
             </Box>
           </Box>

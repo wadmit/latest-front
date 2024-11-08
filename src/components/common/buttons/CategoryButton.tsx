@@ -1,12 +1,12 @@
 "use client";
-import { Box, Button, Stack, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { CustomTooltip, CustomTypography } from "./styled-components";
-import { ArrowDown, CategoryIcon, MessageIcon, SmileIcon } from "public/svg";
+import ChatBotBox from "@/page-components/chatbot";
 import FeedbackForm from "@/page-components/feedback";
 import ThankYouFeedback from "@/page-components/feedback/components/ThankYouFeedback";
-import ChatBotBox from "@/page-components/chatbot";
+import { Box, Button, Stack, Typography } from "@mui/material";
+import { motion } from "framer-motion";
+import { ArrowDown, CategoryIcon, MessageIcon, SmileIcon } from "public/svg";
+import { useEffect, useState } from "react";
+import { CustomTooltip, CustomTypography } from "./styled-components";
 
 type Props = {};
 
@@ -25,7 +25,7 @@ const CategoryButton = (props: Props) => {
       const timer = setTimeout(() => {
         setShowTooltip(false);
         setShowMsgTooltip(false);
-      }, 2000);
+      }, 10000);
       return () => clearTimeout(timer);
     }
   }, [showHiddenFields]);
@@ -33,11 +33,15 @@ const CategoryButton = (props: Props) => {
   // get the value from local storage and it will be true if the user has not clicked on the got it button
   useEffect(() => {
     const showMoreInfo = localStorage.getItem("showMoreInfo");
-    if (showMoreInfo === "false") {
-      setShowMoreInfo(false);
-    } else {
-      setShowMoreInfo(true);
-    }
+    const timer = setTimeout(() => {
+      setShowChatBox(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+    // if (showMoreInfo === "false") {
+    //   // setShowMoreInfo(false);
+    // } else {
+    //   // setShowMoreInfo(true);
+    // }
   }, []);
 
   const hideShowMoreInfo = () => {
@@ -167,7 +171,7 @@ const CategoryButton = (props: Props) => {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  boxShadow: "0px 0px 8px 0px rgba(0, 0, 0, 0.3)",
+                  boxShadow: "s0px 0px 8px 0px rgba(0, 0, 0, 0.3)",
                 }}
               >
                 {/* <NewWhatsApp /> */}
