@@ -48,7 +48,7 @@ import { IconWrapper } from "@/components/common/icon-wrapper/IconWrapper";
 import { getSession } from "next-auth/react";
 import { auth } from "@/auth/auth";
 
-export default  function SortedUniversitiesPageComponent() {
+export default function SortedUniversitiesPageComponent() {
   const UniversityComponentRef = useRef<HTMLDivElement>(null);
   const currency = useAppSelector((state) => state.currency);
   const getConvertedCosts = useCostConverterMain();
@@ -102,7 +102,6 @@ export default  function SortedUniversitiesPageComponent() {
     onError: () => {
       setIsDataResolved(true);
     },
-    
   });
 
   // Handle eligibility recalculation
@@ -248,6 +247,7 @@ export default  function SortedUniversitiesPageComponent() {
                   alignItems={{ lg: "flex-start", xs: "center" }}
                   ml={{ lg: 8, md: 0, sm: 0, xs: 0 }}
                   py={{ lg: 7, xs: 4 }}
+                  bgcolor="white"
                 >
                   <ThinScoreGauge
                     boxSize={isMobile ? 140 : 240}
