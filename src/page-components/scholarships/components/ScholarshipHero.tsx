@@ -1,12 +1,13 @@
 "use client";
 import { Box, Typography, useMediaQuery } from "@mui/material";
-import ScholarshipBigHero from "public/images/scholarships/BigHero.svg";
-import ScholarshipMobileHero from "public/images/scholarships/MobileHero.svg";
+import BigHero from "public/images/scholarships/BigTwo.webp";
+import SmallHero from "public/images/scholarships/SmallTwo.webp";
 import ScholarshipHat from "public/images/scholarships/hat.svg";
 import ScholarshipHatMobile from "public/images/scholarships/hat-small.svg";
 import React from "react";
 import { ScholarshipHeaderContainer } from "../styled-components";
 import { RootContainer } from "@/components/common";
+import Image from "next/image";
 
 const ScholarshipHero = () => {
   const isMobile = useMediaQuery("(max-width:830px)");
@@ -102,7 +103,38 @@ const ScholarshipHero = () => {
           </Box>
 
           <Box>
-            {isMobile ? <ScholarshipMobileHero /> : <ScholarshipBigHero />}
+            {/* {isMobile ? <ScholarshipMobileHero /> : <ScholarshipBigHero />} */}
+            {isMobile ? (
+              <Image
+                width={1000000}
+                height={1}
+                style={{
+                  width: "100%",
+                  // height: { lg: "472px", md: "450px", sm: "100%", xs: "100%" },
+                  // height: "290px",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+                alt="Small Hero"
+                //   src={`${imageUrl}/${scholarship.scholarship.scholarshipCoverImage}`}
+                src={SmallHero}
+              />
+            ) : (
+              <Image
+                width={1000000}
+                height={1}
+                style={{
+                  width: "100%",
+                  // height: { lg: "472px", md: "450px", sm: "100%", xs: "100%" },
+                  // height: "290px",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+                alt="Big Hero"
+                src={BigHero}
+                // src={SingleImg}
+              />
+            )}
           </Box>
         </Box>
       </RootContainer>
