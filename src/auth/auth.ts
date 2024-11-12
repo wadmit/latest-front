@@ -28,9 +28,7 @@ export const { auth, handlers, signIn, signOut,unstable_update } = NextAuth({
             },
             tokenNeeded: false,
           });
-          console.log("res", res);
           if (res.data) {
-            
             return {
               email: credentials.email,
               name: `${res.data?.data?.first_name} ${res.data?.data?.last_name}`,
@@ -53,7 +51,7 @@ export const { auth, handlers, signIn, signOut,unstable_update } = NextAuth({
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if (user) {
+      if (user ) {
 
         // Encode user data into JWT
         const encodedToken = jwt.sign(
@@ -139,5 +137,6 @@ export const { auth, handlers, signIn, signOut,unstable_update } = NextAuth({
   session: {
     strategy: "jwt",
     maxAge: 24 * 60 * 60, // 1 day
+
   },
 });
