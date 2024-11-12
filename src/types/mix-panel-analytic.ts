@@ -129,6 +129,17 @@ export enum EAnalyticsEvents {
   DOWNLOAD_DOCUMENT = "DOWNLOAD_DOCUMENT",
   GET_ROADMAP = "GET_ROADMAP",
   CHAT_WITH_US = "CHAT_WITH_US",
+
+
+
+
+
+
+
+
+
+
+  
 }
 export enum EAnalyticsPageEvent {
   HOME_PAGE = "HOME_PAGE",
