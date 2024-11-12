@@ -20,7 +20,7 @@ export const viewport = {
 
 const page = async () => {
   const session = await auth();
-  if (session) {
+  if (session?.accessToken) {
     redirect("/dashboard");
   }
   return (
