@@ -36,8 +36,8 @@ const AvailableScholarship = ({ scholarships }: Props) => {
     isFetching,
     status,
   } = useInfiniteQuery({
-    queryKey: [CacheConfigKey.BLOG_QUERY_KEY, searchTerm],
-    initialPageParam: 2,
+    queryKey: [CacheConfigKey.SCHOLARSHIP_QUERY_KEY, searchTerm],
+    initialPageParam: 1,
     queryFn: () => getScholarships({ searchTerm }),
     getNextPageParam: (lastPage, pages) =>
       lastPage?.data?.data.paginate?.hasMore ? pages.length + 1 : undefined,

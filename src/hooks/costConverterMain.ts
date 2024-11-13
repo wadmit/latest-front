@@ -13,7 +13,6 @@ const useCostConverterMain = () => {
       let currentAmount = 0;
       if (currency && to) {
         const conversionRate = currency[base_currency ?? "usd"][to];
-        console.log("caeca", conversionRate, base_currency, to);
         currentAmount = value * conversionRate;
         formattedValue = currentAmount?.toLocaleString("en-US", {
           style: "currency",
