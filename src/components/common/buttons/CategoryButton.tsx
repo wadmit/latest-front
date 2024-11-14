@@ -36,26 +36,26 @@ const CategoryButton = (props: Props) => {
   }, [showHiddenFields]);
 
   // get the value from local storage and it will be true if the user has not clicked on the got it button
-  useEffect(() => {
-    const showMoreInfo = localStorage.getItem("showMoreInfo");
-    const timer = setTimeout(() => {
-      setShowChatBox(true);
-    }, 3000);
-    return () => clearTimeout(timer);
-    // if (showMoreInfo === "false") {
-    //   // setShowMoreInfo(false);
-    // } else {
-    //   // setShowMoreInfo(true);
-    // }
-  }, []);
   // useEffect(() => {
   //   const showMoreInfo = localStorage.getItem("showMoreInfo");
-  //   if (showMoreInfo === "false") {
-  //     setShowMoreInfo(false);
-  //   } else {
-  //     setShowMoreInfo(true);
-  //   }
+  //   const timer = setTimeout(() => {
+  //     setShowChatBox(true);
+  //   }, 3000);
+  //   return () => clearTimeout(timer);
+  //   // if (showMoreInfo === "false") {
+  //   //   // setShowMoreInfo(false);
+  //   // } else {
+  //   //   // setShowMoreInfo(true);
+  //   // }
   // }, []);
+  useEffect(() => {
+    const showMoreInfo = localStorage.getItem("showMoreInfo");
+    if (showMoreInfo === "false") {
+      setShowMoreInfo(false);
+    } else {
+      setShowMoreInfo(true);
+    }
+  }, []);
 
   const hideShowMoreInfo = () => {
     setShowMoreInfo(false);
@@ -83,8 +83,6 @@ const CategoryButton = (props: Props) => {
       {showChatBox && (
         <ChatBotBox
           onClick={() => {
-            setShowHiddenFields(false);
-            setShowChatBox((prev) => !prev);
             analytics.websiteButtonInteractions({
               location: {
                 countryName: currency?.currentCountry ?? "",
@@ -97,6 +95,8 @@ const CategoryButton = (props: Props) => {
               status: EAnalyticsStatus.SUCCESS,
               redirectPath: "",
             });
+            setShowHiddenFields(false);
+            setShowChatBox((prev) => !prev);
           }}
         />
       )}
