@@ -98,17 +98,16 @@ const ChatBotBody = ({
         ))}
       {messageLoading && <ChatBotMessage loading message="" own={false} />}
 
-      {similarQuestions.length > 0 &&
-        !messageLoading &&
-        !isAnimationPlaying && (
-          <ChatBotSuggestionQuestion
-            questions={similarQuestions}
-            onClick={(question: string) => {
-              resetSimilarQuestions();
-              setInitialMessage(question);
-            }}
-          />
-        )}
+      {similarQuestions.length > 0 && !messageLoading && (
+        // !isAnimationPlaying && (
+        <ChatBotSuggestionQuestion
+          questions={similarQuestions}
+          onClick={(question: string) => {
+            resetSimilarQuestions();
+            setInitialMessage(question);
+          }}
+        />
+      )}
       <div ref={messagesEndRef} />
     </Box>
   );

@@ -7,6 +7,9 @@ import { ArrowDown, CategoryIcon, MessageIcon, SmileIcon } from "public/svg";
 import FeedbackForm from "@/page-components/feedback";
 import ThankYouFeedback from "@/page-components/feedback/components/ThankYouFeedback";
 import ChatBotBox from "@/page-components/chatbot";
+import { analytics } from "@/services/analytics.service";
+import { useAppSelector } from "@/global-states/hooks/hooks";
+import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 
 type Props = {};
 
@@ -20,12 +23,14 @@ const CategoryButton = (props: Props) => {
   const [showTooltip, setShowTooltip] = useState(true);
   const [showMsgTooltip, setShowMsgTooltip] = useState(true);
 
+  const currency = useAppSelector((state) => state.currency);
+
   useEffect(() => {
     if (showHiddenFields) {
       const timer = setTimeout(() => {
         setShowTooltip(false);
         setShowMsgTooltip(false);
-      }, 2000);
+      }, 10000);
       return () => clearTimeout(timer);
     }
   }, [showHiddenFields]);
@@ -33,12 +38,24 @@ const CategoryButton = (props: Props) => {
   // get the value from local storage and it will be true if the user has not clicked on the got it button
   useEffect(() => {
     const showMoreInfo = localStorage.getItem("showMoreInfo");
-    if (showMoreInfo === "false") {
-      setShowMoreInfo(false);
-    } else {
-      setShowMoreInfo(true);
-    }
+    const timer = setTimeout(() => {
+      setShowChatBox(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+    // if (showMoreInfo === "false") {
+    //   // setShowMoreInfo(false);
+    // } else {
+    //   // setShowMoreInfo(true);
+    // }
   }, []);
+  // useEffect(() => {
+  //   const showMoreInfo = localStorage.getItem("showMoreInfo");
+  //   if (showMoreInfo === "false") {
+  //     setShowMoreInfo(false);
+  //   } else {
+  //     setShowMoreInfo(true);
+  //   }
+  // }, []);
 
   const hideShowMoreInfo = () => {
     setShowMoreInfo(false);
@@ -68,6 +85,18 @@ const CategoryButton = (props: Props) => {
           onClick={() => {
             setShowHiddenFields(false);
             setShowChatBox((prev) => !prev);
+            analytics.websiteButtonInteractions({
+              location: {
+                countryName: currency?.currentCountry ?? "",
+                city: currency?.city ?? "",
+              },
+              buttonName: "Chatbox clicked",
+              source: `User opened an chatbox model`,
+              urlPath: window.location.href,
+              event_type: EAnalyticsEvents.CHAT_BOX,
+              status: EAnalyticsStatus.SUCCESS,
+              redirectPath: "",
+            });
           }}
         />
       )}
@@ -175,7 +204,7 @@ const CategoryButton = (props: Props) => {
               </Stack>
             </Button>
           </CustomTooltip>
-          {/* <CustomTooltip
+          <CustomTooltip
             open={showMsgTooltip}
             placement="left"
             title={<Typography>Chat with our AI bot</Typography>}
@@ -214,7 +243,7 @@ const CategoryButton = (props: Props) => {
                 <MessageIcon />
               </Stack>
             </Button>
-          </CustomTooltip> */}
+          </CustomTooltip>
         </>
       )}
 

@@ -46,7 +46,9 @@ function ThinScoreGauge({
         flexBasis: "5.5rem",
         flexShrink: 0,
       }}
-      zIndex={1}
+      // zIndex={1}
+      // initially it was 1 and it was overlapping with navbar but when placed 0 everything worked fine
+      zIndex={0}
     >
       <CircularProgress
         variant="determinate"
@@ -87,7 +89,6 @@ function ThinScoreGauge({
         variant="determinate"
         value={100}
         thickness={2.2}
-        
         size={boxSize}
         sx={{
           color: "#FFD3B9",

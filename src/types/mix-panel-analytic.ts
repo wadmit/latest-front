@@ -22,7 +22,6 @@ export enum EAnalyticsEvents {
   WISESCORE_RESULT = "WISESCORE_RESULT",
   // new
   WISESCORE_SUBMIT = "WISESCORE_SUBMIT",
-  
 
   // end
   SIGN_IN = "SIGN_IN",
@@ -129,17 +128,7 @@ export enum EAnalyticsEvents {
   DOWNLOAD_DOCUMENT = "DOWNLOAD_DOCUMENT",
   GET_ROADMAP = "GET_ROADMAP",
   CHAT_WITH_US = "CHAT_WITH_US",
-
-
-
-
-
-
-
-
-
-
-  
+  CHAT_BOX = "CHAT_BOX",
 }
 export enum EAnalyticsPageEvent {
   HOME_PAGE = "HOME_PAGE",

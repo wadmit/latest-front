@@ -20,16 +20,16 @@ const ChatBotInput = ({
       // position={""}
       borderTop={"1px solid #e7e7e7"}
       width={{
-        lg: "423px",
-        md: "423px",
+        lg: "700px",
+        md: "550px",
         sm: "350px",
         xs: "90%",
       }}
-      sx={{
-        "@media (min-width:442px) and (max-width: 600px) ": {
-          width: "399px",
-        },
-      }}
+      // sx={{
+      //   "@media (min-width:442px) and (max-width: 600px) ": {
+      //     width: "399px",
+      //   },
+      // }}
       bgcolor={"#ffffff"}
       height={"66px"}
       borderRadius={"0px 0px 14px 14px"}

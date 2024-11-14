@@ -1,6 +1,7 @@
 import TextToClickableLinks from "@/utils/TextToClickableLinks";
 import { Avatar, Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import MarkdownPreview from "@uiw/react-markdown-preview";
 
 type Props = {
   own: boolean;
@@ -27,41 +28,41 @@ const ChatBotMessage = ({
     }
   }, [message, type]);
 
-  useEffect(() => {
-    if (messageArray.length > 0 && type !== "other") {
-      const timer = setInterval(() => {
-        setIndex((prev) => {
-          if (prev < messageArray.length) {
-            scrollToBottom && scrollToBottom();
-            return prev + 1;
-          } else {
-            clearInterval(timer);
-            return prev;
-          }
-        });
-      }, 100);
-      return () => clearInterval(timer);
-    }
-  }, [messageArray]);
+  // useEffect(() => {
+  //   if (messageArray.length > 0 && type !== "other") {
+  //     const timer = setInterval(() => {
+  //       setIndex((prev) => {
+  //         if (prev < messageArray.length) {
+  //           scrollToBottom && scrollToBottom();
+  //           return prev + 1;
+  //         } else {
+  //           clearInterval(timer);
+  //           return prev;
+  //         }
+  //       });
+  //     }, 100);
+  //     return () => clearInterval(timer);
+  //   }
+  // }, [messageArray]);
 
-  const messageSliced = messageArray.slice(0, index).join(" ");
-  useEffect(() => {
-    if (
-      onAnimationComplete &&
-      message.split(" ").length === messageSliced.split(" ").length &&
-      !own
-    ) {
-      onAnimationComplete();
-    }
-  }, [messageSliced, index]);
+  // const messageSliced = messageArray.slice(0, index).join(" ");
+  // useEffect(() => {
+  //   if (
+  //     onAnimationComplete &&
+  //     message.split(" ").length === messageSliced.split(" ").length &&
+  //     !own
+  //   ) {
+  //     onAnimationComplete();
+  //   }
+  // }, [messageSliced, index]);
 
-  const renderMessage = (text: string) => {
-    if (type !== "other" && !own) {
-      return TextToClickableLinks(messageSliced);
-    } else {
-      return TextToClickableLinks(text);
-    }
-  };
+  // const renderMessage = (text: string) => {
+  //   if (type !== "other" && !own) {
+  //     return TextToClickableLinks(messageSliced);
+  //   } else {
+  //     return TextToClickableLinks(text);
+  //   }
+  // };
   return (
     <Box
       width={"100%"}
@@ -119,7 +120,16 @@ const ChatBotMessage = ({
               color={own ? "#fff" : "rgba(32, 28, 26, 0.9)"}
             >
               {/* {type !== "other" && !own ? messageSliced : message} */}
-              {renderMessage(message)}
+              {/* {renderMessage(message)} */}
+              <MarkdownPreview
+                source={message}
+                style={{
+                  background: "transparent",
+                  color: own ? "#fff" : "rgba(32, 28, 26, 0.9)",
+                  fontSize: "14px",
+                  fontFamily: "HankenGroteskRegular",
+                }}
+              />
             </Box>
           </Box>
         )}
