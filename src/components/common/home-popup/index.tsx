@@ -190,7 +190,7 @@ const HomePopUp = ({ openChatBox }: Props) => {
               }}
               src="/images/popup/chatbot.webp"
               alt="home-popup"
-              width={isMobile?310:isTab?500:540}
+              width={isMobile?310:isTab?500:1000}
               height={isMobile?220:400}
             />
           </Box>
