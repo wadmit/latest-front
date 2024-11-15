@@ -7,6 +7,10 @@ import { motion } from "framer-motion";
 import { ArrowDown, CategoryIcon, MessageIcon, SmileIcon } from "public/svg";
 import { useEffect, useState } from "react";
 import { CustomTooltip, CustomTypography } from "./styled-components";
+import { analytics } from "@/services/analytics.service";
+import { useAppSelector } from "@/global-states/hooks/hooks";
+import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
+import HomePopUp from "../home-popup";
 
 type Props = {};
 
@@ -20,6 +24,8 @@ const CategoryButton = (props: Props) => {
   const [showTooltip, setShowTooltip] = useState(true);
   const [showMsgTooltip, setShowMsgTooltip] = useState(true);
 
+  const currency = useAppSelector((state) => state.currency);
+
   useEffect(() => {
     if (showHiddenFields) {
       const timer = setTimeout(() => {
@@ -31,6 +37,18 @@ const CategoryButton = (props: Props) => {
   }, [showHiddenFields]);
 
   // get the value from local storage and it will be true if the user has not clicked on the got it button
+  // useEffect(() => {
+  //   const showMoreInfo = localStorage.getItem("showMoreInfo");
+  //   const timer = setTimeout(() => {
+  //     setShowChatBox(true);
+  //   }, 3000);
+  //   return () => clearTimeout(timer);
+  //   // if (showMoreInfo === "false") {
+  //   //   // setShowMoreInfo(false);
+  //   // } else {
+  //   //   // setShowMoreInfo(true);
+  //   // }
+  // }, []);
   useEffect(() => {
     const showMoreInfo = localStorage.getItem("showMoreInfo");
     const timer = setTimeout(() => {
@@ -70,6 +88,18 @@ const CategoryButton = (props: Props) => {
       {showChatBox && (
         <ChatBotBox
           onClick={() => {
+            analytics.websiteButtonInteractions({
+              location: {
+                countryName: currency?.currentCountry ?? "",
+                city: currency?.city ?? "",
+              },
+              buttonName: "Chatbox clicked",
+              source: `User opened an chatbox model`,
+              urlPath: window.location.href,
+              event_type: EAnalyticsEvents.CHAT_BOX,
+              status: EAnalyticsStatus.SUCCESS,
+              redirectPath: "",
+            });
             setShowHiddenFields(false);
             setShowChatBox((prev) => !prev);
           }}
@@ -259,6 +289,10 @@ const CategoryButton = (props: Props) => {
           {showHiddenFields ? <ArrowDown /> : <CategoryIcon />}
         </Stack>
       </Button>
+
+      <HomePopUp 
+      openChatBox={()=>setShowChatBox(true)}
+      />
     </Box>
   );
 };

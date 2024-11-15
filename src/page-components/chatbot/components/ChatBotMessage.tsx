@@ -119,6 +119,8 @@ const ChatBotMessage = ({
               fontFamily={"HankenGroteskRegular"}
               color={own ? "#fff" : "rgba(32, 28, 26, 0.9)"}
             >
+              {/* {type !== "other" && !own ? messageSliced : message} */}
+              {/* {renderMessage(message)} */}
               <MarkdownPreview
                 source={message}
                 style={{

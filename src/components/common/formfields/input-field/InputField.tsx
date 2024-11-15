@@ -1,6 +1,6 @@
 import { ITextFieldType } from "@/types/other";
 import { Stack, Typography } from "@mui/material";
-import { useField } from "formik";
+import { useField, useFormikContext } from "formik";
 import React from "react";
 import { TextFieldWrapper } from "@/components/common/formfields/styles/StyledInput";
 
@@ -23,10 +23,7 @@ const InputField = ({
     helperText: "",
   };
 
-  if (meta && meta.touched && meta.error) {
-    configTextField.error = true;
-    configTextField.helperText = meta.error;
-  }
+  const { errors, touched, values,handleChange } = useFormikContext<any>();
   return (
     <Stack direction="column" spacing={1}>
       <Typography
@@ -41,12 +38,18 @@ const InputField = ({
 
       <TextFieldWrapper
         id={name}
-        multiline
+        multiline={multiline}
         variant="outlined"
         required={required ?? false}
         placeholder={placeholder}
+        name={name}
+        value={values[name]}
         disabled={!!disabled}
-        {...configTextField}
+        onChange={handleChange}
+        // error={errors[name] && touched[name]}
+        // helperText={errors[name] && touched[name] ? errors[name] : ""}
+
+        // {...configTextField}
         type={type}
         sx={{
           "& input::placeholder": {

@@ -27,7 +27,7 @@ const ChatBotInput = ({
       }}
       // sx={{
       //   "@media (min-width:442px) and (max-width: 600px) ": {
-      //     width: "100%",
+      //     width: "399px",
       //   },
       // }}
       bgcolor={"#ffffff"}

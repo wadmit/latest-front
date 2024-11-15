@@ -336,7 +336,6 @@ export default function SignUpForm({
           setPasswordClicked(true);
           setIsPasswordFocused(true); // Password field is focused
         }}
-        //password was accepted as character so this rejected it
         onKeyDown={(e) => {
           if (e.key === " ") {
             e.preventDefault();

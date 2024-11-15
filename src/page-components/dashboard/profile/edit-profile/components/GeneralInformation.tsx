@@ -4,7 +4,7 @@ import FormHeaders from "@/components/common/formfields/FormHeaders";
 import { PhoneField } from "@/components/common/formfields/phone-field";
 import RadioButtonGroups from "@/components/common/formfields/radio-buttons/RadioButtonGroups";
 import StyledInputField from "@/components/common/formfields/StyleFormFields";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, TextField } from "@mui/material";
 import { useFormikContext } from "formik";
 import React from "react";
 import {
@@ -69,10 +69,12 @@ const GeneralInformation = () => {
               <StyledInputField
                 name={each.name}
                 label={each.label}
+                
                 type={each.type}
                 placeholder={each.placeholder}
                 options={each.options}
               />
+              
             </Grid>
           );
         })}
@@ -90,6 +92,7 @@ const GeneralInformation = () => {
             }
             return (
               <Grid item md={6} xs={12} key={each.name}>
+             
                 <StyledInputField
                   name={each.name}
                   label={each.label}

@@ -101,6 +101,7 @@ const ChatBotBody = ({
       {messageLoading && <ChatBotMessage loading message="" own={false} />}
 
       {similarQuestions.length > 0 && !messageLoading && (
+        // !isAnimationPlaying && (
         <ChatBotSuggestionQuestion
           questions={similarQuestions}
           onClick={(question: string) => {

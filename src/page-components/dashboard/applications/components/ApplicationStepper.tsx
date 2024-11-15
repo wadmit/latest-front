@@ -45,6 +45,7 @@ const ApplicationStepper = ({ activeStep }: Props) => {
       display={{ lg: "flex", md: "flex", xs: "none" }}
       sx={{ width: "100%" }}
       mt={2}
+      //Added this to ensure there is no overlap between navbar and application stepper component
       zIndex={0}
     >
       <Stack sx={{ width: "100%" }} spacing={4}>
