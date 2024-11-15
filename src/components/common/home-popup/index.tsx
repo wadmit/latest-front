@@ -63,7 +63,7 @@ const HomePopUp = ({ openChatBox }: Props) => {
 
   return (
     <Dialog
-      open={true}
+      open={showMoreInfo}
       onClose={handleClose}
       sx={{
         "& .MuiPaper-root": {
