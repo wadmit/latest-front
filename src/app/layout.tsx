@@ -7,6 +7,7 @@ import CurrencyProvider from "@/providers/CurrencyProvider";
 import ReduxProvider from "@/providers/ReduxProvider";
 import NextAuthProvider from "@/providers/NextAuthProvider";
 import { generateMetadata } from "@/components/common/head-component/HeadComponent";
+import HomePopUp from "@/components/common/home-popup";
 
 export const metadata: Metadata = generateMetadata({
   title: "WiseAdmit | Apply To Universities Worldwide",
