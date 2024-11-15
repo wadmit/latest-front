@@ -10,6 +10,7 @@ import ChatBotBox from "@/page-components/chatbot";
 import { analytics } from "@/services/analytics.service";
 import { useAppSelector } from "@/global-states/hooks/hooks";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
+import HomePopUp from "../home-popup";
 
 type Props = {};
 
@@ -284,6 +285,10 @@ const CategoryButton = (props: Props) => {
           {showHiddenFields ? <ArrowDown /> : <CategoryIcon />}
         </Stack>
       </Button>
+
+      <HomePopUp 
+      openChatBox={()=>setShowChatBox(true)}
+      />
     </Box>
   );
 };

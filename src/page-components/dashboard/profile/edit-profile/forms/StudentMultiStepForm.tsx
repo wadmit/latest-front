@@ -14,7 +14,7 @@ import {
 import { dashboardTabSetter, submitStudentData } from "@/api/web/user.action";
 import { useMutation } from "@tanstack/react-query";
 import { request } from "@/services/api.service";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, TextField, Typography } from "@mui/material";
 import { Form, Formik } from "formik";
 import { ButtonWrapper } from "@/components/common";
 import { FORM_VALIDATION_STUDENT } from "../utils/yup-validation";
@@ -223,87 +223,90 @@ const StudentMultiStepForm = ({
             />
           </>
         )}
-
+     
         {!submitted && (
           <Formik
             initialValues={{ ...initialValues }}
             validationSchema={FORM_VALIDATION_STUDENT}
             validateOnMount={false}
             validateOnBlur={false}
+
             // validateOnChange={false}
             // enableReinitialize
             onSubmit={() => {}}
           >
             {(formik) => (
-              <Form>
-                <>
-                  <Box display={activeStep === 0 ? "block" : "none"}>
+              <Form>              
+                   <Box display={activeStep === 0 ? "block" : "none"}>
                     {firstPage}
-                  </Box>
-                  <Box display={activeStep === 1 ? "block" : "none"}>
-                    {secondPage}
-                  </Box>
-                  <Box display={activeStep === 2 ? "block" : "none"}>
-                    {thirdPage}
-                  </Box>
-                  <Stack direction="row" columnGap={2.6}>
-                    <Box
-                      maxWidth="12.8125rem"
-                      width="100%"
-                      display={activeStep !== 0 ? "block" : "none"}
-                    >
-                      <ButtonWrapper onClick={handleBack} variant="text">
-                        Previous
-                      </ButtonWrapper>
-                    </Box>
-                    <Box
-                      maxWidth="12.8125rem"
-                      width="100%"
-                      display={activeStep === 0 ? "block" : "none"}
-                    >
-                      <ButtonWrapper
-                        onClick={() => {
-                          handleNext(formik, firstPageFields);
-                        }}
-                        variant="contained"
-                        disabled={isPending}
-                      >
-                        {isPending ? "Loading..." : "Save & Next"}
-                      </ButtonWrapper>
-                    </Box>
-                    <Box
-                      maxWidth="12.8125rem"
-                      width="100%"
-                      display={activeStep === 1 ? "block" : "none"}
-                    >
-                      <ButtonWrapper
-                        onClick={() => {
-                          handleNext(formik, secondPageFields);
-                        }}
-                        variant="contained"
-                        disabled={isPending}
-                      >
-                        {isPending ? "Loading..." : "Save & Next"}
-                      </ButtonWrapper>
-                    </Box>
-                    <Box
-                      maxWidth="12.8125rem"
-                      width="100%"
-                      display={activeStep === 2 ? "block" : "none"}
-                    >
-                      <ButtonWrapper
-                        variant="contained"
-                        onClick={() => {
-                          handleNext(formik, thirdPageFields);
-                        }}
-                        disabled={isPending}
-                      >
-                        {isPending ? "Loading..." : "Submit"}
-                      </ButtonWrapper>
-                    </Box>
-                  </Stack>
-                </>
-              </Form>
+                   </Box>
+                   <Box display={activeStep === 1 ? "block" : "none"}>
+                     {secondPage}
+                   </Box>
+                   <Box display={activeStep === 2 ? "block" : "none"}>
+                     {thirdPage}
+                   </Box>
+                   <Stack direction="row" columnGap={2.6}>
+                     <Box
+                       maxWidth="12.8125rem"
+                       width="100%"
+                       display={activeStep !== 0 ? "block" : "none"}
+                     >
+                       <ButtonWrapper onClick={handleBack} variant="text">
+                         Previous
+                       </ButtonWrapper>
+                     </Box>
+                     <Box
+                       maxWidth="12.8125rem"
+                       width="100%"
+                       display={activeStep === 0 ? "block" : "none"}
+                     >
+                       <ButtonWrapper
+                         onClick={() => {
+                           handleNext(formik, firstPageFields);
+                         }}
+                         variant="contained"
+                         disabled={isPending}
+                       >
+                         {isPending ? "Loading..." : "Save & Next"}
+                       </ButtonWrapper>
+                     </Box>
+                     <Box
+                       maxWidth="12.8125rem"
+                       width="100%"
+                       display={activeStep === 1 ? "block" : "none"}
+                     >
+                       <ButtonWrapper
+                         onClick={() => {
+                           handleNext(formik, secondPageFields);
+                         }}
+                         variant="contained"
+                         disabled={isPending}
+                       >
+                         {isPending ? "Loading..." : "Save & Next"}
+                       </ButtonWrapper>
+                     </Box>
+                     <Box
+                       maxWidth="12.8125rem"
+                       width="100%"
+                       display={activeStep === 2 ? "block" : "none"}
+                     >
+                       <ButtonWrapper
+                         variant="contained"
+                         onClick={() => {
+                           handleNext(formik, thirdPageFields);
+                         }}
+                         disabled={isPending}
+                       >
+                         {isPending ? "Loading..." : "Submit"}
+                       </ButtonWrapper>
+                     </Box>
+                   </Stack>
+                 </Form>
+              
+              // <Form>
+        
+              // </Form>
             )}
           </Formik>
         )}
