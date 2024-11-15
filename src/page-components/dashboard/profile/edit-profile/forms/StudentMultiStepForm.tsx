@@ -236,9 +236,7 @@ const StudentMultiStepForm = ({
             onSubmit={() => {}}
           >
             {(formik) => (
-              <>
-              {firstPage}
-              
+              <Form>              
                    <Box display={activeStep === 0 ? "block" : "none"}>
                     {firstPage}
                    </Box>
@@ -304,7 +302,7 @@ const StudentMultiStepForm = ({
                        </ButtonWrapper>
                      </Box>
                    </Stack>
-                 </>
+                 </Form>
               
               // <Form>
         
