@@ -56,3 +56,10 @@ export interface IWisescoreInitialValues {
   eligibilitySubjects: any;
   preferredCountry: string;
 }
+
+
+export interface IChatbotState {
+  chatbotMessages: {message:string,own:boolean}[];
+  lastMessageId: string | null;
+  hasNext: boolean;
+}

@@ -48,12 +48,13 @@ const HomePopUp = ({ openChatBox }: Props) => {
 
   const handleClose = () => {
     setShowMoreInfo(false);
+    localStorage.setItem("showMoreInfo", "false");
     localStorage.setItem("showChatPopup", "false");
+
   };
 
   const isTab = useMediaQuery("(max-width: 832px) and (min-width: 600px)");
   const isMobile = useMediaQuery("(max-width: 600px) and (min-width: 0px)");
-  console.log(isTab, isMobile);
   return (
     <Dialog
       open={showMoreInfo}
