@@ -111,7 +111,7 @@ const AboutUsHero = () => {
 							lineHeight="23.4px"
 							component="p"
 						>
-							Founded in 2006 by Rupesh Regmi, our journey began with a vision
+							Founded in 2022 by Rupesh Regmi, our journey began with a vision
 							to democratize educational opportunities. Through our innovative
 							WiseScore Technology, we match students with the right
 							universities and scholarships, making higher education dreams a
