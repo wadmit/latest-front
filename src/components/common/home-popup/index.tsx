@@ -1,4 +1,11 @@
-import { Box, Button, Dialog, IconButton, Typography, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Button,
+  Dialog,
+  IconButton,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Close } from "@mui/icons-material";
 import { ButtonWrapper } from "../buttons/ButtonWrapper";
@@ -75,8 +82,12 @@ const HomePopUp = ({ openChatBox }: Props) => {
           width: {
             xs: "100%",
             sm: "550px",
-
             md: "600px",
+          },
+          overflow: "hidden",
+          height: {
+            xs: "480px",
+            md: "623px",
           },
           padding: {
             lg: "24px 24px 0px 36px",
@@ -87,34 +98,39 @@ const HomePopUp = ({ openChatBox }: Props) => {
           borderRadius: "32px",
         }}
       >
-        <Box width={"100%"} display={"flex"} justifyContent={"flex-end"}>
-          <IconButton
-            sx={{
-              backgroundColor: "#D9D9D9",
-              borderRadius: "50%",
-              width: "34px",
-              height: "34px",
-            }}
-            onClick={handleClose}
-          >
-            <CloseIcon />
-          </IconButton>
-        </Box>
+        {/* <Box width={"100%"} display={"flex"} justifyContent={"flex-end"}>
+        
+        </Box> */}
         <Box display={"flex"} flexDirection={"column"}>
-          <Typography
-            fontSize={{
-              xs: "20px",
-              md: "24px",
-              lg: "24px",
-              xl: "24px",
-            }}
-            lineHeight={"28.8px"}
-            fontWeight={700}
-            color={"#201C1A"}
-            fontFamily={"HankenGroteskRegular"}
-          >
-            Got Questions?
-          </Typography>
+          <Box width={"100%"} pt={2} display={"flex"} justifyContent={"space-between"} alignItems={"flex-start"} position={"relative"}>
+            <Typography
+              fontSize={{
+                xs: "20px",
+                md: "24px",
+                lg: "24px",
+                xl: "24px",
+              }}
+              lineHeight={"28.8px"}
+              fontWeight={700}
+              color={"#201C1A"}
+              fontFamily={"HankenGroteskRegular"}
+            >
+              Got Questions?
+            </Typography>
+            <IconButton
+              sx={{
+                top: "-7px",
+                backgroundColor: "#D9D9D9",
+                borderRadius: "50%",
+                width: "34px",
+                height: "34px",
+              }}
+              onClick={handleClose}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Box>
+
           <Typography
             fontFamily={"HankenGroteskRegular"}
             fontSize={{
@@ -138,12 +154,6 @@ const HomePopUp = ({ openChatBox }: Props) => {
               lg: "310px",
               xl: "310px",
             }}
-            //   maxWidth={{
-            //     xs: "239px",
-            //     md: "100%",
-            //     lg: "100%",
-            //     xl: "100%",
-            //   }}
             mt={"8px"}
             fontSize={{
               xs: "14px",
@@ -174,28 +184,59 @@ const HomePopUp = ({ openChatBox }: Props) => {
             Chat now
           </ButtonWrapper>
         </Box>
-
         <Box
+          pt={"38px"}
+          maxWidth={"600px"}
+          maxHeight={"623px"}
+          sx={{ overflow: "hidden" }}
+        >
+          <Image
+            quality={100}
+            style={{
+              zIndex: 1,
+              objectFit: "contain",
+              width: "100%",
+              height: "100%",
+            }}
+            src={`${process.env.NEXT_PUBLIC_IMAGE_DISTRIBUTION_KEY}/utils/chatbot-popup.webp`}
+            alt="home-popup"
+            width="500"
+            // width={isMobile ? 310 : isTab ? 500 : 1000}
+            height={isMobile ? 220 : 600}
+          />
+        </Box>
+
+        {/* <Box
           height={{ lg: "400px", md: "400px", sm: "380px", xs: "220px" }}
           overflow={"hidden"}
           position={"relative"}
         >
-          <Box width={"100%"} display={"flex"} height={"100%"} alignItems={'flex-end'} justifyContent={"center"} position={"absolute"} top={"10px"}>
+          <Box
+            width={"100%"}
+            display={"flex"}
+            height={"100%"}
+            alignItems={"flex-end"}
+            justifyContent={"center"}
+            position={"absolute"}
+            top={"10px"}
+          >
             <Image
               quality={100}
               style={{
                 zIndex: 1,
                 objectFit: "contain",
-                width: isMobile ? "100%":"",
+                width: isMobile ? "100%" : "",
                 // height: isMobile ? "320px":"",
               }}
-              src="/images/popup/chatbot.webp"
+              // src="/images/popup/chatbot.webp"
+              src={`${process.env.NEXT_PUBLIC_IMAGE_DISTRIBUTION_KEY}/utils/chatbot-popup.webp`}
               alt="home-popup"
-              width={isMobile?310:isTab?500:1000}
-              height={isMobile?220:400}
+              width="500"
+              // width={isMobile ? 310 : isTab ? 500 : 1000}
+              height={isMobile ? 220 : 600}
             />
           </Box>
-        </Box>
+        </Box> */}
       </Box>
     </Dialog>
   );

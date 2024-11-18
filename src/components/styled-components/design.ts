@@ -205,6 +205,10 @@ export const StyledNavbar = styled(Box)`
     color: #5b5b5b;
     border-radius: 2px;
   }
+  .active-tab-sch {
+    color: #201c1a;
+    border-radius: 2px;
+  }
   .tab {
     font-style: normal;
     color: #5b5b5b;
@@ -216,5 +220,7 @@ export const StyledNavbar = styled(Box)`
 export const StyledTabs = styled(Tabs)`
   .MuiTabs-indicator {
     border: 0px;
+    background-color: black;
+    border-radius: 10px;
   }
 `;
