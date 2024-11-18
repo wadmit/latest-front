@@ -49,18 +49,18 @@ const CategoryButton = (props: Props) => {
   //   //   // setShowMoreInfo(true);
   //   // }
   // }, []);
-  useEffect(() => {
-    const showMoreInfo = localStorage.getItem("showMoreInfo");
-    const timer = setTimeout(() => {
-      setShowChatBox(true);
-    }, 3000);
-    return () => clearTimeout(timer);
-    // if (showMoreInfo === "false") {
-    //   // setShowMoreInfo(false);
-    // } else {
-    //   // setShowMoreInfo(true);
-    // }
-  }, []);
+  // useEffect(() => {
+  //   const showMoreInfo = localStorage.getItem("showMoreInfo");
+  //   const timer = setTimeout(() => {
+  //     setShowChatBox(true);
+  //   }, 3000);
+  //   return () => clearTimeout(timer);
+  //   // if (showMoreInfo === "false") {
+  //   //   // setShowMoreInfo(false);
+  //   // } else {
+  //   //   // setShowMoreInfo(true);
+  //   // }
+  // }, []);
 
   const hideShowMoreInfo = () => {
     setShowMoreInfo(false);
