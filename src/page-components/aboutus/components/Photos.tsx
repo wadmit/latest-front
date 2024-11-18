@@ -34,12 +34,12 @@ const Photos = () => {
       imgSrc: "/images/about/cui.webp",
       linkedInUrl: "https://www.linkedin.com/company/wise-admit/mycompany/",
     },
-    {
-      name: "Gerald Ochieng Ndede",
-      position: "Country Manager, Kenya",
-      imgSrc: "/images/about/gerald.webp",
-      linkedInUrl: "https://www.linkedin.com/in/gerald-ndede/",
-    },
+    // {
+    //   name: "Gerald Ochieng Ndede",
+    //   position: "Country Manager, Kenya",
+    //   imgSrc: "/images/about/gerald.webp",
+    //   linkedInUrl: "https://www.linkedin.com/in/gerald-ndede/",
+    // },
     {
       name: "Christian Ilunga",
       position: "Country Manager, DR Congo",
@@ -64,12 +64,7 @@ const Photos = () => {
       imgSrc: "/images/about/celina.webp",
       linkedInUrl: "https://www.linkedin.com/in/selina-pk/",
     },
-    {
-      name: "Jeevan Ale Magar",
-      position: "QA Engineer",
-      imgSrc: "/images/about/jeevan.webp",
-      linkedInUrl: "https://www.linkedin.com/in/jeevan-ale-175220221/",
-    },
+
     {
       name: "Sanju Dongol",
       position: "Growth Manager",
@@ -93,6 +88,18 @@ const Photos = () => {
       position: "Graphics Designer",
       imgSrc: "/images/about/ankit.webp",
       linkedInUrl: "https://www.linkedin.com/in/ankit-chitrakar-b6b836259/",
+    },
+    {
+      name: "Shruti Shrestha",
+      position: "Digital Marketing Manager",
+      imgSrc: "/images/about/shruti.webp",
+      linkedInUrl: "https://www.linkedin.com/in/shrutishresthaa",
+    },
+    {
+      name: "Junu Shrestha",
+      position: "Product Designer",
+      imgSrc: "/images/about/junu.webp",
+      linkedInUrl: "https://www.linkedin.com/in/junu-shrestha-909a06224/",
     },
   ];
 
