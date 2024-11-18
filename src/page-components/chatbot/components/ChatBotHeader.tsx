@@ -1,7 +1,18 @@
-import { Avatar, Box, Typography } from "@mui/material";
+import { Expand } from "@mui/icons-material";
+import { Avatar, Box, IconButton, Typography } from "@mui/material";
+import { ExpandIconChat } from "public/svg";
 import React from "react";
 
-const ChatBotHeader = () => {
+type Props = {
+  changeWidth: (width:string) => void;
+};
+const ChatBotHeader = ({changeWidth}:Props) => {
+
+  const [isExpanded, setIsExpanded] = React.useState(false);
+  const handleExpand = () => {
+    setIsExpanded(!isExpanded);
+    changeWidth(!isExpanded ? "660px" : "423px");
+  };
   return (
     <Box
       width={"100%"}
@@ -13,7 +24,7 @@ const ChatBotHeader = () => {
       position={"sticky"}
       top={"0px"}
       borderRadius={"14px 14px 0px 0px"}
-      bgcolor={"rgba(170, 68, 1, 1)"}
+      bgcolor={"#231F20"}
     >
       <Box display={"flex"} alignItems={"center"}>
         <Box gap={"12px"} alignItems={"center"} display={"flex"}>
@@ -50,6 +61,12 @@ const ChatBotHeader = () => {
         </Box>
       </Box>
       <Box
+      display={"flex"}
+      alignContent={"center"}
+      justifyContent={"center"}
+      gap={"8px"}
+      >
+      <Box
         display={"flex"}
         justifyContent={"center"}
         alignItems={"center"}
@@ -73,6 +90,19 @@ const ChatBotHeader = () => {
           Talk to expert
         </Typography>
         <img width={"28px"} height={"28px"} src="/images/home/whatsapp.webp" />
+      </Box>
+      <IconButton
+      sx={{
+        m: "0px",
+        height: "20px",
+    
+        display: { xs: "none", sm: "none",md:"block" },
+      }}
+      onClick={handleExpand}
+      >
+
+       <ExpandIconChat />
+      </IconButton>
       </Box>
     </Box>
   );

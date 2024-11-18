@@ -1,15 +1,25 @@
 import TextToClickableLinks from "@/utils/TextToClickableLinks";
-import { Avatar, Box } from "@mui/material";
+import { Avatar, Box, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import MarkdownPreview from "@uiw/react-markdown-preview";
+import { ButtonWrapper } from "@/components/common";
+import { PhoneField } from "@/components/common/formfields/phone-field";
+import { Form, Formik } from "formik";
+import { GlobalYup } from "@/config/formik";
+import Loader from "@/components/common/circular-loader/Loader";
+import { getSession } from "next-auth/react";
+
 
 type Props = {
   own: boolean;
   message: string;
   loading?: boolean;
-  type?: "initial" | "other";
+  type?: "initial" | "other" | "email";
   onAnimationComplete?: () => void;
   scrollToBottom?: () => void;
+  messageLoading?: boolean;
+  onSubmit?: (value:string) => void;
+  value?: string | null;
 };
 
 const ChatBotMessage = ({
@@ -19,6 +29,9 @@ const ChatBotMessage = ({
   type,
   onAnimationComplete,
   scrollToBottom,
+  messageLoading,
+  value,
+  onSubmit,
 }: Props) => {
   const [messageArray, setMessageArray] = useState<string[]>([]);
   const [index, setIndex] = useState(0);
@@ -64,6 +77,7 @@ const ChatBotMessage = ({
   //   }
   // };
   return (
+    <>
     <Box
       width={"100%"}
       display={"flex"}
@@ -82,7 +96,7 @@ const ChatBotMessage = ({
           src="/images/home/avatar.webp"
         />
       )}
-      <Box
+      {type !== "email"?<Box
         maxWidth={"80%"}
         margin={!loading ? "8px" : "0px"}
         padding={
@@ -93,7 +107,7 @@ const ChatBotMessage = ({
             : "0px"
         }
         borderRadius={own ? "16px 16px 1px 16px" : "16px 16px 16px 1px"}
-        bgcolor={own ? "rgba(170, 68, 1, 1)" : "rgba(242, 242, 242, 1)"}
+        bgcolor={own ? "#3D9CF0" : "rgba(242, 242, 242, 1)"}
       >
         {loading ? (
           <img
@@ -133,8 +147,60 @@ const ChatBotMessage = ({
             </Box>
           </Box>
         )}
+      </Box>: 
+      <Formik
+      initialValues={{
+        phone: value??'',
+      }}
+      onSubmit={(values) => {
+        onSubmit && values.phone && onSubmit(values.phone);
+      }}
+      validationSchema={GlobalYup.object().shape({
+        phone: GlobalYup.string().required("Phone is required").customPhoneSign(),
+      })}>
+      {(formik)=>(
+      
+      <Box
+      borderRadius={"12px 12px 1px 12px"}
+      margin={!loading ? "8px" : "0px"}
+      bgcolor={"#F2F2F2"}
+      padding={"16px 18px 16px 18px"}
+      maxWidth={"80%"}>
+        <Typography
+        mb={"8px"}
+        fontSize={"14px"}
+        fontWeight={400}
+        lineHeight={"18.2px"}
+        color={"#201C1AE5"}
+        >{message}</Typography>
+          <PhoneField 
+          label=""
+          name="phone"
+          formik={formik}
+          />
+          <ButtonWrapper
+          type="submit"
+          onClick={()=>formik.handleSubmit()}
+          sx={{
+            mt:"12px",
+            width:"90px",
+            height:"20px",
+            fontSize:"14px",
+            borderRadius:"8px",
+          }}
+          >
+           {formik.isSubmitting ?"Submitting":"Submit"}
+          </ButtonWrapper>
       </Box>
+      )}
+      </Formik>
+        }
     </Box>
+    {messageLoading && own && 
+      <Box width={"100%"} display={"flex"} alignItems={"center"} justifyContent={"flex-end"}>
+      <Typography alignItems="center" gap="3px" display={"flex"}color={"#201C1A8C"} fontSize={"12px"} fontWeight={400} >Just Now <Box bgcolor="#737376" width={"3px"} height={"3px"} borderRadius={"50%"} /> Not seen yet</Typography>
+      </Box>}
+    </>
   );
 };
 
