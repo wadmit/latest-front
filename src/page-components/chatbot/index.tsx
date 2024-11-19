@@ -147,6 +147,7 @@ const ChatBotBox = ({ onClick,onClose }: Props) => {
         setOpen(false);
         onClick();
       }}
+      
       fullWidth
       sx={{
         display: "flex",
@@ -165,15 +166,27 @@ const ChatBotBox = ({ onClick,onClose }: Props) => {
           sm: "15%",
           xs: "0%"
         },
+        height: {
+          lg: "auto",
+          md: "auto",
+          sm: "auto",
+          xs: "100vh",
+        },
        
         "& .MuiDialog-container": {
-          height: "fit-content",
+          height: {
+            lg: "fit-content",
+            md: "fit-content",
+            sm: "fit-content",
+            xs: "100svh",
+          },
           width: {
             lg: "fit-content",
             md: "fit-content",
             sm: "fit-content",
             xs: "100%",
           },
+          
         },
         "& .MuiDialog-paper": {
           borderRadius: {lg:"20px",md:"20px",sm:"20px",xs:"0px"},
@@ -184,6 +197,12 @@ const ChatBotBox = ({ onClick,onClose }: Props) => {
             sm: "350px",
             xs: "100%",
           },
+          maxHeight:{
+            xs:'none',
+            sm:'auto',
+            md:'auto',
+            lg:'auto'
+          }
         },
       }}
     >
@@ -201,6 +220,9 @@ const ChatBotBox = ({ onClick,onClose }: Props) => {
           sm: "75vh",
           xs: "100vh",
         }}
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
         position={"relative"}
       >
         <Box height={"100%"} width={"100%"} position={"revert"}>
