@@ -57,7 +57,7 @@ const ChatBotInput = ({
           lg: width,
           md: width,
           sm: "350px",
-          xs: "90%",
+          xs: "100vw",
         }}>
         <ChatBotSuggestionQuestion
           questions={similarQuestions}
@@ -77,7 +77,7 @@ const ChatBotInput = ({
         lg: width,
         md: width,
         sm: "350px",
-        xs: "90%",
+        xs: "100%",
       }}
       // sx={{
       //   "@media (min-width:442px) and (max-width: 600px) ": {
