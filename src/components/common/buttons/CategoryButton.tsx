@@ -92,6 +92,9 @@ const CategoryButton = (props: Props) => {
     >
       {showChatBox && (
         <ChatBotBox
+          onClose={() => {setShowChatBox(false)
+            setShowHiddenFields(false);
+          }}
           onClick={() => {
             analytics.websiteButtonInteractions({
               location: {
