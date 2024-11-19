@@ -6,8 +6,9 @@ import React from "react";
 
 type Props = {
   changeWidth: (width:string) => void;
+  onClose: () => void;
 };
-const ChatBotHeader = ({changeWidth}:Props) => {
+const ChatBotHeader = ({changeWidth,onClose}:Props) => {
 
   const [isExpanded, setIsExpanded] = React.useState(false);
   const handleExpand = () => {
@@ -115,11 +116,12 @@ const ChatBotHeader = ({changeWidth}:Props) => {
        <ExpandIconChat />
       </IconButton>
       <IconButton
+      onClick={onClose}
       sx={{
         m: "0px",
         height: "20px",
     
-        display: { xs: "block", sm: "none",md:"none" },
+        display: { xs: "block", sm: "none",md:"none",lg:"none" },
       }}
       >
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

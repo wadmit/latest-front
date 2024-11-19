@@ -11,9 +11,10 @@ import { useAppDispatch, useAppSelector } from "@/global-states/hooks/hooks";
 import { setChatbotMessages, setChatbotSingleMessage } from "@/global-states/reducers/chatbotReducers";
 type Props = {
   onClick: () => void;
+  onClose: () => void;
 };
 
-const ChatBotBox = ({ onClick }: Props) => {
+const ChatBotBox = ({ onClick,onClose }: Props) => {
 
   const [open, setOpen] = useState(true);
   const [initialQuestions, setInitialQuestions] = useState([]);
@@ -204,6 +205,7 @@ const ChatBotBox = ({ onClick }: Props) => {
       >
         <Box height={"100%"} width={"100%"} position={"revert"}>
           <ChatBotHeader
+            onClose={onClose}
             changeWidth={(width: string) => setWidth(width)}
           />
           <ChatBotBody
