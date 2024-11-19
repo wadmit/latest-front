@@ -26,15 +26,20 @@ const ChatBotInput = ({
 }: Props) => {
   const [message, setMessage] = useState("");
   return (
-    <Box>
+    <Box
+   
+    >
         {similarQuestions.length > 0 && !messageLoading && (
         // !isAnimationPlaying && (
         <Box
+        height={"65px"}
         sx={{
           overflowY: "auto",
           "&::-webkit-scrollbar": {
             width: "1px",
-            height: "2px",
+            height: "6px",
+            display: "none",
+            mt: "10px",
           },
           "&::-webkit-scrollbar-thumb": {
             backgroundColor: "#A6A4A3",
@@ -43,8 +48,7 @@ const ChatBotInput = ({
 
           "&:hover": {
             "&::-webkit-scrollbar":{
-              width: "4px",
-              height: "8px",
+              display: "block",
             }
           }
          
