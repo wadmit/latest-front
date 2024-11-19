@@ -71,7 +71,7 @@ export const Card = styled(Stack)(({ theme }) => ({
 
 
 //data
-export const eventDetails = [
+export const eventDetails: {location: string, date: string}[] = [
   // {
   //     location: "Kenya",
   //     date: "August 17-22"
