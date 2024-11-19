@@ -72,16 +72,16 @@ export const Card = styled(Stack)(({ theme }) => ({
 
 //data
 export const eventDetails = [
-  {
-      location: "Kenya",
-      date: "August 17-22"
-  },
-  {
-      location: "DR Congo",
-      date: "August 22-23"
-  },
-  {
-      location: "Morocco",
-      date: "August 23-26"
-  }
+  // {
+  //     location: "Kenya",
+  //     date: "August 17-22"
+  // },
+  // {
+  //     location: "DR Congo",
+  //     date: "August 22-23"
+  // },
+  // {
+  //     location: "Morocco",
+  //     date: "August 23-26"
+  // }
 ]
