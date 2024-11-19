@@ -82,7 +82,12 @@ const CategoryButton = (props: Props) => {
         position: "fixed",
         right: { lg: "25px", md: "-12px", sm: "-13px", xs: "-18px" },
         bottom: "5%",
-        zIndex: 9999999,
+        zIndex: {
+          lg: 99999,
+          md: 99999,
+          sm: 99999,
+          xs: 9999,
+        },
       }}
     >
       {showChatBox && (

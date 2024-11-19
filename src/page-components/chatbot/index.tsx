@@ -158,10 +158,13 @@ const ChatBotBox = ({ onClick }: Props) => {
           sm: "30px",
           xs: "0px",
         },
-        bottom: "15%",
-        "@media (max-height: 800px)": {
-          bottom: "17%",
+        bottom: {
+          lg: "15%",
+          md: "15%",
+          sm: "15%",
+          xs: "0%"
         },
+       
         "& .MuiDialog-container": {
           height: "fit-content",
           width: {
@@ -172,13 +175,13 @@ const ChatBotBox = ({ onClick }: Props) => {
           },
         },
         "& .MuiDialog-paper": {
-          borderRadius: "20px",
+          borderRadius: {lg:"20px",md:"20px",sm:"20px",xs:"0px"},
           margin: 0,
           width: {
             lg:width,
             md:width,
             sm: "350px",
-            xs: "90%",
+            xs: "100%",
           },
         },
       }}
@@ -186,8 +189,17 @@ const ChatBotBox = ({ onClick }: Props) => {
       <Box
         borderRadius={"20px"}
         width={"100%"}
-        maxHeight={"643px"}
-        height={"75vh"}
+        maxHeight={{lg:"643px"
+        ,md:"643px",
+        sm:"643px",
+        xs:"100%"
+        }}
+        height={{
+          lg: "75vh",
+          md: "75vh",
+          sm: "75vh",
+          xs: "100vh",
+        }}
         position={"relative"}
       >
         <Box height={"100%"} width={"100%"} position={"revert"}>

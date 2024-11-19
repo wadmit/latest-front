@@ -100,10 +100,18 @@ const ChatBotBody = ({
   return (
     <Box
       ref={messageBoxRef}
-      padding={"14px 20px"}
+      padding={{lg:"14px 20px",
+        md:"14px 20px",
+        sm:"14px 20px",
+        xs:"14px 10px"
+        }}
       sx={{
         scrollBehavior: "smooth",
-        height: `calc(100% - ${similarQuestions.length > 0 ? "150px" : "100px"})`,
+        height:{lg:`calc(100% - ${similarQuestions.length > 0 ? "150px" : "100px"})`,
+        md:`calc(100% - ${similarQuestions.length > 0 ? "150px" : "100px"})`,
+        sm:`calc(100% - ${similarQuestions.length > 0 ? "150px" : "100px"})`,
+        xs:`calc(100% - ${similarQuestions.length > 0 ? "200px" : "140px"})`
+        },
         overflowY: "auto",
         position: "relative",
       }}

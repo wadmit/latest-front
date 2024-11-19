@@ -1,3 +1,4 @@
+import { CloseIcon } from "@/components/common";
 import { Expand } from "@mui/icons-material";
 import { Avatar, Box, IconButton, Typography } from "@mui/material";
 import { ExpandIconChat } from "public/svg";
@@ -18,12 +19,22 @@ const ChatBotHeader = ({changeWidth}:Props) => {
       width={"100%"}
       height={"64px"}
       display={"flex"}
-      padding={"14px 20px"}
+      padding={{lg:"14px 20px",
+
+      md:"14px 20px",
+      sm:"14px 20px",
+      xs:"14px 10px"
+      }}
       justifyContent={"space-between"}
       alignItems={"center"}
       position={"sticky"}
       top={"0px"}
-      borderRadius={"14px 14px 0px 0px"}
+      borderRadius={{
+        lg: "14px 14px 0px 0px",
+        md: "14px 14px 0px 0px",
+        sm: "14px 14px 0px 0px",
+        xs: "0px 0px 0px 0px",
+      }}
       bgcolor={"#231F20"}
     >
       <Box display={"flex"} alignItems={"center"}>
@@ -102,6 +113,20 @@ const ChatBotHeader = ({changeWidth}:Props) => {
       >
 
        <ExpandIconChat />
+      </IconButton>
+      <IconButton
+      sx={{
+        m: "0px",
+        height: "20px",
+    
+        display: { xs: "block", sm: "none",md:"none" },
+      }}
+      >
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 5L5 15" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5 5L15 15" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
       </IconButton>
       </Box>
     </Box>
