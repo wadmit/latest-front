@@ -65,6 +65,7 @@ const CategoryButton = (props: Props) => {
   const hideShowMoreInfo = () => {
     setShowMoreInfo(false);
     localStorage.setItem("showMoreInfo", "false");
+    localStorage.setItem("showChatPopup", "false");
   };
 
   const reset = () => {
