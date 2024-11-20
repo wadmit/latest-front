@@ -57,16 +57,18 @@ export default async function Page({
     slug: string;
   };
 }) {
-  const scholarshipData: any = await getSingleScholarship(params.slug);
+  notFound()
+  // const scholarshipData: any = await getSingleScholarship(params.slug);
 
-  if (!scholarshipData) {
-    notFound();
-  }
+  // if (!scholarshipData) {
+  //   notFound();
+  // }
 
   return (
-    <SingleScholarshipHome
-      scholarship={scholarshipData?.scholarship}
-      popularScholarships={scholarshipData?.popularScholarships}
-    />
+    <></>
+    // <SingleScholarshipHome
+    //   scholarship={scholarshipData?.scholarship}
+    //   popularScholarships={scholarshipData?.popularScholarships}
+    // />
   );
 }
