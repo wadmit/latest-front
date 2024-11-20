@@ -145,7 +145,7 @@ table {
 
 .phone-input {
   width: 100% !important;
-  height: 3rem !important;
+  height: 3rem;
   /*Initially */
   /* border-radius: 0.1875rem !important; */
   /*Remove this if you want to remove borderRadius */
