@@ -79,12 +79,12 @@ export const navbarLinks: INavbarMenu[] = [
         desc: "What's new",
         icon: <NewsIcon />,
       },
-      {
-        name: "Scholarships",
-        link: "/scholarships",
-        desc: "Check scholarships",
-        icon: <ScholarshipIcon />,
-      },
+      // {
+      //   name: "Scholarships",
+      //   link: "/scholarships",
+      //   desc: "Check scholarships",
+      //   icon: <ScholarshipIcon />,
+      // },
     ],
   },
 ];
