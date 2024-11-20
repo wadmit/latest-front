@@ -1,5 +1,5 @@
 import TextToClickableLinks from "@/utils/TextToClickableLinks";
-import { Avatar, Box, TextField, Typography } from "@mui/material";
+import { Avatar, Box, FormHelperText, Stack, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import { ButtonWrapper } from "@/components/common";
@@ -8,6 +8,7 @@ import { Form, Formik } from "formik";
 import { GlobalYup } from "@/config/formik";
 import Loader from "@/components/common/circular-loader/Loader";
 import { getSession } from "next-auth/react";
+import PhoneInput from "react-phone-input-2";
 
 
 type Props = {
@@ -173,11 +174,48 @@ const ChatBotMessage = ({
         lineHeight={"18.2px"}
         color={"#201C1AE5"}
         >{message}</Typography>
-          <PhoneField 
-          label=""
-          name="phone"
-          formik={formik}
-          />
+        <Stack direction="column" mt={"12px"} spacing={1} flex={1} width="100%">
+		
+			<PhoneInput
+				copyNumbersOnly={false}
+				value={formik.values["phone"]}
+				onChange={(newPhone, code) => {
+					formik.setFieldValue("phone", "+".concat(newPhone));
+				}}
+				enableSearch
+				prefix="+"
+				disableSearchIcon
+				inputProps={{
+					name: "phone",
+					id: "phone",
+					required: false,
+					autoFocus: false,
+					// InputLabelProps: {
+					//   shrink: false,
+					// },
+				}}
+				inputStyle={{
+          height:"30px !important",
+					borderColor:
+						formik.touched['phone'] && Boolean(formik.errors['phone'])
+							? "red"
+							: "#C4C9D1",
+				}}
+				containerClass="phone-input-container"
+				// containerStyle={{
+				//   marginTop: "-0.03px"
+				// }}
+				specialLabel=""
+				searchClass="phone-search"
+				inputClass={"phone-input"}
+				dropdownClass="phone-dropdown"
+			/>
+			<FormHelperText
+				error={formik.touched["phone"] && Boolean(formik.errors["phone"])}
+			>
+				{formik.touched["phone"] && formik.errors["phone"]}
+			</FormHelperText>
+		</Stack>
           <ButtonWrapper
           type="submit"
           onClick={()=>formik.handleSubmit()}
