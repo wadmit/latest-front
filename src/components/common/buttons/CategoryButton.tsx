@@ -1,12 +1,12 @@
 "use client";
-import { Box, Button, Stack, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { CustomTooltip, CustomTypography } from "./styled-components";
-import { ArrowDown, CategoryIcon, MessageIcon, SmileIcon } from "public/svg";
+import ChatBotBox from "@/page-components/chatbot";
 import FeedbackForm from "@/page-components/feedback";
 import ThankYouFeedback from "@/page-components/feedback/components/ThankYouFeedback";
-import ChatBotBox from "@/page-components/chatbot";
+import { Box, Button, Stack, Typography } from "@mui/material";
+import { motion } from "framer-motion";
+import { ArrowDown, CategoryIcon, MessageIcon, SmileIcon } from "public/svg";
+import { useEffect, useState } from "react";
+import { CustomTooltip, CustomTypography } from "./styled-components";
 import { analytics } from "@/services/analytics.service";
 import { useAppSelector } from "@/global-states/hooks/hooks";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
@@ -49,18 +49,23 @@ const CategoryButton = (props: Props) => {
   //   //   // setShowMoreInfo(true);
   //   // }
   // }, []);
-  useEffect(() => {
-    const showMoreInfo = localStorage.getItem("showMoreInfo");
-    if (showMoreInfo === "false") {
-      setShowMoreInfo(false);
-    } else {
-      setShowMoreInfo(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const showMoreInfo = localStorage.getItem("showMoreInfo");
+  //   const timer = setTimeout(() => {
+  //     setShowChatBox(true);
+  //   }, 3000);
+  //   return () => clearTimeout(timer);
+  //   // if (showMoreInfo === "false") {
+  //   //   // setShowMoreInfo(false);
+  //   // } else {
+  //   //   // setShowMoreInfo(true);
+  //   // }
+  // }, []);
 
   const hideShowMoreInfo = () => {
     setShowMoreInfo(false);
     localStorage.setItem("showMoreInfo", "false");
+    localStorage.setItem("showChatPopup", "false");
   };
 
   const reset = () => {
@@ -78,11 +83,19 @@ const CategoryButton = (props: Props) => {
         position: "fixed",
         right: { lg: "25px", md: "-12px", sm: "-13px", xs: "-18px" },
         bottom: "5%",
-        zIndex: 9999999,
+        zIndex: {
+          lg: 99999,
+          md: 99999,
+          sm: 99999,
+          xs: 9999,
+        },
       }}
     >
       {showChatBox && (
         <ChatBotBox
+          onClose={() => {setShowChatBox(false)
+            setShowHiddenFields(false);
+          }}
           onClick={() => {
             analytics.websiteButtonInteractions({
               location: {
@@ -197,7 +210,7 @@ const CategoryButton = (props: Props) => {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  boxShadow: "0px 0px 8px 0px rgba(0, 0, 0, 0.3)",
+                  boxShadow: "s0px 0px 8px 0px rgba(0, 0, 0, 0.3)",
                 }}
               >
                 {/* <NewWhatsApp /> */}

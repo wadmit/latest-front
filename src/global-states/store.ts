@@ -13,6 +13,7 @@ import wiseScoreReducer from "@/global-states/reducers/wisescore";
 import universityCountryListReducer from "@/global-states/reducers/universityCountryReducer";
 import socketSlice from "@/global-states/reducers/socketReducer";
 import { thunk } from "redux-thunk";
+import chatbotReducer from "./reducers/chatbotReducers";
 
 export const socket = new CustomSocket();
 // export const middlewares = [socketMiddleware(socket), thunk];
@@ -33,6 +34,7 @@ export const makeStore = () => {
       wisescore: wiseScoreReducer,
       universityList: universityCountryListReducer,
       socket: socketSlice,
+      chatbot: chatbotReducer
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({

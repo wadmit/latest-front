@@ -7,24 +7,39 @@ import {
   ChatBotInput,
 } from "@/page-components/chatbot/components";
 import axios from "axios";
-
+import { useAppDispatch, useAppSelector } from "@/global-states/hooks/hooks";
+import { setChatbotMessages, setChatbotSingleMessage } from "@/global-states/reducers/chatbotReducers";
 type Props = {
   onClick: () => void;
+  onClose: () => void;
 };
 
-const ChatBotBox = ({ onClick }: Props) => {
+const ChatBotBox = ({ onClick,onClose }: Props) => {
+
   const [open, setOpen] = useState(true);
   const [initialQuestions, setInitialQuestions] = useState([]);
-  const [message, setMessage] = useState<{ message: string; own: boolean }[]>(
-    []
-  );
+  const {chatbotMessages,hasNext,lastMessageId} = useAppSelector(state=>state.chatbot)
+  const [userMessageBeforeEmail, setUserMessageBeforeEmail] = useState<{
+    userInput: string;
+    response: string;
+  }[]>([]);
+   // ask user to input email if no conversation id saved on local storage and message.own is greater then 2 
+  const [conversationId,setConversationId] = useState(localStorage.getItem("conversationId"));
+  const [toShowEmailInput, setToShowEmailInput] = useState(false);
+
+  useEffect(()=>{
+    if(!conversationId && chatbotMessages.length > 2){
+      setToShowEmailInput(true);
+    }
+  },[chatbotMessages])
+   
   const [similarQuestions, setSimilarQuestions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [messageLoading, setMessageLoading] = useState(false);
   const [isAnimationPlaying, setIsAnimationPlaying] = useState(false);
-
+  const dispatch = useAppDispatch() 
   const setInitialMessage = (messageInit: string) => {
-    setMessage((prev) => [...prev, { message: messageInit, own: true }]);
+    dispatch(setChatbotSingleMessage({ message: messageInit, own: true }));
     getChatResponse(messageInit);
   };
 
@@ -32,13 +47,29 @@ const ChatBotBox = ({ onClick }: Props) => {
     setSimilarQuestions([]);
   };
 
-  const getInitialQuestions = async () => {
+
+  const getPreviousConversation = async () => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_CHAT_URL}/chatbot/initial_questions`
+        `${process.env.NEXT_PUBLIC_CHAT_URL}/chatbot/conversation/${conversationId}` + ((lastMessageId && hasNext) ? `?lastMessageId=${lastMessageId}` : "")
       );
-      setInitialQuestions(response.data.initial_questions);
+      if(response.data?.data?.messages){
+        const messages = response.data?.data?.messages as {userInput:string,response:string}[];
+        // now push each userinput with {own:true} and response with {own:false}
+        const messagesToSet:{message:string,own:boolean}[] = [];
+        messages.forEach((message)=>{
+          messagesToSet.unshift({message:message.response,own:false});
+          messagesToSet.unshift({message:message.userInput,own:true});
+        })
+        dispatch(setChatbotMessages({
+          chatbotMessages:messagesToSet,
+          lastMessageId:response.data?.data?.lastMessageId,
+          hasNext:response.data?.data?.hasNext
+        }))
+
+      }
+      // setInitialQuestions(response.data.initial_questions);
     } catch (e) {
       console.error(e);
     } finally {
@@ -46,23 +77,47 @@ const ChatBotBox = ({ onClick }: Props) => {
     }
   };
 
+  const createConversation = async (phone:string) => {
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_CHAT_URL}/chatbot/create-conversation`,
+        {
+          phone:phone ,
+          messages: userMessageBeforeEmail,
+        }
+
+      );
+      setConversationId(response.data?.data?.id);
+      setToShowEmailInput(false);
+      localStorage.setItem("conversationId", response?.data?.data?.id);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   const getChatResponse = async (messageInit: string) => {
     setMessageLoading(true);
     setIsAnimationPlaying(true);
+    const conversationId = localStorage.getItem("conversationId");
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_CHAT_URL}/chatbot/chat`,
         {
           message: messageInit,
+          conversationId: conversationId
         }
       );
-      setMessage((prev) => [
-        ...prev,
+      dispatch(setChatbotSingleMessage(
         {
           message: response.data.response,
           own: false,
         },
-      ]);
+      ));
+      if (!conversationId) {
+        setUserMessageBeforeEmail((prev)=>{
+          return [...prev,{userInput:messageInit,response:response.data.response}]
+        });
+      }
       setSimilarQuestions(response.data.similar_questions ?? []);
     } catch (e) {
       console.error(e);
@@ -76,8 +131,13 @@ const ChatBotBox = ({ onClick }: Props) => {
   };
 
   useEffect(() => {
-    getInitialQuestions();
+    if(conversationId && chatbotMessages.length === 0){
+    getPreviousConversation();
+    }
   }, []);
+  
+  const [width, setWidth] = useState("423px");
+
 
   return (
     <Dialog
@@ -91,7 +151,7 @@ const ChatBotBox = ({ onClick }: Props) => {
       sx={{
         display: "flex",
         alignItems: "flex-end",
-        zIndex: 999999,
+        zIndex: 9999,
         left: "unset",
         right: {
           lg: "60px",
@@ -99,9 +159,17 @@ const ChatBotBox = ({ onClick }: Props) => {
           sm: "30px",
           xs: "0px",
         },
-        bottom: "15%",
-        "@media (max-height: 800px)": {
-          bottom: "17%",
+        bottom: {
+          lg: "15%",
+          md: "15%",
+          sm: "15%",
+          xs: "0%"
+        },
+        height:{
+          lg:"auto",
+          md:"auto",
+          sm:"auto",
+          xs:"100%",
         },
         "& .MuiDialog-container": {
           height: "fit-content",
@@ -113,13 +181,13 @@ const ChatBotBox = ({ onClick }: Props) => {
           },
         },
         "& .MuiDialog-paper": {
-          borderRadius: "20px",
+          borderRadius: {lg:"20px",md:"20px",sm:"20px",xs:"0px"},
           margin: 0,
           width: {
-            lg: "700px",
-            md: "550px",
+            lg:width,
+            md:width,
             sm: "350px",
-            xs: "90%",
+            xs: "100%",
           },
         },
       }}
@@ -127,14 +195,26 @@ const ChatBotBox = ({ onClick }: Props) => {
       <Box
         borderRadius={"20px"}
         width={"100%"}
-        maxHeight={"643px"}
-        height={"75vh"}
+        maxHeight={{lg:"643px"
+        ,md:"643px",
+        sm:"643px",
+        xs:"100%"
+        }}
+        height={{
+          lg: "75vh",
+          md: "75vh",
+          sm: "75vh",
+          xs: "100svh",
+        }}
         position={"relative"}
       >
         <Box height={"100%"} width={"100%"} position={"revert"}>
-          <ChatBotHeader />
+          <ChatBotHeader
+            onClose={onClose}
+            changeWidth={(width: string) => setWidth(width)}
+          />
           <ChatBotBody
-            message={message}
+            message={chatbotMessages}
             isLoading={isLoading}
             similarQuestions={similarQuestions}
             messageLoading={messageLoading}
@@ -142,16 +222,24 @@ const ChatBotBox = ({ onClick }: Props) => {
             setInitialMessage={setInitialMessage}
             resetSimilarQuestions={resetSimilarQuestions}
             isAnimationPlaying={isAnimationPlaying}
+            loadMore={getPreviousConversation}
             onAnimationComplete={handleAnimationComplete}
+            showMessageEmailInput={toShowEmailInput}
+            createConversation={(phone:string)=>createConversation(phone)}
           />
           <ChatBotInput
             onSubmit={(message: string) => {
-              setMessage((prev) => [...prev, { message: message, own: true }]);
+              dispatch(setChatbotSingleMessage({ message: message, own: true }));
               getChatResponse(message);
             }}
+            width={width}
+            similarQuestions={similarQuestions}
+            messageLoading={messageLoading}
+            setInitialMessage={setInitialMessage}
+
             resetSimilarQuestions={resetSimilarQuestions}
             // isDisabled={isAnimationPlaying}
-            isDisabled={messageLoading}
+            isDisabled={messageLoading || toShowEmailInput}
           />
         </Box>
       </Box>

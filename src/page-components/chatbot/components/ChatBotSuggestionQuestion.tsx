@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography, Tooltip } from "@mui/material";
 import React from "react";
 
 type Props = {
@@ -8,32 +8,48 @@ type Props = {
 
 const ChatBotSuggestionQuestion = ({ questions, onClick }: Props) => {
   return (
-    <Box display={"flex"} flexWrap={"wrap"} gap="12px" mt={"24px"}>
+    <Box display="flex" gap="12px" mt="24px" mb="4px"
+    sx={{
+      // firstchld padding 20xp
+      "& > div:first-child": {
+        marginLeft: "20px",
+      },
+    }}
+    >
       {questions.map((question: string, index: number) => (
-        <Box
-          key={index}
-          onClick={() => onClick(question)}
-          sx={{
-            cursor: "pointer",
-          }}
-          padding={"10px 14px"}
-          width={"fit-content"}
-          borderRadius={"80px"}
-          border={"1px solid rgba(32, 28, 26, 0.4)"}
-        >
+     
           <Box
-            fontSize={"12px"}
-            fontWeight={400}
-            lineHeight={"12px"}
+            onClick={() => onClick(question)}
             sx={{
-              "&::first-letter": {
-                textTransform: "capitalize",
+              cursor: "pointer",
+              "&:hover": {
+                backgroundColor: "#054196",
+                color: "white",
               },
             }}
+            padding="10px 12px"
+            minWidth="fit-content"
+            height="32px"
+            display="flex"
+            alignItems="center"
+            overflow="hidden"
+            borderRadius="8px"
+            position={"relative"}
+            border="1px solid rgba(32, 28, 26, 0.4)"
           >
-            {question}
+            <Typography
+              fontSize="14px"
+              fontWeight={400}
+              lineHeight="12px"
+              sx={{
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {question}
+            </Typography>
           </Box>
-        </Box>
       ))}
     </Box>
   );

@@ -6,7 +6,6 @@ const useCostConverterMain = () => {
   const currency = useAppSelector((state) => state.currency.currency);
   const to = useAppSelector((state) => state.currency.to);
 
-
   const getConvertedCost = useCallback(
     (value: number, base_currency: string) => {
       let formattedValue = "";
@@ -14,6 +13,7 @@ const useCostConverterMain = () => {
       let currentAmount = 0;
       if (currency && to) {
         const conversionRate = currency[base_currency ?? "usd"][to];
+        console.log("caeca", conversionRate, base_currency, to);
         currentAmount = value * conversionRate;
         formattedValue = currentAmount?.toLocaleString("en-US", {
           style: "currency",

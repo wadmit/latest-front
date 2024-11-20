@@ -2,28 +2,82 @@
 import { Box, IconButton } from "@mui/material";
 import React, { useState } from "react";
 import { ArrowRight, ArrowRightEnable } from "@/page-components/chatbot/svg";
+import ChatBotSuggestionQuestion from "./ChatBotSuggestionQuestion";
 
 type Props = {
   onSubmit: (message: string) => void;
   resetSimilarQuestions: () => void;
   isDisabled?: boolean;
+  messageLoading?: boolean;
+  setInitialMessage: (message: string) => void;
+  similarQuestions: string[];
+  width?: string;
 };
 
 const ChatBotInput = ({
   onSubmit,
   resetSimilarQuestions,
   isDisabled,
+  similarQuestions,
+  messageLoading,
+  setInitialMessage,
+  width,
+
 }: Props) => {
   const [message, setMessage] = useState("");
   return (
     <Box
+   
+    >
+        {similarQuestions.length > 0 && !messageLoading && (
+        // !isAnimationPlaying && (
+        <Box
+        height={"65px"}
+        sx={{
+          overflowY: "auto",
+          "&::-webkit-scrollbar": {
+            width: "1px",
+            height: "6px",
+            display: "none",
+            mt: "10px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: "#A6A4A3",
+            borderRadius: "8px",
+          },
+
+          "&:hover": {
+            "&::-webkit-scrollbar":{
+              display: "block",
+            }
+          }
+         
+        }}
+        width={{
+          lg: width,
+          md: width,
+          sm: "350px",
+          xs: "100vw",
+        }}>
+        <ChatBotSuggestionQuestion
+          questions={similarQuestions}
+          onClick={(question: string) => {
+            if(!isDisabled){
+            resetSimilarQuestions();
+            setInitialMessage(question);
+            }
+          }}
+        />
+        </Box>
+      )}
+    <Box
       // position={""}
       borderTop={"1px solid #e7e7e7"}
       width={{
-        lg: "700px",
-        md: "550px",
+        lg: width,
+        md: width,
         sm: "350px",
-        xs: "90%",
+        xs: "100%",
       }}
       // sx={{
       //   "@media (min-width:442px) and (max-width: 600px) ": {
@@ -37,7 +91,9 @@ const ChatBotInput = ({
       position={"fixed"}
       padding={"20px"}
       display={"flex"}
+     
     >
+    
       <form
         style={{
           display: "flex",
@@ -81,6 +137,7 @@ const ChatBotInput = ({
           {isDisabled ? <ArrowRight /> : <ArrowRightEnable />}
         </IconButton>
       </form>
+    </Box>
     </Box>
   );
 };

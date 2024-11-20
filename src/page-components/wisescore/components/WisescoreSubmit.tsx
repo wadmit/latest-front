@@ -62,7 +62,7 @@ function WiseScoreSubmit({
   const country = useAppSelector((state) => state.currency.currentCountry);
   const city = useAppSelector((state) => state.currency.city);
   const [consentChecked, setConsentChecked] = useState(false);
-  const [isLoading, setLoading]= useState(false)
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     if (dashboardData)
@@ -130,7 +130,7 @@ function WiseScoreSubmit({
       mutationKey: ["wisescore-submit", wiseScoreFormData],
       mutationFn: (data) => submitWiseScore(data),
       onMutate: () => {
-        setLoading(true)
+        setLoading(true);
       },
       onSuccess: (res) => {
         console.log(res)
@@ -151,6 +151,7 @@ function WiseScoreSubmit({
             redirectPath: "",
           });
           localStorage.setItem("leadId", res?.leadId);
+          localStorage.setItem("wisescore", res?.data?.score);
         }
         localStorage.setItem("email", res?.data?.email);
         localStorage.setItem("phone", res?.data?.phone);
@@ -175,8 +176,7 @@ function WiseScoreSubmit({
         } else {
           router.push(endPoint);
         }
-        setLoading(false)
-
+        setLoading(false);
       },
       onError: (err) => {
         console.log(err);
@@ -204,8 +204,7 @@ function WiseScoreSubmit({
           message: err,
         });
         setOpen(true);
-        setLoading(false)
-
+        setLoading(false);
       },
     });
 
@@ -401,7 +400,6 @@ function WiseScoreSubmit({
           >
             But before that we need few more information
             <br /> to send you your WiseScore® on the email.
-          
           </Typography>
 
           <Box
