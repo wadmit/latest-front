@@ -165,7 +165,12 @@ const ChatBotBox = ({ onClick,onClose }: Props) => {
           sm: "15%",
           xs: "0%"
         },
-       
+        height:{
+          lg:"auto",
+          md:"auto",
+          sm:"auto",
+          xs:"100%",
+        },
         "& .MuiDialog-container": {
           height: "fit-content",
           width: {
@@ -199,7 +204,7 @@ const ChatBotBox = ({ onClick,onClose }: Props) => {
           lg: "75vh",
           md: "75vh",
           sm: "75vh",
-          xs: "100vh",
+          xs: "100svh",
         }}
         position={"relative"}
       >
