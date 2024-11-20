@@ -210,7 +210,7 @@ const ChatBotBody = ({
       {messageLoading && <ChatBotMessage loading message="" own={false} />}
        {!messageLoading && showMessageEmailInput && (
           <ChatBotMessage
-            message={"Please enter your phone"}
+            message={"Before we dive in, would you like me to send you updates or quick assistance on WhatsApp? It’s super convenient"}
             own={false}
             type="email"
             value={phone}
