@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { ButtonWrapper, RootContainer } from "@/components/common";
 import Loader from "@/components/common/circular-loader/Loader";
 import { analytics } from "@/services/analytics.service";
@@ -63,11 +63,98 @@ const ProgramHome = ({
     setSortedrograms(programsData);
   }, [programsData]);
 
+  const memoizedHeader = useMemo(
+    () => <ProgramUniversityHeader headerFor="program" />,
+    []
+  );
+
+  const memoizedSortBox = useMemo(
+    () => (
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        width="100%"
+        mt={{ sm: "15px", xs: "20px" }}
+        pl={2}
+      >
+        <Typography
+          color="var(--text-day-placeholder, rgba(32, 28, 26, 0.55))"
+          fontSize="16px"
+          fontStyle="normal"
+          fontFamily="HankenGroteskRegular"
+          lineHeight="160%"
+        >
+          Showing {programsData.length} results
+        </Typography>
+        <Button
+          onClick={handleSort}
+          style={{
+            background: "transparent",
+            borderRadius: "40px",
+            padding: "8px 22px",
+            border: "1px solid var(--Icon-Disable, #A3A3A9)",
+          }}
+        >
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            gap="6px"
+          >
+            <Typography
+              color="var(--text-day-subtitle, rgba(32, 28, 26, 0.95))"
+              fontSize="14px"
+              fontStyle="normal"
+              fontFamily="HankenGroteskSemiBold"
+              lineHeight="120%"
+            >
+              Sort
+            </Typography>
+            <Image
+              height={20}
+              width={20}
+              src="/images/common/sort.webp"
+              alt="sort"
+            />
+          </Box>
+        </Button>
+      </Box>
+    ),
+    [handleSort, programsData.length]
+  );
+
+  const memoizedProgramCards = useMemo(
+    () =>
+      sortedPrograms?.length > 0 ? (
+        sortedPrograms.map((program, index) => (
+          <Grid key={index} item lg={12} md={12} sm={12} xs={12}>
+            <ProgramCard programs={program} />
+          </Grid>
+        ))
+      ) : (
+        <Box mx="auto">
+          <Typography
+            variant="h5"
+            component="h4"
+            mb={3}
+            color="grey.500"
+          >
+            No Programs Found
+          </Typography>
+          <ButtonWrapper onClick={handleResetFilters}>
+            Refresh
+          </ButtonWrapper>
+        </Box>
+      ),
+    [sortedPrograms, handleResetFilters]
+  );
+
   return (
     <Stack bgcolor="#f9f9f9">
       <ProgramContext.Provider value={programs}>
         <RootContainer>
-          <ProgramUniversityHeader headerFor="program" />
+          {memoizedHeader}
 
           <ProgramSearchComponent
             isSearchButtonLoading={isSearchButtonLoading}
@@ -85,78 +172,9 @@ const ProgramHome = ({
               </Stack>
             ) : (
               <Grid item lg={8} md={8} sm={12} xs={12} container spacing={2}>
-                <Box
-                  display="flex"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  width="100%"
-                  mt={{ sm: "15px", xs: "20px" }}
-                  pl={2}
-                >
-                  <Typography
-                    color="var(--text-day-placeholder, rgba(32, 28, 26, 0.55))"
-                    fontSize="16px"
-                    fontStyle="normal"
-                    fontFamily="HankenGroteskRegular"
-                    lineHeight="160%"
-                  >
-                    Showing {programsData.length} results
-                  </Typography>
-                  <Button
-                    onClick={handleSort}
-                    style={{
-                      background: "transparent",
-                      borderRadius: "40px",
-                      padding: "8px 22px",
-                      border: "1px solid var(--Icon-Disable, #A3A3A9)",
-                    }}
-                  >
-                    <Box
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      gap="6px"
-                    >
-                      <Typography
-                        color="var(--text-day-subtitle, rgba(32, 28, 26, 0.95))"
-                        fontSize="14px"
-                        fontStyle="normal"
-                        fontFamily="HankenGroteskSemiBold"
-                        lineHeight="120%"
-                      >
-                        Sort
-                      </Typography>
-                      <Image
-                        height={20}
-                        width={20}
-                        src="/images/common/sort.webp"
-                        alt="sort"
-                      />
-                    </Box>
-                  </Button>
-                </Box>
+                {memoizedSortBox}
 
-                {sortedPrograms?.length > 0 ? (
-                  sortedPrograms?.map((program, index) => (
-                    <Grid key={index} item lg={12} md={12} sm={12} xs={12}>
-                      <ProgramCard programs={program} />
-                    </Grid>
-                  ))
-                ) : (
-                  <Box mx="auto">
-                    <Typography
-                      variant="h5"
-                      component="h4"
-                      mb={3}
-                      color="grey.500"
-                    >
-                      No Programs Found
-                    </Typography>
-                    <ButtonWrapper onClick={handleResetFilters}>
-                      Refresh
-                    </ButtonWrapper>
-                  </Box>
-                )}
+                {memoizedProgramCards}
 
                 {hasNext && (
                   <Box

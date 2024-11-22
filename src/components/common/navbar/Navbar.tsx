@@ -1,7 +1,7 @@
 "use client";
 import { Box, IconButton, Typography, useMediaQuery } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { RootContainer } from "@/components/common";
 import { EAnalyticsEvents, EAnalyticsStatus } from "@/types/mix-panel-analytic";
 import { analytics } from "@/services/analytics.service";
@@ -22,6 +22,10 @@ export function Navbar() {
   const [showDrawer, setShowDrawer] = useState(false);
 
   const currency = useAppSelector((state) => state.currency);
+
+  const closeDrawer = useCallback(() => {
+    setShowDrawer(false);
+  }, []);
 
   return (
     <div
@@ -92,7 +96,7 @@ export function Navbar() {
               >
                 {navbarLinks.map((nav) => (
                   <SubMenuItems
-                    closeDrawer={() => setShowDrawer(false)}
+                    closeDrawer={closeDrawer}
                     nav={nav}
                     key={nav.name}
                   />
@@ -167,7 +171,7 @@ export function Navbar() {
               </ButtonWrapper>
             </Box>
 
-            {/* for mobiel hamburger */}
+            {/* for mobile hamburger */}
             {isMobile && (
               <IconButton
                 id="hamburger"
@@ -188,7 +192,7 @@ export function Navbar() {
       </Box>
 
       <DrawerWrapper
-        onClose={() => setShowDrawer(false)}
+        onClose={closeDrawer}
         open={showDrawer && isMobile}
       >
         <Box display="flex" alignItems="center" justifyContent="space-between">
@@ -209,12 +213,12 @@ export function Navbar() {
                 ""
               );
               router.push("/");
-              setShowDrawer(false);
+              closeDrawer();
             }}
           >
             <WiseAdmitColorFulSvg2 color="white" />
           </IconButton>
-          <IconButton onClick={() => setShowDrawer(false)}>
+          <IconButton onClick={closeDrawer}>
             <CloseIcon />
           </IconButton>
         </Box>
@@ -236,7 +240,7 @@ export function Navbar() {
                 ""
               );
               router.push("/applynow");
-              setShowDrawer(false);
+              closeDrawer();
             }}
             sx={{
               boxShadow: "none",
@@ -288,7 +292,7 @@ export function Navbar() {
                 ""
               );
               router.push("/applynow?signUp=true");
-              setShowDrawer(false);
+              closeDrawer();
             }}
           >
             Signup
@@ -297,7 +301,7 @@ export function Navbar() {
         {/* <Box mt="36px"> */}
         {navbarLinks.map((nav) => (
           <SubMenuItemMobile
-            closeDrawer={() => setShowDrawer(false)}
+            closeDrawer={closeDrawer}
             nav={nav}
             key={nav.name}
           />
