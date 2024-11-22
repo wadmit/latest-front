@@ -30,7 +30,8 @@ type Props = {
   createConversation: (phone: string) => void;
   loadMore: () => void;
   scheduleMeeting: boolean;
-  handleMeetingModel: () => void;
+  handleMeetingModel: (value: boolean) => void;
+  handleScheduleMeetingChat: (value: boolean) => void;
 };
 
 const ChatBotBody = ({
@@ -46,7 +47,8 @@ const ChatBotBody = ({
   showMessageEmailInput,
   loadMore,
   scheduleMeeting,
-  handleMeetingModel
+  handleMeetingModel,
+  handleScheduleMeetingChat
 }: Props) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messageBoxRef = useRef<HTMLDivElement>(null);
@@ -243,9 +245,10 @@ const ChatBotBody = ({
           onSubmit={createConversation}
         />
       )}
-      {!scheduleMeeting && (
+      {scheduleMeeting && (
         <ScheduleMeetText
         handleMeetingModel={handleMeetingModel}
+        handleScheduleMeetingChat={handleScheduleMeetingChat}
         />
       )}
       {/* The div that indicates the end of the messages */}

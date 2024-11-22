@@ -4,8 +4,11 @@ import MarkdownPreview from "@uiw/react-markdown-preview";
 
 const ScheduleMeetText = ({
   handleMeetingModel,
+  handleScheduleMeetingChat
 }: {
-  handleMeetingModel: () => void;
+  handleMeetingModel: (value: boolean) => void;
+  handleScheduleMeetingChat: (value: boolean) => void;
+
 }) => {
   return (
     <Box
@@ -71,7 +74,7 @@ const ScheduleMeetText = ({
                 color: "rgba(255, 255, 255, 0.90)",
               },
             }}
-            onClick={handleMeetingModel}
+            onClick={()=> handleMeetingModel(true)}
           >
             Yes, urgently
           </Button>
@@ -90,7 +93,10 @@ const ScheduleMeetText = ({
                 color: "rgba(255, 255, 255, 0.90)",
               },
             }}
-            onClick={handleMeetingModel}
+            onClick={()=> {
+                handleMeetingModel(false)
+                handleScheduleMeetingChat(false)
+            }}
           >
             Not right now
           </Button>

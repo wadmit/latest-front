@@ -150,21 +150,29 @@ const ChatBotBox = ({ onClick, onClose }: Props) => {
           conversationId: conversationId,
         }
       );
-      dispatch(
-        setChatbotSingleMessage({
-          message: response.data.response,
-          own: false,
-        })
-      );
-      if (!conversationId) {
-        setUserMessageBeforeEmail((prev) => {
-          return [
-            ...prev,
-            { userInput: messageInit, response: response.data.response },
-          ];
-        });
+
+      if(response.data.response){
+        dispatch(
+          setChatbotSingleMessage({
+            message: response.data.response,
+            own: false,
+          })
+        );
+        if (!conversationId) {
+          setUserMessageBeforeEmail((prev) => {
+            return [
+              ...prev,
+              { userInput: messageInit, response: response.data.response },
+            ];
+          });
+        }
+        setSimilarQuestions(response.data.similar_questions ?? []);
       }
-      setSimilarQuestions(response.data.similar_questions ?? []);
+
+      if(response.data.schedule){
+        setScheduleMeeting(response.data.schedule)
+      }
+
     } catch (e) {
       console.error(e);
     } finally {
@@ -184,9 +192,12 @@ const ChatBotBox = ({ onClick, onClose }: Props) => {
 
   const [width, setWidth] = useState(defaultWdith);
 
-  const handleMeetingModel = () => {
-    setMeetingModel((prev) => !prev);
+  const handleMeetingModel = (value: boolean) => {
+    setMeetingModel(value);
   };
+  const handleScheduleMeetingChat= (value: boolean)=>{
+    setScheduleMeeting(value)
+  }
 
   return (
     <Dialog
@@ -275,6 +286,7 @@ const ChatBotBox = ({ onClick, onClose }: Props) => {
           <ChatBotBody
             scheduleMeeting={scheduleMeeting}
             handleMeetingModel={handleMeetingModel}
+            handleScheduleMeetingChat={handleScheduleMeetingChat}
             message={chatbotMessages}
             isLoading={isLoading}
             similarQuestions={similarQuestions}
@@ -296,6 +308,7 @@ const ChatBotBox = ({ onClick, onClose }: Props) => {
               <MeetingSchedule
                 expanded={width > defaultWdith ? true : false}
                 handleMeetingModel={handleMeetingModel}
+                handleScheduleMeetingChat={handleScheduleMeetingChat}
               />
             </Box>
           ) : (

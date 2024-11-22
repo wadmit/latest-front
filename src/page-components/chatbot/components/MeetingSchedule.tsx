@@ -4,10 +4,12 @@ import { MeetingArrorLeft } from "../svg";
 
 const MeetingSchedule = ({
   handleMeetingModel,
+  handleScheduleMeetingChat,
   expanded,
 }: {
-  handleMeetingModel: () => void;
+  handleMeetingModel: (value: boolean) => void;
   expanded: boolean;
+  handleScheduleMeetingChat: (value: boolean)=> void
 }) => {
   // const MeetingSchedule = forwardRef(function MeetingSchedule(props, ref) {
 
@@ -26,7 +28,7 @@ const MeetingSchedule = ({
           flexGrow: 1,
           overflow: "auto",
         }}
-        onClick={handleMeetingModel}
+        onClick={()=> handleMeetingModel(false)}
       ></Box>
       <Box
         sx={{
@@ -49,7 +51,7 @@ const MeetingSchedule = ({
               alignSelf: "flex-start",
               cursor: "pointer",
             }}
-            onClick={handleMeetingModel}
+            onClick={()=> handleMeetingModel(false)}
           >
             <MeetingArrorLeft />
           </Box>
