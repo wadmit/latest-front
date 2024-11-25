@@ -1,15 +1,11 @@
 "use client";
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
 import {
   ChatBotMessage,
   ChatBotSuggestionQuestion,
 } from "@/page-components/chatbot/components";
-import { ArrowDownward } from "@mui/icons-material";
-import { ButtonWrapper } from "@/components/common";
-import Loader from "@/components/common/circular-loader/Loader";
-import { getSession } from "next-auth/react";
 import { useAppSelector } from "@/global-states/hooks/hooks";
 import ScheduleMeetText from "./ScheduleMeetText";
 
@@ -221,7 +217,7 @@ const ChatBotBody = ({
         />
       )}
       {message.length > 0 &&
-        message.map((msg, index) => (
+        message.filter(eachMessage => eachMessage.message).map((msg, index) => (
           <ChatBotMessage
             key={index}
             message={msg.message}

@@ -1,5 +1,4 @@
-import { CloseIcon } from "@/components/common";
-import { Expand } from "@mui/icons-material";
+
 import { Avatar, Box, IconButton, Typography } from "@mui/material";
 import { ExpandIconChat } from "public/svg";
 import React from "react";
@@ -49,7 +48,7 @@ const ChatBotHeader = ({ changeWidth, onClose }: Props) => {
               borderRadius: "50%",
               backgroundColor: "white",
             }}
-            src="/images/home/avatar.webp"
+            src="/images/home/chatbot-avatar.webp"
           />
           <Box display={"flex"} gap={"1px"} flexDirection={"column"}>
             <Typography

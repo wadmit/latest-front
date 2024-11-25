@@ -25,8 +25,8 @@ const ScheduleMeetText = ({
           borderRadius: "50%",
           backgroundColor: "white",
         }}
-        src="/images/home/avatar.webp"
-      />
+        src="/images/home/chatbot-avatar.webp"
+        />
       <Box
         maxWidth={"80%"}
         margin={"8px"}
