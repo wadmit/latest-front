@@ -1,13 +1,20 @@
-import TextToClickableLinks from "@/utils/TextToClickableLinks";
 import { Avatar, Box, TextField, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import { ButtonWrapper } from "@/components/common";
 import { PhoneField } from "@/components/common/formfields/phone-field";
 import { Form, Formik } from "formik";
 import { GlobalYup } from "@/config/formik";
-import Loader from "@/components/common/circular-loader/Loader";
-import { getSession } from "next-auth/react";
+import moment from "moment-timezone";
+
+import {
+  CalanderIcon,
+  ClockIcon,
+  CopyLink,
+  MeetingLink,
+  TimezoneIcon,
+} from "../svg";
+import { TickIcon } from "@/page-components/nuaa/svg";
 
 type Props = {
   own: boolean;
@@ -26,20 +33,10 @@ const ChatBotMessage = ({
   message,
   loading,
   type,
-  onAnimationComplete,
-  scrollToBottom,
   messageLoading,
   value,
   onSubmit,
 }: Props) => {
-  const [messageArray, setMessageArray] = useState<string[]>([]);
-  const [index, setIndex] = useState(0);
-  useEffect(() => {
-    if (message && type !== "other") {
-      setMessageArray(message.split(" "));
-    }
-  }, [message, type]);
-
   return (
     <>
       <Box
@@ -57,7 +54,7 @@ const ChatBotMessage = ({
               borderRadius: "50%",
               backgroundColor: "white",
             }}
-            src="/images/home/avatar.webp"
+            src="/images/home/chatbot-avatar.webp"
           />
         )}
         {type !== "email" ? (
@@ -85,32 +82,144 @@ const ChatBotMessage = ({
                 alt="Loading"
               />
             ) : (
-              <Box display={"flex"}>
-                <Box
-                  sx={{
-                    textOverflow: "clip",
-                    overflowWrap: "break-word",
-                    "&::first-letter": {
-                      textTransform: "capitalize",
-                    },
-                  }}
-                  fontSize={"14px"}
-                  fontFamily={"HankenGroteskRegular"}
-                  color={own ? "#fff" : "rgba(32, 28, 26, 0.9)"}
-                >
-                  {/* {type !== "other" && !own ? messageSliced : message} */}
-                  {/* {renderMessage(message)} */}
-                  <MarkdownPreview
-                    source={message}
-                    style={{
-                      background: "transparent",
-                      color: own ? "#fff" : "rgba(32, 28, 26, 0.9)",
-                      fontSize: "14px",
-                      fontFamily: "HankenGroteskRegular",
+              <>
+                {/* for normal message */}
+                {typeof message === "string" && (
+                  <Box display={"flex"}>
+                    <Box
+                      sx={{
+                        textOverflow: "clip",
+                        overflowWrap: "break-word",
+                        "&::first-letter": {
+                          textTransform: "capitalize",
+                        },
+                      }}
+                      fontSize={"14px"}
+                      fontFamily={"HankenGroteskRegular"}
+                      color={own ? "#fff" : "rgba(32, 28, 26, 0.9)"}
+                    >
+                      <MarkdownPreview
+                        source={message}
+                        style={{
+                          background: "transparent",
+                          color: own ? "#fff" : "rgba(32, 28, 26, 0.9)",
+                          fontSize: "14px",
+                          fontFamily: "HankenGroteskRegular",
+                        }}
+                      />
+                    </Box>
+                  </Box>
+                )}
+
+                {/* for appointment message */}
+                {typeof message !== "string" && (
+                  <Box
+                    sx={{
+                      borderRadius: "10px 10px 10px 1px",
+                      background: " #F2F2F2",
                     }}
-                  />
-                </Box>
-              </Box>
+                  >
+                    <Avatar sx={{ width: "32px", height: "32px" }} />
+                    <Box mt={"8px"}>
+                      <Typography
+                        fontSize={"14px"}
+                        sx={{ color: "rgba(32, 28, 26, 0.90)" }}
+                      >
+                        {(message as any).title}
+                      </Typography>
+                    </Box>
+                    <Box
+                      my={"16px"}
+                      display={"flex"}
+                      flexDirection={"column"}
+                      rowGap="8px"
+                    >
+                      <Box
+                        display={"flex"}
+                        alignItems={"center"}
+                        columnGap={"8px"}
+                      >
+                        <ClockIcon />
+                        <Typography
+                          sx={{
+                            fontSize: "12px",
+                            color: "rgba(127, 124, 123, 0.90)",
+                          }}
+                        >
+                          15min
+                        </Typography>
+                      </Box>
+                      <Box
+                        display={"flex"}
+                        alignItems={"center"}
+                        columnGap={"8px"}
+                      >
+                        <CalanderIcon />
+                        <Typography
+                          sx={{
+                            fontSize: "12px",
+                            color: "rgba(127, 124, 123, 0.90)",
+                          }}
+                        >
+                          {moment((message as any).date)
+                            .utcOffset(0)
+                            .format("MMMM DD, YYYY hh:mm a")}
+                          {/* {(message as any).date} */}
+                        </Typography>
+                      </Box>
+                      <Box
+                        display={"flex"}
+                        alignItems={"center"}
+                        columnGap={"8px"}
+                      >
+                        <TimezoneIcon />
+                        <Typography
+                          sx={{
+                            fontSize: "12px",
+                            color: "rgba(127, 124, 123, 0.90)",
+                          }}
+                        >
+                          {moment.tz.guess()}
+                        </Typography>
+                      </Box>
+                      <Box
+                        display={"flex"}
+                        alignItems={"center"}
+                        columnGap={"8px"}
+                        flexDirection={"row"}
+                      >
+                        <MeetingLink />
+                        <Typography
+                          sx={{
+                            fontSize: "12px",
+                            color: "rgba(127, 124, 123, 0.90)",
+                          }}
+                        >
+                          Google link:{" "}
+                          <a
+                            style={{
+                              color: "#3185FC",
+                            }}
+                            target="_"
+                            href={`${(message as any).meeting_link}`}
+                          >
+                            {(message as any).meeting_link}
+                          </a>
+                        </Typography>
+                        <Box sx={{ cursor: "pointer" }}>
+                          <CopyLink />
+                        </Box>
+                      </Box>
+                    </Box>
+                    <Box display={"flex"} alignItems={"center"} gap="8px">
+                      <Typography sx={{ fontSize: "16px", fontWeight: "bold" }}>
+                        Meeting booked
+                      </Typography>
+                      <TickIcon />
+                    </Box>
+                  </Box>
+                )}
+              </>
             )}
           </Box>
         ) : (

@@ -8,7 +8,7 @@ import {
   styled,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ChatBotBody,
   ChatBotHeader,
@@ -47,6 +47,8 @@ const CustomDrawer = styled(Drawer)({
 
 const defaultWdith = "423px";
 const ChatBotBox = ({ onClick, onClose }: Props) => {
+  const hasFetchedRef = useRef(false);
+
   const [open, setOpen] = useState(true);
   const [meetingModel, setMeetingModel] = useState(false);
   const [scheduleMeeting, setScheduleMeeting] = useState(false);
@@ -73,6 +75,7 @@ const ChatBotBox = ({ onClick, onClose }: Props) => {
     }
   }, [chatbotMessages]);
 
+  const [width, setWidth] = useState(defaultWdith);
   const [similarQuestions, setSimilarQuestions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [messageLoading, setMessageLoading] = useState(false);
@@ -151,7 +154,7 @@ const ChatBotBox = ({ onClick, onClose }: Props) => {
         }
       );
 
-      if(response.data.response){
+      if (response.data.response) {
         dispatch(
           setChatbotSingleMessage({
             message: response.data.response,
@@ -169,10 +172,15 @@ const ChatBotBox = ({ onClick, onClose }: Props) => {
         setSimilarQuestions(response.data.similar_questions ?? []);
       }
 
-      if(response.data.schedule){
-        setScheduleMeeting(response.data.schedule)
-      }
 
+      // data.schedule is True if user wants an appointment
+      if (response.data.schedule) {
+        if (conversationId) {
+          setScheduleMeeting(response.data.schedule);
+        } else {
+          setToShowEmailInput(true);
+        }
+      }
     } catch (e) {
       console.error(e);
     } finally {
@@ -185,19 +193,22 @@ const ChatBotBox = ({ onClick, onClose }: Props) => {
   };
 
   useEffect(() => {
-    if (conversationId && chatbotMessages.length === 0) {
+    if (
+      conversationId &&
+      chatbotMessages.length === 0 &&
+      !hasFetchedRef.current
+    ) {
+      hasFetchedRef.current = true;
       getPreviousConversation();
     }
-  }, []);
-
-  const [width, setWidth] = useState(defaultWdith);
+  }, [conversationId, chatbotMessages]);
 
   const handleMeetingModel = (value: boolean) => {
     setMeetingModel(value);
   };
-  const handleScheduleMeetingChat= (value: boolean)=>{
-    setScheduleMeeting(value)
-  }
+  const handleScheduleMeetingChat = (value: boolean) => {
+    setScheduleMeeting(value);
+  };
 
   return (
     <Dialog
