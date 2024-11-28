@@ -28,7 +28,7 @@ const HomePopUp = ({ openChatBox }: Props) => {
   const isMobile = useMediaQuery("(max-width: 600px) and (min-width: 0px)");
   return (
     <Dialog
-      open={showMoreInfo}
+      open={true}
       onClose={handleClose}
       sx={{
         "& .MuiPaper-root": {
