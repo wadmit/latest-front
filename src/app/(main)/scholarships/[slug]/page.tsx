@@ -21,35 +21,6 @@ export async function generateStaticParams() {
 
 export const revalidate = 86400; // 24 hours
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: {
-//     slug: string;
-//   };
-// }): Promise<Metadata> {
-//   const scholarshipData = await getSingleScholarship(params.slug);
-
-//   if (!scholarshipData?.data) {
-//     return {
-//       title: "WiseAdmit scholarship",
-//       description: "WiseAdmit scholarship section",
-//     };
-//   }
-
-//   const { name, slug } = scholarshipData.data;
-//   const endPoint = `scholarships/${params.slug}`;
-//   const url = `${applicationConfig.frontendUrlConfig}/${endPoint}`;
-//   const pageImage =
-//     `${process.env.NEXT_PUBLIC_IMAGE_DISTRIBUTION_KEY}/${scholarshipData.data.scholarship.scholarshipCoverImage}` ||
-//     `${process.env.NEXT_PUBLIC_IMAGE_DISTRIBUTION_KEY}/utils/wiseadmit.png`;
-
-//   return {
-//     name,
-//     description: meta,
-//   };
-// }
-
 export default async function Page({
   params,
 }: {
@@ -57,18 +28,16 @@ export default async function Page({
     slug: string;
   };
 }) {
-  notFound()
-  // const scholarshipData: any = await getSingleScholarship(params.slug);
+  const scholarshipData = await getSingleScholarship(params.slug);
 
-  // if (!scholarshipData) {
-  //   notFound();
-  // }
+  if (!scholarshipData) {
+    notFound();
+  }
 
   return (
-    <></>
-    // <SingleScholarshipHome
-    //   scholarship={scholarshipData?.scholarship}
-    //   popularScholarships={scholarshipData?.popularScholarships}
-    // />
+    <SingleScholarshipHome
+      scholarship={scholarshipData?.scholarship}
+      popularScholarships={scholarshipData?.popularScholarships}
+    />
   );
 }

@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import ScholarshipHero from "./components/ScholarshipHero";
 import ScholarshipCuriosity from "./components/ScholarshipCuriosity";
 import ScholarshipVideoTestimonials from "./components/ScholarshipVideoTestimonials";
@@ -13,11 +14,19 @@ type Props = {
 };
 
 const ScholarshipHome = ({ blogs, scholarships }: Props) => {
+  const [hasWiseScore, setHasWiseScore] = useState(false);
+  useEffect(() => {
+    const wisescore = localStorage.getItem("wisescore");
+    setHasWiseScore(!!wisescore);
+  }, []);
   return (
     <>
       <ScholarshipHero />
-      <ScholarshipCuriosity />
-      <AvailableScholarship scholarships={scholarships} />
+      {!hasWiseScore && <ScholarshipCuriosity />}
+      <AvailableScholarship
+        scholarships={scholarships}
+        hasWiseScore={hasWiseScore}
+      />
       <ScholarshipBlogs blogs={blogs} />
       <ScholarshipVideoTestimonials />
       <ScholarshipTestimonials />

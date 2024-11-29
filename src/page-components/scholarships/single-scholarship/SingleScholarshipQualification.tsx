@@ -10,10 +10,11 @@ import {
   ScholarshipUniversity,
   ScholarshipUniversityMobile,
 } from "../utils/svg";
-import { IScholarshipResponse } from "@/types/utils";
+import { IScholarships } from "@/types/scholarship";
+import { formatDate } from "@/page-components/scholarships/utils/provider";
 
 type Props = {
-  scholarship: IScholarshipResponse;
+  scholarship: IScholarships;
 };
 
 const SingleScholarshipQualification = ({ scholarship }: Props) => {
@@ -26,7 +27,7 @@ const SingleScholarshipQualification = ({ scholarship }: Props) => {
         key: "Qualification",
         icon: isMobile ? <ScholarshipBookMobile /> : <ScholarshipBook />,
         title: "Qualification",
-        description: scholarship?.scholarship?.qualification,
+        description: "International Students",
       },
       {
         key: "Deadline",
@@ -36,7 +37,7 @@ const SingleScholarshipQualification = ({ scholarship }: Props) => {
           <ScholarshipDeadline />
         ),
         title: "Deadline",
-        description: scholarship?.scholarship?.scholarshipDeadline,
+        description: formatDate(scholarship?.deadline || ""),
       },
       {
         key: "Universities",
@@ -46,7 +47,7 @@ const SingleScholarshipQualification = ({ scholarship }: Props) => {
           <ScholarshipUniversity />
         ),
         title: "Universities",
-        description: `${scholarship?.scholarship?.totalUniversityPartners} Chinese universities`,
+        description: `20+ Chinese universities`,
       },
     ],
     [isMobile, scholarship]

@@ -58,7 +58,7 @@ const SingleScholarshipCategory = forwardRef(
               gap={{ lg: "16px", md: "16px", sm: "12px", xs: "12px" }}
               borderRadius="8px"
             >
-              {Object.entries(categories).map(([category, points], index) => (
+              {categories.map((category: any, index) => (
                 <React.Fragment key={category}>
                   {index > 0 && <Divider />}
                   <Grid container spacing={2}>
@@ -80,7 +80,7 @@ const SingleScholarshipCategory = forwardRef(
                           xs: "19.6px",
                         }}
                       >
-                        {category}
+                        {category?.title}
                       </Typography>
                     </Grid>
 
@@ -111,7 +111,7 @@ const SingleScholarshipCategory = forwardRef(
                             paddingInlineStart: "20px",
                           }}
                         >
-                          {points.map((point: any) => (
+                          {category?.details.map((point: string) => (
                             <li
                               key={point}
                               style={{
@@ -152,7 +152,7 @@ const SingleScholarshipCategory = forwardRef(
                             }}
                           >
                             {" "}
-                            {points.join(", ")}
+                            {category?.details.join(", ")}
                           </li>
                         </ul>
                       </Typography>

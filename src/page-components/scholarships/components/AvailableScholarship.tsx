@@ -12,20 +12,15 @@ import useCostConverterMain from "@/hooks/costConverterMain";
 
 type Props = {
   scholarships: IScholarshipResponse;
+  hasWiseScore: boolean;
 };
 
-const AvailableScholarship = ({ scholarships }: Props) => {
+const AvailableScholarship = ({ scholarships, hasWiseScore }: Props) => {
   const getConvertedCosts = useCostConverterMain();
 
-  const [hasMainWiseScore, setHasMainWiseScore] = useState(false);
   const [allScholarships, setAllScholarships] =
     useState<IScholarshipResponse>(scholarships);
   const [searchTerm, setSearchTerm] = useState<string>("");
-
-  useEffect(() => {
-    const mainWisescore = localStorage.getItem("wisescore");
-    setHasMainWiseScore(!!mainWisescore);
-  }, []);
 
   const {
     isLoading,
@@ -50,7 +45,7 @@ const AvailableScholarship = ({ scholarships }: Props) => {
   return (
     <Box
       bgcolor={
-        hasMainWiseScore ? "rgba(229, 242, 255, 1)" : "rgba(240, 234, 230, 1)"
+        hasWiseScore ? "rgba(229, 242, 255, 1)" : "rgba(240, 234, 230, 1)"
       }
       pt="1px"
       pb="1px"

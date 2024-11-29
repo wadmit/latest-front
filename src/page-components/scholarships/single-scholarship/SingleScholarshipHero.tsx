@@ -1,16 +1,15 @@
 "use client";
 import applicationConfig from "@/config";
-import { IScholarshipResponse } from "@/types/utils";
 import { Box, Button, Typography } from "@mui/material";
 import Image from "next/image";
 import { WiseAdmitDefault } from "public/svg";
 import SingleImg from "public/images/scholarships/singlecholarshipimg.png";
 import React from "react";
 import { useRouter } from "next/navigation";
-import { RootContainer } from "@/components/common";
+import { IScholarships } from "@/types/scholarship";
 
 type Props = {
-  scholarship: IScholarshipResponse;
+  scholarship: IScholarships;
 };
 
 const SingleScholarshipHero = ({ scholarship }: Props) => {
@@ -33,7 +32,7 @@ const SingleScholarshipHero = ({ scholarship }: Props) => {
         }}
       >
         <Box height={{ lg: "100%", md: "100%", sm: "290px", xs: "290px" }}>
-          {scholarship.scholarship.scholarshipCoverImage ? (
+          {scholarship.coverImage ? (
             <Box height={{ lg: "472px", md: "450px", sm: "100%", xs: "100%" }}>
               <Image
                 width={1000000}
@@ -46,7 +45,7 @@ const SingleScholarshipHero = ({ scholarship }: Props) => {
                   objectFit: "cover",
                 }}
                 alt={scholarship.name}
-                src={`${imageUrl}/${scholarship.scholarship.scholarshipCoverImage}`}
+                src={`${imageUrl}/${scholarship.coverImage}`}
                 // src={SingleImg}
               />
             </Box>
@@ -99,10 +98,6 @@ const SingleScholarshipHero = ({ scholarship }: Props) => {
           </Typography>
 
           <Button
-            // onClick={(e) => {
-            //   e.preventDefault();
-            //   handleSearch(searchValue);
-            // }}
             type="submit"
             sx={{
               background: "#FF6B26",

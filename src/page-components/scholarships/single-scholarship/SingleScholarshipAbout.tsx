@@ -7,7 +7,11 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { TScholarshipAboutProp } from "../utils/types";
+import { TScholarshipAboutProp } from "@/page-components/scholarships/utils/types";
+import {
+  SingleScholarshipReadLess,
+  SingleScholarshipReadMore,
+} from "@/page-components/scholarships/utils/svg";
 
 const SingleScholarshipAbout = React.forwardRef(
   ({ details }: TScholarshipAboutProp, ref) => {
@@ -126,37 +130,9 @@ const SingleScholarshipAbout = React.forwardRef(
                   </Typography>
                 </Link>
                 {readMore ? (
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7 14L12 9L17 14"
-                      stroke="#FF6B26"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  <SingleScholarshipReadMore />
                 ) : (
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7 10L12 15L17 10"
-                      stroke="#FF6B26"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  <SingleScholarshipReadLess />
                 )}
               </Box>
             )}

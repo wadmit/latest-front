@@ -1,21 +1,28 @@
+import { ICommonCriteria, IQualificationCriteria } from "@/types/scholarship";
+
 export type TScholarshipAboutProp = {
   details: string;
 };
 
 export type TScholarshipBenefitsProp = {
-  benefits: Record<string, any>;
+  benefits: ICommonCriteria[];
 };
 
 export type TScholarshipCategoryProp = {
-  categories: Record<string, any>;
+  categories: ICommonCriteria[];
 };
 
 export type TScholarshipEligibilityCriteriaProp = {
-  criteria: Record<string, any>;
-  language: Record<string, any>;
-  qualification: any;
+  criteria: string[] | undefined;
+  language: ICommonCriteria[] | undefined;
+  qualification: IQualificationCriteria | undefined;
 };
 
 export type TScholarshipProcessProp = {
-  applicationProcess: Record<string, string[]>;
+  applicationProcess: ICommonCriteria[] | undefined;
 };
+
+export interface IFAQScholarship {
+  question: string;
+  answer: string | React.ReactElement;
+}

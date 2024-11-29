@@ -1,5 +1,6 @@
 import { ApiConfig } from "@/constants";
 import ApiService from "@/services/api.service";
+import { IScholarships } from "@/types/scholarship";
 import { IScholarshipResponse } from "@/types/utils";
 
 export const getScholarships = async ({
@@ -21,7 +22,8 @@ export const getScholarships = async ({
 export const getSingleScholarship = async (
   slug: string
 ): Promise<{
-  scholarship: IScholarshipResponse;
+  scholarship: IScholarships;
+  popularScholarships: IScholarships[];
 }> => {
   try {
     const { data: scholarship } = await ApiService.get({

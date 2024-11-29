@@ -2,14 +2,10 @@
 import FAQAccordionCompSch from "@/components/common/faq/FAQAccordionCompSch.";
 import { Box, Button, Typography } from "@mui/material";
 import React, { forwardRef, useState } from "react";
-
-interface FAQItem {
-  question: string;
-  answer: string;
-}
+import { IFAQScholarship } from "../utils/types";
 
 const SingleScholarshipFAQ = forwardRef(
-  ({ faqs }: { faqs: FAQItem[] }, ref) => {
+  ({ faqs }: { faqs: IFAQScholarship[] }, ref) => {
     const [readMore, setReadMore] = useState(false);
     const handleToggleReadMore = () => {
       setReadMore((prev) => !prev);
