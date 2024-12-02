@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "preinstall": "npx only-allow pnpm"
-  },
+    "preinstall": "npx only-allow pnpm",
+    "ngrok": "ngrok http 3000"
+    },
   "dependencies": {
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",

@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken";
 const JWT_SECRET = process.env.NEXTAUTH_SECRET!;
 const isDevelopment = process.env.NODE_ENV === "development";
 
+console.log(process.env.NEXTAUTH_SECRET, "rupak")
 export const { auth, handlers, signIn, signOut,unstable_update } = NextAuth({
   providers: [
     CredentialsProvider({
