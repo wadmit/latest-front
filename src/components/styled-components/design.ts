@@ -63,12 +63,12 @@ export const HeadingH4 = styled(Typography)`
 export const HeadingH5 = styled(Typography)`
   color: #201c1a;
   //   text-align: center;
-  font-family: "HankenGroteskExtraBold";
-  font-size: 20px;
+  font-family: "HankenGroteskSemiBold";
+  font-size: 16px;
   line-height: 130%;
   letter-spacing: -0.4px;
   ${(props) => props.theme.breakpoints.down("md")} {
-    font-size: 18px;
+    font-size: 14px;
     letter-spacing: -0.36px;
   }
 `;

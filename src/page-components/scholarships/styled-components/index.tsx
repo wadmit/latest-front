@@ -2,6 +2,7 @@
 import { IRootContainerProps } from "@/types/other";
 import { Box, TableCell, tableCellClasses } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import Link from "next/link";
 
 export const StyledContainerWrapper = styled(Box, {
   name: "Root-Layout-Wrapper",
@@ -75,4 +76,9 @@ export const StyledTableCellScholarship = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     backgroundColor: "#EAF3FF",
   },
+}));
+
+export const StyledLink = styled(Link)(({ theme }) => ({
+  color: "#FF6B26",
+  textDecoration: "underline",
 }));

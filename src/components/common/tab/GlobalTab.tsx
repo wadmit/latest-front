@@ -45,7 +45,6 @@ const AnimatedBox = () => {
 };
 
 const GlobalTab = <T extends string>({ tabMenu, activeTab }: Props<T>) => {
-  console.log("eavavae", tabMenu, activeTab);
   return (
     <Box
       width="100%"
@@ -71,7 +70,6 @@ const GlobalTab = <T extends string>({ tabMenu, activeTab }: Props<T>) => {
         flexDirection="row"
       >
         {tabMenu.map((eachTab: any, index: number) => {
-          console.log("Caeca", eachTab, index);
           const TabContent = (
             <Box
               key={eachTab.id}

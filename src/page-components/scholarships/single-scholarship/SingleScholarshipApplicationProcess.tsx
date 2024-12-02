@@ -1,12 +1,90 @@
 "use client";
 import { Box, Grid, Typography } from "@mui/material";
-import React, { forwardRef } from "react";
-import { TScholarshipProcessProp } from "../utils/types";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
+import { TScholarshipProcessProp } from "@/page-components/scholarships/utils/types";
 import { useRouter } from "next/navigation";
+
+interface SectionLayout {
+  useFullWidth: boolean;
+}
+
+interface SectionLayouts {
+  [key: number]: SectionLayout;
+}
+
+interface ListItemRefs {
+  [key: number]: React.RefObject<HTMLLIElement>[];
+}
 
 const SingleScholarshipApplicationProcess = forwardRef(
   ({ applicationProcess }: TScholarshipProcessProp, ref) => {
     const router = useRouter();
+    const [sectionLayouts, setSectionLayouts] = useState<SectionLayouts>({});
+    const listItemRefs = useRef<ListItemRefs>({});
+
+    useEffect(() => {
+      applicationProcess?.forEach((section, sectionIndex) => {
+        listItemRefs.current[sectionIndex] = section.details.map(() =>
+          React.createRef<HTMLLIElement>()
+        );
+      });
+    }, [applicationProcess]);
+
+    useEffect(() => {
+      const layouts: SectionLayouts = {};
+      applicationProcess?.forEach((section, sectionIndex) => {
+        const hasMultilineItem = Object.values(
+          listItemRefs.current[sectionIndex] || {}
+        ).some((itemRef) => {
+          const element = itemRef.current;
+          if (element) {
+            return element.clientHeight > 24;
+          }
+          return false;
+        });
+
+        layouts[sectionIndex] = {
+          useFullWidth: section.details.length === 1 || hasMultilineItem,
+        };
+      });
+      setSectionLayouts(layouts);
+    }, [applicationProcess]);
+
+    const renderListItems = (
+      section: any,
+      sectionIndex: number,
+      startIdx: number,
+      endIdx: number
+    ) => {
+      return section?.details
+        .slice(startIdx, endIdx)
+        .map((item: string, itemIndex: number) => (
+          <Box
+            key={itemIndex}
+            sx={{
+              display: "flex",
+              minHeight: {
+                lg: "40px",
+                md: "40px",
+                sm: "auto",
+                xs: "auto",
+              },
+              alignItems: "flex-start",
+              mb: 1,
+            }}
+          >
+            <li
+              ref={listItemRefs.current[sectionIndex]?.[startIdx + itemIndex]}
+              style={{
+                marginTop: "0px",
+              }}
+            >
+              {item}
+            </li>
+          </Box>
+        ));
+    };
+
     return (
       <Box
         ref={ref}
@@ -50,11 +128,11 @@ const SingleScholarshipApplicationProcess = forwardRef(
           <Box
             display="flex"
             flexDirection="column"
-            gap="16px"
+            gap="26px"
             p={{ lg: 0, md: 0, sm: 2, xs: 2 }}
           >
-            {Object.entries(applicationProcess).map(([section, items]) => (
-              <Box key={section}>
+            {applicationProcess?.map((section, sectionIndex) => (
+              <Box key={sectionIndex}>
                 <Typography
                   fontWeight={600}
                   fontFamily="HankenGroteskSemiBold"
@@ -66,83 +144,77 @@ const SingleScholarshipApplicationProcess = forwardRef(
                     xs: "22.4px",
                   }}
                   color="#201C1A"
+                  mb={1}
                 >
-                  {section}
+                  {section?.title}
                 </Typography>
                 <Grid
                   container
+                  spacing={{
+                    lg: 2,
+                    md: 2,
+                    sm: 0,
+                    xs: 0,
+                  }}
                   sx={{
-                    display: {
-                      xs: "block",
-                      sm: "block",
-                      md: "flex",
-                      lg: "flex",
-                    },
+                    display: sectionLayouts[sectionIndex]?.useFullWidth
+                      ? "block"
+                      : {
+                          xs: "block",
+                          sm: "block",
+                          md: "flex",
+                          lg: "flex",
+                        },
                   }}
                 >
-                  <Grid item lg={6} md={6} sm={12} xs={12}>
+                  <Grid
+                    item
+                    lg={sectionLayouts[sectionIndex]?.useFullWidth ? 12 : 6}
+                    md={sectionLayouts[sectionIndex]?.useFullWidth ? 12 : 6}
+                    sm={12}
+                    xs={12}
+                  >
                     <ul
                       style={{
                         listStyleType: "square",
-                        marginTop: "0",
+                        margin: "15",
                         paddingInlineStart: "20px",
                       }}
                     >
-                      {items
-                        .slice(0, Math.ceil(items.length / 2))
-                        .map((item, index) => (
-                          <li
-                            key={index}
-                            style={{
-                              marginTop: "8px",
-                            }}
-                          >
-                            {item}
-                          </li>
-                        ))}
+                      {sectionLayouts[sectionIndex]?.useFullWidth
+                        ? renderListItems(
+                            section,
+                            sectionIndex,
+                            0,
+                            section.details.length
+                          )
+                        : renderListItems(
+                            section,
+                            sectionIndex,
+                            0,
+                            Math.ceil(section.details.length / 2)
+                          )}
                     </ul>
                   </Grid>
-                  {items.length > 1 && (
-                    <Grid
-                      item
-                      lg={6}
-                      md={6}
-                      sm={12}
-                      xs={12}
-                      sx={{
-                        mt: { xs: 0, sm: 0, md: 0, lg: 0 },
-                        "& ul": {
-                          marginTop: {
-                            xs: "-8px",
-                            sm: "-8px",
-                            md: "0",
-                            lg: "0",
-                          },
-                        },
-                      }}
-                    >
-                      <ul
-                        style={{
-                          listStyleType: "square",
-                          marginTop: "0",
-                          paddingInlineStart: "20px",
-                        }}
-                      >
-                        {items
-                          .slice(Math.ceil(items.length / 2))
-                          .map((item, index) => (
-                            <li
-                              key={index}
-                              style={{
-                                marginTop: "8px",
-                              }}
-                            >
-                              {item}
-                            </li>
-                          ))}
-                      </ul>
-                    </Grid>
-                  )}
+                  {!sectionLayouts[sectionIndex]?.useFullWidth &&
+                    section?.details.length > 1 && (
+                      <Grid item lg={6} md={6} sm={12} xs={12}>
+                        <ul
+                          style={{
+                            listStyleType: "square",
+                            margin: "15",
+                            paddingInlineStart: "20px",
+                          }}
+                        >
+                          {renderListItems(
+                            section,
+                            sectionIndex,
+                            Math.ceil(section.details.length / 2),
+                            section.details.length
+                          )}
+                        </ul>
+                      </Grid>
+                    )}
                 </Grid>
               </Box>
             ))}
@@ -179,6 +251,7 @@ const SingleScholarshipApplicationProcess = forwardRef(
             >
               Ensure you checked your{" "}
               <Typography
+                component="span"
                 fontWeight={400}
                 fontSize={{ lg: "16px", md: "16px", sm: "14px", xs: "14px" }}
                 fontFamily="HankenGroteskRegular"
@@ -203,5 +276,8 @@ const SingleScholarshipApplicationProcess = forwardRef(
     );
   }
 );
+
+SingleScholarshipApplicationProcess.displayName =
+  "SingleScholarshipApplicationProcess";
 
 export default SingleScholarshipApplicationProcess;

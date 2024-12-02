@@ -74,17 +74,18 @@ const UniversityCourses = forwardRef((unknown, ref) => {
                 bgcolor: "white",
                 color: "#FF6B26",
                 border: "1px solid #A3A3A9",
-                borderRadius: "45px",
+                borderRadius: "8px",
                 boxShadow: "none",
                 marginTop: "32px",
                 "&:hover": {
                   bgcolor: "white",
                 },
+                textTransform: "none",
               }}
             >
               {toShow === university.programs.length
-                ? "View Less"
-                : "View All Courses"}
+                ? "View less"
+                : "View all courses"}
             </ButtonWrapper>
           </Box>
         )}

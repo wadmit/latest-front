@@ -2,9 +2,8 @@
 import { RootContainer } from "@/components/common";
 import React, { createRef, MutableRefObject } from "react";
 import SingleScholarshipNav from "./SingleScholarshipNav";
-import { navScholarshipMenu } from "../utils/provider";
+import { navScholarshipMenu, ScholarshipFAQData } from "../utils/provider";
 import SingleScholarshipAbout from "./SingleScholarshipAbout";
-import { IScholarshipResponse } from "@/types/utils";
 import {
   SingleScholarshipChildrenWrapper,
   SingleScholarshipStickWrapper,
@@ -19,9 +18,10 @@ import SingleScholarshipCategory from "./SingleScholarshipCategory";
 import SingleScholarshipEligibilityCriteria from "./SingleScholarshipEligibilityCriteria";
 import SingleScholarshipApplicationProcess from "./SingleScholarshipApplicationProcess";
 import SingleScholarshipFAQ from "./SingleScholarshipFAQ";
+import { IScholarships } from "@/types/scholarship";
 
 type Props = {
-  scholarship: IScholarshipResponse;
+  scholarship: IScholarships;
 };
 
 const SingleScholarshipBody = ({ scholarship }: Props) => {
@@ -37,6 +37,21 @@ const SingleScholarshipBody = ({ scholarship }: Props) => {
 
   const Container = isMobile ? Box : RootContainer;
 
+  const hasAcademicCriteria =
+    Array.isArray(scholarship?.eligibilityCriteria?.academic) &&
+    scholarship.eligibilityCriteria.academic.length > 0;
+
+  const hasLanguageCriteria =
+    Array.isArray(scholarship?.eligibilityCriteria?.language) &&
+    scholarship.eligibilityCriteria.language.length > 0;
+
+  const hasQualificationCriteria =
+    Array.isArray(scholarship?.eligibilityCriteria?.qualification) &&
+    scholarship.eligibilityCriteria.qualification.length > 0;
+
+  const hasEligibilityCriteria =
+    hasAcademicCriteria || hasLanguageCriteria || hasQualificationCriteria;
+
   return (
     <Container>
       <SingleScholarshipNav navMenu={navScholarshipMenu} />
@@ -49,31 +64,37 @@ const SingleScholarshipBody = ({ scholarship }: Props) => {
           width={{ lg: "65%", md: "65%", sm: "100%", xs: "100%" }}
         >
           <SingleScholarshipAbout
-            details={scholarship?.scholarship?.scholarshipDescription}
+            details={scholarship?.desc}
             ref={sectionRefs.About}
           />
           <SingleScholarshipBenefits
-            benefits={scholarship?.scholarship?.scholarshipBenefits}
+            benefits={scholarship?.benefits}
             ref={sectionRefs.Benefits}
           />
           <SingleScholarshipCuriosity />
-          <SingleScholarshipCategory
-            categories={scholarship?.scholarship?.scholarshipCategories}
-            ref={sectionRefs.Category}
-          />
-          <SingleScholarshipEligibilityCriteria
-            criteria={scholarship?.scholarship?.eligibilityCriteria}
-            language={scholarship?.scholarship?.languageRequirements}
-            qualification={scholarship?.scholarship?.eligibility_qualifications}
-            ref={sectionRefs.Criteria}
-          />
+          {scholarship?.categories && scholarship?.categories.length > 0 && (
+            <SingleScholarshipCategory
+              categories={scholarship.categories}
+              ref={sectionRefs.Category}
+            />
+          )}
+          {hasEligibilityCriteria && (
+            <SingleScholarshipEligibilityCriteria
+              criteria={scholarship?.eligibilityCriteria?.academic}
+              language={scholarship?.eligibilityCriteria?.language}
+              qualification={scholarship?.eligibilityCriteria?.qualification}
+              ref={sectionRefs.Criteria}
+            />
+          )}
           <SingleScholarshipApplicationProcess
-            applicationProcess={scholarship?.scholarship?.applicationProcess}
+            applicationProcess={
+              scholarship?.eligibilityCriteria?.applicationProcess
+            }
             ref={sectionRefs.Process}
           />
           <SingleScholarshipUniversity />
           <SingleScholarshipFAQ
-            faqs={scholarship?.scholarship?.faqs}
+            faqs={ScholarshipFAQData}
             ref={sectionRefs.FAQ}
           />
         </Box>

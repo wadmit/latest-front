@@ -54,20 +54,31 @@ function CalculateProbability() {
           display="flex"
           alignItems="center"
           justifyContent="center"
-          color="#FF6B26"
-          fontSize="14px"
-          fontFamily="HankenGroteskSemiBold"
-          borderRadius="40px"
-          padding="14px 27px"
-          border="1px solid #A3A3A9"
+          borderRadius="8px"
+          padding="12px 19px"
+          border="1px solid #00000099"
         >
-          Check your WiseScore®
+          <Typography
+            fontWeight={600}
+            color="#FF6B26"
+            fontSize={{ lg: "16px", md: "16px", sm: "14px", xs: "14px" }}
+            fontFamily="HankenGroteskSemiBold"
+            lineHeight={{
+              lg: "19.2px",
+              md: "19.2px",
+              sm: "19.6px",
+              xs: "19.6px",
+            }}
+          >
+            {" "}
+            Check your WiseScore®
+          </Typography>
         </Box>
       </Box>
       <Box
         sx={{
           top: 10,
-          left: "40%",
+          left: "42%",
           bottom: 0,
           right: 0,
           margin: "auto",

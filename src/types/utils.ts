@@ -1,6 +1,7 @@
 import { IBlog } from "./blog";
 import { INews } from "./news";
 import { IProgram } from "./program";
+import { IScholarships } from "./scholarship";
 import { IUniversity } from "./university";
 
 export type ScholarShipRangeType = {
@@ -70,13 +71,7 @@ export interface INewsResponse {
 }
 
 export interface IScholarshipResponse {
-  scholarship: Record<string, any>;
-  name: string;
-  active: boolean;
-  slug: string;
-  createdAt: Date;
-  updatedAt: Date;
-  id: string;
+  data: IScholarships[];
 }
 
 export interface IScholarship {

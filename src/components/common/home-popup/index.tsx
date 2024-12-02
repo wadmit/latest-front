@@ -1,50 +1,15 @@
-import {
-  Box,
-  Button,
-  Dialog,
-  IconButton,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, Button, Dialog, Typography, useMediaQuery } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Close } from "@mui/icons-material";
-import { ButtonWrapper } from "../buttons/ButtonWrapper";
-import Image from "next/image";
+
+import { BannerMascot, LeftMark, LeftPoint, RightMark, StarIcon } from "./svg";
 
 type Props = {
   openChatBox: () => void;
 };
 
-const CloseIcon = () => {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M15 5L5 15"
-        stroke="#201C1A"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-      <path
-        d="M5 5L15 15"
-        stroke="#201C1A"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-    </svg>
-  );
-};
 const HomePopUp = ({ openChatBox }: Props) => {
   const [showMoreInfo, setShowMoreInfo] = useState(false);
 
-  //   after 3 seconds open it
   useEffect(() => {
     const showMoreInfoValue = localStorage.getItem("showChatPopup");
     const timer = setTimeout(() => {
@@ -57,7 +22,6 @@ const HomePopUp = ({ openChatBox }: Props) => {
     setShowMoreInfo(false);
     localStorage.setItem("showMoreInfo", "false");
     localStorage.setItem("showChatPopup", "false");
-
   };
 
   const isTab = useMediaQuery("(max-width: 832px) and (min-width: 600px)");
@@ -79,6 +43,8 @@ const HomePopUp = ({ openChatBox }: Props) => {
     >
       <Box
         sx={{
+          background: `url('/images/home/banner-background.webp') no-repeat center center`,
+          backgroundSize: "cover",
           width: {
             xs: "100%",
             sm: "550px",
@@ -96,147 +62,133 @@ const HomePopUp = ({ openChatBox }: Props) => {
             xs: "24px 24px 0px 20px",
           },
           borderRadius: "32px",
+          posotion: "relative",
         }}
       >
+        {/* <img
+          src={"/images/home/banner-background.webp"}
+          height={100}
+          width={10}
+          style={{
+            height: "100%",
+            width: "600px",
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
+          alt="test"
+        /> */}
+
         {/* <Box width={"100%"} display={"flex"} justifyContent={"flex-end"}>
         
         </Box> */}
-        <Box display={"flex"} flexDirection={"column"}>
-          <Box width={"100%"} pt={2} display={"flex"} justifyContent={"space-between"} alignItems={"flex-start"} position={"relative"}>
-            <Typography
-              fontSize={{
-                xs: "20px",
-                md: "24px",
-                lg: "24px",
-                xl: "24px",
-              }}
-              lineHeight={"28.8px"}
-              fontWeight={700}
-              color={"#201C1A"}
-              fontFamily={"HankenGroteskRegular"}
-            >
-              Got Questions?
-            </Typography>
-            <IconButton
-              sx={{
-                top: "-7px",
-                backgroundColor: "#D9D9D9",
-                borderRadius: "50%",
-                width: "34px",
-                height: "34px",
-              }}
-              onClick={handleClose}
-            >
-              <CloseIcon />
-            </IconButton>
-          </Box>
-
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          alignItems={"center"}
+          justifyContent={"center"}
+        >
           <Typography
-            fontFamily={"HankenGroteskRegular"}
-            fontSize={{
-              xs: "28px",
-              md: "36px",
-              lg: "36px",
-              xl: "36px",
+            sx={{
+              mb: "2px",
+              color: "#201C1A",
+              fontSize: {
+                md: "32px",
+                xs: "22px",
+              },
+              fontWeight: 700,
+              letterSpacing: "-0.96px",
             }}
-            lineHeight={"43.2px"}
-            fontWeight={700}
-            color={"#201C1A"}
           >
-            {" "}
+            Got questions?
+          </Typography>
+          <Typography
+            sx={{
+              mb: "10px",
+              color: "#201C1A",
+              fontSize: {
+                md: "48px",
+                xs: "30px",
+              },
+              fontWeight: 700,
+              letterSpacing: "-1.44px",
+            }}
+          >
             WiseAI answers
           </Typography>
           <Typography
-            width={{
-              xs: "80%",
-              sm: "310px",
-              md: "310px",
-              lg: "310px",
-              xl: "310px",
+            sx={{
+              fontSize: {
+                md: "20px",
+                xs: "16px",
+              },
+              color: "black",
+              width: "340px",
+              wordWrap: "break-word",
+              textAlign: "center",
+              mb: "33px",
             }}
-            mt={"8px"}
-            fontSize={{
-              xs: "14px",
-              md: "16px",
-              lg: "16px",
-              xl: "16px",
-            }}
-            lineHeight={"22.4px"}
-            fontWeight={400}
-            color={"#201C1A"}
           >
             Get instant answers and guidance on scholarships, admissions, and
-            more.{" "}
+            more.
           </Typography>
 
-          <ButtonWrapper
-            sx={{
-              width: "115px",
-              mt: "24px",
-              borderRadius: "8px",
-              padding: "11px 23px",
-            }}
-            onClick={() => {
-              openChatBox();
-              handleClose();
-            }}
-          >
-            Chat now
-          </ButtonWrapper>
-        </Box>
-        <Box
-          pt={"38px"}
-          maxWidth={"600px"}
-          maxHeight={"623px"}
-          sx={{ overflow: "hidden" }}
-        >
-          <Image
-            quality={100}
-            style={{
-              zIndex: 1,
-              objectFit: "contain",
-              width: "100%",
-              height: "100%",
-            }}
-            src={`${process.env.NEXT_PUBLIC_IMAGE_DISTRIBUTION_KEY}/utils/chatbot-popup.webp`}
-            alt="home-popup"
-            width="500"
-            // width={isMobile ? 310 : isTab ? 500 : 1000}
-            height={isMobile ? 220 : 600}
-          />
-        </Box>
-
-        {/* <Box
-          height={{ lg: "400px", md: "400px", sm: "380px", xs: "220px" }}
-          overflow={"hidden"}
-          position={"relative"}
-        >
           <Box
-            width={"100%"}
-            display={"flex"}
-            height={"100%"}
-            alignItems={"flex-end"}
-            justifyContent={"center"}
-            position={"absolute"}
-            top={"10px"}
+            sx={{ display: "flex", alignItems: "center", mb: "51px" }}
+            gap={"14px"}
           >
-            <Image
-              quality={100}
-              style={{
-                zIndex: 1,
-                objectFit: "contain",
-                width: isMobile ? "100%" : "",
-                // height: isMobile ? "320px":"",
+            <LeftMark />
+            <Button
+              sx={{
+                borderRadius: "10.54px",
+                padding: "20px 20px",
               }}
-              // src="/images/popup/chatbot.webp"
-              src={`${process.env.NEXT_PUBLIC_IMAGE_DISTRIBUTION_KEY}/utils/chatbot-popup.webp`}
-              alt="home-popup"
-              width="500"
-              // width={isMobile ? 310 : isTab ? 500 : 1000}
-              height={isMobile ? 220 : 600}
-            />
+              variant="contained"
+              onClick={() => {
+                openChatBox();
+                handleClose();
+              }}
+            >
+              Chat now
+            </Button>
+            <RightMark />
           </Box>
-        </Box> */}
+
+          <Box
+            display={"flex"}
+            sx={{ width: "100%" }}
+            alignItems={"flex-start"}
+          >
+            <BannerMascot />
+            <StarIcon />
+            <Box
+              sx={{
+                position: "relative",
+                borderRadius: "16px",
+                background: "#FFF",
+                maxHeight: "100px",
+                ml: "10px",
+                top: "28px",
+                height: "auto",
+                padding: "12px 12px 12px 18px",
+                width: "194px",
+              }}
+            >
+              <Box sx={{ position: "absolute", top: "30px", left: "-13px" }}>
+                <LeftPoint />
+              </Box>
+              <Typography
+                sx={{
+                  width: "182px",
+                  wordWrap: "break-word",
+                  fontSize: "16px",
+                }}
+              >
+                Hi 👋, I am WiseAI, an AI assistant to help you.
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
       </Box>
     </Dialog>
   );

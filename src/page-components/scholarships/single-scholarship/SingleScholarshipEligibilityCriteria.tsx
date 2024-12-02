@@ -11,25 +11,15 @@ import {
   Typography,
 } from "@mui/material";
 import React, { forwardRef } from "react";
-import { TScholarshipEligibilityCriteriaProp } from "../utils/types";
-import { StyledTableCellScholarship } from "../styled-components";
+import { TScholarshipEligibilityCriteriaProp } from "@/page-components/scholarships/utils/types";
+import { StyledTableCellScholarship } from "@/page-components/scholarships/styled-components";
 
 const SingleScholarshipEligibilityCriteria = forwardRef(
   (
     { criteria, language, qualification }: TScholarshipEligibilityCriteriaProp,
     ref
   ) => {
-    const columns =
-      qualification && qualification.length > 0
-        ? Object.keys(qualification[0]).map((key) => ({
-            id: key,
-            label:
-              key.charAt(0).toUpperCase() +
-              key.slice(1).replace(/([A-Z])/g, " $1"),
-            minWidth: 170,
-            align: "left",
-          }))
-        : [];
+    const hasQualificationData = qualification?.title && qualification?.value;
 
     return (
       <Box
@@ -46,7 +36,7 @@ const SingleScholarshipEligibilityCriteria = forwardRef(
         // p={2}
         p={{ lg: 3, md: 3, sm: 0, xs: 0 }}
       >
-        <Box display="flex" flexDirection="column" gap="16px">
+        <Box display="flex" flexDirection="column" gap="33px">
           <Box
             bgcolor={{
               lg: "transparent",
@@ -76,9 +66,9 @@ const SingleScholarshipEligibilityCriteria = forwardRef(
             p={{ lg: 0, md: 0, sm: 2, xs: 2 }}
             display="flex"
             flexDirection="column"
-            gap="15px"
+            gap="28px"
           >
-            {Object.entries(criteria).map(([key, value], index) => (
+            {criteria && criteria.length > 0 && (
               <Box>
                 <Typography
                   fontFamily="HankenGroteskSemiBold"
@@ -97,47 +87,49 @@ const SingleScholarshipEligibilityCriteria = forwardRef(
                     xs: "25.2px",
                   }}
                 >
-                  {key}
+                  Academic Excellence
                 </Typography>
 
-                <Typography
-                  fontFamily="HankenGroteskRegular"
-                  fontWeight={400}
-                  color="#201C1A"
-                  fontSize={{
-                    lg: "16px",
-                    md: "16px",
-                    sm: "14px",
-                    xs: "14px",
-                  }}
-                  lineHeight={{
-                    lg: "22.4px",
-                    md: "22.4px",
-                    sm: "19.6px",
-                    xs: "19.6px",
-                  }}
-                >
-                  <ul
-                    style={{
-                      listStyleType: "square",
-                      marginTop: "0",
-                      paddingInlineStart: "20px",
+                {criteria?.map((value, index) => (
+                  <Typography
+                    fontFamily="HankenGroteskRegular"
+                    fontWeight={400}
+                    color="#201C1A"
+                    fontSize={{
+                      lg: "16px",
+                      md: "16px",
+                      sm: "14px",
+                      xs: "14px",
+                    }}
+                    lineHeight={{
+                      lg: "22.4px",
+                      md: "22.4px",
+                      sm: "19.6px",
+                      xs: "19.6px",
                     }}
                   >
-                    <li
-                      key={key}
+                    <ul
                       style={{
-                        marginTop: "8px",
+                        listStyleType: "square",
+                        marginTop: "0",
+                        paddingInlineStart: "20px",
                       }}
                     >
-                      {value}
-                    </li>
-                  </ul>
-                </Typography>
+                      <li
+                        key={index}
+                        style={{
+                          marginTop: "8px",
+                        }}
+                      >
+                        {value}
+                      </li>
+                    </ul>
+                  </Typography>
+                ))}
               </Box>
-            ))}
+            )}
 
-            {qualification && qualification.length > 0 && (
+            {hasQualificationData && (
               <Box>
                 <Typography
                   fontFamily="HankenGroteskSemiBold"
@@ -178,36 +170,37 @@ const SingleScholarshipEligibilityCriteria = forwardRef(
                       }}
                     >
                       <TableRow>
-                        {columns.map((column) => (
+                        {qualification?.title.map((header, index) => (
                           <StyledTableCellScholarship
                             sortDirection={false}
-                            key={column.id}
-                            align={column.align as any}
+                            key={index}
+                            align="left"
                             style={{
                               color: "white",
                               fontSize: "16px",
-                              minWidth: column.minWidth,
+                              minWidth: 170,
                             }}
                           >
-                            {column.label}
+                            {header}
                           </StyledTableCellScholarship>
                         ))}
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {qualification && qualification.length > 0 ? (
-                        qualification.map((qual: any, index: number) => (
+                      {qualification?.value &&
+                      qualification?.value.length > 0 ? (
+                        qualification?.value.map((row, index) => (
                           <TableRow key={index}>
-                            {Object.entries(qual).map(([key, value]) => (
+                            {row.map((cell, index) => (
                               <StyledTableCellScholarship
-                                key={key}
+                                key={index}
                                 sx={{
                                   color: "#201C1A",
                                   fontFamily: "HankenGroteskRegular",
                                   fontSize: "14px",
                                 }}
                               >
-                                {value as any}
+                                {cell}
                               </StyledTableCellScholarship>
                             ))}
                           </TableRow>
@@ -279,7 +272,7 @@ const SingleScholarshipEligibilityCriteria = forwardRef(
                 </Typography>
               </Box>
               <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
+                <Grid item lg={12} md={12} sm={12} xs={12}>
                   <Box
                     display="flex"
                     flexDirection="column"
@@ -288,10 +281,10 @@ const SingleScholarshipEligibilityCriteria = forwardRef(
                     padding="14px 20px"
                     gap="14px"
                   >
-                    {Object.entries(language).map(([lang, value], index) => (
-                      <React.Fragment key={lang}>
-                        <Grid container spacing={2}>
-                          <Grid item lg={3} md={3} sm={4} xs={5}>
+                    {language?.map((lang, index) => (
+                      <React.Fragment key={index}>
+                        <Grid container spacing={1}>
+                          <Grid item lg={4} md={3} sm={4} xs={5}>
                             <Typography
                               fontFamily="HankenGroteskSemiBold"
                               fontWeight={600}
@@ -309,33 +302,83 @@ const SingleScholarshipEligibilityCriteria = forwardRef(
                                 xs: "19.6px",
                               }}
                             >
-                              {lang}
+                              {lang?.title}
                             </Typography>
                           </Grid>
 
-                          <Grid item lg={9} md={9} sm={4} xs={5}>
-                            <Typography
-                              fontFamily="HankenGroteskRegular"
-                              fontWeight={400}
-                              color="#201C1A"
-                              fontSize={{
-                                lg: "16px",
-                                md: "16px",
-                                sm: "14px",
-                                xs: "14px",
-                              }}
-                              lineHeight={{
-                                lg: "22.4px",
-                                md: "22.4px",
-                                sm: "19.6px",
-                                xs: "19.6px",
-                              }}
-                            >
-                              {value}
-                            </Typography>
+                          <Grid item lg={8} md={9} sm={4} xs={5}>
+                            {Array.isArray(lang?.details) &&
+                            lang.details.length > 1 ? (
+                              <ul
+                                style={{
+                                  listStyleType: "square",
+                                  paddingInlineStart: "20px",
+                                  margin: 0,
+                                }}
+                              >
+                                {lang.details.map((detail, detailIndex) => (
+                                  <li
+                                    key={detailIndex}
+                                    // style={{
+                                    //   marginTop: "8px",
+                                    // }}
+                                  >
+                                    <Typography
+                                      fontFamily="HankenGroteskRegular"
+                                      fontWeight={400}
+                                      color="#201C1A"
+                                      fontSize={{
+                                        lg: "16px",
+                                        md: "16px",
+                                        sm: "14px",
+                                        xs: "14px",
+                                      }}
+                                      lineHeight={{
+                                        lg: "22.4px",
+                                        md: "22.4px",
+                                        sm: "19.6px",
+                                        xs: "19.6px",
+                                      }}
+                                    >
+                                      {detail}
+                                    </Typography>
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <ul
+                                style={{
+                                  listStyleType: "square",
+                                  paddingInlineStart: "20px",
+                                  margin: 0,
+                                }}
+                              >
+                                <li>
+                                  <Typography
+                                    fontFamily="HankenGroteskRegular"
+                                    fontWeight={400}
+                                    color="#201C1A"
+                                    fontSize={{
+                                      lg: "16px",
+                                      md: "16px",
+                                      sm: "14px",
+                                      xs: "14px",
+                                    }}
+                                    lineHeight={{
+                                      lg: "22.4px",
+                                      md: "22.4px",
+                                      sm: "19.6px",
+                                      xs: "19.6px",
+                                    }}
+                                  >
+                                    {lang?.details}
+                                  </Typography>
+                                </li>
+                              </ul>
+                            )}
                           </Grid>
                         </Grid>
-                        {index < Object.entries(language).length - 1 && (
+                        {index < language.length - 1 && (
                           <Divider
                             sx={{
                               borderColor: "rgba(32, 28, 26, 0.1)",

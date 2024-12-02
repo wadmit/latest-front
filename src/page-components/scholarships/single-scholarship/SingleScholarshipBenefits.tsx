@@ -6,15 +6,6 @@ import { TScholarshipBenefitsProp } from "../utils/types";
 
 const SingleScholarshipBenefits = forwardRef(
   ({ benefits }: TScholarshipBenefitsProp, ref) => {
-    const benefitsArray = Object.entries(benefits).map(
-      ([title, descriptions]) => ({
-        title,
-        descriptions: Array.isArray(descriptions)
-          ? descriptions
-          : [descriptions],
-      })
-    );
-
     return (
       <Box
         ref={ref}
@@ -67,7 +58,7 @@ const SingleScholarshipBenefits = forwardRef(
           </Box>
           <Box p={{ lg: 0, md: 0, sm: 2, xs: 2 }}>
             <Grid container spacing={{ lg: 3, md: 3, sm: "12px", xs: "12px" }}>
-              {benefitsArray.map((benefit, index) => (
+              {benefits.map((benefit, index) => (
                 <Grid item lg={6} md={6} sm={12} xs={12}>
                   <Box
                     border="1px solid #E4E7EC"
@@ -99,7 +90,7 @@ const SingleScholarshipBenefits = forwardRef(
                       >
                         {benefit?.title}
                       </Typography>
-                      {benefit.descriptions.map((description, descIndex) => (
+                      {benefit.details.map((description, descIndex) => (
                         <Typography
                           key={descIndex}
                           fontFamily="HankenGroteskRegular"
@@ -125,7 +116,6 @@ const SingleScholarshipBenefits = forwardRef(
                   </Box>
                 </Grid>
               ))}
-              <Grid item lg={6} md={6} sm={12} xs={12}></Grid>
             </Grid>
           </Box>
         </Box>

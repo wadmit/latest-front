@@ -9,27 +9,18 @@ import {
   ScholarshipHat,
   ScholarshipCurrency,
 } from "../utils/svg";
-import { IScholarshipResponse } from "@/types/utils";
-import { scholarshipStyles } from "../utils/provider";
+import { getScholarshipTypeStyle } from "@/page-components/scholarships/utils/provider";
 import Link from "next/link";
 import applicationConfig from "@/config";
 import useCostConverterMain from "@/hooks/costConverterMain";
+import { IScholarships } from "@/types/scholarship";
+import { ITag } from "@/types/tag";
 
 type Props = {
-  poplarScholarships: IScholarshipResponse[];
+  poplarScholarships: IScholarships[];
 };
 
-const getScholarshipTypeStyle = (type: string | null) => {
-  if (!type) return scholarshipStyles["NOTHING"];
-  const formattedType = type.toUpperCase();
-  return scholarshipStyles[formattedType] || scholarshipStyles["NOTHING"];
-};
-
-const ScholarshipCard = ({
-  scholarship,
-}: {
-  scholarship: IScholarshipResponse;
-}) => {
+const ScholarshipCard = ({ scholarship }: { scholarship: IScholarships }) => {
   const getConvertedCosts = useCostConverterMain();
 
   return (
@@ -61,37 +52,39 @@ const ScholarshipCard = ({
             alt="Scholarship"
             width={100}
             height={1}
-            src={`${applicationConfig.distributionKey}/${scholarship.scholarship.scholarshipCoverImage}`}
+            src={
+              scholarship.coverImage
+                ? `${applicationConfig.distributionKey}/${scholarship.coverImage}`
+                : SchImg
+            }
           />
         </Box>
 
         <Box display="flex" flexDirection="column" gap="20px" flex="1 1 auto">
           <Box display="flex" gap="8px">
-            {scholarship?.scholarship?.scholarshipType &&
-              scholarship.scholarship.scholarshipType.length > 0 &&
-              scholarship.scholarship.scholarshipType.map(
-                (type: string, idx: number) => {
-                  const style = getScholarshipTypeStyle(type);
-                  return (
-                    <Box key={idx} bgcolor={style.bgColor} padding="4px">
-                      <Typography
-                        fontWeight={600}
-                        fontFamily="HankenGroteskSemiBold"
-                        fontSize={{
-                          lg: "10px",
-                          md: "10px",
-                          sm: "10px",
-                          xs: "10px",
-                        }}
-                        lineHeight="12px"
-                        color={style.textColor}
-                      >
-                        {type ? type.toUpperCase() : "NOTHING"}
-                      </Typography>
-                    </Box>
-                  );
-                }
-              )}
+            {scholarship?.tags &&
+              scholarship?.tags.length > 0 &&
+              scholarship?.tags.map((tag: ITag, idx: number) => {
+                const style = getScholarshipTypeStyle(tag);
+                return (
+                  <Box key={idx} bgcolor={style.bgColor} padding="4px">
+                    <Typography
+                      fontWeight={600}
+                      fontFamily="HankenGroteskSemiBold"
+                      fontSize={{
+                        lg: "10px",
+                        md: "10px",
+                        sm: "10px",
+                        xs: "10px",
+                      }}
+                      lineHeight="12px"
+                      color={style.textColor}
+                    >
+                      {tag && tag.name.toUpperCase()}
+                    </Typography>
+                  </Box>
+                );
+              })}
           </Box>
 
           <Typography
@@ -114,7 +107,7 @@ const ScholarshipCard = ({
           <Divider />
 
           <Box display="flex" flexDirection="column" gap="12px">
-            <Box display="flex" alignItems="center" gap="4px">
+            {/* <Box display="flex" alignItems="center" gap="4px">
               <PersonRequest />
               <Typography
                 fontWeight={400}
@@ -146,7 +139,7 @@ const ScholarshipCard = ({
                   ? scholarship?.scholarship?.totalScholarshipRecipients
                   : 0}
               </Typography>
-            </Box>
+            </Box> */}
 
             <Box display="flex" alignItems="center" gap="4px">
               <ScholarshipHat />
@@ -176,7 +169,7 @@ const ScholarshipCard = ({
                 }}
                 color="rgba(32, 28, 26, 1)"
               >
-                {scholarship?.scholarship?.educationalLevel ?? "N/A"}
+                {"Bachelor's/ Master's"}
               </Typography>
             </Box>
 
@@ -210,8 +203,8 @@ const ScholarshipCard = ({
               >
                 {
                   getConvertedCosts(
-                    scholarship?.scholarship?.scholarshipAmount ?? 0,
-                    scholarship?.scholarship?.scholarshipAmountCurrency
+                    scholarship?.amount ?? 0,
+                    scholarship?.currency
                   ).formattedValue
                 }
                 {/* {scholarship?.scholarship?.scholarshipAmount ?? 0}{" "}
