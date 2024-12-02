@@ -1,15 +1,15 @@
 "use client";
 
-import { Navbar } from "../../components/common";
-import CategoryButton from "../../components/common/buttons/CategoryButton";
-import { Footer } from "../../components/common/footer/Footer";
-import FooterContact from "../../page-components/contactus/components/FooterContact";
+import { Navbar } from "@/components/common";
+import CategoryButton from "@/components/common/buttons/CategoryButton";
+import { Footer } from "@/components/common/footer/Footer";
+import FooterContact from "@/page-components/contactus/components/FooterContact";
 import { usePathname } from "next/navigation";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
-  // Build Trigger 2
+  // Build Trigger
 
   const renderFooter = () => {
     switch (pathname) {
