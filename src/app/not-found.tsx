@@ -1,7 +1,7 @@
 "use client";
 
-import { ButtonWrapper } from "@/components/common";
-import { generateMetadata } from "@/components/common/head-component/HeadComponent";
+import { ButtonWrapper } from "../components/common";
+import { generateMetadata } from "../components/common/head-component/HeadComponent";
 import { Box, Stack } from "@mui/material";
 import { Metadata } from "next";
 import { useRouter } from "next/navigation";
