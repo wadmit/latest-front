@@ -93,7 +93,8 @@ const CategoryButton = (props: Props) => {
     >
       {showChatBox && (
         <ChatBotBox
-          onClose={() => {setShowChatBox(false)
+          onClose={() => {
+            setShowChatBox(false);
             setShowHiddenFields(false);
           }}
           onClick={() => {
@@ -299,9 +300,7 @@ const CategoryButton = (props: Props) => {
         </Stack>
       </Button>
 
-      <HomePopUp 
-      openChatBox={()=>setShowChatBox(true)}
-      />
+      <HomePopUp openChatBox={() => setShowChatBox(true)} />
     </Box>
   );
 };
