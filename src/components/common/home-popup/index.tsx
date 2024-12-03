@@ -28,11 +28,16 @@ const HomePopUp = ({ openChatBox }: Props) => {
   const isMobile = useMediaQuery("(max-width: 600px) and (min-width: 0px)");
   return (
     <Dialog
-      open={showMoreInfo}
+      open={true}
       onClose={handleClose}
+      PaperProps={{
+        style: {
+          backgroundColor: "transparent",
+          boxShadow: "none",
+        },
+      }}
       sx={{
         "& .MuiPaper-root": {
-          borderRadius: "32px",
           margin: {
             xs: "16px",
             sm: "16px",
@@ -41,6 +46,22 @@ const HomePopUp = ({ openChatBox }: Props) => {
         },
       }}
     >
+      <Box
+        sx={{
+          color: "rgba(255, 255, 255, 0.65)",
+          fontSize: "16px",
+          fontWeight: 600,
+          cursor: "pointer",
+          "&:hover": {
+            color: "rgba(255, 255, 255, 0.9)"
+          },
+        }}
+        p={"8px"}
+        display={"flex"}
+        justifyContent={"flex-end"}
+      >
+        Cancel
+      </Box>
       <Box
         sx={{
           background: `url('/images/home/banner-background.webp') no-repeat center center`,
@@ -56,32 +77,15 @@ const HomePopUp = ({ openChatBox }: Props) => {
             md: "623px",
           },
           padding: {
-            lg: "24px 24px 0px 36px",
-            md: "24px 24px 0px 36px",
-            sm: "24px 24px 0px 20px",
-            xs: "24px 24px 0px 20px",
+            lg: "58px 24px 0px 36px",
+            md: "58px 24px 0px 36px",
+            sm: "20px 24px 0px 20px",
+            xs: "20px 24px 0px 20px",
           },
           borderRadius: "32px",
           posotion: "relative",
         }}
       >
-        {/* <img
-          src={"/images/home/banner-background.webp"}
-          height={100}
-          width={10}
-          style={{
-            height: "100%",
-            width: "600px",
-            position: "absolute",
-            top: 0,
-            left: 0,
-          }}
-          alt="test"
-        /> */}
-
-        {/* <Box width={"100%"} display={"flex"} justifyContent={"flex-end"}>
-        
-        </Box> */}
         <Box
           display={"flex"}
           flexDirection={"column"}
@@ -90,7 +94,6 @@ const HomePopUp = ({ openChatBox }: Props) => {
         >
           <Typography
             sx={{
-              mb: "2px",
               color: "#201C1A",
               fontSize: {
                 md: "32px",
@@ -98,13 +101,14 @@ const HomePopUp = ({ openChatBox }: Props) => {
               },
               fontWeight: 700,
               letterSpacing: "-0.96px",
+              lineHeight: "30px",
             }}
           >
             Got questions?
           </Typography>
           <Typography
             sx={{
-              mb: "10px",
+              // mb: "10px",
               color: "#201C1A",
               fontSize: {
                 md: "48px",
@@ -126,6 +130,8 @@ const HomePopUp = ({ openChatBox }: Props) => {
               width: "340px",
               wordWrap: "break-word",
               textAlign: "center",
+              letterSpacing: "-0.4px",
+              lineHeight: "28px",
               mb: "33px",
             }}
           >
@@ -141,7 +147,9 @@ const HomePopUp = ({ openChatBox }: Props) => {
             <Button
               sx={{
                 borderRadius: "10.54px",
-                padding: "20px 20px",
+                padding: "25px 28px",
+                fontSize: "22px",
+                fontWeight: 600,
               }}
               variant="contained"
               onClick={() => {
@@ -179,12 +187,13 @@ const HomePopUp = ({ openChatBox }: Props) => {
               </Box>
               <Typography
                 sx={{
-                  width: "182px",
-                  wordWrap: "break-word",
+                  // width: "290px",
+                  // wordWrap: "break-word",
                   fontSize: "16px",
+                  letterSpacing: "-0.32px",
                 }}
               >
-                Hi 👋, I am WiseAI, an AI assistant to help you.
+                Hi👋, I am WiseAI, an AI assistant to help you.
               </Typography>
             </Box>
           </Box>
