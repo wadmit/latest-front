@@ -199,9 +199,10 @@ const MeetingSchedule = ({
                           textAlign="center"
                           fontWeight={"bold"}
                         >
-                          {moment(each.date, "YYYY-MM-DD").format(
+                          {moment(each.date, "ddd, DD MMM YYYY HH:mm:ss [GMT]").format("ddd, DD MMM YYYY")}
+                          {/* {moment(each.date, "YYYY-MM-DD").format(
                             "dddd, D MMMM YYYY"
-                          )}
+                          )} */}
                         </Typography>
                         <Box
                           display={"flex"}
