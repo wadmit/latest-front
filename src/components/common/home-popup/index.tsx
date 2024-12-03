@@ -28,7 +28,7 @@ const HomePopUp = ({ openChatBox }: Props) => {
   const isMobile = useMediaQuery("(max-width: 600px) and (min-width: 0px)");
   return (
     <Dialog
-      open={true}
+      open={showMoreInfo}
       onClose={handleClose}
       PaperProps={{
         style: {
@@ -56,6 +56,7 @@ const HomePopUp = ({ openChatBox }: Props) => {
             color: "rgba(255, 255, 255, 0.9)"
           },
         }}
+        onClick={handleClose}
         p={"8px"}
         display={"flex"}
         justifyContent={"flex-end"}
